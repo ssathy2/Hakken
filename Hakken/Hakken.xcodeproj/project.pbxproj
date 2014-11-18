@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B92414FD761527F22666A /* libPods.a */; };
+		DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DA1A1ADC160020DB40 /* DDDViewController.m */; };
+		DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
-		DE475D991A1ADB1600970E87 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D981A1ADB1600970E87 /* ViewController.m */; };
 		DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9A1A1ADB1600970E87 /* Main.storyboard */; };
 		DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9D1A1ADB1600970E87 /* Images.xcassets */; };
 		DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9F1A1ADB1600970E87 /* LaunchScreen.xib */; };
@@ -27,13 +29,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DC4B92414FD761527F22666A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE3127D91A1ADC160020DB40 /* DDDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewController.h; sourceTree = "<group>"; };
+		DE3127DA1A1ADC160020DB40 /* DDDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewController.m; sourceTree = "<group>"; };
+		DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewModel.h; sourceTree = "<group>"; };
+		DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewModel.m; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475D911A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE475D921A1ADB1600970E87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DE475D941A1ADB1600970E87 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DE475D951A1ADB1600970E87 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DE475D971A1ADB1600970E87 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DE475D981A1ADB1600970E87 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DE475D9B1A1ADB1600970E87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DE475D9D1A1ADB1600970E87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DE475DA01A1ADB1600970E87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -47,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +68,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4AEFAB96A037F3056B270F18 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DC4B92414FD761527F22666A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8A98EBCFF3C8561ADC3BD643 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */,
+				3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		DE3127D41A1ADBBD0020DB40 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DE3127D91A1ADC160020DB40 /* DDDViewController.h */,
+				DE3127DA1A1ADC160020DB40 /* DDDViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DE3127D51A1ADBBD0020DB40 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DE3127D61A1ADBBD0020DB40 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */,
+				DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		DE3127D71A1ADBBD0020DB40 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DE3127D81A1ADBBD0020DB40 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		DE475D841A1ADB1600970E87 = {
 			isa = PBXGroup;
 			children = (
 				DE475D8F1A1ADB1600970E87 /* Hakken */,
 				DE475DA91A1ADB1600970E87 /* HakkenTests */,
 				DE475D8E1A1ADB1600970E87 /* Products */,
+				8A98EBCFF3C8561ADC3BD643 /* Pods */,
+				4AEFAB96A037F3056B270F18 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,10 +147,13 @@
 		DE475D8F1A1ADB1600970E87 /* Hakken */ = {
 			isa = PBXGroup;
 			children = (
+				DE3127D41A1ADBBD0020DB40 /* View Controllers */,
+				DE3127D51A1ADBBD0020DB40 /* Models */,
+				DE3127D61A1ADBBD0020DB40 /* View Models */,
+				DE3127D71A1ADBBD0020DB40 /* Utilities */,
+				DE3127D81A1ADBBD0020DB40 /* Views */,
 				DE475D941A1ADB1600970E87 /* AppDelegate.h */,
 				DE475D951A1ADB1600970E87 /* AppDelegate.m */,
-				DE475D971A1ADB1600970E87 /* ViewController.h */,
-				DE475D981A1ADB1600970E87 /* ViewController.m */,
 				DE475D9A1A1ADB1600970E87 /* Main.storyboard */,
 				DE475D9D1A1ADB1600970E87 /* Images.xcassets */,
 				DE475D9F1A1ADB1600970E87 /* LaunchScreen.xib */,
@@ -126,9 +195,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE475DB01A1ADB1600970E87 /* Build configuration list for PBXNativeTarget "Hakken" */;
 			buildPhases = (
+				04BFB6DB1F776787EF2E72EC /* Check Pods Manifest.lock */,
 				DE475D891A1ADB1600970E87 /* Sources */,
 				DE475D8A1A1ADB1600970E87 /* Frameworks */,
 				DE475D8B1A1ADB1600970E87 /* Resources */,
+				EF6575B35B3EF278267B3846 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,13 +285,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		04BFB6DB1F776787EF2E72EC /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		EF6575B35B3EF278267B3846 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DE475D891A1ADB1600970E87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE475D991A1ADB1600970E87 /* ViewController.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
+				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
+				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -341,6 +446,7 @@
 		};
 		DE475DB11A1ADB1600970E87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Hakken/Info.plist;
@@ -351,6 +457,7 @@
 		};
 		DE475DB21A1ADB1600970E87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Hakken/Info.plist;
@@ -412,6 +519,7 @@
 				DE475DB21A1ADB1600970E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE475DB31A1ADB1600970E87 /* Build configuration list for PBXNativeTarget "HakkenTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +528,7 @@
 				DE475DB51A1ADB1600970E87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
