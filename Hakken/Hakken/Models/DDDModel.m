@@ -117,14 +117,34 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
             switch ([mapping mappingType]) {
                 case DDDModelMappingTypeSingleModel:
                 {
+                    Class klass = [(DDDModelMapping *)mapping modelClass];
+                    id model;
+                    if ([klass instancesRespondToSelector:@selector(initWithDictionary:)])
+                        model = [[klass alloc] initWithDictionary:[dictionary valueForKey:key]];
+                    else
+                        model = [klass new];
                     
+                    [self setValue:model forKey:key];
                 }
                 case DDDModelMappingTypeMultipleModel:
                 {
+                    Class klass = [(DDDModelMapping *)mapping modelClass];
+                    NSArray *rawElements = [dictionary valueForKey:key];
+                    NSMutableArray *parsedElements = [NSMutableArray array];
+                    
+                    BOOL respondsToDictionary = ([klass instancesRespondToSelector:@selector(initWithDictionary:)]);
+                    
+                    for (NSDictionary *rawElement in rawElements)
+                    {
+                        id model = (respondsToDictionary) ? [[klass alloc] initWithDictionary:rawElement] : [klass new];
+                        [parsedElements addObject:model];
+                    }
+                    [self setValue:parsedElements forKey:key];
                     
                 }
                 case DDDModelMappingTypeEnumerationType:
                 {
+                    NSDictionary *enumerationMapping = [(DDDEnumerationMapping *)mapping enumerationMapping];
                     
                 }
             }
