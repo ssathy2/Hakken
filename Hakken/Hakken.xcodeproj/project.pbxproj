@@ -10,6 +10,9 @@
 		C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B92414FD761527F22666A /* libPods.a */; };
 		DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DA1A1ADC160020DB40 /* DDDViewController.m */; };
 		DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */; };
+		DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */; };
+		DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E21A1AE9820020DB40 /* UIView+SSAdditions.m */; };
+		DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E61A1AE9B00020DB40 /* DDDModel.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
 		DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9A1A1ADB1600970E87 /* Main.storyboard */; };
@@ -36,6 +39,15 @@
 		DE3127DA1A1ADC160020DB40 /* DDDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewController.m; sourceTree = "<group>"; };
 		DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewModel.h; sourceTree = "<group>"; };
 		DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewModel.m; sourceTree = "<group>"; };
+		DE3127DF1A1AE9820020DB40 /* NSMutableArray+Modification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Modification.h"; sourceTree = "<group>"; };
+		DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Modification.m"; sourceTree = "<group>"; };
+		DE3127E11A1AE9820020DB40 /* UIView+SSAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SSAdditions.h"; sourceTree = "<group>"; };
+		DE3127E21A1AE9820020DB40 /* UIView+SSAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SSAdditions.m"; sourceTree = "<group>"; };
+		DE3127E51A1AE9B00020DB40 /* DDDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDModel.h; sourceTree = "<group>"; };
+		DE3127E61A1AE9B00020DB40 /* DDDModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDModel.m; sourceTree = "<group>"; };
+		DE3127E91A1AEC0A0020DB40 /* Hakken-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hakken-Prefix.pch"; sourceTree = "<group>"; };
+		DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHelpers.h; sourceTree = "<group>"; };
+		DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCategories.h; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475D911A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE475D921A1ADB1600970E87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -97,6 +109,8 @@
 		DE3127D51A1ADBBD0020DB40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE3127E51A1AE9B00020DB40 /* DDDModel.h */,
+				DE3127E61A1AE9B00020DB40 /* DDDModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +127,12 @@
 		DE3127D71A1ADBBD0020DB40 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */,
+				DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */,
+				DE3127DF1A1AE9820020DB40 /* NSMutableArray+Modification.h */,
+				DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */,
+				DE3127E11A1AE9820020DB40 /* UIView+SSAdditions.h */,
+				DE3127E21A1AE9820020DB40 /* UIView+SSAdditions.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -165,6 +185,7 @@
 		DE475D901A1ADB1600970E87 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DE3127E91A1AEC0A0020DB40 /* Hakken-Prefix.pch */,
 				DE475D911A1ADB1600970E87 /* Info.plist */,
 				DE475D921A1ADB1600970E87 /* main.m */,
 			);
@@ -323,8 +344,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
+				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
+				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,
 			);
@@ -391,6 +415,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "Hakken/Hakken-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -431,6 +456,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREFIX_HEADER = "Hakken/Hakken-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

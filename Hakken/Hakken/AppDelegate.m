@@ -16,8 +16,18 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self configureLogging];
     // Override point for customization after application launch.
     return YES;
+}
+
+- (void)configureLogging
+{
+#ifdef DEBUG
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDFileLogger new]];
+#endif
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
