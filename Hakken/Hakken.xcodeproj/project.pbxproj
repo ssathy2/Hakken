@@ -13,12 +13,20 @@
 		DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */; };
 		DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E21A1AE9820020DB40 /* UIView+SSAdditions.m */; };
 		DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E61A1AE9B00020DB40 /* DDDModel.m */; };
+		DE3128071A1EE4D70020DB40 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
+		DE3128081A1EE4D70020DB40 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
+		DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
+		DE31280A1A1EE4D70020DB40 /* DDDHackerNewsItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */; };
+		DE31280D1A1EE4E20020DB40 /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE31280C1A1EE4E20020DB40 /* DDDHackerNewsItem.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
 		DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9A1A1ADB1600970E87 /* Main.storyboard */; };
 		DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9D1A1ADB1600970E87 /* Images.xcassets */; };
 		DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9F1A1ADB1600970E87 /* LaunchScreen.xib */; };
-		DE475DAD1A1ADB1600970E87 /* HakkenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475DAC1A1ADB1600970E87 /* HakkenTests.m */; };
+		DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC361A1EE8FF00692CB8 /* DDDMock.m */; };
+		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
+		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
+		DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,12 @@
 		DE3127E91A1AEC0A0020DB40 /* Hakken-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Hakken-Prefix.pch"; sourceTree = "<group>"; };
 		DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHelpers.h; sourceTree = "<group>"; };
 		DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCategories.h; sourceTree = "<group>"; };
+		DE3128031A1EE4D70020DB40 /* mock_story.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_story.json; sourceTree = "<group>"; };
+		DE3128041A1EE4D70020DB40 /* mock_comment.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_comment.json; sourceTree = "<group>"; };
+		DE3128051A1EE4D70020DB40 /* mock_poll.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_poll.json; sourceTree = "<group>"; };
+		DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItemTests.m; sourceTree = "<group>"; };
+		DE31280B1A1EE4E20020DB40 /* DDDHackerNewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackerNewsItem.h; sourceTree = "<group>"; };
+		DE31280C1A1EE4E20020DB40 /* DDDHackerNewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItem.m; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475D911A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE475D921A1ADB1600970E87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -58,7 +72,8 @@
 		DE475DA01A1ADB1600970E87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DE475DA61A1ADB1600970E87 /* HakkenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HakkenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475DAB1A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE475DAC1A1ADB1600970E87 /* HakkenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HakkenTests.m; sourceTree = "<group>"; };
+		DE62AC351A1EE8FF00692CB8 /* DDDMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMock.h; sourceTree = "<group>"; };
+		DE62AC361A1EE8FF00692CB8 /* DDDMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMock.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +124,8 @@
 		DE3127D51A1ADBBD0020DB40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE31280B1A1EE4E20020DB40 /* DDDHackerNewsItem.h */,
+				DE31280C1A1EE4E20020DB40 /* DDDHackerNewsItem.m */,
 				DE3127E51A1AE9B00020DB40 /* DDDModel.h */,
 				DE3127E61A1AE9B00020DB40 /* DDDModel.m */,
 			);
@@ -127,6 +144,8 @@
 		DE3127D71A1ADBBD0020DB40 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DE62AC351A1EE8FF00692CB8 /* DDDMock.h */,
+				DE62AC361A1EE8FF00692CB8 /* DDDMock.m */,
 				DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */,
 				DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */,
 				DE3127DF1A1AE9820020DB40 /* NSMutableArray+Modification.h */,
@@ -195,7 +214,10 @@
 		DE475DA91A1ADB1600970E87 /* HakkenTests */ = {
 			isa = PBXGroup;
 			children = (
-				DE475DAC1A1ADB1600970E87 /* HakkenTests.m */,
+				DE3128031A1EE4D70020DB40 /* mock_story.json */,
+				DE3128041A1EE4D70020DB40 /* mock_comment.json */,
+				DE3128051A1EE4D70020DB40 /* mock_poll.json */,
+				DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */,
 				DE475DAA1A1ADB1600970E87 /* Supporting Files */,
 			);
 			path = HakkenTests;
@@ -291,6 +313,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */,
+				DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */,
+				DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */,
 				DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
 				DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */,
@@ -301,6 +326,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE3128071A1EE4D70020DB40 /* mock_story.json in Resources */,
+				DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */,
+				DE3128081A1EE4D70020DB40 /* mock_comment.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +375,9 @@
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
+				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
+				DE31280D1A1EE4E20020DB40 /* DDDHackerNewsItem.m in Sources */,
 				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,
@@ -358,7 +388,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE475DAD1A1ADB1600970E87 /* HakkenTests.m in Sources */,
+				DE31280A1A1EE4D70020DB40 /* DDDHackerNewsItemTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +457,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${PODS_ROOT}/BuildHeaders\"/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -463,6 +498,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"${PODS_ROOT}/BuildHeaders\"/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
@@ -494,6 +534,7 @@
 		};
 		DE475DB41A1ADB1600970E87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -513,6 +554,7 @@
 		};
 		DE475DB51A1ADB1600970E87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

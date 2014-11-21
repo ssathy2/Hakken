@@ -48,7 +48,6 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
     {
         self.propertyMappings = [NSMutableDictionary dictionary];
         [self prepareWithAttributes:dictionary];
-        [self setupPropertyMappingsWithDictionary:dictionary];
     }
     return self;
 }
@@ -105,12 +104,24 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
     // base implementation does nothing
 }
 
+- (BOOL)handleRemappingWithKey:(NSString *)key withPropertyDictionary:(NSDictionary *)dictionary
+{
+    NSString *remappedKey = remappings()[key];
+    if (!remappedKey)
+        return NO;
+    else
+        [self setValue:remappedKey forKey:[dictionary valueForKey:key]];
+        return YES;
+}
+
 - (void)prepareWithAttributes:(NSDictionary *)dictionary
 {
     [self setupPropertyMappingsWithDictionary:dictionary];
     
     for (NSString *key in dictionary)
     {
+        if ([self handleRemappingWithKey:key withPropertyDictionary:dictionary])
+            continue;
         id<DDDMapping> mapping = [self.propertyMappings valueForKey:key];
         if (mapping)
         {
@@ -145,11 +156,22 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
                 case DDDModelMappingTypeEnumerationType:
                 {
                     NSDictionary *enumerationMapping = [(DDDEnumerationMapping *)mapping enumerationMapping];
-                    
+                    [self setValue:[enumerationMapping valueForKey:key] forKey:key];
                 }
             }
         }
+        else
+            [self setValue:[dictionary valueForKey:key] forKey:key];
     }
+}
+
+#pragma mark - Helpers
+//
+static NSDictionary *remappings()
+{
+    return @{
+             @"id" : @"identifier"
+             };
 }
 
 
@@ -160,30 +182,9 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
     DDLogWarn(@"Tried to set value: %@ for undefined key: %@ in class: %@", value, key, NSStringFromClass([self class]));
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key
+- (id)valueForUndefinedKey:(NSString *)key
 {
-    id<DDDMapping> mapping = [self.propertyMappings valueForKey:key];
-    if (mapping)
-    {
-        switch (mapping.mappingType) {
-            case DDDModelMappingTypeEnumerationType:
-            {
-                
-                break;
-            }
-            case DDDModelMappingTypeMultipleModel:
-            {
-                
-                break;
-            }
-            case DDDModelMappingTypeSingleModel:
-            {
-                
-                break;
-            }
-        }
-    }
-    else
-        [super setValue:value forKey:key];
+    DDLogWarn(@"Tried to get value for undefined key: %@", key);
+    return nil;
 }
 @end

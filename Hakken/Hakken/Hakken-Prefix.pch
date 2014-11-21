@@ -6,17 +6,15 @@
 
 #ifdef __OBJC__
 	#import <UIKit/UIKit.h>
-    #import "DDDHelpers.h"
+    #import <CocoaLumberjack/CocoaLumberjack.h>
 
+    #import "DDDHelpers.h"
     // Categories
     #import "DDDCategories.h"
 #endif
 
-#import <CocoaLumberJack/CocoaLumberJack.h>
-extern int ddLogLevel;
-int ddLogLevel =
 #ifdef DEBUG
-DDLogLevelDebug;
+static const int ddLogLevel = DDLogLevelVerbose;
 #else
-DDLogLevelWarn;
+static const int ddLogLevel = DDLogLevelWarning;
 #endif

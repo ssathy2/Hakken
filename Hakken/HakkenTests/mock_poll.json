@@ -1,0 +1,40 @@
+{
+    "by" : "pg",
+    "id" : 126809,
+    "kids" : [],
+    "parts" : [
+               {
+                   "by" : "pg",
+                   "id" : 126810,
+                   "parent" : 126809,
+                   "score" : 73,
+                   "text" : "Users would create too many, and new arrivals would think News.YC was a poll site.",
+                   "time" : 1204403652,
+                   "type" : "pollopt",
+                   "url" : ""
+               },
+               {
+                   "by" : "pg",
+                   "id" : 126811,
+                   "parent" : 126809,
+                   "score" : 49,
+                   "text" : "Users would create fewer polls, because the main reason they do it now is to get karma from people voting up the poll choices.",
+                   "time" : 1204403652,
+                   "type" : "pollopt"
+               },
+               {
+                   "by" : "pg",
+                   "id" : 126812,
+                   "parent" : 126809,
+                   "score" : 179,
+                   "text" : "We'd have the same number of polls, but they wouldn't look as ugly.",
+                   "time" : 1204403652,
+                   "type" : "pollopt"
+               }
+    ],
+    "score" : 46,
+    "text" : "",
+    "time" : 1204403652,
+    "title" : "Poll: What would happen if News.YC had explicit support for polls?",
+    "type" : "poll"
+}

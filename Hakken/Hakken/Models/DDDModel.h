@@ -11,9 +11,10 @@
 @interface DDDModel : NSObject<NSCoding>
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+// Hook to setup mappings with a dictionary
 - (void)setupPropertyMappingsWithDictionary:(NSDictionary *)dictionary;
 
-- (void)setEnumerationMapping:(NSDictionary *)enumerationMapping forKey:(NSString *)key
+- (void)setEnumerationMapping:(NSDictionary *)enumerationMapping forKey:(NSString *)key;
 - (void)setModelClass:(Class)klass forKey:(NSString *)key;
 - (void)setArrayOfModelsWithClass:(Class)klass forKey:(NSString *)key;
 @end
