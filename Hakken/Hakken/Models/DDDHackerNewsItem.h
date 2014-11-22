@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 };
 
 @interface DDDHackerNewsItem : DDDModel
-@property (copy,   nonatomic) NSString *identifier;
+@property (copy,   nonatomic) NSNumber *identifier;
 @property (assign, nonatomic) BOOL deleted;
 @property (assign, nonatomic) DDDHackerNewsItemType type;
 @property (copy,   nonatomic) NSString *by;

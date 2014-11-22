@@ -110,7 +110,7 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
     if (!remappedKey)
         return NO;
     else
-        [self setValue:remappedKey forKey:[dictionary valueForKey:key]];
+        [self setValue:[dictionary valueForKey:key] forKey:remappedKey];
         return YES;
 }
 
@@ -136,6 +136,7 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
                         model = [klass new];
                     
                     [self setValue:model forKey:key];
+                    break;
                 }
                 case DDDModelMappingTypeMultipleModel:
                 {
@@ -151,12 +152,15 @@ typedef NS_ENUM(NSInteger, DDDModelMappingType)
                         [parsedElements addObject:model];
                     }
                     [self setValue:parsedElements forKey:key];
+                    break;
                     
                 }
                 case DDDModelMappingTypeEnumerationType:
                 {
                     NSDictionary *enumerationMapping = [(DDDEnumerationMapping *)mapping enumerationMapping];
-                    [self setValue:[enumerationMapping valueForKey:key] forKey:key];
+                    NSString *enumerationKey         = [dictionary valueForKey:key];
+                    [self setValue:[enumerationMapping valueForKey:enumerationKey] forKey:key];
+                    break;
                 }
             }
         }
@@ -187,4 +191,19 @@ static NSDictionary *remappings()
     DDLogWarn(@"Tried to get value for undefined key: %@", key);
     return nil;
 }
+
+#pragma mark - Console printing helpers
+- (NSString *)debugDescription
+{
+    NSMutableString *str = [NSMutableString string];
+    [str appendString:[NSString stringWithFormat:@"%@\n",[self description]]];
+    [str appendString:@"{\n"];
+    for (NSString *key in [[self class] propertyNames])
+    {
+        [str appendString:[NSString stringWithFormat:@"\t%@ : %@\n", key, [self valueForKey:key]]];
+    }
+    [str appendString:@"}"];
+    return str;
+}
+
 @end
