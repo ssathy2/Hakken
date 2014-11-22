@@ -1,5 +1,5 @@
 //
-//  DDDReactiveServices.h
+//  DDDResponseSerializer.h
 //  Hakken
 //
 //  Created by Sidd Sathyam on 11/22/14.
@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDDReactiveServices : NSObject
-+ (instancetype)sharedInstance;
-
+@interface DDDResponseSerializer : NSObject
++ (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json;
 @end

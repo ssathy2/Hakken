@@ -1,0 +1,11 @@
+{
+    live: {
+        baseURL : "Moo",
+    },
+    mock: {
+        baseURL : "Moo",
+    }
+    custom : {
+        baseURL : "http://localhost:5000/",
+    }
+}
