@@ -7,44 +7,65 @@
 //
 
 #import "DDDViewController.h"
+#import "DDDViewModel.h"
 
 @interface DDDViewController ()<DDDViewModelListener>
+@property (strong, nonatomic) DDDViewModel *viewModel;
 @end
 
 @implementation DDDViewController
-+ (instancetype)instance
+#pragma mark - DDDViewControllerInstantiation
++ (instancetype)storyboardInstance
 {
 	NSString *storyboardName = [self storyboardName];
 	UIStoryboard *sb = [UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]];
-	return [sb instantiateViewControllerWithIdentifier:[self identifier]];
+	return [sb instantiateViewControllerWithIdentifier:[self storyboardIdentifier]];
 }
 
-+ (NSString *)identifier
++ (NSString *)storyboardIdentifier
 {
-	return NSStringFromClass([self class]);
+    return NSStringFromClass([self class]);
 }
 
 + (NSString *)storyboardName
 {
-	return @"Main";
+    return @"Main";
+}
+
+#pragma mark - DDDViewModelInstantiation
+
++ (Class)viewModelClass
+{
+    // must implement this in subclass
+    return nil;
+}
+
+- (void)prepareWithModel:(id)model
+{
+    if (!self.viewModel)
+        self.viewModel = [[[self.class viewModelClass] alloc] init];
+    [self.viewModel prepareWithModel:model];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.viewModel viewModelDidLoad];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self.viewModel registerListener:self];
+    [self.viewModel registerListener:self];
+    [self.viewModel viewModelWillAppear];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-	[self.viewModel deregisterListener:self];
+    [self.viewModel unregisterListener:self];
+    [self.viewModel viewModelWillDisappear];
 }
 
 - (NSDictionary *)segueIdentifierToContainerViewControllerMapping
@@ -64,8 +85,6 @@
     NSAssert(path, @"This segue identifier doesn't contain a mapping! Make sure segue identifier exists in the storyboard");
     [self setValue:segue.destinationViewController forKeyPath:path];
 	if ([segue.destinationViewController isKindOfClass:[DDDViewController class]])
-	{
 		[segue.destinationViewController performSelector:@selector(setViewModel:) withObject:self.viewModel];
-	}
 }
 @end

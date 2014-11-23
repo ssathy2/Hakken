@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDDResponseSerializer : NSObject
+@class DDDHackerNewsItem;
+
+@interface DDDHackernewsItemResponseSerializer : NSObject
 + (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json;
++ (DDDHackerNewsItem *)itemFromJSON:(NSDictionary *)json;
 @end

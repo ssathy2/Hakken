@@ -32,7 +32,11 @@
 		DE62AC491A20FD5300692CB8 /* ServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */; };
 		DE62AC4D1A21010200692CB8 /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC4C1A21010200692CB8 /* Configuration.json */; };
 		DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC4F1A21303100692CB8 /* NSDictionary+DDDAdditions.m */; };
-		DE62AC531A213D5F00692CB8 /* DDDResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC521A213D5F00692CB8 /* DDDResponseSerializer.m */; };
+		DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */; };
+		DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */; };
+		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
+		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
+		DEE038EC1A2293DA00979793 /* DDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +92,16 @@
 		DE62AC4C1A21010200692CB8 /* Configuration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Configuration.json; sourceTree = "<group>"; };
 		DE62AC4E1A21303100692CB8 /* NSDictionary+DDDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DDDAdditions.h"; sourceTree = "<group>"; };
 		DE62AC4F1A21303100692CB8 /* NSDictionary+DDDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DDDAdditions.m"; sourceTree = "<group>"; };
-		DE62AC511A213D5F00692CB8 /* DDDResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDResponseSerializer.h; sourceTree = "<group>"; };
-		DE62AC521A213D5F00692CB8 /* DDDResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDResponseSerializer.m; sourceTree = "<group>"; };
+		DE62AC511A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackernewsItemResponseSerializer.h; sourceTree = "<group>"; };
+		DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackernewsItemResponseSerializer.m; sourceTree = "<group>"; };
+		DE62AC551A224CCA00692CB8 /* DDDViewControllerRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewControllerRouter.h; sourceTree = "<group>"; };
+		DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewControllerRouter.m; sourceTree = "<group>"; };
+		DEB09D091A2258E90021A933 /* DDDScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDScreen.h; sourceTree = "<group>"; };
+		DEB09D0A1A2258E90021A933 /* DDDScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDScreen.m; sourceTree = "<group>"; };
+		DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTransitionAttributes.h; sourceTree = "<group>"; };
+		DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTransitionAttributes.m; sourceTree = "<group>"; };
+		DEE038EA1A2293DA00979793 /* DDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDRootViewController.h; sourceTree = "<group>"; };
+		DEE038EB1A2293DA00979793 /* DDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +145,8 @@
 			children = (
 				DE3127D91A1ADC160020DB40 /* DDDViewController.h */,
 				DE3127DA1A1ADC160020DB40 /* DDDViewController.m */,
+				DEE038EA1A2293DA00979793 /* DDDRootViewController.h */,
+				DEE038EB1A2293DA00979793 /* DDDRootViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -206,6 +220,7 @@
 		DE475D8F1A1ADB1600970E87 /* Hakken */ = {
 			isa = PBXGroup;
 			children = (
+				DE62AC541A224C7700692CB8 /* Navigation */,
 				DE62AC441A20FD5300692CB8 /* Services */,
 				DE3127D41A1ADBBD0020DB40 /* View Controllers */,
 				DE3127D51A1ADBBD0020DB40 /* Models */,
@@ -259,10 +274,23 @@
 				DE62AC451A20FD5300692CB8 /* DDDReactiveServices.h */,
 				DE62AC461A20FD5300692CB8 /* DDDReactiveServices.m */,
 				DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */,
-				DE62AC511A213D5F00692CB8 /* DDDResponseSerializer.h */,
-				DE62AC521A213D5F00692CB8 /* DDDResponseSerializer.m */,
+				DE62AC511A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.h */,
+				DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		DE62AC541A224C7700692CB8 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				DE62AC551A224CCA00692CB8 /* DDDViewControllerRouter.h */,
+				DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */,
+				DEB09D091A2258E90021A933 /* DDDScreen.h */,
+				DEB09D0A1A2258E90021A933 /* DDDScreen.m */,
+				DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */,
+				DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */,
+			);
+			name = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,15 +437,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
+				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,
+				DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
+				DEE038EC1A2293DA00979793 /* DDDRootViewController.m in Sources */,
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
 				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
 				DE31280D1A1EE4E20020DB40 /* DDDHackerNewsItem.m in Sources */,
 				DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */,
 				DE62AC481A20FD5300692CB8 /* DDDReactiveServices.m in Sources */,
-				DE62AC531A213D5F00692CB8 /* DDDResponseSerializer.m in Sources */,
+				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
+				DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */,
 				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,
