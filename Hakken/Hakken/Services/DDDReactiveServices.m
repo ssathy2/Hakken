@@ -41,21 +41,20 @@
 
 - (RACSignal *)fetchTopStoriesFromStory:(NSNumber *)fromStory toStory:(NSNumber *)toStory
 {
-    NSString *endPoint;
-    if (fromStory == 0 || toStory == 0)
-        endPoint = [NSString stringWithFormat:@"%@", @"getTopStories"];
-    else
-    {
-        NSDictionary *paramsDictionary = @{
-                                           @"fromStory" : fromStory,
-                                           @"toStory"   : toStory
-                                           };
-        endPoint = [NSString stringWithFormat:@"%@?%@", @"getTopStories", [paramsDictionary urlEncodedParameterString]];
-    }
-    
-    __weak typeof(self) weakSelf = self;
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        [weakSelf.httpRequestManager GET:endPoint
+        NSString *endPoint;
+        if (fromStory == 0 || toStory == 0)
+            endPoint = [NSString stringWithFormat:@"%@", @"getTopStories"];
+        else
+        {
+            NSDictionary *paramsDictionary = @{
+                                               @"fromStory" : fromStory,
+                                               @"toStory"   : toStory
+                                               };
+            endPoint = [NSString stringWithFormat:@"%@?%@", @"getTopStories", [paramsDictionary urlEncodedParameterString]];
+        }
+        
+        [self.httpRequestManager GET:endPoint
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  // convert the response object into an array of models
@@ -68,37 +67,8 @@
     }];
 }
 
-- (RACSignal *)fetchStoryWithIdentifier:(NSNumber *)identifier
-{
-    __weak typeof(self) weakSelf = self;
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        if (identifier == 0)
-        {
-            [subscriber sendError:[NSError errorWithDomain:@"Invalid identifier" code:-1 userInfo:nil]];
-            return nil;
-        }
-        
-        NSDictionary *paramsDictionary = @{
-                                           @"storyID" : identifier,
-                                           };
-        NSString *endPoint = [NSString stringWithFormat:@"%@?%@", @"getStory", [paramsDictionary urlEncodedParameterString]];
-        
-        [weakSelf.httpRequestManager GET:endPoint
-                              parameters:nil
-                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                     // convert the response object into an models
-                                     [subscriber sendNext:[DDDHackernewsItemResponseSerializer itemFromJSON:responseObject]];
-                                     [subscriber sendCompleted];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     [subscriber sendError:error];
-                                 }];
-        return nil;
-    }];
-}
-
 - (RACSignal *)fetchCommentsForStoryIdentifier:(NSNumber *)identifier
 {
-    __weak typeof(self) weakSelf = self;
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         if (identifier == 0)
         {
@@ -111,7 +81,7 @@
                                            };
         NSString *endPoint = [NSString stringWithFormat:@"%@?%@", @"getComments", [paramsDictionary urlEncodedParameterString]];
         
-        [weakSelf.httpRequestManager GET:endPoint
+        [self.httpRequestManager GET:endPoint
                               parameters:nil
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      // convert the response object into an array of models

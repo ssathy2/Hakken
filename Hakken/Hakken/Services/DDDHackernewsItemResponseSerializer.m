@@ -12,7 +12,8 @@
 @implementation DDDHackernewsItemResponseSerializer
 + (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json
 {
-    NSArray *rawItems               = [json valueForKey:@"items"];
+    // TODO: replace back with items
+    NSArray *rawItems               = [json valueForKey:@"COMMENTTREEKEY"];
     NSMutableArray *serializedItems = [NSMutableArray array];
     for (NSDictionary *rawItem in rawItems)
         [serializedItems addObject:[self itemFromJSON:rawItem]];

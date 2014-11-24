@@ -37,6 +37,9 @@
 		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
 		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
 		DEE038EC1A2293DA00979793 /* DDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDRootViewController.m */; };
+		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
+		DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */; };
+		DEE038F01A229CCE00979793 /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC4C1A21010200692CB8 /* Configuration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,7 @@
 		DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTransitionAttributes.m; sourceTree = "<group>"; };
 		DEE038EA1A2293DA00979793 /* DDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDRootViewController.h; sourceTree = "<group>"; };
 		DEE038EB1A2293DA00979793 /* DDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDRootViewController.m; sourceTree = "<group>"; };
+		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +259,7 @@
 				DE3128041A1EE4D70020DB40 /* mock_comment.json */,
 				DE3128051A1EE4D70020DB40 /* mock_poll.json */,
 				DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */,
+				DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */,
 				DE475DAA1A1ADB1600970E87 /* Supporting Files */,
 			);
 			path = HakkenTests;
@@ -390,6 +395,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */,
+				DEE038F01A229CCE00979793 /* Configuration.json in Resources */,
 				DE3128071A1EE4D70020DB40 /* mock_story.json in Resources */,
 				DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */,
 				DE3128081A1EE4D70020DB40 /* mock_comment.json in Resources */,
@@ -461,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE31280A1A1EE4D70020DB40 /* DDDHackerNewsItemTests.m in Sources */,
+				DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

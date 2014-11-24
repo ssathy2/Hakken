@@ -1,11 +1,11 @@
 {
-    live: {
-        baseURL : "Moo",
+    "live": {
+        "baseURL" : "Moo",
     },
-    mock: {
-        baseURL : "Moo",
-    }
-    custom : {
-        baseURL : "http://localhost:5000/",
+    "mock": {
+        "baseURL" : "Moo",
+    },
+    "custom" : {
+        "baseURL" : "http://0.0.0.0:5000/",
     }
 }

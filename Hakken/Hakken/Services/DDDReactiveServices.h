@@ -13,7 +13,5 @@
 
 // Returns a RACSignal that contains the result of the network calls
 - (RACSignal *)fetchTopStoriesFromStory:(NSNumber *)fromStory toStory:(NSNumber *)toStory;
-- (RACSignal *)fetchStoryWithIdentifier:(NSNumber *)identifier;
-
 - (RACSignal *)fetchCommentsForStoryIdentifier:(NSNumber *)identifier;
 @end
