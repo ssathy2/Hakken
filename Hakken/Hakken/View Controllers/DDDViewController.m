@@ -7,9 +7,8 @@
 //
 
 #import "DDDViewController.h"
-#import "DDDViewModel.h"
 
-@interface DDDViewController ()<DDDViewModelListener>
+@interface DDDViewController ()
 @property (strong, nonatomic) DDDViewModel *viewModel;
 @end
 
@@ -57,14 +56,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-    [self.viewModel registerListener:self];
     [self.viewModel viewModelWillAppear];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 	[super viewWillDisappear:animated];
-    [self.viewModel unregisterListener:self];
     [self.viewModel viewModelWillDisappear];
 }
 
@@ -84,7 +81,10 @@
     NSString *path = [identifierMapping objectForKey:segue.identifier];
     NSAssert(path, @"This segue identifier doesn't contain a mapping! Make sure segue identifier exists in the storyboard");
     [self setValue:segue.destinationViewController forKeyPath:path];
-	if ([segue.destinationViewController isKindOfClass:[DDDViewController class]])
+	if ([segue.destinationViewController respondsToSelector:@selector(setViewModel:)])
 		[segue.destinationViewController performSelector:@selector(setViewModel:) withObject:self.viewModel];
+    
+    if ([segue.destinationViewController respondsToSelector:@selector(setNavigationRouter:)])
+        [segue.destinationViewController performSelector:@selector(setNavigationRouter:) withObject:self.navigationRouter];
 }
 @end

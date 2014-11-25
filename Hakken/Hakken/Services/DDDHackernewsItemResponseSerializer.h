@@ -12,5 +12,6 @@
 
 @interface DDDHackernewsItemResponseSerializer : NSObject
 + (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json;
++ (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray;
 + (DDDHackerNewsItem *)itemFromJSON:(NSDictionary *)json;
 @end

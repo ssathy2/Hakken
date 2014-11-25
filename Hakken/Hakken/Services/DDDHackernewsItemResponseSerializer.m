@@ -10,14 +10,19 @@
 #import "DDDHackerNewsItem.h"
 
 @implementation DDDHackernewsItemResponseSerializer
++ (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray
+{
+    NSMutableArray *serializedItems = [NSMutableArray array];
+    for (NSDictionary *rawItem in jsonArray)
+        [serializedItems addObject:[self itemFromJSON:rawItem]];
+    return serializedItems;
+}
+
 + (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json
 {
     // TODO: replace back with items
-    NSArray *rawItems               = [json valueForKey:@"COMMENTTREEKEY"];
-    NSMutableArray *serializedItems = [NSMutableArray array];
-    for (NSDictionary *rawItem in rawItems)
-        [serializedItems addObject:[self itemFromJSON:rawItem]];
-    return serializedItems;
+    NSArray *rawItems = [json valueForKey:@"items"];
+    return [self arrayOfItemsFromJSONArray:rawItems];
 }
 
 + (DDDHackerNewsItem *)itemFromJSON:(NSDictionary *)json

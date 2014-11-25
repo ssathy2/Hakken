@@ -13,12 +13,25 @@
 
 @interface DDDViewControllerRouter ()
 @property (strong, nonatomic) NSMutableDictionary *screenMapping;
+@property (strong, nonatomic) UINavigationController *navigationController;
 @end
 
 @implementation DDDViewControllerRouter
 
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController
+{
+    self = [super init];
+    if (self)
+    {
+        self.navigationController = navigationController;
+    }
+    return self;
+}
+
 - (void)updateScreenMapping:(NSDictionary *)screenMapping
 {
+    if (!self.screenMapping)
+        self.screenMapping = [NSMutableDictionary dictionary];
     [self serializeScreenMapping:screenMapping];
 }
 
@@ -46,20 +59,19 @@
     // check if the screen is a root view
     DDDScreen *screenObject = [self.screenMapping objectForKey:screen];
     DDDViewController *vc = [self viewControllerForScreen:screen];
-    
-    if (attributes)
-        [vc prepareWithModel:attributes.model];
+    [vc setNavigationRouter:self];
+    [vc prepareWithModel:attributes.model];
 
     // instantiate the view and replace root view if it is, if it's not then push it on
     // modal presentation takes precedence over root view
     if (attributes.presentModally)
-        [self presentViewController:vc animated:animated completion:nil];
+        [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:animated completion:nil];
     else
     {
         if (screenObject.isRootView)
-            [self setViewControllers:@[vc] animated:animated];
+            [self.navigationController setViewControllers:@[vc] animated:animated];
         else
-            [self pushViewController:vc animated:animated];
+            [self.navigationController pushViewController:vc animated:animated];
     }
 }
 

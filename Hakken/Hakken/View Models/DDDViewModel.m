@@ -26,33 +26,17 @@
     // use this to setup the view model from a model
 }
 
-- (void)registerListener:(id<DDDViewModelListener>)listener
+- (RACSignal *)subscribeToViewModelProperty:(NSString *)property
 {
-	if (![self.listeners containsObject:listener])
-        [self.listeners addObject:listener];
+    if (![self respondsToSelector:NSSelectorFromString(property)])
+    {
+        DDLogError(@"Can't subscribe to a view model property: %@ because it doesn't exist on the view model", property);
+        return nil;
+    }
+    
+    return [self rac_signalForSelector:NSSelectorFromString(property)];
 }
 
-- (void)unregisterListener:(id<DDDViewModelListener>)listener
-{
-	if (![self.listeners containsObject:listener])
-		[self.listeners removeObject:listener];
-}
-
-- (void)notifyListenersWithSelector:(SEL)selector
-{
-	[self notifyListenersWithSelector:selector withObject:nil];
-}
-
-- (void)notifyListenersWithSelector:(SEL)selector withObject:(id)object1
-{
-	[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-		for (id<DDDViewModelListener> listener in self.listeners)
-		{
-			if ([listener respondsToSelector:selector])
-				[listener performSelector:selector withObject:self withObject:object1];
-		}
-	}];
-}
 
 #pragma mark - View Controller Lifecycle Hooks
 - (void)viewModelDidLoad

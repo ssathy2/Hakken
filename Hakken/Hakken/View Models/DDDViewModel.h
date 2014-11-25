@@ -8,19 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-// An empty protocol declaration that inherting view models must inherit from when defining view model delegate methods
-@protocol DDDViewModelListener <NSObject> @optional
-
-@end
-
-@interface DDDViewModel : NSObject<DDDViewModelListener>
+@interface DDDViewModel : NSObject
 - (void)prepareWithModel:(id)model;
 
-- (void)registerListener:(id<DDDViewModelListener>)listener;
-- (void)unregisterListener:(id<DDDViewModelListener>)listener;
-
-- (void)notifyListenersWithSelector:(SEL)selector;
-- (void)notifyListenersWithSelector:(SEL)selector withObject:(id)object;
+// Returns a signal that a an object can subscribe inorder to get events about onNext, completed, error, etc.
+- (RACSignal *)subscribeToViewModelProperty:(NSString *)property;
 
 // View Controller Lifecycle Hooks
 - (void)viewModelWillAppear;

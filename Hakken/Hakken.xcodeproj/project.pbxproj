@@ -34,12 +34,17 @@
 		DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC4F1A21303100692CB8 /* NSDictionary+DDDAdditions.m */; };
 		DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */; };
 		DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */; };
+		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
+		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
 		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
-		DEE038EC1A2293DA00979793 /* DDDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDRootViewController.m */; };
+		DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDMainViewController.m */; };
 		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
 		DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */; };
 		DEE038F01A229CCE00979793 /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC4C1A21010200692CB8 /* Configuration.json */; };
+		DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038F21A22EF7200979793 /* DDDContentViewController.m */; };
+		DEE038F61A22EFD300979793 /* DDDTopStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */; };
+		DEE038FB1A22F10A00979793 /* TopStoriesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,13 +104,24 @@
 		DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackernewsItemResponseSerializer.m; sourceTree = "<group>"; };
 		DE62AC551A224CCA00692CB8 /* DDDViewControllerRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewControllerRouter.h; sourceTree = "<group>"; };
 		DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewControllerRouter.m; sourceTree = "<group>"; };
+		DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesViewModel.h; sourceTree = "<group>"; };
+		DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesViewModel.m; sourceTree = "<group>"; };
+		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
+		DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDArrayInsertionDeletion.m; sourceTree = "<group>"; };
 		DEB09D091A2258E90021A933 /* DDDScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDScreen.h; sourceTree = "<group>"; };
 		DEB09D0A1A2258E90021A933 /* DDDScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDScreen.m; sourceTree = "<group>"; };
 		DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTransitionAttributes.h; sourceTree = "<group>"; };
 		DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTransitionAttributes.m; sourceTree = "<group>"; };
-		DEE038EA1A2293DA00979793 /* DDDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDRootViewController.h; sourceTree = "<group>"; };
-		DEE038EB1A2293DA00979793 /* DDDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDRootViewController.m; sourceTree = "<group>"; };
+		DEE038EA1A2293DA00979793 /* DDDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMainViewController.h; sourceTree = "<group>"; };
+		DEE038EB1A2293DA00979793 /* DDDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMainViewController.m; sourceTree = "<group>"; };
 		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
+		DEE038F11A22EF7200979793 /* DDDContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDContentViewController.h; sourceTree = "<group>"; };
+		DEE038F21A22EF7200979793 /* DDDContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDContentViewController.m; sourceTree = "<group>"; };
+		DEE038F41A22EFD300979793 /* DDDTopStoriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesViewController.h; sourceTree = "<group>"; };
+		DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesViewController.m; sourceTree = "<group>"; };
+		DEE038F71A22F08100979793 /* MainStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainStoryboardIdentifiers.h; sourceTree = "<group>"; };
+		DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopStoryStoryboardIdentifiers.h; sourceTree = "<group>"; };
+		DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TopStoriesStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,8 +165,14 @@
 			children = (
 				DE3127D91A1ADC160020DB40 /* DDDViewController.h */,
 				DE3127DA1A1ADC160020DB40 /* DDDViewController.m */,
-				DEE038EA1A2293DA00979793 /* DDDRootViewController.h */,
-				DEE038EB1A2293DA00979793 /* DDDRootViewController.m */,
+				DEE038EA1A2293DA00979793 /* DDDMainViewController.h */,
+				DEE038EB1A2293DA00979793 /* DDDMainViewController.m */,
+				DEE038F11A22EF7200979793 /* DDDContentViewController.h */,
+				DEE038F21A22EF7200979793 /* DDDContentViewController.m */,
+				DEE038F41A22EFD300979793 /* DDDTopStoriesViewController.h */,
+				DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */,
+				DEE038F71A22F08100979793 /* MainStoryboardIdentifiers.h */,
+				DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -162,6 +184,8 @@
 				DE31280C1A1EE4E20020DB40 /* DDDHackerNewsItem.m */,
 				DE3127E51A1AE9B00020DB40 /* DDDModel.h */,
 				DE3127E61A1AE9B00020DB40 /* DDDModel.m */,
+				DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */,
+				DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -171,6 +195,8 @@
 			children = (
 				DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */,
 				DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */,
+				DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */,
+				DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -224,6 +250,7 @@
 		DE475D8F1A1ADB1600970E87 /* Hakken */ = {
 			isa = PBXGroup;
 			children = (
+				DEE038F91A22F0E500979793 /* Storyboards */,
 				DE62AC541A224C7700692CB8 /* Navigation */,
 				DE62AC441A20FD5300692CB8 /* Services */,
 				DE3127D41A1ADBBD0020DB40 /* View Controllers */,
@@ -233,7 +260,6 @@
 				DE3127D81A1ADBBD0020DB40 /* Views */,
 				DE475D941A1ADB1600970E87 /* AppDelegate.h */,
 				DE475D951A1ADB1600970E87 /* AppDelegate.m */,
-				DE475D9A1A1ADB1600970E87 /* Main.storyboard */,
 				DE475D9D1A1ADB1600970E87 /* Images.xcassets */,
 				DE475D9F1A1ADB1600970E87 /* LaunchScreen.xib */,
 				DE475D901A1ADB1600970E87 /* Supporting Files */,
@@ -296,6 +322,15 @@
 				DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */,
 			);
 			name = Navigation;
+			sourceTree = "<group>";
+		};
+		DEE038F91A22F0E500979793 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				DE475D9A1A1ADB1600970E87 /* Main.storyboard */,
+				DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,6 +422,7 @@
 				DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */,
 				DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
+				DEE038FB1A22F10A00979793 /* TopStoriesStoryboard.storyboard in Resources */,
 				DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,16 +480,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
+				DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */,
 				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,
 				DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
-				DEE038EC1A2293DA00979793 /* DDDRootViewController.m in Sources */,
+				DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */,
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
 				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
+				DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */,
 				DE31280D1A1EE4E20020DB40 /* DDDHackerNewsItem.m in Sources */,
+				DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */,
 				DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */,
+				DEE038F61A22EFD300979793 /* DDDTopStoriesViewController.m in Sources */,
 				DE62AC481A20FD5300692CB8 /* DDDReactiveServices.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
 				DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */,

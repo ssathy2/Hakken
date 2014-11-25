@@ -10,7 +10,11 @@
 
 @class DDDTransitionAttributes;
 
-@interface DDDViewControllerRouter : UINavigationController
+@interface DDDViewControllerRouter : NSObject
+
+// Designated initializer
+- (instancetype)initWithNavigationController:(UINavigationController *)navigationController;
+
 /**
     An enumeration mapping should be of the format:
     ex: 

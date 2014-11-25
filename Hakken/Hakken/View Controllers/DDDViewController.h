@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class DDDViewModel;
-@class DDDViewControllerRouter;
+#import "DDDViewModel.h"
+#import "DDDViewControllerRouter.h"
 
 @protocol DDDViewControllerInstantiation <NSObject>
 @required
@@ -33,6 +33,7 @@
 
 @interface DDDViewController : UIViewController<DDDViewControllerInstantiation, DDDViewModelInstantiation>
 @property (strong, nonatomic, readonly) DDDViewModel *viewModel;
+@property (strong, nonatomic) DDDViewControllerRouter *navigationRouter;
 
 // Subclasses implement this method to be able to bind properties of classes to resulting destination vc's of segues
 - (NSDictionary *)segueIdentifierToContainerViewControllerMapping;

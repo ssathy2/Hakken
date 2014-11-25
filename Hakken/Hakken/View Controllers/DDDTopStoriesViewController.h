@@ -1,5 +1,5 @@
 //
-//  DDDRootViewController.h
+//  DDDTopStoriesViewController.h
 //  Hakken
 //
 //  Created by Sidd Sathyam on 11/23/14.
@@ -8,6 +8,6 @@
 
 #import "DDDViewController.h"
 
-@interface DDDRootViewController : DDDViewController
+@interface DDDTopStoriesViewController : DDDViewController
 
 @end

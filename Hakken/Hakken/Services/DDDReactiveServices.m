@@ -58,7 +58,7 @@
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  // convert the response object into an array of models
-                                 [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSON:responseObject]];
+                                 [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:responseObject]];
                                  [subscriber sendCompleted];
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [subscriber sendError:error];
