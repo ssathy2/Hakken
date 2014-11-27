@@ -1,8 +1,8 @@
 //
-//  DDDHackernewsItem.h
+//  DDDHackerNewsItem.h
 //  Hakken
 //
-//  Created by Sidd Sathyam on 11/26/14.
+//  Created by Sidd Sathyam on 11/20/14.
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
     DDDHackerNewsItemTypePollOption
 };
 
-@interface DDDHackernewsItem : DDDModel
+@interface DDDHackerNewsItem : DDDModel
 @property (copy,   nonatomic) NSNumber *identifier;
 @property (assign, nonatomic) BOOL deleted;
 @property (assign, nonatomic) DDDHackerNewsItemType type;
@@ -25,8 +25,8 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 @property (copy,   nonatomic) NSNumber *time;
 @property (copy,   nonatomic) NSString *text;
 @property (assign, nonatomic) BOOL dead;
-@property (copy,   nonatomic) NSArray *kids;
 @property (copy,   nonatomic) NSString *parent;
+@property (copy,   nonatomic) NSArray *kids;
 @property (copy,   nonatomic) NSString *url;
 @property (copy,   nonatomic) NSNumber *score;
 @property (copy,   nonatomic) NSString *title;
