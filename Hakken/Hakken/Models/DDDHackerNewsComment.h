@@ -8,5 +8,5 @@
 
 #import "DDDHackernewsItem.h"
 
-@interface DDDHackerNewsComment : DDDHackernewsItem
+@interface DDDHackerNewsComment : DDDHackerNewsItem
 @end

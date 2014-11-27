@@ -12,6 +12,6 @@
 - (void)setupPropertyMappingsWithDictionary:(NSDictionary *)dictionary
 {
     [super setupPropertyMappingsWithDictionary:dictionary];
-    [self setArrayOfModelsWithClass:[DDDHackernewsItem class] forKey:@"kids"];
+    [self setArrayOfModelsWithClass:[DDDHackerNewsItem class] forKey:@"kids"];
 }
 @end

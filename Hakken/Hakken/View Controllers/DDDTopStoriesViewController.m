@@ -10,8 +10,10 @@
 #import "TopStoryStoryboardIdentifiers.h"
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
+#import "DDDTopStoriesCollectionViewCell.h"
 
-@interface DDDTopStoriesViewController ()
+@interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
 @end
 
 @implementation DDDTopStoriesViewController
@@ -42,6 +44,13 @@
     // Do any additional setup after loading the view.
     
     [self setupListenersToViewModel];
+    [self setupCollectionView];
+}
+
+- (void)setupCollectionView
+{
+    self.storiesCollectionView.delegate     = self;
+    self.storiesCollectionView.dataSource   = self;
 }
 
 - (void)setupListenersToViewModel
@@ -59,6 +68,37 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    
+    [self.storiesCollectionView performBatchUpdates:^{
+        if (insertionDeletion.indexesInserted)
+            [self.storiesCollectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+        if (insertionDeletion.indexesDeleted)
+            [self.storiesCollectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+    } completion:^(BOOL finished) {
+       
+    }];
+}
+
+- (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
+{
+    NSMutableArray *indexPaths = [NSMutableArray array];
+    NSUInteger currentIndex = [set firstIndex];
+    while (currentIndex != NSNotFound) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
+        currentIndex = [set indexGreaterThanIndex:currentIndex];
+    }
+    return indexPaths;
+}
+
+#pragma mark - UICollectionViewDataSource
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[[self topStoriesViewModel] latestTopStoriesUpdate] array] count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    DDDTopStoriesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDTopStoriesCollectionViewCellIdentifier forIndexPath:indexPath];
+    [cell prepareWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
+    return cell;
 }
 @end

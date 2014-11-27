@@ -9,7 +9,7 @@
 #import "DDDModel.h"
 
 @interface DDDArrayInsertionDeletion : DDDModel
-@property (weak  , nonatomic) NSArray *array;
+@property (strong, nonatomic) NSArray *array;
 @property (strong, nonatomic) NSIndexSet *indexesInserted;
 @property (strong, nonatomic) NSIndexSet *indexesDeleted;
 @end

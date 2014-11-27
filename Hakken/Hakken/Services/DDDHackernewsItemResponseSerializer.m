@@ -23,7 +23,7 @@
 {
     NSMutableArray *serializedItems = [NSMutableArray array];
     for (NSDictionary *rawItem in jsonArray)
-        [serializedItems addObject:[[DDDHackernewsItem alloc] initWithDictionary:rawItem]];
+        [serializedItems addObject:[[DDDHackerNewsItem alloc] initWithDictionary:rawItem]];
     return serializedItems;
 }
 @end
