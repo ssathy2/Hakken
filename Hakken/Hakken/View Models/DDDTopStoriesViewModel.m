@@ -11,9 +11,6 @@
 #import "DDDArrayInsertionDeletion.h"
 
 @interface DDDTopStoriesViewModel()
-// This object gets updated with the latest stories array and any insertions and deletions that may have occurred
-@property (strong, nonatomic) DDDArrayInsertionDeletion *latestTopStoriesUpdate;
-
 @property (strong, nonatomic) NSNumber *topStoryFromValue;
 @property (strong, nonatomic) NSNumber *topStoryToValue;
 @end
@@ -29,31 +26,29 @@
 - (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
-    
-    __weak typeof(self) weakSelf = self;
+
     RACSignal *fetchTopStories = [[DDDReactiveServices sharedInstance] fetchTopStoriesFromStory:self.topStoryFromValue toStory:self.topStoryToValue];
     fetchTopStories = [fetchTopStories filter:^BOOL(id value) {
         return value != nil;
     }];
-    [fetchTopStories subscribeNext:^(NSArray *stories) {
-        if (stories.count != 0)
-            [weakSelf updateWithStories:stories indexesInserted:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, stories.count-1)] indexesDeleted:nil];
-    } error:^(NSError *error) {
-        DDLogError(@"%@", error);
-    } completed:^{
-       
+    fetchTopStories = [fetchTopStories flattenMap:^RACStream *(id value) {
+        NSIndexSet *inserted = nil;
+        if (value)
+            inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [value count])];
+        return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:nil]];
+    }];
+    [fetchTopStories subscribeNext:^(id x) {
+        self.latestTopStoriesUpdate = x;
     }];
 }
 
-- (void)updateWithStories:(NSArray *)stories indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
+- (DDDArrayInsertionDeletion *)updateWithStories:(NSArray *)stories indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
 {
-    if (!self.latestTopStoriesUpdate)
-        self.latestTopStoriesUpdate = [DDDArrayInsertionDeletion new];
-    
-    self.latestTopStoriesUpdate = [DDDArrayInsertionDeletion new];
-    self.latestTopStoriesUpdate.array = stories;
-    self.latestTopStoriesUpdate.indexesDeleted = indexesDeleted;
-    self.latestTopStoriesUpdate.indexesInserted = indexesInserted;
+    DDDArrayInsertionDeletion *topStoresUpdate = [DDDArrayInsertionDeletion new];
+    topStoresUpdate.array = stories;
+    topStoresUpdate.indexesDeleted = indexesDeleted;
+    topStoresUpdate.indexesInserted = indexesInserted;
+    return topStoresUpdate;
 }
 
 - (void)fetchNextStories:(NSNumber *)numberToFetch

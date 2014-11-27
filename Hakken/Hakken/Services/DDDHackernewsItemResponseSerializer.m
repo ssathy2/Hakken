@@ -7,26 +7,23 @@
 //
 
 #import "DDDHackernewsItemResponseSerializer.h"
-#import "DDDHackerNewsItem.h"
+#import "DDDHackerNewsComment.h"
 
 @implementation DDDHackernewsItemResponseSerializer
+
++ (NSArray *)arrayOfCommentsFromJSON:(NSDictionary *)json
+{
+    NSMutableArray *serializedItems = [NSMutableArray array];
+    for (NSDictionary *rawItem in [json valueForKey:@"items"])
+        [serializedItems addObject:[[DDDHackerNewsComment alloc] initWithDictionary:rawItem]];
+    return serializedItems;
+}
+
 + (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray
 {
     NSMutableArray *serializedItems = [NSMutableArray array];
     for (NSDictionary *rawItem in jsonArray)
-        [serializedItems addObject:[self itemFromJSON:rawItem]];
+        [serializedItems addObject:[[DDDHackernewsItem alloc] initWithDictionary:rawItem]];
     return serializedItems;
-}
-
-+ (NSArray *)arrayOfItemsFromJSON:(NSDictionary *)json
-{
-    // TODO: replace back with items
-    NSArray *rawItems = [json valueForKey:@"items"];
-    return [self arrayOfItemsFromJSONArray:rawItems];
-}
-
-+ (DDDHackerNewsItem *)itemFromJSON:(NSDictionary *)json
-{
-    return [[DDDHackerNewsItem alloc] initWithDictionary:json];
 }
 @end

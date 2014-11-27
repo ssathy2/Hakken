@@ -12,7 +12,7 @@
 
 @interface DDDTopStoriesViewModel : DDDViewModel
 // This object gets updated with the latest stories array and any insertions and deletions that may have occurred
-@property (strong, nonatomic, readonly) DDDArrayInsertionDeletion *latestTopStoriesUpdate;
+@property (strong, nonatomic) DDDArrayInsertionDeletion *latestTopStoriesUpdate;
 
 - (void)fetchNextStories:(NSNumber *)numberToFetch;
 @end

@@ -40,13 +40,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[[self topStoriesViewModel] subscribeToViewModelProperty:@keypath([self topStoriesViewModel].latestTopStoriesUpdate)]
-    subscribeNext:^(DDDArrayInsertionDeletion *insertionDeletion) {
-        DDLogInfo(@"X: %@", insertionDeletion);
-    } error:^(NSError *error) {
-        DDLogError(@"%@", error);
-    } completed:^{
-       
-    }];
+    
+    [self setupListenersToViewModel];
+}
+
+- (void)setupListenersToViewModel
+{
+    [RACObserve([self topStoriesViewModel], latestTopStoriesUpdate)
+     subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
+         DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);
+         [self updateWithInsertionDeletion:latestInsertionDeletion];
+     } error:^(NSError *error) {
+         DDLogError(@"%@", error);
+     } completed:^{
+         DDLogInfo(@"Complete!");
+     }];
+}
+
+- (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
+{
+    
 }
 @end

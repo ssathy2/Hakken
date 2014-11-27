@@ -11,8 +11,9 @@
 @interface DDDViewModel : NSObject
 - (void)prepareWithModel:(id)model;
 
-// Returns a signal that a an object can subscribe inorder to get events about onNext, completed, error, etc.
-- (RACSignal *)subscribeToViewModelProperty:(NSString *)property;
+//TODO:
+//// Returns a signal that a an object can subscribe inorder to get events about onNext, completed, error, etc.
+//- (RACSignal *)subscribeToViewModelProperty:(NSString *)property;
 
 // View Controller Lifecycle Hooks
 - (void)viewModelWillAppear;
