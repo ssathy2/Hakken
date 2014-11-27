@@ -11,7 +11,13 @@
 
 #define DDDTopStoriesCollectionViewCellIdentifier @"DDDTopStoriesCollectionViewCell"
 
+typedef NS_ENUM(NSInteger, DDDCellCollapseState)
+{
+    DDDCellCollapseStateCollapsed,
+    DDDCellCollapseStateNotCollapsed
+};
 
 @interface DDDTopStoriesCollectionViewCell : DDDCollectionViewCell
-
+- (void)setCellState:(DDDCellCollapseState)state;
+- (void)loadURLIfNecessary;
 @end

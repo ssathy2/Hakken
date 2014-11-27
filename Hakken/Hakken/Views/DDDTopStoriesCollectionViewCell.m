@@ -10,11 +10,10 @@
 #import "DDDHackerNewsItem.h"
 
 @interface DDDTopStoriesCollectionViewCell()
-@property (weak, nonatomic) IBOutlet UIImageView *storyTypeImageView;
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
-@property (weak, nonatomic) IBOutlet UIView *textContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webview;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -26,6 +25,7 @@
 {
     [super awakeFromNib];
     [self styleCell];
+    [self setCellState:DDDCellCollapseStateCollapsed];
 }
 
 - (void)styleCell
@@ -49,6 +49,38 @@
     
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
+}
+
+- (void)setCellState:(DDDCellCollapseState)state
+{
+    switch (state) {
+        case DDDCellCollapseStateCollapsed:
+        {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.webview.hidden = YES;
+                self.pointDatePostedLabel.alpha = 1.f;
+                self.userName.alpha = 1.f;
+            }];
+            break;
+        }
+        case DDDCellCollapseStateNotCollapsed:
+        {
+//            [UIView animateWithDuration:0.2 animations:^{
+                self.webview.hidden = NO;
+                self.pointDatePostedLabel.alpha = 0.f;
+                self.userName.alpha = 0.f;
+//            }];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)loadURLIfNecessary
+{
+    if ([self.model url])
+        [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:(NSString *)[self.model url]]]];
 }
 
 

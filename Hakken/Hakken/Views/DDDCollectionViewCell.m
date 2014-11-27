@@ -15,6 +15,14 @@
     self.model = nil;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
+}
+
 - (void)prepareWithModel:(id)model
 {
     self.model = model;

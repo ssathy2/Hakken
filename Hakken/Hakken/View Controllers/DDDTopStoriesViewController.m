@@ -107,6 +107,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedIndexPath = indexPath;
+
+    DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCellState:DDDCellCollapseStateNotCollapsed];
+    [cell loadURLIfNecessary];
+    
+    // IndexPath of cell to be expanded
     [collectionView performBatchUpdates:nil completion:nil];
     [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
 }

@@ -20,7 +20,7 @@
 {
     [super prepareWithModel:model];
     self.topStoryFromValue = @(0);
-    self.topStoryToValue   = @(10);
+    self.topStoryToValue   = @(2);
 }
 
 - (void)viewModelDidLoad
