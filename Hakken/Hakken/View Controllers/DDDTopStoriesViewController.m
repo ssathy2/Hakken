@@ -14,6 +14,7 @@
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation DDDTopStoriesViewController
@@ -100,5 +101,22 @@
     DDDTopStoriesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDTopStoriesCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
     return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.selectedIndexPath = indexPath;
+    [collectionView performBatchUpdates:nil completion:nil];
+    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = (self.selectedIndexPath != nil && [self.selectedIndexPath row] == indexPath.row) ? collectionView.frame.size.height : 150.f;
+    
+    //Return the size of each cell to draw
+    CGSize cellSize = (CGSize) { .width = collectionView.frame.size.width, .height = height };
+    return cellSize;
 }
 @end

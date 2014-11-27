@@ -7,7 +7,7 @@
 //
 
 #import "DDDTopStoriesCollectionViewCell.h"
-#import "DDDHackernewsItem.h"
+#import "DDDHackerNewsItem.h"
 
 @interface DDDTopStoriesCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIImageView *storyTypeImageView;

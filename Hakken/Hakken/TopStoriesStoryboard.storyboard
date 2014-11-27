@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="dX5-2d-P9H"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kos-2u-mNl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-LM-WyX">
@@ -263,10 +263,10 @@
                                 <exclude reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="o74-yt-cNN"/>
                                 <exclude reference="5TL-Lz-PpX"/>
                                 <exclude reference="Als-eY-DQD"/>
                                 <exclude reference="mv9-tZ-2Qr"/>
-                                <exclude reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -274,10 +274,10 @@
                                 <include reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="o74-yt-cNN"/>
                                 <include reference="5TL-Lz-PpX"/>
                                 <include reference="Als-eY-DQD"/>
                                 <include reference="mv9-tZ-2Qr"/>
-                                <include reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                     </view>
