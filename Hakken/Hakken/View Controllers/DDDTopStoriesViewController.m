@@ -106,14 +106,27 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self collectionView:collectionView deselectCellAtIndexPath:_selectedIndexPath];
+    
     self.selectedIndexPath = indexPath;
+    // deselect cell at indexpath at previous indexpath
+    // IndexPath of cell to be expanded
+    [collectionView performBatchUpdates:nil completion:nil];
+    [self collectionView:collectionView selectCellAtIndexPath:indexPath];
+}
 
+- (void)collectionView:(UICollectionView *)collectionView deselectCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [cell setCellState:DDDCellCollapseStateCollapsed];
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView selectCellAtIndexPath:(NSIndexPath *)indexPath
+{
     DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     [cell setCellState:DDDCellCollapseStateNotCollapsed];
     [cell loadURLIfNecessary];
-    
-    // IndexPath of cell to be expanded
-    [collectionView performBatchUpdates:nil completion:nil];
     [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
 }
 

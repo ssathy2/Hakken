@@ -19,8 +19,8 @@
 {
     [super awakeFromNib];
     
+    self.contentView.frame = self.bounds;
     self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.contentView.translatesAutoresizingMaskIntoConstraints = YES;
 }
 
 - (void)prepareWithModel:(id)model

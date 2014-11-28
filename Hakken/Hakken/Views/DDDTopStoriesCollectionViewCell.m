@@ -25,6 +25,7 @@
 {
     [super awakeFromNib];
     [self styleCell];
+    
     [self setCellState:DDDCellCollapseStateCollapsed];
 }
 
@@ -58,18 +59,18 @@
         {
             [UIView animateWithDuration:0.2 animations:^{
                 self.webview.hidden = YES;
-                self.pointDatePostedLabel.alpha = 1.f;
-                self.userName.alpha = 1.f;
+                self.pointDatePostedLabel.hidden = NO;
+                self.userName.hidden = NO;
             }];
             break;
         }
         case DDDCellCollapseStateNotCollapsed:
         {
-//            [UIView animateWithDuration:0.2 animations:^{
+            [UIView animateWithDuration:0.2 animations:^{
                 self.webview.hidden = NO;
-                self.pointDatePostedLabel.alpha = 0.f;
-                self.userName.alpha = 0.f;
-//            }];
+                self.pointDatePostedLabel.hidden = YES;
+                self.userName.hidden = YES;
+            }];
             break;
         }
         default:
