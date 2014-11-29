@@ -11,7 +11,6 @@
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDTopStoriesCollectionViewCell.h"
-#import "DDDExpandableCollectionViewFlowLayout.h"
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
