@@ -108,8 +108,9 @@
 {
     if (indexPath == self.selectedIndexPath)
     {
-        [collectionView performBatchUpdates:nil completion:nil];
         [self collectionView:collectionView deselectCellAtIndexPath:self.selectedIndexPath];
+        self.selectedIndexPath = nil;        
+        [collectionView performBatchUpdates:nil completion:nil];
     }
     else
     {

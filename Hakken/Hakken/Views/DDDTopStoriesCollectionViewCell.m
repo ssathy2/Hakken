@@ -40,6 +40,19 @@
     [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/1.2];
 }
 
+// TODO: Implement this method to properly return the correctly sized cell
+//- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+//{
+//    UICollectionViewLayoutAttributes *retAttributes = [layoutAttributes copy];
+//    CGRect fittingCellFrame = layoutAttributes.frame;
+//    CGFloat prevTitleLabelHeight = self.titleLabel.bounds.size.height;
+//    [self.titleLabel sizeToFit];
+//    fittingCellFrame.size.height += (self.titleLabel.bounds.size.height - prevTitleLabelHeight);
+//    retAttributes.frame = fittingCellFrame;
+//    return retAttributes;
+//    return [super preferredLayoutAttributesFittingAttributes:layoutAttributes];
+//}
+
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
@@ -50,7 +63,7 @@
     NSURL *url = [NSURL URLWithString:hnItem.url];
     self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [url host]];
     
-    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ point %@", hnItem.score, [[NSDate dateWithTimeIntervalSince1970:[hnItem.time doubleValue]] relativeDateTimeStringToNow]];
+    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[NSDate dateWithTimeIntervalSince1970:[hnItem.time doubleValue]] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
     
     // TODO: Get the actual number of comments

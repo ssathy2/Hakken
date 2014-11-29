@@ -40,6 +40,7 @@
 		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
 		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
+		DE9665C11A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665C01A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m */; };
 		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
 		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
 		DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDMainViewController.m */; };
@@ -120,6 +121,8 @@
 		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
 		DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDArrayInsertionDeletion.m; sourceTree = "<group>"; };
 		DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItem.m; sourceTree = "<group>"; };
+		DE9665BF1A2A2E7B00A40A1A /* DDDBouncyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDBouncyFlowLayout.h; sourceTree = "<group>"; };
+		DE9665C01A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDBouncyFlowLayout.m; sourceTree = "<group>"; };
 		DEB09D091A2258E90021A933 /* DDDScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDScreen.h; sourceTree = "<group>"; };
 		DEB09D0A1A2258E90021A933 /* DDDScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDScreen.m; sourceTree = "<group>"; };
 		DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTransitionAttributes.h; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */,
 				DEE038F71A22F08100979793 /* MainStoryboardIdentifiers.h */,
 				DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */,
+				DE9665BF1A2A2E7B00A40A1A /* DDDBouncyFlowLayout.h */,
+				DE9665C01A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -525,6 +530,7 @@
 				DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */,
 				DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */,
 				DEE038F61A22EFD300979793 /* DDDTopStoriesViewController.m in Sources */,
+				DE9665C11A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m in Sources */,
 				DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */,
 				DE62AC481A20FD5300692CB8 /* DDDReactiveServices.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
