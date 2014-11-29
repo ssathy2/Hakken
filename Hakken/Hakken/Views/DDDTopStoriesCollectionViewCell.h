@@ -18,6 +18,6 @@ typedef NS_ENUM(NSInteger, DDDCellCollapseState)
 };
 
 @interface DDDTopStoriesCollectionViewCell : DDDCollectionViewCell
-- (void)setCellState:(DDDCellCollapseState)state;
+- (void)setCollapseState:(DDDCellCollapseState)collapseState;
 - (void)loadURLIfNecessary;
 @end

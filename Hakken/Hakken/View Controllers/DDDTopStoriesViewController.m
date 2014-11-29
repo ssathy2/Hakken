@@ -11,6 +11,7 @@
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDTopStoriesCollectionViewCell.h"
+#import "DDDExpandableCollectionViewFlowLayout.h"
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
@@ -106,36 +107,43 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self collectionView:collectionView deselectCellAtIndexPath:_selectedIndexPath];
-    
-    self.selectedIndexPath = indexPath;
-    // deselect cell at indexpath at previous indexpath
-    // IndexPath of cell to be expanded
-    [collectionView performBatchUpdates:nil completion:nil];
-    [self collectionView:collectionView selectCellAtIndexPath:indexPath];
+    if (indexPath == self.selectedIndexPath)
+    {
+        [collectionView performBatchUpdates:nil completion:nil];
+        [self collectionView:collectionView deselectCellAtIndexPath:self.selectedIndexPath];
+    }
+    else
+    {
+        self.selectedIndexPath = indexPath;
+        // deselect cell at indexpath at previous indexpath
+        // IndexPath of cell to be expanded
+        [collectionView performBatchUpdates:nil completion:nil];
+        [self collectionView:collectionView selectCellAtIndexPath:indexPath];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView deselectCellAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell setCellState:DDDCellCollapseStateCollapsed];
+    [cell setCollapseState:DDDCellCollapseStateCollapsed];
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView selectCellAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell setCellState:DDDCellCollapseStateNotCollapsed];
+    [cell setCollapseState:DDDCellCollapseStateNotCollapsed];
     [cell loadURLIfNecessary];
     [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize )collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = (self.selectedIndexPath != nil && [self.selectedIndexPath row] == indexPath.row) ? collectionView.frame.size.height : 150.f;
-    
-    //Return the size of each cell to draw
-    CGSize cellSize = (CGSize) { .width = collectionView.frame.size.width, .height = height };
-    return cellSize;
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
+    CGSize newSize = CGSizeMake(collectionView.bounds.size.width, flowLayout.itemSize.height);
+    if (indexPath == self.selectedIndexPath)
+        newSize.height = collectionView.bounds.size.height;
+    return newSize;
 }
+
 @end

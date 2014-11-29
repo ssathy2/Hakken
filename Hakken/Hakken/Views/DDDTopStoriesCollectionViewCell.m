@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *pageableContentView;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
@@ -25,8 +26,12 @@
 {
     [super awakeFromNib];
     [self styleCell];
-    
-    [self setCellState:DDDCellCollapseStateCollapsed];
+}
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self setCollapseState:DDDCellCollapseStateCollapsed];
 }
 
 - (void)styleCell
@@ -52,9 +57,9 @@
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
 }
 
-- (void)setCellState:(DDDCellCollapseState)state
+- (void)setCollapseState:(DDDCellCollapseState)collapseState
 {
-    switch (state) {
+    switch (collapseState) {
         case DDDCellCollapseStateCollapsed:
         {
             [UIView animateWithDuration:0.2 animations:^{
@@ -83,6 +88,5 @@
     if ([self.model url])
         [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:(NSString *)[self.model url]]]];
 }
-
 
 @end
