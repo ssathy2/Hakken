@@ -14,7 +14,6 @@
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
-@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation DDDTopStoriesViewController
@@ -52,6 +51,9 @@
 {
     self.storiesCollectionView.delegate     = self;
     self.storiesCollectionView.dataSource   = self;
+//    
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.storiesCollectionView.collectionViewLayout;
+    flowLayout.estimatedItemSize = CGSizeMake(flowLayout.itemSize.width, flowLayout.itemSize.height);
 }
 
 - (void)setupListenersToViewModel
@@ -74,9 +76,7 @@
             [self.storiesCollectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
         if (insertionDeletion.indexesDeleted)
             [self.storiesCollectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-    } completion:^(BOOL finished) {
-       
-    }];
+    } completion:nil];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -106,44 +106,7 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath == self.selectedIndexPath)
-    {
-        [self collectionView:collectionView deselectCellAtIndexPath:self.selectedIndexPath];
-        self.selectedIndexPath = nil;        
-        [collectionView performBatchUpdates:nil completion:nil];
-    }
-    else
-    {
-        self.selectedIndexPath = indexPath;
-        // deselect cell at indexpath at previous indexpath
-        // IndexPath of cell to be expanded
-        [collectionView performBatchUpdates:nil completion:nil];
-        [self collectionView:collectionView selectCellAtIndexPath:indexPath];
-    }
-}
-
-- (void)collectionView:(UICollectionView *)collectionView deselectCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell setCollapseState:DDDCellCollapseStateCollapsed];
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView selectCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    DDDTopStoriesCollectionViewCell *cell = (DDDTopStoriesCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [cell setCollapseState:DDDCellCollapseStateNotCollapsed];
-    [cell loadURLIfNecessary];
-    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionCenteredVertically];
-}
-
-- (CGSize )collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
-    CGSize newSize = CGSizeMake(collectionView.bounds.size.width, flowLayout.itemSize.height);
-    if (indexPath == self.selectedIndexPath)
-        newSize.height = collectionView.bounds.size.height;
-    return newSize;
+    // push webview/comments controller here...
 }
 
 @end

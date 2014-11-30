@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *pageableContentView;
-@property (weak, nonatomic) IBOutlet UIWebView *webview;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -28,30 +27,27 @@
     [self styleCell];
 }
 
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    [self setCollapseState:DDDCellCollapseStateCollapsed];
-}
-
 - (void)styleCell
 {
     self.commentsButton.layer.masksToBounds = NO;
-    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/1.2];
+    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height];
 }
 
 // TODO: Implement this method to properly return the correctly sized cell
-//- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
-//{
-//    UICollectionViewLayoutAttributes *retAttributes = [layoutAttributes copy];
-//    CGRect fittingCellFrame = layoutAttributes.frame;
-//    CGFloat prevTitleLabelHeight = self.titleLabel.bounds.size.height;
-//    [self.titleLabel sizeToFit];
-//    fittingCellFrame.size.height += (self.titleLabel.bounds.size.height - prevTitleLabelHeight);
-//    retAttributes.frame = fittingCellFrame;
-//    return retAttributes;
-//    return [super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-//}
+- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
+{
+    UICollectionViewLayoutAttributes *retAttributes = [layoutAttributes copy];
+    CGRect fittingCellFrame = layoutAttributes.frame;
+    CGFloat prevTitleLabelHeight = self.titleLabel.bounds.size.height;
+    [self.titleLabel sizeToFit];
+    CGFloat heightDiff = self.titleLabel.bounds.size.height - prevTitleLabelHeight;
+   
+    if (heightDiff > 0)
+        fittingCellFrame.size.height += heightDiff;
+    
+    retAttributes.frame = fittingCellFrame;
+    return retAttributes;
+}
 
 - (void)prepareWithModel:(id)model
 {
@@ -69,37 +65,4 @@
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
 }
-
-- (void)setCollapseState:(DDDCellCollapseState)collapseState
-{
-    switch (collapseState) {
-        case DDDCellCollapseStateCollapsed:
-        {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.webview.hidden = YES;
-                self.pointDatePostedLabel.hidden = NO;
-                self.userName.hidden = NO;
-            }];
-            break;
-        }
-        case DDDCellCollapseStateNotCollapsed:
-        {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.webview.hidden = NO;
-                self.pointDatePostedLabel.hidden = YES;
-                self.userName.hidden = YES;
-            }];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-- (void)loadURLIfNecessary
-{
-    if ([self.model url])
-        [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:(NSString *)[self.model url]]]];
-}
-
 @end

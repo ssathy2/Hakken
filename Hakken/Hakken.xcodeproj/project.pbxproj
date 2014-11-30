@@ -43,6 +43,9 @@
 		DE9665C11A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665C01A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m */; };
 		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
 		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
+		DEC57A741A2AA11300D89A96 /* DetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */; };
+		DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */; };
+		DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */; };
 		DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDMainViewController.m */; };
 		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
 		DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */; };
@@ -127,6 +130,12 @@
 		DEB09D0A1A2258E90021A933 /* DDDScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDScreen.m; sourceTree = "<group>"; };
 		DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTransitionAttributes.h; sourceTree = "<group>"; };
 		DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTransitionAttributes.m; sourceTree = "<group>"; };
+		DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailStoryboard.storyboard; sourceTree = "<group>"; };
+		DEC57A781A2AA1F000D89A96 /* DDDStoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewController.h; sourceTree = "<group>"; };
+		DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewController.m; sourceTree = "<group>"; };
+		DEC57A7B1A2AA24A00D89A96 /* DetailStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailStoryboardIdentifiers.h; sourceTree = "<group>"; };
+		DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewModel.h; sourceTree = "<group>"; };
+		DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewModel.m; sourceTree = "<group>"; };
 		DEE038EA1A2293DA00979793 /* DDDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMainViewController.h; sourceTree = "<group>"; };
 		DEE038EB1A2293DA00979793 /* DDDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMainViewController.m; sourceTree = "<group>"; };
 		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
@@ -178,16 +187,9 @@
 		DE3127D41A1ADBBD0020DB40 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				DE3127D91A1ADC160020DB40 /* DDDViewController.h */,
-				DE3127DA1A1ADC160020DB40 /* DDDViewController.m */,
-				DEE038EA1A2293DA00979793 /* DDDMainViewController.h */,
-				DEE038EB1A2293DA00979793 /* DDDMainViewController.m */,
-				DEE038F11A22EF7200979793 /* DDDContentViewController.h */,
-				DEE038F21A22EF7200979793 /* DDDContentViewController.m */,
-				DEE038F41A22EFD300979793 /* DDDTopStoriesViewController.h */,
-				DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */,
-				DEE038F71A22F08100979793 /* MainStoryboardIdentifiers.h */,
-				DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */,
+				DEC57A771A2AA1B300D89A96 /* Main Content */,
+				DEC57A761A2AA1A500D89A96 /* Top Stories */,
+				DEC57A751A2AA19C00D89A96 /* Detail */,
 				DE9665BF1A2A2E7B00A40A1A /* DDDBouncyFlowLayout.h */,
 				DE9665C01A2A2E7B00A40A1A /* DDDBouncyFlowLayout.m */,
 			);
@@ -216,6 +218,8 @@
 				DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */,
 				DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */,
 				DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */,
+				DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */,
+				DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -357,11 +361,46 @@
 			name = "Top Stories";
 			sourceTree = "<group>";
 		};
+		DEC57A751A2AA19C00D89A96 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DEC57A781A2AA1F000D89A96 /* DDDStoryDetailViewController.h */,
+				DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */,
+				DEC57A7B1A2AA24A00D89A96 /* DetailStoryboardIdentifiers.h */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
+		DEC57A761A2AA1A500D89A96 /* Top Stories */ = {
+			isa = PBXGroup;
+			children = (
+				DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */,
+				DEE038F41A22EFD300979793 /* DDDTopStoriesViewController.h */,
+				DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */,
+			);
+			name = "Top Stories";
+			sourceTree = "<group>";
+		};
+		DEC57A771A2AA1B300D89A96 /* Main Content */ = {
+			isa = PBXGroup;
+			children = (
+				DEE038F71A22F08100979793 /* MainStoryboardIdentifiers.h */,
+				DE3127DA1A1ADC160020DB40 /* DDDViewController.m */,
+				DE3127D91A1ADC160020DB40 /* DDDViewController.h */,
+				DEE038EA1A2293DA00979793 /* DDDMainViewController.h */,
+				DEE038EB1A2293DA00979793 /* DDDMainViewController.m */,
+				DEE038F11A22EF7200979793 /* DDDContentViewController.h */,
+				DEE038F21A22EF7200979793 /* DDDContentViewController.m */,
+			);
+			name = "Main Content";
+			sourceTree = "<group>";
+		};
 		DEE038F91A22F0E500979793 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				DE475D9A1A1ADB1600970E87 /* Main.storyboard */,
 				DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */,
+				DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -456,6 +495,7 @@
 				DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
 				DEE038FB1A22F10A00979793 /* TopStoriesStoryboard.storyboard in Resources */,
+				DEC57A741A2AA11300D89A96 /* DetailStoryboard.storyboard in Resources */,
 				DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,12 +556,14 @@
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
 				DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */,
 				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,
+				DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */,
 				DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE663FA71A26D0DB00E80DA7 /* NSDate+Utility.m in Sources */,
 				DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */,
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
+				DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */,
 				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
 				DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */,
