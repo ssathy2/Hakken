@@ -22,4 +22,9 @@
                          forKey:@keypath(self.type)];
 }
 
+- (NSURL *)itemURL
+{
+    return [NSURL URLWithString:self.url];
+}
+
 @end

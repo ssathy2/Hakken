@@ -16,45 +16,123 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cv6-pr-cKf">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dxG-Lv-VMq">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </webView>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yiW-SZ-9lt">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <subviews>
+                                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wev-mw-l1v">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </webView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="wev-mw-l1v" firstAttribute="leading" secondItem="yiW-SZ-9lt" secondAttribute="leading" id="aiZ-EL-Pdk"/>
+                                            <constraint firstItem="wev-mw-l1v" firstAttribute="top" secondItem="yiW-SZ-9lt" secondAttribute="top" id="fUN-vW-REu"/>
+                                            <constraint firstAttribute="trailing" secondItem="wev-mw-l1v" secondAttribute="trailing" id="vZr-Ib-DQL"/>
+                                            <constraint firstAttribute="bottom" secondItem="wev-mw-l1v" secondAttribute="bottom" id="zEu-Ft-UFI"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="wev-mw-l1v"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="aiZ-EL-Pdk"/>
+                                                <exclude reference="fUN-vW-REu"/>
+                                                <exclude reference="vZr-Ib-DQL"/>
+                                                <exclude reference="zEu-Ft-UFI"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="subviews">
+                                                <include reference="wev-mw-l1v"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="aiZ-EL-Pdk"/>
+                                                <include reference="fUN-vW-REu"/>
+                                                <include reference="vZr-Ib-DQL"/>
+                                                <include reference="zEu-Ft-UFI"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="yiW-SZ-9lt" secondAttribute="bottom" id="79m-Yw-6hr"/>
+                                    <constraint firstItem="yiW-SZ-9lt" firstAttribute="width" secondItem="dxG-Lv-VMq" secondAttribute="width" id="99g-Sp-Xg6"/>
+                                    <constraint firstItem="yiW-SZ-9lt" firstAttribute="top" secondItem="dxG-Lv-VMq" secondAttribute="top" id="Edq-VG-CAc"/>
+                                    <constraint firstAttribute="trailing" secondItem="yiW-SZ-9lt" secondAttribute="trailing" id="QW0-gZ-BX0"/>
+                                    <constraint firstItem="yiW-SZ-9lt" firstAttribute="height" secondItem="dxG-Lv-VMq" secondAttribute="height" id="ffw-BX-uIT"/>
+                                    <constraint firstItem="yiW-SZ-9lt" firstAttribute="leading" secondItem="dxG-Lv-VMq" secondAttribute="leading" id="lcd-Eq-mlf"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="yiW-SZ-9lt"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="79m-Yw-6hr"/>
+                                        <exclude reference="99g-Sp-Xg6"/>
+                                        <exclude reference="Edq-VG-CAc"/>
+                                        <exclude reference="QW0-gZ-BX0"/>
+                                        <exclude reference="ffw-BX-uIT"/>
+                                        <exclude reference="lcd-Eq-mlf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="yiW-SZ-9lt"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="79m-Yw-6hr"/>
+                                        <include reference="99g-Sp-Xg6"/>
+                                        <include reference="Edq-VG-CAc"/>
+                                        <include reference="QW0-gZ-BX0"/>
+                                        <include reference="ffw-BX-uIT"/>
+                                        <include reference="lcd-Eq-mlf"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Cv6-pr-cKf" firstAttribute="top" secondItem="VgO-pz-6Lf" secondAttribute="top" id="AP3-tC-P0X"/>
-                            <constraint firstItem="Cv6-pr-cKf" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="MMA-2q-UbB"/>
-                            <constraint firstAttribute="trailing" secondItem="Cv6-pr-cKf" secondAttribute="trailing" id="a0E-2O-Q07"/>
-                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="Cv6-pr-cKf" secondAttribute="bottom" id="xhf-uh-zvN"/>
+                            <constraint firstItem="dxG-Lv-VMq" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="3NQ-r1-6Ph"/>
+                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="dxG-Lv-VMq" secondAttribute="bottom" id="5CK-j6-1uS"/>
+                            <constraint firstAttribute="trailing" secondItem="dxG-Lv-VMq" secondAttribute="trailing" id="Yqu-E0-LAt"/>
+                            <constraint firstItem="dxG-Lv-VMq" firstAttribute="top" secondItem="VgO-pz-6Lf" secondAttribute="top" id="c2g-9K-O3p"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="Cv6-pr-cKf"/>
+                                <exclude reference="dxG-Lv-VMq"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="xhf-uh-zvN"/>
-                                <exclude reference="AP3-tC-P0X"/>
-                                <exclude reference="MMA-2q-UbB"/>
-                                <exclude reference="a0E-2O-Q07"/>
+                                <exclude reference="5CK-j6-1uS"/>
+                                <exclude reference="3NQ-r1-6Ph"/>
+                                <exclude reference="Yqu-E0-LAt"/>
+                                <exclude reference="c2g-9K-O3p"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="Cv6-pr-cKf"/>
+                                <include reference="dxG-Lv-VMq"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="xhf-uh-zvN"/>
-                                <include reference="AP3-tC-P0X"/>
-                                <include reference="MMA-2q-UbB"/>
-                                <include reference="a0E-2O-Q07"/>
+                                <include reference="5CK-j6-1uS"/>
+                                <include reference="3NQ-r1-6Ph"/>
+                                <include reference="Yqu-E0-LAt"/>
+                                <include reference="c2g-9K-O3p"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="detailContentView" destination="yiW-SZ-9lt" id="u55-Vj-Uwu"/>
+                        <outlet property="scrollView" destination="dxG-Lv-VMq" id="RM3-z6-8ZO"/>
+                        <outlet property="webView" destination="wev-mw-l1v" id="UdK-OM-JXc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQc-K3-sz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="363" y="383"/>
+            <point key="canvasLocation" x="375" y="415"/>
         </scene>
     </scenes>
 </document>

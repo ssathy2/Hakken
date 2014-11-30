@@ -10,6 +10,9 @@
     #import <ReactiveCocoa/ReactiveCocoa.h>
     #import <AFNetworking/AFNetworking.h>
 
+    #define MAS_SHORTHAND
+    #import <Masonry/Masonry.h>
+
     #import "DDDHelpers.h"
     // Categories
     #import "DDDCategories.h"

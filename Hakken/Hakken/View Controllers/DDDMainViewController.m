@@ -10,7 +10,10 @@
 #import "DDDContentViewController.h"
 #import "MainStoryboardIdentifiers.h"
 #import "TopStoryStoryboardIdentifiers.h"
+#import "DetailStoryboardIdentifiers.h"
+
 #import "DDDTopStoriesViewController.h"
+#import "DDDStoryDetailViewController.h"
 
 @interface DDDMainViewController ()
 @property (weak, nonatomic) DDDContentViewController *contentViewController;
@@ -28,7 +31,8 @@
 {
     self.navigationRouter = [[DDDViewControllerRouter alloc] initWithNavigationController:self.navigationController];
     [self.navigationRouter updateScreenMapping:@{
-                                                 DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) }
+                                                 DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
+                                                 DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) }
                                                  }];
 }
 

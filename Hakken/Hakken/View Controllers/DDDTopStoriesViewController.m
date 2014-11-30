@@ -11,8 +11,12 @@
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDTopStoriesCollectionViewCell.h"
+#import "DDDExpandTransition.h"
+#import "DetailStoryboardIdentifiers.h"
+#import "DDDTransitionAttributes.h"
+#import "DDDStoryDetailTransitionModel.h"
 
-@interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
 @end
 
@@ -38,6 +42,7 @@
     return (DDDTopStoriesViewModel *)self.viewModel;
 }
 
+#pragma mark - UIViewController Lifecycle methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -45,6 +50,33 @@
     
     [self setupListenersToViewModel];
     [self setupCollectionView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if (self.navigationController.delegate == self)
+        self.navigationController.delegate = nil;
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC
+{
+    // Check if we're transitioning from this view controller to a DDDViewController
+    if (fromVC == self && [toVC isKindOfClass:[DDDViewController class]])
+        return [DDDExpandTransition new];
+    else
+        return nil;
 }
 
 - (void)setupCollectionView
@@ -104,9 +136,42 @@
 }
 
 #pragma mark - UICollectionViewDelegate
+
+- (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect cellRect = [[self.storiesCollectionView cellForItemAtIndexPath:indexPath] frame];
+    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.storiesCollectionView.frame.size.width, cellRect.origin.y-self.view.frame.origin.y);
+    
+    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
+    return snapShot;
+}
+
+- (UIView *)getViewSnapshotBelowCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect cellRect = [self.storiesCollectionView cellForItemAtIndexPath:indexPath].frame;
+    
+    CGPoint cellOrigin = [self.view convertPoint:[self.storiesCollectionView cellForItemAtIndexPath:indexPath].frame.origin toView:self.view];
+    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, cellOrigin.y+cellRect.size.height, self.view.frame.size.width, CGRectGetMaxY(self.view.frame) - cellOrigin.y);
+    
+    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
+    return snapShot;
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIView *topHalf = [self getViewSnapshotAboveCellAtIndexPath:indexPath];
+    UIView *bottomHalf = [self getViewSnapshotBelowCellAtIndexPath:indexPath];
+
+    DDDStoryDetailTransitionModel *transitionModel = [DDDStoryDetailTransitionModel new];
+    transitionModel.topPeekView = topHalf;
+    transitionModel.bottomPeekView = bottomHalf;
+    transitionModel.story = [[[self topStoriesViewModel] latestTopStoriesUpdate].array objectAtIndex:indexPath.row];
+    
+    DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+    attrs.model = transitionModel;
+    
     // push webview/comments controller here...
+    [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 @end

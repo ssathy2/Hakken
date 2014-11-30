@@ -7,7 +7,8 @@
 //
 
 #import "DDDViewModel.h"
+#import "DDDStoryDetailTransitionModel.h"
 
 @interface DDDStoryDetailViewModel : DDDViewModel
-
+@property (strong, nonatomic, readonly) DDDStoryDetailTransitionModel *transitionModel;
 @end

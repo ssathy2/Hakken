@@ -31,4 +31,7 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 @property (copy,   nonatomic) NSNumber *score;
 @property (copy,   nonatomic) NSString *title;
 @property (copy,   nonatomic) NSArray *parts;
+
+// generated properties
+@property (readonly, nonatomic) NSURL *itemURL;
 @end

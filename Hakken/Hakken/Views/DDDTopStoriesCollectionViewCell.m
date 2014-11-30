@@ -56,8 +56,7 @@
     DDDHackerNewsItem *hnItem = (DDDHackerNewsItem *)model;
     self.userName.text = [NSString stringWithFormat:@"from %@", hnItem.by];
     
-    NSURL *url = [NSURL URLWithString:hnItem.url];
-    self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [url host]];
+    self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [hnItem.itemURL host]];
     
     self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[NSDate dateWithTimeIntervalSince1970:[hnItem.time doubleValue]] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
