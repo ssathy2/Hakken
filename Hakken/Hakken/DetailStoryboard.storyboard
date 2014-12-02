@@ -34,22 +34,9 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hug-aj-2uy">
                                                     <rect key="frame" x="20" y="20" width="296" height="61"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" priority="250" constant="60" id="m1u-cx-HiF"/>
-                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="default">
-                                                        <mask key="constraints">
-                                                            <exclude reference="m1u-cx-HiF"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="widthClass=compact">
-                                                        <mask key="constraints">
-                                                            <include reference="m1u-cx-HiF"/>
-                                                        </mask>
-                                                    </variation>
                                                 </label>
                                                 <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1F-d0-VbB">
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -75,9 +62,22 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Q9-YO-76g">
+                                                <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Q9-YO-76g">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" priority="250" constant="513" id="yy7-jU-ssO"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="yy7-jU-ssO"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="yy7-jU-ssO"/>
+                                                        </mask>
+                                                    </variation>
                                                 </webView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -140,20 +140,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="8ai-DF-kRR"/>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="top" secondItem="VgO-pz-6Lf" secondAttribute="top" id="Jyv-Yo-5F1"/>
-                            <constraint firstAttribute="trailing" secondItem="URf-vr-I9T" secondAttribute="trailing" id="QRR-FN-leI"/>
-                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="URf-vr-I9T" secondAttribute="bottom" id="ahw-3y-Ube"/>
+                            <constraint firstItem="URf-vr-I9T" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="4Sj-gp-KIp"/>
+                            <constraint firstAttribute="centerX" secondItem="URf-vr-I9T" secondAttribute="centerX" id="IaN-12-acN"/>
+                            <constraint firstItem="URf-vr-I9T" firstAttribute="bottom" secondItem="8Ab-nG-bdK" secondAttribute="top" id="V9W-ia-9aj"/>
+                            <constraint firstAttribute="centerY" secondItem="URf-vr-I9T" secondAttribute="centerY" id="sb6-pn-eBK"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="URf-vr-I9T"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="8ai-DF-kRR"/>
-                                <exclude reference="Jyv-Yo-5F1"/>
-                                <exclude reference="QRR-FN-leI"/>
-                                <exclude reference="ahw-3y-Ube"/>
+                                <exclude reference="4Sj-gp-KIp"/>
+                                <exclude reference="IaN-12-acN"/>
+                                <exclude reference="V9W-ia-9aj"/>
+                                <exclude reference="sb6-pn-eBK"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -161,13 +161,14 @@
                                 <include reference="URf-vr-I9T"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="8ai-DF-kRR"/>
-                                <include reference="Jyv-Yo-5F1"/>
-                                <include reference="QRR-FN-leI"/>
-                                <include reference="ahw-3y-Ube"/>
+                                <include reference="4Sj-gp-KIp"/>
+                                <include reference="IaN-12-acN"/>
+                                <include reference="V9W-ia-9aj"/>
+                                <include reference="sb6-pn-eBK"/>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="collectionView" destination="URf-vr-I9T" id="u5y-mi-El6"/>
                     </connections>

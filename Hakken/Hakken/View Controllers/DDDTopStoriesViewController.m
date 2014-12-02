@@ -49,6 +49,8 @@
     
     [self setupListenersToViewModel];
     [self setupCollectionView];
+    
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -168,6 +170,8 @@
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     // push webview/comments controller here...
     [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];

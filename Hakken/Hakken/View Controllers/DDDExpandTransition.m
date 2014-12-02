@@ -12,18 +12,18 @@
 @implementation DDDExpandTransition
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return 2.f;
+    return 0.99f;
 }
 
-- (UIView *)topPartOfView:(UIView *)fromView withYPosition:(CGFloat)yPosition
+- (UIView *)topPartOfView:(UIView *)fromView withCellRect:(CGRect)cellRect
 {
-    CGRect topHalfOfViewRect = CGRectMake(0, 0, fromView.frame.size.width, yPosition);
+    CGRect topHalfOfViewRect = (CGRect){fromView.frame.origin, CGSizeMake(fromView.frame.size.width, cellRect.size.height - fromView.frame.origin.y)};
     return [fromView resizableSnapshotViewFromRect:topHalfOfViewRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
 }
 
-- (UIView *)bottomPartOfView:(UIView *)fromView withYPosition:(CGFloat)yPosition
+- (UIView *)bottomPartOfView:(UIView *)fromView withCellRect:(CGRect)cellRect
 {
-    CGRect bottomHalfOfViewRect = CGRectMake(0, yPosition, fromView.frame.size.width, fromView.frame.size.height-yPosition);
+    CGRect bottomHalfOfViewRect = (CGRect){CGPointMake(cellRect.origin.x, cellRect.origin.y+cellRect.size.height), CGSizeMake(fromView.frame.size.width, fromView.frame.size.height-cellRect.origin.y+cellRect.size.height)};
     return [fromView resizableSnapshotViewFromRect:bottomHalfOfViewRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
 }
 
@@ -35,23 +35,21 @@
     UIView *fromView = fromViewController.view;
     UIView *toView   = toViewController.view;
     
-    UICollectionView *fromCollectionView = [(UICollectionViewController *)fromViewController collectionView];
-    
     UIView *containerView = [transitionContext containerView];
     [containerView setBackgroundColor:[UIColor darkGrayColor]];
     
+    CGRect cellRect = [self originRectFromContext:transitionContext];
+    UIView *topFromView = [fromView resizableSnapshotViewFromRect:cellRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
+    UIView *bottomFromView = [self bottomPartOfView:fromView withCellRect:cellRect];
+    
     [toView setAlpha:0.0f];
     [containerView addSubview:toView];
+
+    [containerView addSubview:topFromView];
+    [containerView addSubview:bottomFromView];
     
-    CGRect originRect = [self originRectFromContext:transitionContext];
-    CGRect destinationRect = [self destinationRectFromContext:transitionContext];
-    
-    CGRect firstRect = CGRectMake(destinationRect.origin.x, destinationRect.origin.y, destinationRect.size.width, originRect.size.height);
-    
-    UIView *snapshot = [fromCollectionView resizableSnapshotViewFromRect:originRect afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
-    
-    [snapshot setFrame:[containerView convertRect:originRect fromView:fromCollectionView]];
-    [containerView addSubview:snapshot];
+    [topFromView setFrame:cellRect];
+    [bottomFromView setFrame:(CGRect){CGPointMake(cellRect.origin.x, cellRect.origin.y+cellRect.size.height), bottomFromView.frame.size}];
     
     [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]  delay:0.0f options:0 animations:^{
         [UIView addKeyframeWithRelativeStartTime:0.0f relativeDuration:0.33f animations:^{
@@ -59,15 +57,22 @@
         }];
         
         [UIView addKeyframeWithRelativeStartTime:0.33f relativeDuration:0.33f animations:^{
-            [snapshot setFrame:firstRect];
+            [bottomFromView setFrame:(CGRect){CGPointMake(0, 1000), bottomFromView.frame.size}];
+            [bottomFromView setAlpha:0.f];
         }];
+        
+        [UIView addKeyframeWithRelativeStartTime:0.66f relativeDuration:0.33f animations:^{
+            [topFromView setFrame:(CGRect){fromView.frame.origin, topFromView.frame.size}];
+        }];
+        
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:finished];
         
         [toView setAlpha:1.0f];
         [fromView removeFromSuperview];
         [containerView addSubview:toView];
-        [snapshot removeFromSuperview];
+        [topFromView removeFromSuperview];
+        [bottomFromView removeFromSuperview];
     }];
 }
 
@@ -78,7 +83,7 @@
         UICollectionView *collectionView = [fromViewController performSelector:@selector(collectionView)];
         NSIndexPath *indexPath = [[collectionView indexPathsForSelectedItems] firstObject];
         UICollectionViewLayoutAttributes *attributes = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
-        return attributes.frame;
+        return [collectionView convertRect:attributes.frame toView:fromViewController.view];
     }
     return CGRectZero;
 }
