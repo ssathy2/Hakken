@@ -60,8 +60,7 @@
         }];
         
         [UIView addKeyframeWithRelativeStartTime:0.33f relativeDuration:0.33f animations:^{
-//            [snapshot setFrame:firstRect];
-            snapshot.transform = CGAffineTransformIdentity;
+            [snapshot setFrame:firstRect];
         }];
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:finished];
