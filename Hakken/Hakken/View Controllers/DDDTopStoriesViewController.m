@@ -17,7 +17,6 @@
 #import "DDDStoryDetailTransitionModel.h"
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UICollectionView *storiesCollectionView;
 @end
 
 @implementation DDDTopStoriesViewController
@@ -81,10 +80,10 @@
 
 - (void)setupCollectionView
 {
-    self.storiesCollectionView.delegate     = self;
-    self.storiesCollectionView.dataSource   = self;
+    self.collectionView.delegate     = self;
+    self.collectionView.dataSource   = self;
 //    
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.storiesCollectionView.collectionViewLayout;
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     flowLayout.estimatedItemSize = CGSizeMake(flowLayout.itemSize.width, flowLayout.itemSize.height);
 }
 
@@ -103,11 +102,11 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.storiesCollectionView performBatchUpdates:^{
+    [self.collectionView performBatchUpdates:^{
         if (insertionDeletion.indexesInserted)
-            [self.storiesCollectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
         if (insertionDeletion.indexesDeleted)
-            [self.storiesCollectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
     } completion:nil];
 }
 
@@ -139,8 +138,8 @@
 
 - (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect cellRect = [[self.storiesCollectionView cellForItemAtIndexPath:indexPath] frame];
-    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.storiesCollectionView.frame.size.width, cellRect.origin.y-self.view.frame.origin.y);
+    CGRect cellRect = [[self.collectionView cellForItemAtIndexPath:indexPath] frame];
+    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.collectionView.frame.size.width, cellRect.origin.y-self.view.frame.origin.y);
     
     UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
     return snapShot;
@@ -148,9 +147,9 @@
 
 - (UIView *)getViewSnapshotBelowCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect cellRect = [self.storiesCollectionView cellForItemAtIndexPath:indexPath].frame;
+    CGRect cellRect = [self.collectionView cellForItemAtIndexPath:indexPath].frame;
     
-    CGPoint cellOrigin = [self.view convertPoint:[self.storiesCollectionView cellForItemAtIndexPath:indexPath].frame.origin toView:self.view];
+    CGPoint cellOrigin = [self.view convertPoint:[self.collectionView cellForItemAtIndexPath:indexPath].frame.origin toView:self.view];
     CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, cellOrigin.y+cellRect.size.height, self.view.frame.size.width, CGRectGetMaxY(self.view.frame) - cellOrigin.y);
     
     UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];

@@ -9,5 +9,5 @@
 #import "DDDViewController.h"
 
 @interface DDDTopStoriesViewController : DDDViewController
-
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

@@ -12,18 +12,18 @@
 @implementation DDDExpandTransition
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return 0.7;
+    return 2.f;
 }
 
-- (UIView *)topHalfViewSnapshotFromView:(UIView *)fromView
+- (UIView *)topPartOfView:(UIView *)fromView withYPosition:(CGFloat)yPosition
 {
-    CGRect topHalfOfViewRect = CGRectMake(0, 0, fromView.frame.size.width, fromView.frame.size.height/2);
+    CGRect topHalfOfViewRect = CGRectMake(0, 0, fromView.frame.size.width, yPosition);
     return [fromView resizableSnapshotViewFromRect:topHalfOfViewRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
 }
 
-- (UIView *)bottomHalfViewSnapshotFromView:(UIView *)fromView
+- (UIView *)bottomPartOfView:(UIView *)fromView withYPosition:(CGFloat)yPosition
 {
-    CGRect bottomHalfOfViewRect = CGRectMake(0, fromView.frame.size.height/2, fromView.frame.size.width, fromView.frame.size.height/2);
+    CGRect bottomHalfOfViewRect = CGRectMake(0, yPosition, fromView.frame.size.width, fromView.frame.size.height-yPosition);
     return [fromView resizableSnapshotViewFromRect:bottomHalfOfViewRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
 }
 
@@ -35,40 +35,71 @@
     UIView *fromView = fromViewController.view;
     UIView *toView   = toViewController.view;
     
+    UICollectionView *fromCollectionView = [(UICollectionViewController *)fromViewController collectionView];
+    
     UIView *containerView = [transitionContext containerView];
+    [containerView setBackgroundColor:[UIColor darkGrayColor]];
     
-    // Get snapshots to the top and bottom of the fromView
-    UIView *fromViewTopHalf = [self topHalfViewSnapshotFromView:fromView];
-    UIView *fromViewBottomHalf = [self bottomHalfViewSnapshotFromView:fromView];
-    fromViewTopHalf.frame = CGRectMake(0, 0, fromViewTopHalf.frame.size.width, fromViewTopHalf.frame.size.height);
-    fromViewBottomHalf.frame = CGRectMake(0, fromViewTopHalf.frame.size.height, fromViewBottomHalf.frame.size.width, fromViewBottomHalf.frame.size.height);
-    
-    toView.alpha = 0.f;
-    toView.frame = [transitionContext finalFrameForViewController:toViewController];
-    
-    [containerView addSubview:fromViewTopHalf];
-    [containerView addSubview:fromViewBottomHalf];
+    [toView setAlpha:0.0f];
     [containerView addSubview:toView];
     
-    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-        toView.alpha = 1.f;
-
-        // animate the top snapshot going up and the bottom snapshot going down
-        CGRect fromViewTopHalfFrame = fromViewTopHalf.frame;
-        fromViewTopHalfFrame.origin = CGPointMake(0, -1000);
-        fromViewTopHalf.frame = fromViewTopHalfFrame;
+    CGRect originRect = [self originRectFromContext:transitionContext];
+    CGRect destinationRect = [self destinationRectFromContext:transitionContext];
+    
+    CGRect firstRect = CGRectMake(destinationRect.origin.x, destinationRect.origin.y, destinationRect.size.width, originRect.size.height);
+    
+    UIView *snapshot = [fromCollectionView resizableSnapshotViewFromRect:originRect afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
+    snapshot.transform = CGAffineTransformMakeScale(0, 0);
+    
+    [snapshot setFrame:[containerView convertRect:originRect fromView:fromCollectionView]];
+    [containerView addSubview:snapshot];
+    
+    [UIView animateKeyframesWithDuration:[self transitionDuration:transitionContext]  delay:0.0f options:0 animations:^{
+        [UIView addKeyframeWithRelativeStartTime:0.0f relativeDuration:0.33f animations:^{
+            [fromView setAlpha:0.0f];
+        }];
         
-        CGRect fromViewBottomHalfFrame = fromViewBottomHalf.frame;
-        fromViewBottomHalfFrame.origin = CGPointMake(0, 1000);
-        fromViewBottomHalf.frame = fromViewBottomHalfFrame;
-        
+        [UIView addKeyframeWithRelativeStartTime:0.33f relativeDuration:0.33f animations:^{
+//            [snapshot setFrame:firstRect];
+            snapshot.transform = CGAffineTransformIdentity;
+        }];
     } completion:^(BOOL finished) {
-        // Clean up
-        // Declare that we've finished
-        [fromViewBottomHalf removeFromSuperview];
-        [fromViewTopHalf removeFromSuperview];
+        [transitionContext completeTransition:finished];
         
-        [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+        [toView setAlpha:1.0f];
+        [fromView removeFromSuperview];
+        [containerView addSubview:toView];
+        [snapshot removeFromSuperview];
     }];
+}
+
+- (CGRect)originRectFromContext:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    if ([fromViewController respondsToSelector:@selector(collectionView)])
+    {
+        UICollectionView *collectionView = [fromViewController performSelector:@selector(collectionView)];
+        NSIndexPath *indexPath = [[collectionView indexPathsForSelectedItems] firstObject];
+        UICollectionViewLayoutAttributes *attributes = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
+        return attributes.frame;
+    }
+    return CGRectZero;
+}
+
+- (CGRect)destinationRectFromContext:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    if ([toViewController respondsToSelector:@selector(collectionView)])
+    {
+//        UICollectionView *collectionView = [toViewController performSelector:@selector(collectionView)];
+//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        
+        // Can't get the destination rect properly from teh collection view's flow becuase the collectionview is still nil at this point
+        // Hardcode this for now
+        UIView *toView = toViewController.view;
+        return toView.frame;
+//        UICollectionViewLayoutAttributes *attributes = [collectionView layoutAttributesForItemAtIndexPath:indexPath];
+//        return attributes.frame;
+//        return frame;
+    }
+    return CGRectZero;
 }
 @end

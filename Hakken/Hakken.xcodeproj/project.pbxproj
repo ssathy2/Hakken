@@ -39,6 +39,7 @@
 		DE663FA11A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA01A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m */; };
 		DE663FA41A26CD6100E80DA7 /* DDDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */; };
 		DE663FA71A26D0DB00E80DA7 /* NSDate+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA61A26D0DB00E80DA7 /* NSDate+Utility.m */; };
+		DE6EB7141A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */; };
 		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
 		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
@@ -125,6 +126,8 @@
 		DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCollectionViewCell.m; sourceTree = "<group>"; };
 		DE663FA51A26D0DB00E80DA7 /* NSDate+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utility.h"; sourceTree = "<group>"; };
 		DE663FA61A26D0DB00E80DA7 /* NSDate+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utility.m"; sourceTree = "<group>"; };
+		DE6EB7121A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailCollectionViewCell.h; sourceTree = "<group>"; };
+		DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailCollectionViewCell.m; sourceTree = "<group>"; };
 		DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesViewModel.h; sourceTree = "<group>"; };
 		DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesViewModel.m; sourceTree = "<group>"; };
 		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
@@ -258,6 +261,7 @@
 			children = (
 				DE663FA21A26CD6100E80DA7 /* DDDCollectionViewCell.h */,
 				DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */,
+				DE6EB7111A2D38CD0077FDF4 /* Story Detail */,
 				DE663F9E1A26CD3400E80DA7 /* Top Stories */,
 			);
 			path = Views;
@@ -367,6 +371,15 @@
 				DE663FA01A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m */,
 			);
 			name = "Top Stories";
+			sourceTree = "<group>";
+		};
+		DE6EB7111A2D38CD0077FDF4 /* Story Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DE6EB7121A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.h */,
+				DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */,
+			);
+			name = "Story Detail";
 			sourceTree = "<group>";
 		};
 		DEC57A751A2AA19C00D89A96 /* Detail */ = {
@@ -589,6 +602,7 @@
 				DE62AC481A20FD5300692CB8 /* DDDReactiveServices.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
 				DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */,
+				DE6EB7141A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m in Sources */,
 				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,

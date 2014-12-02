@@ -9,3 +9,4 @@
 #define DetailStoryboardName @"DetailStoryboard"
 
 #define DDDStoryDetailViewControllerIdentifier @"DDDStoryDetailViewController"
+#define DDDStoryDetailCollectionViewCellIdentifier @"DDDStoryDetailCollectionViewCell"
