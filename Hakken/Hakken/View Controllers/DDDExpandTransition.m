@@ -49,7 +49,6 @@
     CGRect firstRect = CGRectMake(destinationRect.origin.x, destinationRect.origin.y, destinationRect.size.width, originRect.size.height);
     
     UIView *snapshot = [fromCollectionView resizableSnapshotViewFromRect:originRect afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
-    snapshot.transform = CGAffineTransformMakeScale(0, 0);
     
     [snapshot setFrame:[containerView convertRect:originRect fromView:fromCollectionView]];
     [containerView addSubview:snapshot];
