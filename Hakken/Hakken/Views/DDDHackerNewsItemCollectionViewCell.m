@@ -1,20 +1,31 @@
 //
-//  DDDStoryDetailCollectionViewCell.m
+//  DDDHackerNewsItemCollectionViewCell.m
 //  Hakken
 //
 //  Created by Sidd Sathyam on 12/1/14.
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDStoryDetailCollectionViewCell.h"
+#import "DDDHackerNewsItemCollectionViewCell.h"
 #import "DDDHackerNewsItem.h"
 
-@implementation DDDStoryDetailCollectionViewCell
+@interface DDDHackerNewsItemCollectionViewCell()
+@property (weak, nonatomic) IBOutlet UIButton *commentsButton;
+@property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *userName;
+@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@end
+
+@implementation DDDHackerNewsItemCollectionViewCell
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
     [self styleCell];
 }
+
 - (void)styleCell
 {
     self.commentsButton.layer.masksToBounds = NO;
@@ -42,10 +53,14 @@
     [super prepareWithModel:model];
     
     DDDHackerNewsItem *hnItem = (DDDHackerNewsItem *)model;
+    self.userName.text = [NSString stringWithFormat:@"from %@", hnItem.by];
+    
+    self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [hnItem.itemURL host]];
+    
+    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[NSDate dateWithTimeIntervalSince1970:[hnItem.time doubleValue]] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
-
+    
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
-    [self.webview loadRequest:[NSURLRequest requestWithURL:hnItem.itemURL]];
 }
 @end
