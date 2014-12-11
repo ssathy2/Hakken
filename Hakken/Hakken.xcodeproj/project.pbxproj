@@ -36,10 +36,10 @@
 		DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC4F1A21303100692CB8 /* NSDictionary+DDDAdditions.m */; };
 		DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */; };
 		DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */; };
-		DE663FA11A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA01A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m */; };
 		DE663FA41A26CD6100E80DA7 /* DDDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */; };
 		DE663FA71A26D0DB00E80DA7 /* NSDate+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DE663FA61A26D0DB00E80DA7 /* NSDate+Utility.m */; };
-		DE6EB7141A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */; };
+		DE6EB7171A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6EB7161A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m */; };
+		DE6EB7191A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6EB7181A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib */; };
 		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
 		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
@@ -120,14 +120,13 @@
 		DE62AC551A224CCA00692CB8 /* DDDViewControllerRouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewControllerRouter.h; sourceTree = "<group>"; };
 		DE62AC561A224CCA00692CB8 /* DDDViewControllerRouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewControllerRouter.m; sourceTree = "<group>"; };
 		DE663F9B1A269B4B00E80DA7 /* DDDHackerNewsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackerNewsItem.h; sourceTree = "<group>"; };
-		DE663F9F1A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesCollectionViewCell.h; sourceTree = "<group>"; };
-		DE663FA01A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesCollectionViewCell.m; sourceTree = "<group>"; };
 		DE663FA21A26CD6100E80DA7 /* DDDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCollectionViewCell.h; sourceTree = "<group>"; };
 		DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCollectionViewCell.m; sourceTree = "<group>"; };
 		DE663FA51A26D0DB00E80DA7 /* NSDate+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utility.h"; sourceTree = "<group>"; };
 		DE663FA61A26D0DB00E80DA7 /* NSDate+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utility.m"; sourceTree = "<group>"; };
-		DE6EB7121A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailCollectionViewCell.h; sourceTree = "<group>"; };
-		DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailCollectionViewCell.m; sourceTree = "<group>"; };
+		DE6EB7151A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackerNewsItemCollectionViewCell.h; sourceTree = "<group>"; };
+		DE6EB7161A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItemCollectionViewCell.m; sourceTree = "<group>"; };
+		DE6EB7181A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDHackerNewsItemCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesViewModel.h; sourceTree = "<group>"; };
 		DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesViewModel.m; sourceTree = "<group>"; };
 		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
@@ -259,10 +258,11 @@
 		DE3127D81A1ADBBD0020DB40 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DE663FA21A26CD6100E80DA7 /* DDDCollectionViewCell.h */,
 				DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */,
-				DE6EB7111A2D38CD0077FDF4 /* Story Detail */,
-				DE663F9E1A26CD3400E80DA7 /* Top Stories */,
+				DE663FA21A26CD6100E80DA7 /* DDDCollectionViewCell.h */,
+				DE6EB7151A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.h */,
+				DE6EB7161A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m */,
+				DE6EB7181A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,24 +362,6 @@
 				DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */,
 			);
 			name = Navigation;
-			sourceTree = "<group>";
-		};
-		DE663F9E1A26CD3400E80DA7 /* Top Stories */ = {
-			isa = PBXGroup;
-			children = (
-				DE663F9F1A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.h */,
-				DE663FA01A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m */,
-			);
-			name = "Top Stories";
-			sourceTree = "<group>";
-		};
-		DE6EB7111A2D38CD0077FDF4 /* Story Detail */ = {
-			isa = PBXGroup;
-			children = (
-				DE6EB7121A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.h */,
-				DE6EB7131A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m */,
-			);
-			name = "Story Detail";
 			sourceTree = "<group>";
 		};
 		DEC57A751A2AA19C00D89A96 /* Detail */ = {
@@ -511,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */,
+				DE6EB7191A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib in Resources */,
 				DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */,
 				DE62AC4D1A21010200692CB8 /* Configuration.json in Resources */,
 				DE62AC491A20FD5300692CB8 /* ServicesConfiguration.json in Resources */,
@@ -575,7 +558,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE663FA11A26CD4C00E80DA7 /* DDDTopStoriesCollectionViewCell.m in Sources */,
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
 				DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */,
 				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,
@@ -588,6 +570,7 @@
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
 				DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */,
 				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
+				DE6EB7171A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
 				DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */,
 				DE31280D1A1EE4E20020DB40 /* DDDHackerNewsComment.m in Sources */,
@@ -602,7 +585,6 @@
 				DE62AC481A20FD5300692CB8 /* DDDReactiveServices.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
 				DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */,
-				DE6EB7141A2D38E80077FDF4 /* DDDStoryDetailCollectionViewCell.m in Sources */,
 				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,

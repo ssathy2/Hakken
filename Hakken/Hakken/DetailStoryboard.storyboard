@@ -32,7 +32,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hug-aj-2uy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalCompressionResistancePriority="749" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hug-aj-2uy">
                                                     <rect key="frame" x="20" y="20" width="296" height="61"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,14 +51,14 @@
                                                     </state>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="rEu-gw-1qb"/>
                                                             <exclude reference="ZVI-Lb-xBx"/>
+                                                            <exclude reference="rEu-gw-1qb"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="rEu-gw-1qb"/>
                                                             <include reference="ZVI-Lb-xBx"/>
+                                                            <include reference="rEu-gw-1qb"/>
                                                         </mask>
                                                     </variation>
                                                 </button>
@@ -100,15 +100,15 @@
                                                 <exclude reference="2Q9-YO-76g"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="lgk-Jy-cvc"/>
+                                                <exclude reference="oTA-CI-TzO"/>
+                                                <exclude reference="uU8-1M-E6A"/>
                                                 <exclude reference="9ik-Ei-WmX"/>
                                                 <exclude reference="VhZ-TX-0jf"/>
                                                 <exclude reference="92Y-1G-9eW"/>
                                                 <exclude reference="M1j-l9-B8h"/>
                                                 <exclude reference="fS6-yM-0fc"/>
                                                 <exclude reference="rlR-kY-dzT"/>
-                                                <exclude reference="lgk-Jy-cvc"/>
-                                                <exclude reference="oTA-CI-TzO"/>
-                                                <exclude reference="uU8-1M-E6A"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
@@ -118,15 +118,15 @@
                                                 <include reference="2Q9-YO-76g"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="lgk-Jy-cvc"/>
+                                                <include reference="oTA-CI-TzO"/>
+                                                <include reference="uU8-1M-E6A"/>
                                                 <include reference="9ik-Ei-WmX"/>
                                                 <include reference="VhZ-TX-0jf"/>
                                                 <include reference="92Y-1G-9eW"/>
                                                 <include reference="M1j-l9-B8h"/>
                                                 <include reference="fS6-yM-0fc"/>
                                                 <include reference="rlR-kY-dzT"/>
-                                                <include reference="lgk-Jy-cvc"/>
-                                                <include reference="oTA-CI-TzO"/>
-                                                <include reference="uU8-1M-E6A"/>
                                             </mask>
                                         </variation>
                                         <connections>

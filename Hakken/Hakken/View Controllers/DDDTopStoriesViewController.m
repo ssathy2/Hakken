@@ -10,7 +10,7 @@
 #import "TopStoryStoryboardIdentifiers.h"
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
-#import "DDDTopStoriesCollectionViewCell.h"
+#import "DDDHackerNewsItemCollectionViewCell.h"
 #import "DDDExpandTransition.h"
 #import "DetailStoryboardIdentifiers.h"
 #import "DDDTransitionAttributes.h"
@@ -84,7 +84,9 @@
 {
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
-//    
+//
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     flowLayout.estimatedItemSize = CGSizeMake(flowLayout.itemSize.width, flowLayout.itemSize.height);
 }
@@ -131,7 +133,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDTopStoriesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDTopStoriesCollectionViewCellIdentifier forIndexPath:indexPath];
+    DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
     return cell;
 }

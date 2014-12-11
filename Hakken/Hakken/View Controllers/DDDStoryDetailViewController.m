@@ -11,7 +11,7 @@
 #import "DDDStoryDetailViewModel.h"
 #import "DDDStoryDetailTransitionModel.h"
 #import "DDDHackerNewsItem.h"
-#import "DDDStoryDetailCollectionViewCell.h"
+#import "DDDHackerNewsItemCollectionViewCell.h"
 
 @interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @end
@@ -51,6 +51,8 @@
 {
     self.collectionView.dataSource  = self;
     self.collectionView.delegate    = self;
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
 }
 
 - (void)setupListenersToViewModel
@@ -84,7 +86,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDStoryDetailCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDStoryDetailCollectionViewCellIdentifier forIndexPath:indexPath];
+    DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self storyDetailViewModel] transitionModel] story]];
     return cell;
 }
