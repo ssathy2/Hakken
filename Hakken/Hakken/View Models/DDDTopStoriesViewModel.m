@@ -7,7 +7,7 @@
 //
 
 #import "DDDTopStoriesViewModel.h"
-#import "DDDReactiveServices.h"
+#import "DDDDataServices.h"
 #import "DDDArrayInsertionDeletion.h"
 
 @interface DDDTopStoriesViewModel()
@@ -27,7 +27,8 @@
 {
     [super viewModelDidLoad];
 
-    RACSignal *fetchTopStories = [[DDDReactiveServices sharedInstance] fetchTopStoriesFromStory:self.topStoryFromValue toStory:self.topStoryToValue];
+    __weak typeof(self) weakSelf = self;
+    RACSignal *fetchTopStories = [[DDDDataServices sharedInstance] fetchTopStoriesFromStory:self.topStoryFromValue toStory:self.topStoryToValue];
     fetchTopStories = [fetchTopStories filter:^BOOL(id value) {
         return value != nil;
     }];
@@ -38,7 +39,7 @@
         return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:nil]];
     }];
     [fetchTopStories subscribeNext:^(id x) {
-        self.latestTopStoriesUpdate = x;
+        weakSelf.latestTopStoriesUpdate = x;
     }];
 }
 

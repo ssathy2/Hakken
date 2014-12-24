@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "DDDReactiveServices.h"
+#import "DDDDataServices.h"
 
 @interface DDDReactiveServicesTests : XCTestCase
-@property (strong, nonatomic) DDDReactiveServices *services;
+@property (strong, nonatomic) DDDDataServices *services;
 @end
 
 @implementation DDDReactiveServicesTests
@@ -19,7 +19,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.services = [DDDReactiveServices sharedInstance];
+    self.services = [DDDDataServices sharedInstance];
 }
 
 - (void)tearDown {
