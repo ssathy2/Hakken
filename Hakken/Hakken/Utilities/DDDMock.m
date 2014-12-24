@@ -9,16 +9,59 @@
 #import "DDDMock.h"
 
 @implementation DDDMock
-+ (NSDictionary *)dictionaryFromJSONFile:(NSString *)file
++ (RACSignal *)arrayFromJSONFile:(NSString *)file
+                           async:(BOOL)async
 {
-    if (file.length == 0)
-        return nil;
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSString *fullFilePath = [bundle pathForResource:file ofType:@"json"];
-    if (!fullFilePath)
-        return nil;
+    return [self internalJSONHelper:file async:async];
+}
+
++ (RACSignal *)internalJSONHelper:(NSString *)fileName
+                            async:(BOOL)async
+{
+    RACSignal *signal = [self dataFromFileName:fileName withExtension:@"json" async:async];
+    [signal filter:^BOOL(id value) {
+        return value != nil;
+    }];
+    return [signal flattenMap:^RACStream *(id value) {
+        return [RACSignal return:[NSJSONSerialization JSONObjectWithData:value options:0 error:nil]];
+    }];
+}
+
++ (RACSignal *)dataFromFileName:(NSString *)fileName
+                  withExtension:(NSString *)extension
+                          async:(BOOL)async
+{
+    assert(fileName.length > 0);
+    assert(extension.length > 0);
     
-    NSData *rawJSON = [[NSData alloc] initWithContentsOfFile:fullFilePath options:NSDataReadingMappedIfSafe error:nil];
-    return (rawJSON) ? [NSJSONSerialization JSONObjectWithData:rawJSON options:0 error:nil] : nil;
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        void(^dataFetchBlock)() = ^() {
+            NSBundle *bundle = [NSBundle mainBundle];
+            NSString *fullFilePath = [bundle pathForResource:fileName ofType:extension];
+            if (!fullFilePath)
+                [subscriber sendError:[NSError errorWithDomain:@"File not found in default bundle" code:-1 userInfo:nil]];
+            
+            NSData *rawJSON = [[NSData alloc] initWithContentsOfFile:fullFilePath options:NSDataReadingMappedIfSafe error:nil];
+            [subscriber sendNext:rawJSON];
+            [subscriber sendCompleted];
+        };
+        
+        if (async)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                dataFetchBlock();
+            });
+        }
+        else
+            dataFetchBlock();
+        
+        return nil;
+    }];
+}
+
++ (RACSignal *)dictionaryFromJSONFile:(NSString *)file
+                                async:(BOOL)async
+{
+    return [self internalJSONHelper:file async:async];
 }
 @end

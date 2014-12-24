@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^DataBlock)(NSData *data);
+typedef void(^ErrorBlock)(NSError *error);
+
 @interface DDDMock : NSObject
-+ (NSDictionary *)dictionaryFromJSONFile:(NSString *)file;
++ (RACSignal *)dictionaryFromJSONFile:(NSString *)file
+                                async:(BOOL)async;
+
++ (RACSignal *)arrayFromJSONFile:(NSString *)file
+                           async:(BOOL)async;
+
+
++ (RACSignal *)dataFromFileName:(NSString *)fileName
+                  withExtension:(NSString *)extension
+                          async:(BOOL)async;
 @end

@@ -31,21 +31,43 @@
 - (void)testInitWithDictionary
 {
     // Load in mock story
-    NSDictionary *mockStoryDictionary = [DDDMock dictionaryFromJSONFile:@"mock_story"];
-    DDDHackerNewsComment *mockStoryItem = [[DDDHackerNewsComment alloc] initWithDictionary:mockStoryDictionary];
-    XCTAssert(mockStoryItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
-    XCTAssert(mockStoryItem.type == DDDHackerNewsItemTypeStory, @"FAIL: The type of this item should be a story!");
+    [[[[DDDMock dictionaryFromJSONFile:@"mock_story" async:NO] filter:^BOOL(id value) {
+        return value != nil;
+    }] flattenMap:^RACStream *(id value) {
+        return [RACStream return:[[DDDHackerNewsItem alloc] initWithDictionary:value]];
+    }] subscribeNext:^(DDDHackerNewsItem *mockStoryItem) {
+        XCTAssert(mockStoryItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
+        XCTAssert(mockStoryItem.type == DDDHackerNewsItemTypeStory, @"FAIL: The type of this item should be a story!");
+    } error:^(NSError *error) {
+        XCTAssert(error == nil, @"FAIL: %@", error);
+    } completed:^{
+    }];
+    
 
     // Load in mock comment
-    NSDictionary *mockCommentDictionary = [DDDMock dictionaryFromJSONFile:@"mock_comment"];
-    DDDHackerNewsComment *mockCommentItem = [[DDDHackerNewsComment alloc] initWithDictionary:mockCommentDictionary];
-    XCTAssert(mockCommentItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
-    XCTAssert(mockCommentItem.type == DDDHackerNewsItemTypeComment, @"FAIL: The type of this item should be a comment!");
+    [[[[DDDMock dictionaryFromJSONFile:@"mock_comment" async:NO] filter:^BOOL(id value) {
+        return value != nil;
+    }] flattenMap:^RACStream *(id value) {
+        return [RACStream return:[[DDDHackerNewsComment alloc] initWithDictionary:value]];
+    }] subscribeNext:^(DDDHackerNewsComment *mockCommentItem) {
+        XCTAssert(mockCommentItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
+        XCTAssert(mockCommentItem.type == DDDHackerNewsItemTypeComment, @"FAIL: The type of this item should be a comment!");
+    } error:^(NSError *error) {
+        XCTAssert(error == nil, @"FAIL: %@", error);
+    } completed:^{
+    }];
     
-    // Load in poll model
-    NSDictionary *mockPollDictionray = [DDDMock dictionaryFromJSONFile:@"mock_poll"];
-    DDDHackerNewsComment *mockPoll = [[DDDHackerNewsComment alloc] initWithDictionary:mockPollDictionray];
-    XCTAssert(mockPoll.parts.count == 3, @"FAIL: There should be three parts to this mock poll!");
+    // Load in mock poll
+    [[[[DDDMock dictionaryFromJSONFile:@"mock_poll" async:NO] filter:^BOOL(id value) {
+        return value != nil;
+    }] flattenMap:^RACStream *(id value) {
+        return [RACStream return:[[DDDHackerNewsItem alloc] initWithDictionary:value]];
+    }] subscribeNext:^(DDDHackerNewsItem *mockPoll) {
+        XCTAssert(mockPoll.parts.count == 3, @"FAIL: There should be three parts to this mock poll!");
+    } error:^(NSError *error) {
+        XCTAssert(error == nil, @"FAIL: %@", error);
+    } completed:^{
+    }];
 }
 
 @end

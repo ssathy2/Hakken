@@ -6,37 +6,27 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDReactiveServices.h"
+#import "DDDLiveDataServices.h"
 #import "DDDHackernewsItemResponseSerializer.h"
 
-@interface DDDReactiveServices()
+@interface DDDLiveDataServices()
 @property (strong, nonatomic) AFHTTPRequestOperationManager *httpRequestManager;
 @end
 
-@implementation DDDReactiveServices
-+ (instancetype) sharedInstance
+@implementation DDDLiveDataServices
++ (instancetype)liveServicesWithBaseURL:(NSURL *)baseURL
 {
-    static DDDReactiveServices* sharedInstance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[DDDReactiveServices alloc] init];
-        // do any init for the shared instance here
-        [sharedInstance setupFromConfiguration];
-    });
-    return sharedInstance;
+    return [[DDDLiveDataServices alloc] initWithBaseURL:baseURL];
 }
 
-- (void)setupFromConfiguration
+- (instancetype)initWithBaseURL:(NSURL *)url
 {
-    NSDictionary *configuration             = [DDDMock dictionaryFromJSONFile:@"Configuration"];
-    NSDictionary *servicesConfiguration     = [DDDMock dictionaryFromJSONFile:@"ServicesConfiguration"];
-    
-    NSString *servicesKey = configuration[@"services"];
-
-    NSDictionary *servicesDictionary        = servicesConfiguration[servicesKey];
-    
-    NSURL *baseURL = [NSURL URLWithString:servicesDictionary[@"baseURL"]];
-    self.httpRequestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:baseURL];
+    self = [super init];
+    if (self)
+    {
+        self.httpRequestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
+    }
+    return self;
 }
 
 - (RACSignal *)fetchTopStoriesFromStory:(NSNumber *)fromStory toStory:(NSNumber *)toStory
