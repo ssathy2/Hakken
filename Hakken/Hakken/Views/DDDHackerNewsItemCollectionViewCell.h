@@ -11,5 +11,5 @@
 #define DDDHackerNewsItemCollectionViewCellIdentifier @"DDDHackerNewsItemCollectionViewCell"
 
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell
-
+- (CGSize)adjustedCellSize;
 @end

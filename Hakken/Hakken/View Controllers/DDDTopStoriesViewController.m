@@ -11,10 +11,10 @@
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
-#import "DDDExpandTransition.h"
 #import "DetailStoryboardIdentifiers.h"
 #import "DDDTransitionAttributes.h"
 #import "DDDStoryDetailTransitionModel.h"
+#import "DDDTopStoriesPushAnimator.h"
 
 @interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 @end
@@ -49,8 +49,6 @@
     
     [self setupListenersToViewModel];
     [self setupCollectionView];
-    
-    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,22 +60,21 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self)
-        self.navigationController.delegate = nil;
+    self.navigationController.delegate = nil;
 }
 
 #pragma mark - UINavigationControllerDelegate
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                  animationControllerForOperation:(UINavigationControllerOperation)operation
-                                               fromViewController:(UIViewController *)fromVC
-                                                 toViewController:(UIViewController *)toVC
+- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                   animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                fromViewController:(UIViewController *)fromVC
+                                                  toViewController:(UIViewController *)toVC  NS_AVAILABLE_IOS(7_0);
 {
     // Check if we're transitioning from this view controller to a DDDViewController
     if (fromVC == self && [toVC isKindOfClass:[DDDViewController class]])
-        return [DDDExpandTransition new];
+        return [DDDTopStoriesPushAnimator new];
     else
         return nil;
+
 }
 
 - (void)setupCollectionView
@@ -160,6 +157,32 @@
     return snapShot;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(0.95f, 0.95);
+                        } completion:^(BOOL finished) {
+                        }];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.4
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        } completion:^(BOOL finished) {
+                        }];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UIView *topHalf = [self getViewSnapshotAboveCellAtIndexPath:indexPath];
@@ -172,8 +195,6 @@
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
-    
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     // push webview/comments controller here...
     [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
