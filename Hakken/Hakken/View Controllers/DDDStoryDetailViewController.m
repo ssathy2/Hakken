@@ -12,6 +12,7 @@
 #import "DDDStoryDetailTransitionModel.h"
 #import "DDDHackerNewsItem.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
+#import "DDDWebViewCollectionViewCell.h"
 
 @interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @end
@@ -42,7 +43,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self setupCollectionView];
     [self setupListenersToViewModel];
 }
@@ -53,6 +53,7 @@
     self.collectionView.delegate    = self;
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDWebViewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDWebViewCollectionViewCellIdentifier];
 }
 
 - (void)setupListenersToViewModel
@@ -68,26 +69,30 @@
      }];
 }
 
-- (void)updateWithTransitionModel:(DDDStoryDetailTransitionModel *)transitionModel
-{
-    [self updateWithStory:transitionModel.story];
-}
-
-- (void)updateWithStory:(DDDHackerNewsItem *)story
-{
-
-}
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
+    NSString *identifier = (indexPath.row == 0) ? DDDHackerNewsItemCollectionViewCellIdentifier : DDDWebViewCollectionViewCellIdentifier;
+    DDDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self storyDetailViewModel] transitionModel] story]];
     return cell;
 }
+
+#pragma mark - UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+{
+    UICollectionViewFlowLayout *flowLaoyut = (UICollectionViewFlowLayout *)collectionViewLayout;
+    if (indexPath.row == 1)
+        return CGSizeMake(flowLaoyut.itemSize.width, collectionView.bounds.size.height - flowLaoyut.itemSize.height);
+    else
+        return flowLaoyut.itemSize;
+    
+}
+
 @end
