@@ -16,6 +16,7 @@
 		DE124AF91A4BBECA00337342 /* DDDWebViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124AF71A4BBECA00337342 /* DDDWebViewCollectionViewCell.m */; };
 		DE124AFA1A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE124AF81A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib */; };
 		DE124AFD1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124AFC1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m */; };
+		DE124AFF1A4CA4E700337342 /* CommentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE124AFE1A4CA4E700337342 /* CommentsStoryboard.storyboard */; };
 		DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DA1A1ADC160020DB40 /* DDDViewController.m */; };
 		DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */; };
 		DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */; };
@@ -26,12 +27,15 @@
 		DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
 		DE31280A1A1EE4D70020DB40 /* DDDHackerNewsItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */; };
 		DE31280D1A1EE4E20020DB40 /* DDDHackerNewsComment.m in Sources */ = {isa = PBXBuildFile; fileRef = DE31280C1A1EE4E20020DB40 /* DDDHackerNewsComment.m */; };
-		DE3962561A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3962551A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.m */; };
+		DE3962561A2BB9A2009EEB82 /* DDDStoryTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
 		DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9A1A1ADB1600970E87 /* Main.storyboard */; };
 		DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9D1A1ADB1600970E87 /* Images.xcassets */; };
 		DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE475D9F1A1ADB1600970E87 /* LaunchScreen.xib */; };
+		DE5504051A4CAA34003B4CEC /* DDDCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */; };
+		DE55040A1A4CB183003B4CEC /* DDDCommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */; };
+		DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */; };
 		DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC361A1EE8FF00692CB8 /* DDDMock.m */; };
 		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
 		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
@@ -90,6 +94,7 @@
 		DE124AF81A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDWebViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE124AFB1A4BC79C00337342 /* DDDTopStoriesPushAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesPushAnimator.h; sourceTree = "<group>"; };
 		DE124AFC1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesPushAnimator.m; sourceTree = "<group>"; };
+		DE124AFE1A4CA4E700337342 /* CommentsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CommentsStoryboard.storyboard; sourceTree = "<group>"; };
 		DE3127D91A1ADC160020DB40 /* DDDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewController.h; sourceTree = "<group>"; };
 		DE3127DA1A1ADC160020DB40 /* DDDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewController.m; sourceTree = "<group>"; };
 		DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewModel.h; sourceTree = "<group>"; };
@@ -109,8 +114,8 @@
 		DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItemTests.m; sourceTree = "<group>"; };
 		DE31280B1A1EE4E20020DB40 /* DDDHackerNewsComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackerNewsComment.h; sourceTree = "<group>"; };
 		DE31280C1A1EE4E20020DB40 /* DDDHackerNewsComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsComment.m; sourceTree = "<group>"; };
-		DE3962541A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailTransitionModel.h; sourceTree = "<group>"; };
-		DE3962551A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailTransitionModel.m; sourceTree = "<group>"; };
+		DE3962541A2BB9A2009EEB82 /* DDDStoryTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryTransitionModel.h; sourceTree = "<group>"; };
+		DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryTransitionModel.m; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475D911A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE475D921A1ADB1600970E87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,6 +126,13 @@
 		DE475DA01A1ADB1600970E87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		DE475DA61A1ADB1600970E87 /* HakkenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HakkenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475DAB1A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE5504031A4CAA34003B4CEC /* DDDCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewController.h; sourceTree = "<group>"; };
+		DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; };
+		DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsStoryboardIdentifiers.h; sourceTree = "<group>"; };
+		DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentCollectionViewCell.h; sourceTree = "<group>"; };
+		DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentCollectionViewCell.m; sourceTree = "<group>"; };
+		DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewModel.h; sourceTree = "<group>"; };
+		DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewModel.m; sourceTree = "<group>"; };
 		DE62AC351A1EE8FF00692CB8 /* DDDMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMock.h; sourceTree = "<group>"; };
 		DE62AC361A1EE8FF00692CB8 /* DDDMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMock.m; sourceTree = "<group>"; };
 		DE62AC3B1A20F4DF00692CB8 /* NSObject+Introspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Introspection.h"; sourceTree = "<group>"; };
@@ -211,6 +223,7 @@
 		DE3127D41A1ADBBD0020DB40 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DE5504061A4CAA3C003B4CEC /* Comments */,
 				DEC57A771A2AA1B300D89A96 /* Main Content */,
 				DEC57A761A2AA1A500D89A96 /* Top Stories */,
 				DEC57A751A2AA19C00D89A96 /* Detail */,
@@ -231,8 +244,8 @@
 				DE3127E61A1AE9B00020DB40 /* DDDModel.m */,
 				DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */,
 				DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */,
-				DE3962541A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.h */,
-				DE3962551A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.m */,
+				DE3962541A2BB9A2009EEB82 /* DDDStoryTransitionModel.h */,
+				DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -246,6 +259,8 @@
 				DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */,
 				DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */,
 				DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */,
+				DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */,
+				DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -359,6 +374,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DE5504061A4CAA3C003B4CEC /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				DE5504031A4CAA34003B4CEC /* DDDCommentsViewController.h */,
+				DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */,
+				DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */,
+				DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */,
+				DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */,
+			);
+			name = Comments;
+			sourceTree = "<group>";
+		};
 		DE62AC441A20FD5300692CB8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +458,7 @@
 				DE475D9A1A1ADB1600970E87 /* Main.storyboard */,
 				DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */,
 				DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */,
+				DE124AFE1A4CA4E700337342 /* CommentsStoryboard.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -524,6 +552,7 @@
 				DE62AC4D1A21010200692CB8 /* Configuration.json in Resources */,
 				DE62AC491A20FD5300692CB8 /* ServicesConfiguration.json in Resources */,
 				DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */,
+				DE124AFF1A4CA4E700337342 /* CommentsStoryboard.storyboard in Resources */,
 				DE475D9C1A1ADB1600970E87 /* Main.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
 				DEE038FB1A22F10A00979793 /* TopStoriesStoryboard.storyboard in Resources */,
@@ -597,6 +626,7 @@
 				DE124AFD1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m in Sources */,
 				DE663FA71A26D0DB00E80DA7 /* NSDate+Utility.m in Sources */,
 				DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */,
+				DE5504051A4CAA34003B4CEC /* DDDCommentsViewController.m in Sources */,
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
 				DE124ABC1A4B537B00337342 /* DDDDataServices.m in Sources */,
 				DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */,
@@ -605,7 +635,7 @@
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
 				DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */,
 				DE31280D1A1EE4E20020DB40 /* DDDHackerNewsComment.m in Sources */,
-				DE3962561A2BB9A2009EEB82 /* DDDStoryDetailTransitionModel.m in Sources */,
+				DE3962561A2BB9A2009EEB82 /* DDDStoryTransitionModel.m in Sources */,
 				DE663FA41A26CD6100E80DA7 /* DDDCollectionViewCell.m in Sources */,
 				DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */,
 				DE62AC501A21303100692CB8 /* NSDictionary+DDDAdditions.m in Sources */,
@@ -616,7 +646,9 @@
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
 				DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */,
 				DE124AF91A4BBECA00337342 /* DDDWebViewCollectionViewCell.m in Sources */,
+				DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */,
 				DE3127E31A1AE9820020DB40 /* NSMutableArray+Modification.m in Sources */,
+				DE55040A1A4CB183003B4CEC /* DDDCommentCollectionViewCell.m in Sources */,
 				DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */,
 				DE475D931A1ADB1600970E87 /* main.m in Sources */,
 			);

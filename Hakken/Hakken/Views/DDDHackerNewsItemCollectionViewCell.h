@@ -10,6 +10,13 @@
 
 #define DDDHackerNewsItemCollectionViewCellIdentifier @"DDDHackerNewsItemCollectionViewCell"
 
+@class DDDHackerNewsItemCollectionViewCell, DDDHackerNewsItem;
+
+@protocol DDDHackerNewsItemCollectionViewCellDelegate <NSObject>
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story;
+@end
+
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell
+@property (weak, nonatomic) id<DDDHackerNewsItemCollectionViewCellDelegate> delegate;
 - (CGSize)adjustedCellSize;
 @end

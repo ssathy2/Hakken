@@ -9,7 +9,7 @@
 #import "DDDStoryDetailViewController.h"
 #import "DetailStoryboardIdentifiers.h"
 #import "DDDStoryDetailViewModel.h"
-#import "DDDStoryDetailTransitionModel.h"
+#import "DDDStoryTransitionModel.h"
 #import "DDDHackerNewsItem.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
 #import "DDDWebViewCollectionViewCell.h"
@@ -59,7 +59,7 @@
 - (void)setupListenersToViewModel
 {
     [RACObserve([self storyDetailViewModel], transitionModel)
-     subscribeNext:^(DDDStoryDetailTransitionModel *transitionModel) {
+     subscribeNext:^(DDDStoryTransitionModel *transitionModel) {
          DDLogInfo(@"transitionModel: %@", transitionModel);
          [self.collectionView reloadData];
      } error:^(NSError *error) {

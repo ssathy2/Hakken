@@ -10,6 +10,6 @@
 
 @interface DDDHackernewsItemResponseSerializer : NSObject
 
-+ (NSArray *)arrayOfCommentsFromJSON:(NSDictionary *)json;
++ (NSArray *)arrayOfCommentsFromJSONArray:(NSArray *)json;
 + (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray;
 @end

@@ -86,6 +86,11 @@
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
                         } completion:^(BOOL finished) {
+                            if (finished)
+                            {
+                                if ([self.delegate respondsToSelector:@selector(cell:didSelectCommentsButton:)])
+                                    [self.delegate cell:self didSelectCommentsButton:self.model];
+                            }
                         }];
 }
 

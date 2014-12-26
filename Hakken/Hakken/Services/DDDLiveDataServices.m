@@ -70,12 +70,12 @@
                                            @"storyID" : identifier,
                                            };
         NSString *endPoint = [NSString stringWithFormat:@"%@?%@", @"getComments", [paramsDictionary urlEncodedParameterString]];
-        
+            
         [self.httpRequestManager GET:endPoint
                               parameters:nil
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      // convert the response object into an array of models
-                                     [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSON:responseObject]];
+                                     [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:responseObject]];
                                      [subscriber sendCompleted];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [subscriber sendError:error];
