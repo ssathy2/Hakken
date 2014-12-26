@@ -60,13 +60,13 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView reloadData];
-//    [self.collectionView performBatchUpdates:^{
-//        if (insertionDeletion.indexesInserted)
-//            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-//        if (insertionDeletion.indexesDeleted)
-//            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-//    } completion:nil];
+//    [self.collectionView reloadData];
+    [self.collectionView performBatchUpdates:^{
+        if (insertionDeletion.indexesInserted)
+            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+        if (insertionDeletion.indexesDeleted)
+            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+    } completion:nil];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -83,13 +83,13 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self commentsViewModel] totalCommentCount];
+    return [[[[self commentsViewModel] latestComments] array] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDCommentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell prepareWithModel:[[self commentsViewModel] commentForIndexPath:indexPath]];
+    [cell prepareWithModel:[[self commentsViewModel] commentForRootItemIndex:indexPath.row forDepth:0]];
     return cell;
 }
 

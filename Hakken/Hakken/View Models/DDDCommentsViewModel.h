@@ -13,7 +13,5 @@
 @interface DDDCommentsViewModel : DDDViewModel
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestComments;
 
-- (NSInteger)totalCommentCount;
-- (DDDHackerNewsComment *)commentForIndexPath:(NSIndexPath *)indexpath;
-- (NSInteger)commentDepthForIndexPath:(NSIndexPath *)indexPath;
+- (DDDHackerNewsComment *)commentForRootItemIndex:(NSInteger)rootItemIndex forDepth:(NSInteger)depth;
 @end

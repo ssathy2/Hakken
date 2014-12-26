@@ -73,8 +73,18 @@
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(0.90, 0.90);
-                        } completion:^(BOOL finished) {
-                        }];
+                        } completion:nil];
+}
+
+- (IBAction)resetButtonTransform:(id)sender
+{
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.4f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        } completion:nil];
 }
 
 - (IBAction)didTouchUpOnCommentButton:(UIButton *)sender

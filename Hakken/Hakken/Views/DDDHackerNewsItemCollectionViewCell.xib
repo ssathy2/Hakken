@@ -73,6 +73,8 @@
                         <connections>
                             <action selector="didTouchDownOnCommentButton:" destination="hWV-aD-7Oy" eventType="touchDown" id="bQk-Kq-BSf"/>
                             <action selector="didTouchUpOnCommentButton:" destination="hWV-aD-7Oy" eventType="touchUpInside" id="Bqe-Yz-S3g"/>
+                            <action selector="resetButtonTransform:" destination="hWV-aD-7Oy" eventType="touchDragInside" id="2Sd-ti-gBe"/>
+                            <action selector="resetButtonTransform:" destination="hWV-aD-7Oy" eventType="touchCancel" id="O4H-TH-9Wi"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXP-po-bLh">

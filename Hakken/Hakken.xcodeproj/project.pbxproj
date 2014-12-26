@@ -36,6 +36,7 @@
 		DE5504051A4CAA34003B4CEC /* DDDCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */; };
 		DE55040A1A4CB183003B4CEC /* DDDCommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */; };
 		DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */; };
+		DE5504101A4D18A7003B4CEC /* DDDCommentTreeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE55040F1A4D18A7003B4CEC /* DDDCommentTreeInfo.m */; };
 		DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC361A1EE8FF00692CB8 /* DDDMock.m */; };
 		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
 		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
@@ -133,6 +134,8 @@
 		DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentCollectionViewCell.m; sourceTree = "<group>"; };
 		DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewModel.h; sourceTree = "<group>"; };
 		DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewModel.m; sourceTree = "<group>"; };
+		DE55040E1A4D18A7003B4CEC /* DDDCommentTreeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentTreeInfo.h; sourceTree = "<group>"; };
+		DE55040F1A4D18A7003B4CEC /* DDDCommentTreeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentTreeInfo.m; sourceTree = "<group>"; };
 		DE62AC351A1EE8FF00692CB8 /* DDDMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMock.h; sourceTree = "<group>"; };
 		DE62AC361A1EE8FF00692CB8 /* DDDMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMock.m; sourceTree = "<group>"; };
 		DE62AC3B1A20F4DF00692CB8 /* NSObject+Introspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Introspection.h"; sourceTree = "<group>"; };
@@ -382,6 +385,8 @@
 				DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */,
 				DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */,
 				DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */,
+				DE55040E1A4D18A7003B4CEC /* DDDCommentTreeInfo.h */,
+				DE55040F1A4D18A7003B4CEC /* DDDCommentTreeInfo.m */,
 			);
 			name = Comments;
 			sourceTree = "<group>";
@@ -615,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE5504101A4D18A7003B4CEC /* DDDCommentTreeInfo.m in Sources */,
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
 				DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */,
 				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,

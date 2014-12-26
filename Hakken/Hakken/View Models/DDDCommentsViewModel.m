@@ -12,9 +12,11 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHackerNewsComment.h"
+#import "DDDCommentTreeInfo.h"
 
 @interface DDDCommentsViewModel()
 @property (strong, nonatomic) DDDStoryTransitionModel *transitionModel;
+@property (strong, nonatomic) NSMutableArray *commentTreeInfos;
 @end
 
 @implementation DDDCommentsViewModel
@@ -42,44 +44,45 @@
         return [RACSignal return:[self updateWithComments:value indexesInserted:inserted indexesDeleted:nil]];
     }];
     [fetchComments subscribeNext:^(id x) {
+        [weakSelf formCommentTreeInfosArrayWithComments:[x array]];
         weakSelf.latestComments = x;
     }];
 }
 
-- (NSInteger)totalCommentCount
+- (void)formCommentTreeInfosArrayWithComments:(NSArray *)comments
 {
-    NSInteger count = 0;
-    for (DDDHackerNewsComment *comment in self.latestComments.array)
-    {
-        count += [self totalCommentCountWithComment:comment];
-    }
-    return count;
+    if (!self.commentTreeInfos)
+        self.commentTreeInfos = [NSMutableArray array];
+ 
+    NSInteger depth = 0;
+    for (DDDHackerNewsComment *comment in comments)
+        [self formCommentTreeWithRootComment:comment withDepth:depth];
 }
-
-- (NSInteger)totalCommentCountWithComment:(DDDHackerNewsComment *)comment
+                                      
+- (void)formCommentTreeWithRootComment:(DDDHackerNewsComment *)rootComment withDepth:(NSInteger)depth
 {
-    if (!comment.kids)
-        return 0;
-    NSInteger count = 0;
-    for (DDDHackerNewsComment *commentKid in comment.kids)
-    {
-        count = comment.kids.count + [self totalCommentCountWithComment:commentKid];
-    }
-    return count;
-}
-
-// TODO: Implement
-- (DDDHackerNewsComment *)commentForIndexPath:(NSIndexPath *)indexpath
-{
-    return self.latestComments.array[indexpath.row % self.latestComments.array.count];
-}
-
-// TODO: Implement
-- (NSInteger)commentDepthForIndexPath:(NSIndexPath *)indexPath
-{
-    return 0;
-}
+    if (![self shouldIgnoreComment:rootComment])
+        [self.commentTreeInfos addObject:[DDDCommentTreeInfo commentTreeInfoWithComment:rootComment withDepth:depth]];
     
+    if (!rootComment.kids)
+        return;
+    for (DDDHackerNewsComment *childComment in rootComment.kids)
+    {
+        depth++;
+        [self formCommentTreeWithRootComment:childComment withDepth:depth];
+    }
+}
+
+- (BOOL)shouldIgnoreComment:(DDDHackerNewsComment *)comment
+{
+    return comment.deleted;
+}
+
+- (DDDHackerNewsComment *)commentForRootItemIndex:(NSInteger)rootItemIndex forDepth:(NSInteger)depth
+{
+    return (DDDHackerNewsComment *)[self.commentTreeInfos[rootItemIndex] comment];
+}
+
 - (DDDArrayInsertionDeletion *)updateWithComments:(NSArray *)comments indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
 {
     DDDArrayInsertionDeletion *topStoresUpdate = [DDDArrayInsertionDeletion new];
