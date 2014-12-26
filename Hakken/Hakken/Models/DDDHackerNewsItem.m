@@ -27,4 +27,8 @@
     return [NSURL URLWithString:self.url];
 }
 
+- (NSDate *)dateCreated
+{
+    return [NSDate dateWithTimeIntervalSince1970:[self.time doubleValue]];
+}
 @end

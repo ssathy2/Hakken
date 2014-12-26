@@ -7,16 +7,16 @@
 //
 
 #import "DDDStoryDetailViewModel.h"
-#import "DDDStoryDetailTransitionModel.h"
+#import "DDDStoryTransitionModel.h"
 
 @interface DDDStoryDetailViewModel()
-@property (strong, nonatomic) DDDStoryDetailTransitionModel *transitionModel;
+@property (strong, nonatomic) DDDStoryTransitionModel *transitionModel;
 @end
 @implementation DDDStoryDetailViewModel
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
-    DDDStoryDetailTransitionModel *transitionModel = (DDDStoryDetailTransitionModel *)model;
+    DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
 }
 

@@ -7,16 +7,20 @@
 //
 
 #import "DDDTopStoriesViewController.h"
-#import "TopStoryStoryboardIdentifiers.h"
+
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
+
+#import "TopStoryStoryboardIdentifiers.h"
 #import "DetailStoryboardIdentifiers.h"
+#import "CommentsStoryboardIdentifiers.h"
+
 #import "DDDTransitionAttributes.h"
-#import "DDDStoryDetailTransitionModel.h"
+#import "DDDStoryTransitionModel.h"
 #import "DDDTopStoriesPushAnimator.h"
 
-@interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
+@interface DDDTopStoriesViewController ()<DDDHackerNewsItemCollectionViewCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 @end
 
 @implementation DDDTopStoriesViewController
@@ -132,6 +136,7 @@
 {
     DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
+    cell.delegate = self;
     return cell;
 }
 
@@ -188,7 +193,7 @@
     UIView *topHalf = [self getViewSnapshotAboveCellAtIndexPath:indexPath];
     UIView *bottomHalf = [self getViewSnapshotBelowCellAtIndexPath:indexPath];
 
-    DDDStoryDetailTransitionModel *transitionModel = [DDDStoryDetailTransitionModel new];
+    DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
     transitionModel.topPeekView = topHalf;
     transitionModel.bottomPeekView = bottomHalf;
     transitionModel.story = [[[self topStoriesViewModel] latestTopStoriesUpdate].array objectAtIndex:indexPath.row];
@@ -199,5 +204,18 @@
     // push webview/comments controller here...
     [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
 }
+
+#pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story
+{
+    DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
+    transitionModel.story = story;
+    DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+    attrs.model = transitionModel;
+    
+    // push webview/comments controller here...
+    [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+}
+
 
 @end
