@@ -7,24 +7,36 @@
 //
 
 #import "DDDCommentCollectionViewCell.h"
+#import "DDDCommentTreeInfo.h"
 #import "DDDHackerNewsComment.h"
 
 @interface DDDCommentCollectionViewCell()
+@property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subcommentAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distantDateCommentPostedLabel;
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
-
 @end
 
 @implementation DDDCommentCollectionViewCell
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+}
+
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
-    DDDHackerNewsComment *comment = (DDDHackerNewsComment *)model;
-    self.commentUserLabel.text = comment.by;
-    self.subcommentAmountLabel.text = [NSString stringWithFormat:@"%@ comments",@(comment.kids.count)];
-    self.distantDateCommentPostedLabel.text = [comment.dateCreated relativeDateTimeStringToNow];
-    self.commentTextView.text = comment.text;
+    DDDCommentTreeInfo *commentTreeInfo = (DDDCommentTreeInfo *)model;
+    self.commentUserLabel.text = commentTreeInfo.comment.by;
+    self.distantDateCommentPostedLabel.text = [commentTreeInfo.comment.dateCreated relativeDateTimeStringToNow];
+    self.commentTextView.text = commentTreeInfo.comment.text;
+    
+    [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
+}
+
+- (void)setupDepthIndicatorWithDepth:(NSInteger)depth
+{
+    self.depthIndicatorView.backgroundColor = [UIColor colorForDepth:depth];
 }
 @end

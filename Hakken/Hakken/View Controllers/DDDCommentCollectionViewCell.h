@@ -9,5 +9,4 @@
 #import "DDDCollectionViewCell.h"
 
 @interface DDDCommentCollectionViewCell : DDDCollectionViewCell
-
 @end
