@@ -8,10 +8,12 @@
 
 #import "DDDViewModel.h"
 
-@class DDDArrayInsertionDeletion, DDDHackerNewsComment;
+@class DDDArrayInsertionDeletion, DDDHackerNewsComment, DDDCommentTreeInfo;
 
 @interface DDDCommentsViewModel : DDDViewModel
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestComments;
 
 - (DDDHackerNewsComment *)commentForRootItemIndex:(NSInteger)rootItemIndex forDepth:(NSInteger)depth;
+- (DDDCommentTreeInfo *)commentTreeInfoForIndexPath:(NSIndexPath *)idxPath;
+- (NSInteger)commentCount;
 @end

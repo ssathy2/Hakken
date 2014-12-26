@@ -11,6 +11,7 @@
 #import "DDDCommentsViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDCommentCollectionViewCell.h"
+#import "DDDCommentsCollectionViewFlowLayout.h"
 
 @interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -41,8 +42,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     [self setupViewModelListeners];
+    [self setupCollectionView];
+}
+
+- (void)setupCollectionView
+{
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
 }
 
 - (void)setupViewModelListeners
@@ -60,13 +72,7 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-//    [self.collectionView reloadData];
-    [self.collectionView performBatchUpdates:^{
-        if (insertionDeletion.indexesInserted)
-            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-        if (insertionDeletion.indexesDeleted)
-            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-    } completion:nil];
+    [self.collectionView reloadData];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -83,13 +89,13 @@
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[[[self commentsViewModel] latestComments] array] count];
+    return [[self commentsViewModel] commentCount];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDCommentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell prepareWithModel:[[self commentsViewModel] commentForRootItemIndex:indexPath.row forDepth:0]];
+    [cell prepareWithModel:[[self commentsViewModel] commentTreeInfoForIndexPath:indexPath]];
     return cell;
 }
 

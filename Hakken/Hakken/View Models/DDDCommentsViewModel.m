@@ -83,6 +83,16 @@
     return (DDDHackerNewsComment *)[self.commentTreeInfos[rootItemIndex] comment];
 }
 
+- (DDDCommentTreeInfo *)commentTreeInfoForIndexPath:(NSIndexPath *)idxPath
+{
+    return [self.commentTreeInfos objectAtIndex:idxPath.row];
+}
+
+- (NSInteger)commentCount
+{
+    return [self.commentTreeInfos count];
+}
+
 - (DDDArrayInsertionDeletion *)updateWithComments:(NSArray *)comments indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
 {
     DDDArrayInsertionDeletion *topStoresUpdate = [DDDArrayInsertionDeletion new];

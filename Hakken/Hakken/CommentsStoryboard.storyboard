@@ -19,8 +19,8 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AeX-C6-s6L">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="M1V-ZI-zy3">
-                                    <size key="itemSize" width="375" height="100"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="M1V-ZI-zy3" customClass="DDDCommentsCollectionViewFlowLayout">
+                                    <size key="itemSize" width="375" height="80"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -30,16 +30,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZA-kv-N8G">
-                                                    <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.6173453283" green="0.6173453283" blue="0.6173453283" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UV4-gk-NBX">
                                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.6173453283" green="0.6173453283" blue="0.6173453283" alpha="1" colorSpace="calibratedRGB"/>
@@ -59,67 +53,87 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qtg-9B-A71" userLabel="DepthIndicatorView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="5" id="GWg-kH-8qe"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="GWg-kH-8qe"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="GWg-kH-8qe"/>
+                                                        </mask>
+                                                    </variation>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="UV4-gk-NBX" firstAttribute="leading" secondItem="PZA-kv-N8G" secondAttribute="trailing" constant="10" id="T5y-4N-1Dl"/>
-                                            <constraint firstItem="CdI-dF-4Zo" firstAttribute="top" secondItem="UV4-gk-NBX" secondAttribute="top" id="UaW-tI-bhs"/>
+                                            <constraint firstItem="l5b-Ml-eow" firstAttribute="top" secondItem="PZA-kv-N8G" secondAttribute="bottom" constant="4" id="8XM-Fd-A9j"/>
+                                            <constraint firstAttribute="bottom" secondItem="Qtg-9B-A71" secondAttribute="bottom" id="MWK-bM-pYy"/>
                                             <constraint firstAttribute="trailing" secondItem="l5b-Ml-eow" secondAttribute="trailing" constant="20" id="bbL-xr-tFq"/>
-                                            <constraint firstItem="PZA-kv-N8G" firstAttribute="top" secondItem="y4O-t4-7Tr" secondAttribute="top" constant="20" id="daS-OX-t0T"/>
-                                            <constraint firstItem="UV4-gk-NBX" firstAttribute="top" secondItem="PZA-kv-N8G" secondAttribute="top" id="fx9-24-8tR"/>
+                                            <constraint firstItem="Qtg-9B-A71" firstAttribute="top" secondItem="y4O-t4-7Tr" secondAttribute="top" id="btP-qy-Wbb"/>
+                                            <constraint firstItem="PZA-kv-N8G" firstAttribute="top" secondItem="y4O-t4-7Tr" secondAttribute="top" constant="10" id="daS-OX-t0T"/>
+                                            <constraint firstItem="l5b-Ml-eow" firstAttribute="leading" secondItem="Qtg-9B-A71" secondAttribute="trailing" constant="15" id="h5F-Ub-kaZ"/>
+                                            <constraint firstItem="PZA-kv-N8G" firstAttribute="leading" secondItem="Qtg-9B-A71" secondAttribute="trailing" constant="15" id="hDJ-wK-uiQ"/>
                                             <constraint firstAttribute="trailing" secondItem="CdI-dF-4Zo" secondAttribute="trailing" constant="20" id="jSJ-El-byS"/>
-                                            <constraint firstItem="l5b-Ml-eow" firstAttribute="leading" secondItem="y4O-t4-7Tr" secondAttribute="leading" constant="20" id="sYe-Bo-t2g"/>
-                                            <constraint firstItem="l5b-Ml-eow" firstAttribute="top" secondItem="UV4-gk-NBX" secondAttribute="bottom" constant="4" id="vAR-eN-WXT"/>
-                                            <constraint firstAttribute="bottom" secondItem="l5b-Ml-eow" secondAttribute="bottom" constant="20" id="w1t-hP-AfC"/>
-                                            <constraint firstItem="PZA-kv-N8G" firstAttribute="leading" secondItem="y4O-t4-7Tr" secondAttribute="leading" constant="20" id="y7C-io-jGu"/>
+                                            <constraint firstItem="Qtg-9B-A71" firstAttribute="leading" secondItem="y4O-t4-7Tr" secondAttribute="leading" id="sKq-Cu-zRP"/>
+                                            <constraint firstItem="CdI-dF-4Zo" firstAttribute="top" secondItem="PZA-kv-N8G" secondAttribute="top" id="vXe-UX-Q2d"/>
+                                            <constraint firstAttribute="bottom" secondItem="l5b-Ml-eow" secondAttribute="bottom" constant="10" id="w1t-hP-AfC"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
                                                 <exclude reference="PZA-kv-N8G"/>
-                                                <exclude reference="UV4-gk-NBX"/>
                                                 <exclude reference="CdI-dF-4Zo"/>
                                                 <exclude reference="l5b-Ml-eow"/>
+                                                <exclude reference="Qtg-9B-A71"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <exclude reference="MWK-bM-pYy"/>
+                                                <exclude reference="btP-qy-Wbb"/>
+                                                <exclude reference="sKq-Cu-zRP"/>
                                                 <exclude reference="daS-OX-t0T"/>
-                                                <exclude reference="y7C-io-jGu"/>
+                                                <exclude reference="hDJ-wK-uiQ"/>
+                                                <exclude reference="8XM-Fd-A9j"/>
                                                 <exclude reference="bbL-xr-tFq"/>
-                                                <exclude reference="sYe-Bo-t2g"/>
-                                                <exclude reference="vAR-eN-WXT"/>
+                                                <exclude reference="h5F-Ub-kaZ"/>
                                                 <exclude reference="w1t-hP-AfC"/>
-                                                <exclude reference="T5y-4N-1Dl"/>
-                                                <exclude reference="fx9-24-8tR"/>
-                                                <exclude reference="UaW-tI-bhs"/>
                                                 <exclude reference="jSJ-El-byS"/>
+                                                <exclude reference="vXe-UX-Q2d"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="subviews">
                                                 <include reference="PZA-kv-N8G"/>
-                                                <include reference="UV4-gk-NBX"/>
                                                 <include reference="CdI-dF-4Zo"/>
                                                 <include reference="l5b-Ml-eow"/>
+                                                <include reference="Qtg-9B-A71"/>
                                             </mask>
                                             <mask key="constraints">
+                                                <include reference="MWK-bM-pYy"/>
+                                                <include reference="btP-qy-Wbb"/>
+                                                <include reference="sKq-Cu-zRP"/>
                                                 <include reference="daS-OX-t0T"/>
-                                                <include reference="y7C-io-jGu"/>
+                                                <include reference="hDJ-wK-uiQ"/>
+                                                <include reference="8XM-Fd-A9j"/>
                                                 <include reference="bbL-xr-tFq"/>
-                                                <include reference="sYe-Bo-t2g"/>
-                                                <include reference="vAR-eN-WXT"/>
+                                                <include reference="h5F-Ub-kaZ"/>
                                                 <include reference="w1t-hP-AfC"/>
-                                                <include reference="T5y-4N-1Dl"/>
-                                                <include reference="fx9-24-8tR"/>
-                                                <include reference="UaW-tI-bhs"/>
                                                 <include reference="jSJ-El-byS"/>
+                                                <include reference="vXe-UX-Q2d"/>
                                             </mask>
                                         </variation>
                                         <connections>
                                             <outlet property="commentTextView" destination="l5b-Ml-eow" id="R47-NC-1V2"/>
                                             <outlet property="commentUserLabel" destination="PZA-kv-N8G" id="sSH-0y-5nb"/>
+                                            <outlet property="depthIndicatorView" destination="Qtg-9B-A71" id="ahz-MO-ofQ"/>
                                             <outlet property="distantDateCommentPostedLabel" destination="CdI-dF-4Zo" id="OuW-5q-BEG"/>
-                                            <outlet property="subcommentAmountLabel" destination="UV4-gk-NBX" id="dEM-X4-gL3"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -141,10 +155,10 @@
                                 <exclude reference="AeX-C6-s6L"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="SPE-4w-Qj8"/>
                                 <exclude reference="79w-3J-9gw"/>
                                 <exclude reference="LdF-5k-1Yz"/>
                                 <exclude reference="eIf-Pe-x3O"/>
-                                <exclude reference="SPE-4w-Qj8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -152,10 +166,10 @@
                                 <include reference="AeX-C6-s6L"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="SPE-4w-Qj8"/>
                                 <include reference="79w-3J-9gw"/>
                                 <include reference="LdF-5k-1Yz"/>
                                 <include reference="eIf-Pe-x3O"/>
-                                <include reference="SPE-4w-Qj8"/>
                             </mask>
                         </variation>
                     </view>
