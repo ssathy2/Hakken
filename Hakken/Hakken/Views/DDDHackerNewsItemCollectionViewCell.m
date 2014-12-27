@@ -28,7 +28,19 @@
     [self styleCell];
 }
 
-+ (NSMutableDictionary *)sizingInfos {
++ (instancetype)sizingCell
+{
+    static DDDHackerNewsItemCollectionViewCell* sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[[UINib nibWithNibName:NSStringFromClass([self class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+        // do any init for the shared instance here
+    });
+    return sharedInstance;
+}
+
++ (NSMutableDictionary *)sizingInfos
+{
     static NSDictionary *dict = nil;
     static dispatch_once_t oncePredicate;
     dispatch_once(&oncePredicate, ^{
@@ -46,15 +58,17 @@
     objc_setAssociatedObject(self, @selector(sizingInfos), sizingInfos, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (CGSize)adjustedCellSize
++ (CGSize)adjustedCellSizeWithModel:(id)model
 {
-    NSValue *val = [[[self class] sizingInfos] valueForKey:[self.model identifier]];
+    NSValue *val = [[[self class] sizingInfos] objectForKey:[model identifier]];
     if (val)
         return [val CGSizeValue];
     else
     {
-        CGSize size = [self systemLayoutSizeFittingSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX)];
-        [[[self class] sizingInfos] setValue:[NSValue valueWithCGSize:size] forKey:[self.model identifier]];
+        [[self sizingCell] prepareWithModel:model];
+        [[self sizingCell] layoutIfNeeded];
+        CGSize size = [[self sizingCell] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        [[[self class] sizingInfos] setObject:[NSValue valueWithCGSize:size] forKey:[model identifier]];
         return size;
     }
 }
@@ -62,7 +76,7 @@
 - (void)styleCell
 {
     self.commentsButton.layer.masksToBounds = NO;
-    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height];
+    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/2];
 }
 
 - (IBAction)didTouchDownOnCommentButton:(UIButton *)sender

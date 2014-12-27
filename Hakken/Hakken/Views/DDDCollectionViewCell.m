@@ -9,6 +9,7 @@
 #import "DDDCollectionViewCell.h"
 
 @implementation DDDCollectionViewCell
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
