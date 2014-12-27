@@ -67,6 +67,8 @@
     {
         [[self sizingCell] prepareWithModel:model];
         [[self sizingCell] layoutIfNeeded];
+        [[self sizingCell] updateConstraintsIfNeeded];
+        
         CGSize size = [[self sizingCell] systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         [[[self class] sizingInfos] setObject:[NSValue valueWithCGSize:size] forKey:[model identifier]];
         return size;
