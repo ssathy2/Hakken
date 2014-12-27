@@ -78,18 +78,14 @@
         return [DDDTopStoriesPushAnimator new];
     else
         return nil;
-
 }
 
 - (void)setupCollectionView
 {
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
-//
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
-
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    flowLayout.estimatedItemSize = CGSizeMake(flowLayout.itemSize.width, flowLayout.itemSize.height);
 }
 
 - (void)setupListenersToViewModel
@@ -108,6 +104,7 @@
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
     [self.collectionView performBatchUpdates:^{
+        [self.collectionView.collectionViewLayout invalidateLayout];
         if (insertionDeletion.indexesInserted)
             [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
         if (insertionDeletion.indexesDeleted)
@@ -141,6 +138,10 @@
 }
 
 #pragma mark - UICollectionViewDelegate
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [DDDHackerNewsItemCollectionViewCell adjustedCellSizeWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
+}
 
 - (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath
 {
