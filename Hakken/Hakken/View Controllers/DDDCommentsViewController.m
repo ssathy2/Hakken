@@ -53,6 +53,7 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDCommentCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier];
     DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
 }

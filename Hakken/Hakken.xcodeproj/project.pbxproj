@@ -39,6 +39,7 @@
 		DE5504101A4D18A7003B4CEC /* DDDCommentTreeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE55040F1A4D18A7003B4CEC /* DDDCommentTreeInfo.m */; };
 		DE5504131A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504121A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m */; };
 		DE5504161A4DE55C003B4CEC /* UIColor+DDDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504151A4DE55C003B4CEC /* UIColor+DDDAdditions.m */; };
+		DE55041A1A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5504191A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib */; };
 		DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC361A1EE8FF00692CB8 /* DDDMock.m */; };
 		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
 		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
@@ -131,8 +132,8 @@
 		DE5504031A4CAA34003B4CEC /* DDDCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewController.h; sourceTree = "<group>"; };
 		DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; };
 		DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsStoryboardIdentifiers.h; sourceTree = "<group>"; };
-		DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentCollectionViewCell.h; sourceTree = "<group>"; };
-		DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentCollectionViewCell.m; sourceTree = "<group>"; };
+		DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDDCommentCollectionViewCell.h; path = "../View Controllers/DDDCommentCollectionViewCell.h"; sourceTree = "<group>"; };
+		DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDDCommentCollectionViewCell.m; path = "../View Controllers/DDDCommentCollectionViewCell.m"; sourceTree = "<group>"; };
 		DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewModel.h; sourceTree = "<group>"; };
 		DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewModel.m; sourceTree = "<group>"; };
 		DE55040E1A4D18A7003B4CEC /* DDDCommentTreeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentTreeInfo.h; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 		DE5504121A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 		DE5504141A4DE55C003B4CEC /* UIColor+DDDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DDDAdditions.h"; sourceTree = "<group>"; };
 		DE5504151A4DE55C003B4CEC /* UIColor+DDDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DDDAdditions.m"; sourceTree = "<group>"; };
+		DE5504191A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDCommentCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE62AC351A1EE8FF00692CB8 /* DDDMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMock.h; sourceTree = "<group>"; };
 		DE62AC361A1EE8FF00692CB8 /* DDDMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMock.m; sourceTree = "<group>"; };
 		DE62AC3B1A20F4DF00692CB8 /* NSObject+Introspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Introspection.h"; sourceTree = "<group>"; };
@@ -297,6 +299,9 @@
 			children = (
 				DE663FA31A26CD6100E80DA7 /* DDDCollectionViewCell.m */,
 				DE663FA21A26CD6100E80DA7 /* DDDCollectionViewCell.h */,
+				DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */,
+				DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */,
+				DE5504191A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib */,
 				DE6EB7151A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.h */,
 				DE6EB7161A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m */,
 				DE6EB7181A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib */,
@@ -386,8 +391,6 @@
 				DE5504031A4CAA34003B4CEC /* DDDCommentsViewController.h */,
 				DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */,
 				DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */,
-				DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */,
-				DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */,
 				DE55040E1A4D18A7003B4CEC /* DDDCommentTreeInfo.h */,
 				DE55040F1A4D18A7003B4CEC /* DDDCommentTreeInfo.m */,
 				DE5504111A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.h */,
@@ -558,6 +561,7 @@
 				DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */,
 				DE124AB71A4B516B00337342 /* mock_top_stories.json in Resources */,
 				DE6EB7191A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib in Resources */,
+				DE55041A1A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib in Resources */,
 				DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */,
 				DE62AC4D1A21010200692CB8 /* Configuration.json in Resources */,
 				DE62AC491A20FD5300692CB8 /* ServicesConfiguration.json in Resources */,
