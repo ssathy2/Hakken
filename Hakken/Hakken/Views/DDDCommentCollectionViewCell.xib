@@ -75,16 +75,16 @@
                     <exclude reference="ozX-cW-dpl"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="agv-0z-z24"/>
-                    <exclude reference="mvB-oB-G1U"/>
                     <exclude reference="4PA-vU-ywf"/>
                     <exclude reference="g4u-CN-SHp"/>
+                    <exclude reference="agv-0z-z24"/>
+                    <exclude reference="mvB-oB-G1U"/>
+                    <exclude reference="1ql-1p-PAF"/>
                     <exclude reference="7pD-Nh-p9s"/>
                     <exclude reference="L88-2P-34c"/>
-                    <exclude reference="1ql-1p-PAF"/>
                     <exclude reference="zeT-Qc-H6c"/>
-                    <exclude reference="89X-Zl-aND"/>
                     <exclude reference="2Da-FT-9gd"/>
+                    <exclude reference="89X-Zl-aND"/>
                     <exclude reference="iLj-YM-9HC"/>
                 </mask>
             </variation>
@@ -96,16 +96,16 @@
                     <include reference="ozX-cW-dpl"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="agv-0z-z24"/>
-                    <include reference="mvB-oB-G1U"/>
                     <include reference="4PA-vU-ywf"/>
                     <include reference="g4u-CN-SHp"/>
+                    <include reference="agv-0z-z24"/>
+                    <include reference="mvB-oB-G1U"/>
+                    <include reference="1ql-1p-PAF"/>
                     <include reference="7pD-Nh-p9s"/>
                     <include reference="L88-2P-34c"/>
-                    <include reference="1ql-1p-PAF"/>
                     <include reference="zeT-Qc-H6c"/>
-                    <include reference="89X-Zl-aND"/>
                     <include reference="2Da-FT-9gd"/>
+                    <include reference="89X-Zl-aND"/>
                     <include reference="iLj-YM-9HC"/>
                 </mask>
             </variation>
