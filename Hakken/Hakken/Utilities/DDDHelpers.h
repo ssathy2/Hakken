@@ -14,4 +14,18 @@
 #define IS_DEVICE YES
 #endif
 
-#import "DDDMock.h"
+typedef void(^DataBlock)(NSData *data);
+typedef void(^ErrorBlock)(NSError *error);
+
+@interface DDDHelpers : NSObject
++ (RACSignal *)dictionaryFromJSONFile:(NSString *)file
+                                async:(BOOL)async;
+
++ (RACSignal *)arrayFromJSONFile:(NSString *)file
+                           async:(BOOL)async;
+
+
++ (RACSignal *)dataFromFileName:(NSString *)fileName
+                  withExtension:(NSString *)extension
+                          async:(BOOL)async;
+@end

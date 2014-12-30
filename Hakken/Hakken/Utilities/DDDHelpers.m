@@ -1,14 +1,14 @@
 //
-//  DDDMock.m
+//  DDDHelpers.m
 //  Hakken
 //
-//  Created by Sidd Sathyam on 11/20/14.
+//  Created by Sidd Sathyam on 12/29/14.
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDMock.h"
+#import "DDDHelpers.h"
 
-@implementation DDDMock
+@implementation DDDHelpers
 + (RACSignal *)arrayFromJSONFile:(NSString *)file
                            async:(BOOL)async
 {
@@ -39,11 +39,15 @@
             NSBundle *bundle = [NSBundle mainBundle];
             NSString *fullFilePath = [bundle pathForResource:fileName ofType:extension];
             if (!fullFilePath)
+            {
                 [subscriber sendError:[NSError errorWithDomain:@"File not found in default bundle" code:-1 userInfo:nil]];
-            
-            NSData *rawJSON = [[NSData alloc] initWithContentsOfFile:fullFilePath options:NSDataReadingMappedIfSafe error:nil];
-            [subscriber sendNext:rawJSON];
-            [subscriber sendCompleted];
+            }
+            else
+            {
+                NSData *rawData = [[NSData alloc] initWithContentsOfFile:fullFilePath options:NSDataReadingMappedIfSafe error:nil];
+                [subscriber sendNext:rawData];
+                [subscriber sendCompleted];
+            }
         };
         
         if (async)
