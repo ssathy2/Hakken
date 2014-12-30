@@ -10,6 +10,8 @@
 #import "DDDLiveDataServices.h"
 #import "DDDMockDataServices.h"
 
+@import ObjectiveC;
+
 #define DDDMockServicesValue @"mock"
 
 @interface DDDDataServices()
@@ -17,26 +19,52 @@
 @end
 
 @implementation DDDDataServices
-+ (instancetype)sharedInstance
+
+/*
+    We use an associated object to store the data services object on the class,
+    doing this allows us to basically take the data services object and change configurations
+    at runtime.
+*/
++ (DDDDataServices *)cachedDataServices
 {
-    static DDDDataServices* sharedInstance;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[DDDDataServices alloc] init];
-        // do any init for the shared instance here
-        [sharedInstance setupFromConfiguration];
+    static DDDDataServices *dataServices = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        dataServices = [DDDDataServices new];
+        [dataServices setupFromConfiguration:DDDDefaultConfigurationFilename withServicesConfiguration:DDDDefaultDataServicesConfigurationFileName];
     });
-    return sharedInstance;
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+    return objc_getAssociatedObject(self, @selector(cachedDataServices)) ?: dataServices;
+#pragma clang diagnostic pop
 }
 
-- (void)setupFromConfiguration
++ (void)setCachedDataServices:(DDDDataServices *)dataServices
+{
+    objc_setAssociatedObject(self, @selector(cachedDataServices), dataServices, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
++ (instancetype)sharedInstance
+{
+    return [self cachedDataServices];
+}
+
++ (instancetype)sharedInstanceWithConfiguration:(NSString *)configurationFilename withServicesConfiguration:(NSString *)servicesConfigurationFilename;
+{
+    DDDDataServices *dataServices = [self cachedDataServices];
+    [dataServices setupFromConfiguration:configurationFilename withServicesConfiguration:servicesConfigurationFilename];
+    return dataServices;
+}
+
+- (void)setupFromConfiguration:(NSString *)configurationFilename withServicesConfiguration:(NSString *)servicesConfigurationFilename
 {
     __block NSString *servicesKey;
     __block NSDictionary *servicesConfiguration;
-    [[[[DDDMock dictionaryFromJSONFile:@"Configuration" async:NO] flattenMap:^RACStream *(NSDictionary *configuration) {
+    [[[[DDDHelpers dictionaryFromJSONFile:configurationFilename async:NO] flattenMap:^RACStream *(NSDictionary *configuration) {
         return [RACSignal return:configuration[@"services"]];
     }]
-    concat:[DDDMock dictionaryFromJSONFile:@"ServicesConfiguration" async:NO]]
+    concat:[DDDHelpers dictionaryFromJSONFile:servicesConfigurationFilename async:NO]]
     subscribeNext:^(id x) {
        if ([x isKindOfClass:[NSString class]])
            servicesKey = (NSString *)x;

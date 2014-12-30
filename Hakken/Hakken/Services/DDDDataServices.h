@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "DDDServices.h"
 
+#define DDDDefaultConfigurationFilename @"Configuration"
+#define DDDDefaultDataServicesConfigurationFileName @"ServicesConfiguration"
+
 @interface DDDDataServices : NSObject<DDDServices>
 + (instancetype)sharedInstance;
++ (instancetype)sharedInstanceWithConfiguration:(NSString *)configurationFilename withServicesConfiguration:(NSString *)servicesConfigurationFilename;
 @end

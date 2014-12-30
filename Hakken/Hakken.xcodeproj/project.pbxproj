@@ -40,7 +40,6 @@
 		DE5504131A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504121A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m */; };
 		DE5504161A4DE55C003B4CEC /* UIColor+DDDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5504151A4DE55C003B4CEC /* UIColor+DDDAdditions.m */; };
 		DE55041A1A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5504191A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib */; };
-		DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC361A1EE8FF00692CB8 /* DDDMock.m */; };
 		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
 		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
 		DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
@@ -60,13 +59,15 @@
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
 		DEB09D0B1A2258E90021A933 /* DDDScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0A1A2258E90021A933 /* DDDScreen.m */; };
 		DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */; };
+		DEB22DD21A52656E0027E36D /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
+		DEB22DD41A5267590027E36D /* TestConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD31A5267590027E36D /* TestConfiguration.json */; };
+		DEB22DD61A52676F0027E36D /* TestServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */; };
 		DEC57A741A2AA11300D89A96 /* DetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */; };
 		DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */; };
 		DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */; };
+		DEDE8C271A52745300484B1D /* DDDHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DEDE8C261A52745300484B1D /* DDDHelpers.m */; };
 		DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038EB1A2293DA00979793 /* DDDMainViewController.m */; };
 		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
-		DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */; };
-		DEE038F01A229CCE00979793 /* Configuration.json in Resources */ = {isa = PBXBuildFile; fileRef = DE62AC4C1A21010200692CB8 /* Configuration.json */; };
 		DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038F21A22EF7200979793 /* DDDContentViewController.m */; };
 		DEE038F61A22EFD300979793 /* DDDTopStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */; };
 		DEE038FB1A22F10A00979793 /* TopStoriesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE038FA1A22F10A00979793 /* TopStoriesStoryboard.storyboard */; };
@@ -143,8 +144,6 @@
 		DE5504141A4DE55C003B4CEC /* UIColor+DDDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+DDDAdditions.h"; sourceTree = "<group>"; };
 		DE5504151A4DE55C003B4CEC /* UIColor+DDDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+DDDAdditions.m"; sourceTree = "<group>"; };
 		DE5504191A4E5DA6003B4CEC /* DDDCommentCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDCommentCollectionViewCell.xib; sourceTree = "<group>"; };
-		DE62AC351A1EE8FF00692CB8 /* DDDMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMock.h; sourceTree = "<group>"; };
-		DE62AC361A1EE8FF00692CB8 /* DDDMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMock.m; sourceTree = "<group>"; };
 		DE62AC3B1A20F4DF00692CB8 /* NSObject+Introspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Introspection.h"; sourceTree = "<group>"; };
 		DE62AC3C1A20F4DF00692CB8 /* NSObject+Introspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Introspection.m"; sourceTree = "<group>"; };
 		DE62AC451A20FD5300692CB8 /* DDDLiveDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDLiveDataServices.h; sourceTree = "<group>"; };
@@ -174,12 +173,16 @@
 		DEB09D0A1A2258E90021A933 /* DDDScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDScreen.m; sourceTree = "<group>"; };
 		DEB09D0C1A225D190021A933 /* DDDTransitionAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTransitionAttributes.h; sourceTree = "<group>"; };
 		DEB09D0D1A225D190021A933 /* DDDTransitionAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTransitionAttributes.m; sourceTree = "<group>"; };
+		DEB22DD11A52656E0027E36D /* mock_getcomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_getcomments.json; sourceTree = "<group>"; };
+		DEB22DD31A5267590027E36D /* TestConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestConfiguration.json; sourceTree = "<group>"; };
+		DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestServicesConfiguration.json; sourceTree = "<group>"; };
 		DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailStoryboard.storyboard; sourceTree = "<group>"; };
 		DEC57A781A2AA1F000D89A96 /* DDDStoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewController.h; sourceTree = "<group>"; };
 		DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewController.m; sourceTree = "<group>"; };
 		DEC57A7B1A2AA24A00D89A96 /* DetailStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailStoryboardIdentifiers.h; sourceTree = "<group>"; };
 		DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewModel.h; sourceTree = "<group>"; };
 		DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewModel.m; sourceTree = "<group>"; };
+		DEDE8C261A52745300484B1D /* DDDHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHelpers.m; sourceTree = "<group>"; };
 		DEE038EA1A2293DA00979793 /* DDDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMainViewController.h; sourceTree = "<group>"; };
 		DEE038EB1A2293DA00979793 /* DDDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMainViewController.m; sourceTree = "<group>"; };
 		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
@@ -274,9 +277,8 @@
 		DE3127D71A1ADBBD0020DB40 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				DE62AC351A1EE8FF00692CB8 /* DDDMock.h */,
-				DE62AC361A1EE8FF00692CB8 /* DDDMock.m */,
 				DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */,
+				DEDE8C261A52745300484B1D /* DDDHelpers.m */,
 				DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */,
 				DE3127DF1A1AE9820020DB40 /* NSMutableArray+Modification.h */,
 				DE3127E01A1AE9820020DB40 /* NSMutableArray+Modification.m */,
@@ -366,7 +368,10 @@
 		DE475DA91A1ADB1600970E87 /* HakkenTests */ = {
 			isa = PBXGroup;
 			children = (
+				DEB22DD31A5267590027E36D /* TestConfiguration.json */,
+				DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */,
 				DE124AB61A4B516B00337342 /* mock_top_stories.json */,
+				DEB22DD11A52656E0027E36D /* mock_getcomments.json */,
 				DE3128031A1EE4D70020DB40 /* mock_story.json */,
 				DE3128041A1EE4D70020DB40 /* mock_comment.json */,
 				DE3128051A1EE4D70020DB40 /* mock_poll.json */,
@@ -580,11 +585,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE038EF1A229CCE00979793 /* ServicesConfiguration.json in Resources */,
 				DE124AB81A4B516B00337342 /* mock_top_stories.json in Resources */,
-				DEE038F01A229CCE00979793 /* Configuration.json in Resources */,
+				DEB22DD61A52676F0027E36D /* TestServicesConfiguration.json in Resources */,
 				DE3128071A1EE4D70020DB40 /* mock_story.json in Resources */,
 				DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */,
+				DEB22DD21A52656E0027E36D /* mock_getcomments.json in Resources */,
+				DEB22DD41A5267590027E36D /* TestConfiguration.json in Resources */,
 				DE3128081A1EE4D70020DB40 /* mock_comment.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -637,6 +643,7 @@
 				DE124AC01A4B570400337342 /* DDDMockDataServices.m in Sources */,
 				DEB09D0E1A225D190021A933 /* DDDTransitionAttributes.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
+				DEDE8C271A52745300484B1D /* DDDHelpers.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE5504131A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m in Sources */,
 				DE124AFD1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m in Sources */,
@@ -646,7 +653,6 @@
 				DE62AC3D1A20F4DF00692CB8 /* NSObject+Introspection.m in Sources */,
 				DE124ABC1A4B537B00337342 /* DDDDataServices.m in Sources */,
 				DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */,
-				DE62AC371A1EE8FF00692CB8 /* DDDMock.m in Sources */,
 				DE6EB7171A2D6A160077FDF4 /* DDDHackerNewsItemCollectionViewCell.m in Sources */,
 				DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */,
 				DEE038F31A22EF7200979793 /* DDDContentViewController.m in Sources */,
