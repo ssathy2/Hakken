@@ -12,7 +12,10 @@
 + (RACSignal *)arrayFromJSONFile:(NSString *)file
                            async:(BOOL)async
 {
-    return [self internalJSONHelper:file async:async];
+    return [[self internalJSONHelper:file async:async]
+            filter:^BOOL(id value) {
+                return [value isKindOfClass:NSArray.class];
+            }];
 }
 
 + (RACSignal *)internalJSONHelper:(NSString *)fileName
@@ -39,9 +42,7 @@
             NSBundle *bundle = [NSBundle mainBundle];
             NSString *fullFilePath = [bundle pathForResource:fileName ofType:extension];
             if (!fullFilePath)
-            {
                 [subscriber sendError:[NSError errorWithDomain:@"File not found in default bundle" code:-1 userInfo:nil]];
-            }
             else
             {
                 NSData *rawData = [[NSData alloc] initWithContentsOfFile:fullFilePath options:NSDataReadingMappedIfSafe error:nil];

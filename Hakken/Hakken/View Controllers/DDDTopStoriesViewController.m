@@ -20,6 +20,9 @@
 #import "DDDStoryTransitionModel.h"
 #import "DDDTopStoriesPushAnimator.h"
 
+#import "DDDHackerNewsItem.h"
+#import "DDDCollectionViewCellSizingHelper.h"
+
 @interface DDDTopStoriesViewController ()<DDDHackerNewsItemCollectionViewCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 @end
 
@@ -103,13 +106,11 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView performBatchUpdates:^{
-        [self.collectionView.collectionViewLayout invalidateLayout];
-        if (insertionDeletion.indexesInserted)
-            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-        if (insertionDeletion.indexesDeleted)
-            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-    } completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // TODO: Fix issue with collectionview throwing an exception with inserting and deleting rows in
+        // performBatchUpdatesWithCompletion:
+        [self.collectionView reloadData];
+    });
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -140,7 +141,8 @@
 #pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [DDDHackerNewsItemCollectionViewCell adjustedCellSizeWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
+    DDDHackerNewsItem *item = [[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row];
+    return [[DDDCollectionViewCellSizingHelper sharedInstance] adjustedCellSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withCellModelIdentifier:item.identifier];
 }
 
 - (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath

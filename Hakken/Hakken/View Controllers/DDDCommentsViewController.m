@@ -12,6 +12,9 @@
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDCommentCollectionViewCell.h"
 #import "DDDCommentsCollectionViewFlowLayout.h"
+#import "DDDCommentTreeInfo.h"
+#import "DDDHackerNewsComment.h"
+#import "DDDCollectionViewCellSizingHelper.h"
 
 @interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -99,6 +102,13 @@
     DDDCommentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[self commentsViewModel] commentTreeInfoForIndexPath:indexPath]];
     return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
+    DDDHackerNewsComment *comment = treeInfo.comment;
+    return [[DDDCollectionViewCellSizingHelper sharedInstance] adjustedCellSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withCellModelIdentifier:comment.identifier];
 }
 
 @end

@@ -18,6 +18,4 @@
 
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell
 @property (weak, nonatomic) id<DDDHackerNewsItemCollectionViewCellDelegate> delegate;
-
-+ (CGSize)adjustedCellSizeWithModel:(id)model;
 @end

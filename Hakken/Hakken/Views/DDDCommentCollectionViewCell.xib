@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -14,41 +14,34 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1x-ml-vhn">
-                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                        <rect key="frame" x="20" y="10" width="29" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.6173453283" green="0.6173453283" blue="0.6173453283" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 day ago" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptj-0S-i48">
-                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                        <rect key="frame" x="299" y="10" width="56" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.6173453283" green="0.6173453283" blue="0.6173453283" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K30-Rq-UST">
-                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K30-Rq-UST">
+                        <rect key="frame" x="20" y="29" width="335" height="41"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" priority="250" constant="41" id="nZ7-BN-Ujw"/>
+                        </constraints>
                         <string key="text">askjdhfhjklasdhfjklsahdfjklhasjlkdfhjlkashfjklashdfjklhasjkdlfhjkalsdhfjklshfjklsadhfjklashfjklhasdljkfhjklashfjklashflkjhalskfhjaklshfkjlashfljkahsdkjlfhljkasfhklja</string>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozX-cW-dpl" userLabel="DepthIndicatorView">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="5" height="80"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="5" id="eLO-e4-dRy"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="eLO-e4-dRy"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="eLO-e4-dRy"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -67,54 +60,18 @@
                 <constraint firstItem="ptj-0S-i48" firstAttribute="top" secondItem="G1x-ml-vhn" secondAttribute="top" id="mvB-oB-G1U"/>
                 <constraint firstAttribute="bottom" secondItem="K30-Rq-UST" secondAttribute="bottom" constant="10" id="zeT-Qc-H6c"/>
             </constraints>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="G1x-ml-vhn"/>
-                    <exclude reference="ptj-0S-i48"/>
-                    <exclude reference="K30-Rq-UST"/>
-                    <exclude reference="ozX-cW-dpl"/>
-                </mask>
-                <mask key="constraints">
-                    <exclude reference="4PA-vU-ywf"/>
-                    <exclude reference="g4u-CN-SHp"/>
-                    <exclude reference="agv-0z-z24"/>
-                    <exclude reference="mvB-oB-G1U"/>
-                    <exclude reference="1ql-1p-PAF"/>
-                    <exclude reference="7pD-Nh-p9s"/>
-                    <exclude reference="L88-2P-34c"/>
-                    <exclude reference="zeT-Qc-H6c"/>
-                    <exclude reference="2Da-FT-9gd"/>
-                    <exclude reference="89X-Zl-aND"/>
-                    <exclude reference="iLj-YM-9HC"/>
-                </mask>
-            </variation>
-            <variation key="widthClass=compact">
-                <mask key="subviews">
-                    <include reference="G1x-ml-vhn"/>
-                    <include reference="ptj-0S-i48"/>
-                    <include reference="K30-Rq-UST"/>
-                    <include reference="ozX-cW-dpl"/>
-                </mask>
-                <mask key="constraints">
-                    <include reference="4PA-vU-ywf"/>
-                    <include reference="g4u-CN-SHp"/>
-                    <include reference="agv-0z-z24"/>
-                    <include reference="mvB-oB-G1U"/>
-                    <include reference="1ql-1p-PAF"/>
-                    <include reference="7pD-Nh-p9s"/>
-                    <include reference="L88-2P-34c"/>
-                    <include reference="zeT-Qc-H6c"/>
-                    <include reference="2Da-FT-9gd"/>
-                    <include reference="89X-Zl-aND"/>
-                    <include reference="iLj-YM-9HC"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="commentTextView" destination="K30-Rq-UST" id="h5L-LB-im1"/>
                 <outlet property="commentUserLabel" destination="G1x-ml-vhn" id="W4X-Lp-gIr"/>
                 <outlet property="depthIndicatorView" destination="ozX-cW-dpl" id="ugP-gC-BNt"/>
                 <outlet property="distantDateCommentPostedLabel" destination="ptj-0S-i48" id="Bgn-Xq-A7e"/>
             </connections>
+            <point key="canvasLocation" x="96.5" y="165"/>
         </collectionViewCell>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

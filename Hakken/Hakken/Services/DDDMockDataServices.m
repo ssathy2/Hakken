@@ -26,13 +26,13 @@
 
 - (RACSignal *)fetchCommentsForStoryIdentifier:(NSNumber *)identifier
 {
-    // Load in mock story
+    // Load in mock comments
     return [[[DDDHelpers arrayFromJSONFile:@"mock_getcomments" async:YES]
              filter:^BOOL(id value) {
                  return value != nil;
              }]
             flattenMap:^RACStream *(id value) {
-                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:value]];
+                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:value]];
             }];
 }
 @end

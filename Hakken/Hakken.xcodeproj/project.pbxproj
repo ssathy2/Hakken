@@ -62,6 +62,8 @@
 		DEB22DD21A52656E0027E36D /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
 		DEB22DD41A5267590027E36D /* TestConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD31A5267590027E36D /* TestConfiguration.json */; };
 		DEB22DD61A52676F0027E36D /* TestServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */; };
+		DEBE3B771A561A5400AA194F /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
+		DEBE3B7A1A561F6900AA194F /* DDDCollectionViewCellSizingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = DEBE3B791A561F6900AA194F /* DDDCollectionViewCellSizingHelper.m */; };
 		DEC57A741A2AA11300D89A96 /* DetailStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */; };
 		DEC57A7A1A2AA1F000D89A96 /* DDDStoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */; };
 		DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */; };
@@ -176,6 +178,8 @@
 		DEB22DD11A52656E0027E36D /* mock_getcomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_getcomments.json; sourceTree = "<group>"; };
 		DEB22DD31A5267590027E36D /* TestConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestConfiguration.json; sourceTree = "<group>"; };
 		DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestServicesConfiguration.json; sourceTree = "<group>"; };
+		DEBE3B781A561F6900AA194F /* DDDCollectionViewCellSizingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCollectionViewCellSizingHelper.h; sourceTree = "<group>"; };
+		DEBE3B791A561F6900AA194F /* DDDCollectionViewCellSizingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCollectionViewCellSizingHelper.m; sourceTree = "<group>"; };
 		DEC57A731A2AA11300D89A96 /* DetailStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DetailStoryboard.storyboard; sourceTree = "<group>"; };
 		DEC57A781A2AA1F000D89A96 /* DDDStoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewController.h; sourceTree = "<group>"; };
 		DEC57A791A2AA1F000D89A96 /* DDDStoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewController.m; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 			isa = PBXGroup;
 			children = (
 				DE3127EA1A1AEC3A0020DB40 /* DDDHelpers.h */,
+				DEBE3B781A561F6900AA194F /* DDDCollectionViewCellSizingHelper.h */,
+				DEBE3B791A561F6900AA194F /* DDDCollectionViewCellSizingHelper.m */,
 				DEDE8C261A52745300484B1D /* DDDHelpers.m */,
 				DE3127EB1A1AEC3A0020DB40 /* DDDCategories.h */,
 				DE3127DF1A1AE9820020DB40 /* NSMutableArray+Modification.h */,
@@ -563,6 +569,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEBE3B771A561A5400AA194F /* mock_getcomments.json in Resources */,
 				DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */,
 				DE124AB71A4B516B00337342 /* mock_top_stories.json in Resources */,
 				DE6EB7191A2D6A310077FDF4 /* DDDHackerNewsItemCollectionViewCell.xib in Resources */,
@@ -637,6 +644,7 @@
 			files = (
 				DE5504101A4D18A7003B4CEC /* DDDCommentTreeInfo.m in Sources */,
 				DE3127E41A1AE9820020DB40 /* UIView+SSAdditions.m in Sources */,
+				DEBE3B7A1A561F6900AA194F /* DDDCollectionViewCellSizingHelper.m in Sources */,
 				DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */,
 				DE62AC571A224CCA00692CB8 /* DDDViewControllerRouter.m in Sources */,
 				DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */,

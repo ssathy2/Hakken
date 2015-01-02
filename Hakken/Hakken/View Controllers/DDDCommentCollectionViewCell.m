@@ -20,7 +20,6 @@
 @end
 
 @implementation DDDCommentCollectionViewCell
-
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];

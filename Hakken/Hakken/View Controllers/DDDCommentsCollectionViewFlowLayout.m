@@ -9,6 +9,7 @@
 #import "DDDCommentsCollectionViewFlowLayout.h"
 #import "DDDCommentsViewModel.h"
 #import "DDDCommentTreeInfo.h"
+#import "DDDCommentCollectionViewCell.h"
 
 @interface DDDCommentsCollectionViewFlowLayout()
 @property (strong, nonatomic) NSMutableDictionary *layoutInfo;
@@ -61,7 +62,6 @@
             
             UICollectionViewLayoutAttributes *itemAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
             itemAttributes.frame = [self frameForLayoutAttributes:itemAttributes atIndexPath:indexPath];
-            
             cellLayoutInfo[indexPath] = itemAttributes;
         }
     }
