@@ -19,7 +19,7 @@
                             async:(BOOL)async
 {
     RACSignal *signal = [self dataFromFileName:fileName withExtension:@"json" async:async];
-    [signal filter:^BOOL(id value) {
+    signal = [signal filter:^BOOL(id value) {
         return value != nil;
     }];
     return [signal flattenMap:^RACStream *(id value) {
@@ -66,6 +66,9 @@
 + (RACSignal *)dictionaryFromJSONFile:(NSString *)file
                                 async:(BOOL)async
 {
-    return [self internalJSONHelper:file async:async];
+    return [[self internalJSONHelper:file async:async]
+                filter:^BOOL(id value) {
+                    return [value isKindOfClass:NSDictionary.class];
+            }];
 }
 @end

@@ -14,6 +14,7 @@
 - (RACSignal *)fetchTopStoriesFromStory:(NSNumber *)fromStory toStory:(NSNumber *)toStory
 {
     // Load in mock story
+
     return [[[DDDHelpers arrayFromJSONFile:@"mock_top_stories" async:YES]
                          filter:^BOOL(id value) {
                              return value != nil;
