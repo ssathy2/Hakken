@@ -142,7 +142,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDHackerNewsItem *item = [[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row];
-    return [[DDDCollectionViewCellSizingHelper sharedInstance] adjustedCellSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withCellModelIdentifier:item.identifier];
+    CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withModelIdentifier:item.identifier];
+    return size;
 }
 
 - (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath

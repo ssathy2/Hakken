@@ -57,7 +57,7 @@
     self.collectionView.dataSource = self;
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDCommentCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier];
-    DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;    
     [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
 }
 
@@ -107,8 +107,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-    DDDHackerNewsComment *comment = treeInfo.comment;
-    return [[DDDCollectionViewCellSizingHelper sharedInstance] adjustedCellSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withCellModelIdentifier:comment.identifier];
+    return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:treeInfo.comment.identifier];
 }
 
 @end

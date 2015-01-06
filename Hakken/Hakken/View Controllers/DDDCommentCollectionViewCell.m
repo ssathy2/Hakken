@@ -31,6 +31,7 @@
     [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
 }
 
+
 - (void)setupDepthIndicatorWithDepth:(NSInteger)depth
 {
     self.depthIndicatorView.backgroundColor = [UIColor colorForDepth:depth];

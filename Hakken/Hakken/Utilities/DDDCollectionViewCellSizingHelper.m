@@ -42,13 +42,13 @@
     self.cellClassToSizingCellMapping = [NSMutableDictionary new];
 }
 
-- (CGSize)adjustedCellSizeWithCellClass:(Class)cellClass withCellModel:(id)model withCellModelIdentifier:(id)identifier
+- (CGSize)preferredLayoutSizeWithCellClass:(Class)cellClass withCellModel:(id)model withModelIdentifier:(id)modelIdentifier
 {
-    NSParameterAssert(identifier != nil);
+    NSParameterAssert(modelIdentifier != nil);
     NSParameterAssert(cellClass != nil);
     NSParameterAssert(model != nil);
     
-    DDDCollectionViewCellSizingHelperEntry *sizingEntry = [self.modelIdentifierToSizingHelperEntryMapping objectForKey:identifier];
+    DDDCollectionViewCellSizingHelperEntry *sizingEntry = [self.modelIdentifierToSizingHelperEntryMapping objectForKey:modelIdentifier];
     if (sizingEntry)
         return sizingEntry.size;
     else
@@ -56,14 +56,22 @@
         UICollectionViewCell *cell = [self sizingForCellClass:cellClass];
         if ([cell respondsToSelector:@selector(prepareWithModel:)])
             [cell performSelector:@selector(prepareWithModel:) withObject:model];
-        [cell layoutIfNeeded];
-        CGSize size = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        
+        CGSize size = [self preferredLayoutSizeFittingSize:UILayoutFittingCompressedSize withCell:cell];
         sizingEntry = [DDDCollectionViewCellSizingHelperEntry new];
         sizingEntry.cellClass = [cellClass copy];
         sizingEntry.size = size;
-        [self.modelIdentifierToSizingHelperEntryMapping setObject:sizingEntry forKey:identifier];
+        [self.modelIdentifierToSizingHelperEntryMapping setObject:sizingEntry forKey:modelIdentifier];
         return size;
     }
+}
+
+- (CGSize)preferredLayoutSizeFittingSize:(CGSize)targetSize withCell:(UICollectionViewCell *)cell
+{
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    CGSize computedSize = [cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return computedSize;
 }
 
 - (UICollectionViewCell *)sizingForCellClass:(Class)cellClass

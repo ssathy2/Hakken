@@ -11,5 +11,5 @@
 @interface DDDCollectionViewCellSizingHelper : NSObject
 + (instancetype)sharedInstance;
 // Sizing helper uses cell class name to instantiate a nib with the cell
-- (CGSize)adjustedCellSizeWithCellClass:(Class)cellClass withCellModel:(id)model withCellModelIdentifier:(id)identifier;
+- (CGSize)preferredLayoutSizeWithCellClass:(Class)cellClass withCellModel:(id)model withModelIdentifier:(id)modelIdentifier;
 @end

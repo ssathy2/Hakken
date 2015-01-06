@@ -41,7 +41,7 @@
 
 - (void)setup
 {
-
+    self.layoutInfo = [NSMutableDictionary new];
 }
 
 - (void)prepareLayout
@@ -60,9 +60,10 @@
         {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
-            UICollectionViewLayoutAttributes *itemAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
             itemAttributes.frame = [self frameForLayoutAttributes:itemAttributes atIndexPath:indexPath];
-            cellLayoutInfo[indexPath] = itemAttributes;
+            if (itemAttributes)
+                cellLayoutInfo[indexPath] = itemAttributes;
         }
     }
     
