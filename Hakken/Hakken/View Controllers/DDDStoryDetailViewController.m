@@ -13,6 +13,7 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
 #import "DDDWebViewCollectionViewCell.h"
+#import "DDDCollectionViewCellSizingHelper.h"
 
 @interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @end
@@ -87,12 +88,15 @@
 #pragma mark - UICollectionViewDelegateFlowLayout
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
-    UICollectionViewFlowLayout *flowLaoyut = (UICollectionViewFlowLayout *)collectionViewLayout;
-    if (indexPath.row == 1)
-        return CGSizeMake(flowLaoyut.itemSize.width, collectionView.bounds.size.height - flowLaoyut.itemSize.height);
+    if (indexPath.row == 0)
+    {
+        return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:[[[self storyDetailViewModel] transitionModel] story] withModelIdentifier:[[[[self storyDetailViewModel] transitionModel] story] identifier]];
+    }
     else
-        return flowLaoyut.itemSize;
-    
+    {
+        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
+        return CGSizeMake(flowLayout.itemSize.width, collectionView.bounds.size.height - flowLayout.itemSize.height);
+    }
 }
 
 @end
