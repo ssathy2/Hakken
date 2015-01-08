@@ -18,7 +18,6 @@
 
 #import "DDDTransitionAttributes.h"
 #import "DDDStoryTransitionModel.h"
-#import "DDDTopStoriesPushAnimator.h"
 
 #import "DDDHackerNewsItem.h"
 #import "DDDCollectionViewCellSizingHelper.h"
@@ -56,31 +55,6 @@
     
     [self setupListenersToViewModel];
     [self setupCollectionView];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.navigationController.delegate = nil;
-}
-
-#pragma mark - UINavigationControllerDelegate
-- (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                   animationControllerForOperation:(UINavigationControllerOperation)operation
-                                                fromViewController:(UIViewController *)fromVC
-                                                  toViewController:(UIViewController *)toVC  NS_AVAILABLE_IOS(7_0);
-{
-    // Check if we're transitioning from this view controller to a DDDViewController
-    if (fromVC == self && [toVC isKindOfClass:[DDDViewController class]])
-        return [DDDTopStoriesPushAnimator new];
-    else
-        return nil;
 }
 
 - (void)setupCollectionView
@@ -146,26 +120,6 @@
     return size;
 }
 
-- (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGRect cellRect = [[self.collectionView cellForItemAtIndexPath:indexPath] frame];
-    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.collectionView.frame.size.width, cellRect.origin.y-self.view.frame.origin.y);
-    
-    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    return snapShot;
-}
-
-- (UIView *)getViewSnapshotBelowCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGRect cellRect = [self.collectionView cellForItemAtIndexPath:indexPath].frame;
-    
-    CGPoint cellOrigin = [self.view convertPoint:[self.collectionView cellForItemAtIndexPath:indexPath].frame.origin toView:self.view];
-    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, cellOrigin.y+cellRect.size.height, self.view.frame.size.width, CGRectGetMaxY(self.view.frame) - cellOrigin.y);
-    
-    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    return snapShot;
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
@@ -194,12 +148,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIView *topHalf = [self getViewSnapshotAboveCellAtIndexPath:indexPath];
-    UIView *bottomHalf = [self getViewSnapshotBelowCellAtIndexPath:indexPath];
-
     DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
-    transitionModel.topPeekView = topHalf;
-    transitionModel.bottomPeekView = bottomHalf;
     transitionModel.story = [[[self topStoriesViewModel] latestTopStoriesUpdate].array objectAtIndex:indexPath.row];
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];

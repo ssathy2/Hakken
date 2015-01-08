@@ -15,7 +15,6 @@
 		DE124AC01A4B570400337342 /* DDDMockDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABF1A4B570400337342 /* DDDMockDataServices.m */; };
 		DE124AF91A4BBECA00337342 /* DDDWebViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124AF71A4BBECA00337342 /* DDDWebViewCollectionViewCell.m */; };
 		DE124AFA1A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE124AF81A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib */; };
-		DE124AFD1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124AFC1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m */; };
 		DE124AFF1A4CA4E700337342 /* CommentsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE124AFE1A4CA4E700337342 /* CommentsStoryboard.storyboard */; };
 		DE3127DB1A1ADC160020DB40 /* DDDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DA1A1ADC160020DB40 /* DDDViewController.m */; };
 		DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */; };
@@ -98,8 +97,6 @@
 		DE124AF61A4BBECA00337342 /* DDDWebViewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDWebViewCollectionViewCell.h; sourceTree = "<group>"; };
 		DE124AF71A4BBECA00337342 /* DDDWebViewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDWebViewCollectionViewCell.m; sourceTree = "<group>"; };
 		DE124AF81A4BBECA00337342 /* DDDWebViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDWebViewCollectionViewCell.xib; sourceTree = "<group>"; };
-		DE124AFB1A4BC79C00337342 /* DDDTopStoriesPushAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesPushAnimator.h; sourceTree = "<group>"; };
-		DE124AFC1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesPushAnimator.m; sourceTree = "<group>"; };
 		DE124AFE1A4CA4E700337342 /* CommentsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CommentsStoryboard.storyboard; sourceTree = "<group>"; };
 		DE3127D91A1ADC160020DB40 /* DDDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewController.h; sourceTree = "<group>"; };
 		DE3127DA1A1ADC160020DB40 /* DDDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewController.m; sourceTree = "<group>"; };
@@ -133,7 +130,7 @@
 		DE475DA61A1ADB1600970E87 /* HakkenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HakkenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE475DAB1A1ADB1600970E87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE5504031A4CAA34003B4CEC /* DDDCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewController.h; sourceTree = "<group>"; };
-		DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; };
+		DE5504041A4CAA34003B4CEC /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		DE5504071A4CAB44003B4CEC /* CommentsStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsStoryboardIdentifiers.h; sourceTree = "<group>"; };
 		DE5504081A4CB183003B4CEC /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDDCommentCollectionViewCell.h; path = "../View Controllers/DDDCommentCollectionViewCell.h"; sourceTree = "<group>"; };
 		DE5504091A4CB183003B4CEC /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDDCommentCollectionViewCell.m; path = "../View Controllers/DDDCommentCollectionViewCell.m"; sourceTree = "<group>"; };
@@ -456,8 +453,6 @@
 				DEE038F81A22F0D700979793 /* TopStoryStoryboardIdentifiers.h */,
 				DEE038F41A22EFD300979793 /* DDDTopStoriesViewController.h */,
 				DEE038F51A22EFD300979793 /* DDDTopStoriesViewController.m */,
-				DE124AFB1A4BC79C00337342 /* DDDTopStoriesPushAnimator.h */,
-				DE124AFC1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m */,
 			);
 			name = "Top Stories";
 			sourceTree = "<group>";
@@ -654,7 +649,6 @@
 				DEDE8C271A52745300484B1D /* DDDHelpers.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE5504131A4DD6F8003B4CEC /* DDDCommentsCollectionViewFlowLayout.m in Sources */,
-				DE124AFD1A4BC79C00337342 /* DDDTopStoriesPushAnimator.m in Sources */,
 				DE663FA71A26D0DB00E80DA7 /* NSDate+Utility.m in Sources */,
 				DEE038EC1A2293DA00979793 /* DDDMainViewController.m in Sources */,
 				DE5504051A4CAA34003B4CEC /* DDDCommentsViewController.m in Sources */,

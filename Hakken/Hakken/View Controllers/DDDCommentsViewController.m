@@ -15,6 +15,15 @@
 #import "DDDCommentTreeInfo.h"
 #import "DDDHackerNewsComment.h"
 #import "DDDCollectionViewCellSizingHelper.h"
+#import "DDDHackernewsItemCollectionViewCell.h"
+
+typedef NS_ENUM(NSInteger, DDDCommentsSection)
+{
+    DDDCommentsSectionHeader,
+    DDDCommentsSectionComments,
+    
+    DDDCommentsSectionCount
+};
 
 @interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -57,6 +66,8 @@
     self.collectionView.dataSource = self;
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDCommentCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+    
     DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;    
     [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
 }
@@ -92,22 +103,69 @@
 }
 
 #pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return DDDCommentsSectionCount;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[self commentsViewModel] commentCount];
+    switch (section)
+    {
+        case DDDCommentsSectionComments:
+            return [[self commentsViewModel] commentCount];
+        case DDDCommentsSectionHeader:
+            return 1;
+        default:
+            return 0;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDCommentCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell prepareWithModel:[[self commentsViewModel] commentTreeInfoForIndexPath:indexPath]];
+    DDDCollectionViewCell *cell;
+    switch (indexPath.section)
+    {
+        case DDDCommentsSectionHeader:
+        {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
+            [cell prepareWithModel:[[self commentsViewModel] story]];
+            break;
+        }
+        case DDDCommentsSectionComments:
+        {
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
+            [cell prepareWithModel:[[self commentsViewModel] commentTreeInfoForIndexPath:indexPath]];
+            break;
+        }
+        default:
+            break;
+    }
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-    return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:treeInfo.comment.identifier];
+    switch (indexPath.section)
+    {
+        case DDDCommentsSectionHeader:
+        {
+            DDDHackerNewsItem *item = [[self commentsViewModel] story];
+            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:item withModelIdentifier:item.identifier];
+            break;
+        }
+        case DDDCommentsSectionComments:
+        {
+            DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
+            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:treeInfo.comment.identifier];
+        }
+        default:
+        {
+            UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
+            return flowLayout.itemSize;
+        }
+    }
 }
 
 @end

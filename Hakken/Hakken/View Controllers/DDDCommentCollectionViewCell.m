@@ -10,8 +10,6 @@
 #import "DDDCommentTreeInfo.h"
 #import "DDDHackerNewsComment.h"
 
-@import ObjectiveC;
-
 @interface DDDCommentCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;

@@ -15,6 +15,8 @@
 #import "DDDCommentTreeInfo.h"
 
 @interface DDDCommentsViewModel()
+@property (strong, nonatomic) DDDArrayInsertionDeletion *latestComments;
+
 @property (strong, nonatomic) DDDStoryTransitionModel *transitionModel;
 @property (strong, nonatomic) NSMutableArray *commentTreeInfos;
 @end
@@ -26,6 +28,11 @@
     [super prepareWithModel:model];
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
+}
+
+- (DDDHackerNewsItem *)story
+{
+    return self.transitionModel.story;
 }
 
 - (void)viewModelDidLoad
