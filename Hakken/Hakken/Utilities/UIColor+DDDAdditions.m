@@ -13,15 +13,17 @@
 {
     switch (depth) {
         case 0:
-           return [UIColor clearColor];
+            return [UIColor clearColor];
         case 1:
-           return [UIColor colorWithRed:0 green:255 blue:0 alpha:1];
+            return [UIColor colorWithRed:0 green:255 blue:0 alpha:1];
         case 2:
-           return [UIColor colorWithRed:0 green:0 blue:255 alpha:1];
+            return [UIColor colorWithRed:0 green:0 blue:255 alpha:1];
         case 3:
-           return [UIColor colorWithRed:255 green:255 blue:0 alpha:1];
+            return [UIColor colorWithRed:255 green:255 blue:0 alpha:1];
         case 4:
-           return [UIColor colorWithRed:0 green:255 blue:255 alpha:1];
+            return [UIColor colorWithRed:0 green:255 blue:255 alpha:1];
+        case 5:
+            return [UIColor colorWithRed:255 green:255 blue:0 alpha:1];
         default:
             return [UIColor colorWithRed:255 green:255 blue:255 alpha:1];
     }

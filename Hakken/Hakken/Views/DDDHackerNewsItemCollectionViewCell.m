@@ -80,7 +80,7 @@
     
     self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [hnItem.itemURL host]];
     
-    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
+    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
     
     // TODO: Get the actual number of comments

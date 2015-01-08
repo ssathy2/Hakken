@@ -13,6 +13,7 @@
 
 @interface DDDCommentsCollectionViewFlowLayout()
 @property (strong, nonatomic) NSMutableDictionary *layoutInfo;
+@property (assign, nonatomic) CGFloat collectionViewContentSizeHeight;
 @end
 
 @implementation DDDCommentsCollectionViewFlowLayout
@@ -74,8 +75,8 @@
 {
     DDDCommentTreeInfo *treeInfo = [self.commentsViewModel commentTreeInfoForIndexPath:indexpath];
     CGRect attributesFrame = attributes.frame;
-    attributesFrame.origin.x = attributesFrame.origin.x + (treeInfo.depth * 10);
-    attributesFrame.size.width = attributesFrame.size.width - (treeInfo.depth * 10);
+    attributesFrame.origin.x = attributesFrame.origin.x + (treeInfo.depth * 5);
+    attributesFrame.size.width = attributesFrame.size.width - (treeInfo.depth * 5);
     return attributesFrame;
 }
 
@@ -94,13 +95,15 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (self.layoutInfo[indexPath]) ?: [super layoutAttributesForItemAtIndexPath:indexPath];
+    UICollectionViewLayoutAttributes *attrs = (self.layoutInfo[indexPath]) ?: [super layoutAttributesForItemAtIndexPath:indexPath];
+    self.collectionViewContentSizeHeight += attrs.frame.size.height;
+    return attrs;
 }
 
 - (CGSize)collectionViewContentSize
 {
     CGFloat contentWidth = self.collectionView.bounds.size.width;
-    CGFloat contentHeight = [self.commentsViewModel commentCount] * self.itemSize.height;
+    CGFloat contentHeight = self.collectionViewContentSizeHeight;
     return CGSizeMake(contentWidth, contentHeight);
 }
 

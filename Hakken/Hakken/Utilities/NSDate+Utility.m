@@ -34,7 +34,10 @@
         timeFormat = (timeVal == 1) ? @"%i hour ago" : @"%i hours ago";
     }
     else
-        return @"A while ago";
+    {
+        timeVal = (NSInteger)timeDifferenceBetweenDates/SECONDSINONEDAY;
+        timeFormat = (timeVal == 1) ? @"%i day ago" : @"%i days ago";
+    }
     
     return [NSString stringWithFormat:timeFormat, timeVal];
 }

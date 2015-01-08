@@ -11,7 +11,6 @@
 
 @interface DDDWebViewCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIWebView *webVIew;
-
 @end
 
 @implementation DDDWebViewCollectionViewCell
