@@ -77,8 +77,8 @@
     CGRect attributesFrame = attributes.frame;
     if (treeInfo.depth != 0)
     {
-        attributesFrame.origin.x += ((treeInfo.depth-1) * 5);
-        attributesFrame.size.width -= ((treeInfo.depth-1) * 5);
+        attributesFrame.origin.x += ((treeInfo.depth-1) * 8);
+        attributesFrame.size.width -= ((treeInfo.depth-1) * 8);
     }
     return attributesFrame;
 }

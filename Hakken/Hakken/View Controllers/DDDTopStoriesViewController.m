@@ -80,11 +80,7 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        // TODO: Fix issue with collectionview throwing an exception with inserting and deleting rows in
-        // performBatchUpdatesWithCompletion:
-        [self.collectionView reloadData];
-    });
+    [self.collectionView reloadData];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set

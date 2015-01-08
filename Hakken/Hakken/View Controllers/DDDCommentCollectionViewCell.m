@@ -24,11 +24,15 @@
     DDDCommentTreeInfo *commentTreeInfo = (DDDCommentTreeInfo *)model;
     self.commentUserLabel.text = commentTreeInfo.comment.by;
     self.distantDateCommentPostedLabel.text = [commentTreeInfo.comment.dateCreated relativeDateTimeStringToNow];
+    
+    // TODO: We HAVE to handle text that's marked up with HTML, currently we're not doing that and it looks ugly.
+    // we can use NSAttributedString's initWithData:options:documentAttributes:error:, but this is SUPER SUPER slow and
+    // we can't create the attributed string on a background thread. Using a webview is slow and too cumbersome for what needs
+    // to be done here....
     self.commentTextView.text = commentTreeInfo.comment.text;
     
     [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
 }
-
 
 - (void)setupDepthIndicatorWithDepth:(NSInteger)depth
 {
