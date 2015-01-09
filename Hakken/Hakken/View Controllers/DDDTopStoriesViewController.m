@@ -7,16 +7,22 @@
 //
 
 #import "DDDTopStoriesViewController.h"
-#import "TopStoryStoryboardIdentifiers.h"
+
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
-#import "DDDTopStoriesCollectionViewCell.h"
-#import "DDDExpandTransition.h"
-#import "DetailStoryboardIdentifiers.h"
-#import "DDDTransitionAttributes.h"
-#import "DDDStoryDetailTransitionModel.h"
+#import "DDDHackerNewsItemCollectionViewCell.h"
 
-@interface DDDTopStoriesViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
+#import "TopStoryStoryboardIdentifiers.h"
+#import "DetailStoryboardIdentifiers.h"
+#import "CommentsStoryboardIdentifiers.h"
+
+#import "DDDTransitionAttributes.h"
+#import "DDDStoryTransitionModel.h"
+
+#import "DDDHackerNewsItem.h"
+#import "DDDCollectionViewCellSizingHelper.h"
+
+@interface DDDTopStoriesViewController ()<DDDHackerNewsItemCollectionViewCellDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 @end
 
 @implementation DDDTopStoriesViewController
@@ -49,44 +55,14 @@
     
     [self setupListenersToViewModel];
     [self setupCollectionView];
-    
-    [self.navigationController setNavigationBarHidden:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.delegate = self;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    if (self.navigationController.delegate == self)
-        self.navigationController.delegate = nil;
-}
-
-#pragma mark - UINavigationControllerDelegate
-- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
-                                  animationControllerForOperation:(UINavigationControllerOperation)operation
-                                               fromViewController:(UIViewController *)fromVC
-                                                 toViewController:(UIViewController *)toVC
-{
-    // Check if we're transitioning from this view controller to a DDDViewController
-    if (fromVC == self && [toVC isKindOfClass:[DDDViewController class]])
-        return [DDDExpandTransition new];
-    else
-        return nil;
 }
 
 - (void)setupCollectionView
 {
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
-//    
-    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
-    flowLayout.estimatedItemSize = CGSizeMake(flowLayout.itemSize.width, flowLayout.itemSize.height);
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
 }
 
 - (void)setupListenersToViewModel
@@ -104,12 +80,7 @@
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView performBatchUpdates:^{
-        if (insertionDeletion.indexesInserted)
-            [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-        if (insertionDeletion.indexesDeleted)
-            [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-    } completion:nil];
+    [self.collectionView reloadData];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -131,50 +102,69 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDDTopStoriesCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDTopStoriesCollectionViewCellIdentifier forIndexPath:indexPath];
+    DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row]];
+    cell.delegate = self;
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
-
-- (UIView *)getViewSnapshotAboveCellAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect cellRect = [[self.collectionView cellForItemAtIndexPath:indexPath] frame];
-    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.collectionView.frame.size.width, cellRect.origin.y-self.view.frame.origin.y);
-    
-    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    return snapShot;
+    DDDHackerNewsItem *item = [[[self topStoriesViewModel] latestTopStoriesUpdate] array][indexPath.row];
+    CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withModelIdentifier:item.identifier];
+    return size;
 }
 
-- (UIView *)getViewSnapshotBelowCellAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGRect cellRect = [self.collectionView cellForItemAtIndexPath:indexPath].frame;
-    
-    CGPoint cellOrigin = [self.view convertPoint:[self.collectionView cellForItemAtIndexPath:indexPath].frame.origin toView:self.view];
-    CGRect snapShotRect = CGRectMake(self.view.frame.origin.x, cellOrigin.y+cellRect.size.height, self.view.frame.size.width, CGRectGetMaxY(self.view.frame) - cellOrigin.y);
-    
-    UIView *snapShot = [self.view resizableSnapshotViewFromRect:snapShotRect afterScreenUpdates:YES withCapInsets:UIEdgeInsetsZero];
-    return snapShot;
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(0.95f, 0.95);
+                        } completion:^(BOOL finished) {
+                        }];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.4
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        } completion:^(BOOL finished) {
+                        }];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIView *topHalf = [self getViewSnapshotAboveCellAtIndexPath:indexPath];
-    UIView *bottomHalf = [self getViewSnapshotBelowCellAtIndexPath:indexPath];
-
-    DDDStoryDetailTransitionModel *transitionModel = [DDDStoryDetailTransitionModel new];
-    transitionModel.topPeekView = topHalf;
-    transitionModel.bottomPeekView = bottomHalf;
+    DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
     transitionModel.story = [[[self topStoriesViewModel] latestTopStoriesUpdate].array objectAtIndex:indexPath.row];
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
     
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
     // push webview/comments controller here...
     [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
 }
+
+#pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story
+{
+    DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
+    transitionModel.story = story;
+    DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+    attrs.model = transitionModel;
+    
+    // push webview/comments controller here...
+    [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+}
+
 
 @end

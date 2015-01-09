@@ -11,10 +11,10 @@
 
 @implementation DDDHackernewsItemResponseSerializer
 
-+ (NSArray *)arrayOfCommentsFromJSON:(NSDictionary *)json
++ (NSArray *)arrayOfCommentsFromJSONArray:(NSArray *)json;
 {
     NSMutableArray *serializedItems = [NSMutableArray array];
-    for (NSDictionary *rawItem in [json valueForKey:@"items"])
+    for (NSDictionary *rawItem in json)
         [serializedItems addObject:[[DDDHackerNewsComment alloc] initWithDictionary:rawItem]];
     return serializedItems;
 }

@@ -9,18 +9,11 @@
 #import "DDDCollectionViewCell.h"
 
 @implementation DDDCollectionViewCell
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
     self.model = nil;
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    self.contentView.frame = self.bounds;
-    self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 }
 
 - (void)prepareWithModel:(id)model

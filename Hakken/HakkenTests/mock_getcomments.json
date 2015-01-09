@@ -1,0 +1,397 @@
+[
+{
+"by": "TheDong",
+"id": 8799334,
+"kids": [
+{
+"by": "pjmlp",
+"id": 8799683,
+"kids": [
+{
+"by": "agumonkey",
+"id": 8799973,
+"kids": [
+{
+"by": "AnimalMuppet",
+"id": 8800026,
+"kids": [
+{
+"by": "pjmlp",
+"id": 8800098,
+"kids": [
+{
+"by": "agumonkey",
+"id": 8800305,
+"kids": [
+{
+"by": "pjmlp",
+"id": 8800355,
+"kids": [
+{
+"by": "agumonkey",
+"id": 8800369,
+"parent": 8800355,
+"text": "Yes indeed, I forgot about that. I wonder if there ever was a purely &#x27;compiled&#x27; OS from some declarative form.",
+"time": 1419627918,
+"type": "comment"
+}
+],
+"parent": 8800305,
+"text": "Yes, they did use Assembly.<p>When implementing an OS avoiding Assembly is impossible. Even if intrisics are used instead, they are just another way of using Assembly like instructions.<p>There are lots of informations in this book, &quot;Revolution in The Valley: The Insanely Great Story of How the Mac Was Made&quot;.",
+"time": 1419627681,
+"type": "comment"
+}
+],
+"parent": 8800098,
+"text": "I knew about Apple programs being in Pascal, but the whole OS ? did they resort to inline asm ?",
+"time": 1419626913,
+"type": "comment"
+}
+],
+"parent": 8800026,
+"text": "Those problems were not part of the Pascal dialects.<p>The largely ignored Extended Pascal ISO standard also had those issues fixed.<p>The first Mac OS versions were written in Apple Pascal.",
+"time": 1419623927,
+"type": "comment"
+}
+],
+"parent": 8799973,
+"text": "It wasn&#x27;t just the lack of a cast.  (IIRC, you could work around that with variant records if you really had to, though it was really clumsy.)<p>Another, unfixable problem was that the size of an array was part of the type of the array.  This meant that you couldn&#x27;t ever access past the end of an array, which was good.  It also meant that you could never have a variable-sized array - you couldn&#x27;t even talk about the type of such a thing.<p>This meant that Pascal was completely unusable for writing, say, a memory manager (what type would you give to the return from an allocation)?  But that&#x27;s a low level problem.  It also meant that Pascal couldn&#x27;t be used for a numeric simulation where the size of your grid was a user-supplied runtime value.<p>Note that I am only talking about the original (Wirth&#x2F;UCSD) Pascal.  I believe that Turbo Pascal fixed the variable-sized array problem.",
+"time": 1419623016,
+"type": "comment"
+},
+{
+"by": "pjmlp",
+"id": 8800085,
+"kids": [
+{
+"by": "GFK_of_xmaspast",
+"id": 8800622,
+"parent": 8800085,
+"text": "Large parts of my undergraduate curriculum in the early 90s (at a mid-size well-funded public school in the united states) used pascal, and the unix and vms compilers we used most certainly suffered from the &#x27;different array sizes are different types&#x27; issue.",
+"time": 1419631742,
+"type": "comment"
+}
+],
+"parent": 8799973,
+"text": "No, that was a problem only with the original Pascal as designed by Niklaus Wirth for teaching purposes.<p>None of the Pascal dialects that extended it with features for professional programming suffered from it.",
+"time": 1419623814,
+"type": "comment"
+},
+{
+"by": "hsitz",
+"id": 8800013,
+"parent": 8799973,
+"text": "You&#x27;re probably remembering something from Brian Kernighan&#x27;s 1981 essay, &quot;Why Pascal Is Not My Favorite Programming Language&quot;.  Lack of unsafe typecasts, as well as (I think) all of Kernighan&#x27;s other main points in that essay were cured in Pascal implementations by end of the 80&#x27;s. But by that time C had captured all the mindshare.",
+"time": 1419622847,
+"type": "comment"
+}
+],
+"parent": 8799683,
+"text": "Wasn&#x27;t there some issue with Pascal type system being too restricting sometimes (the unfortunate lack of cast) ?",
+"time": 1419622435,
+"type": "comment"
+}
+],
+"parent": 8799334,
+"text": "&gt; I&#x27;ve yet to actually use Cello myself since I feel like if you hack C up that much, you might as well just use something like C++, C#, Rust ....<p>Since the early 90&#x27;s I never understood why some programmers insist in using what is basically a portable macro assembler for higher level programming.<p>It was already primitive when compared with the likes of Modula-2 and Turbo&#x2F;Apple Pascal, not to mention all the other alternatives even higher level.",
+"time": 1419619565,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "Previous discussion: <a href=\"https://news.ycombinator.com/item?id=6047576\" rel=\"nofollow\">https:&#x2F;&#x2F;news.ycombinator.com&#x2F;item?id=6047576</a><p>This has tons of sugar; if you&#x27;re just interested in how this stuff is possible in C it would probably be more instructive to look at the GNU library libffcall[0] which implements trampolines. The code is simpler and there&#x27;s less syntactic sugar obscuring what&#x27;s going on. Of course, the linked articles on the Cello home page are instructive too.<p>I&#x27;ve yet to actually use Cello myself since I feel like if you hack C up that much, you might as well just use something like C++, C#, Rust or what have you and gain even more benefits, like a mature ecosystem that&#x27;s highly compatible with the features you&#x27;re using while I worry Cello, when relying on normal C libraries, might require you to slip back into some C-isms that Cello desires to avoid due to your dependencies not caring.<p>[0]: <a href=\"https://www.gnu.org/software/libffcall/\" rel=\"nofollow\">https:&#x2F;&#x2F;www.gnu.org&#x2F;software&#x2F;libffcall&#x2F;</a>",
+"time": 1419613541,
+"type": "comment"
+},
+{
+"by": "orangeduck",
+"id": 8800575,
+"kids": [
+{
+"by": "tomphoolery",
+"id": 8801286,
+"parent": 8800575,
+"text": "It looks <i>really</i> good and you should be proud of your work.",
+"time": 1419643818,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "Author here. I always get asked two questions about libCello.<p>1. Why?\n2. Is anyone using it for anything serious?<p>The second one is easiest to answer: no. And most people are suprised to hear that I probably wouldn&#x27;t use it for anything serious either.<p>If you hadn&#x27;t noticed from my github page I love C, and while I am also very interested in the things Cello adds such as duck typing and interfaces, and all the syntactic sugar that makes thing really nice and literate; it doesn&#x27;t interest me enough to choose it over C. Additionally who is going to want to use my project if it uses this weird hacky C library! People are (for good reason) very suspect of dependancies.<p>That isn&#x27;t to say I don&#x27;t like programming in Cello. I&#x27;m almost definitely the person who has written the most in it and some things are just a joy to write in it, and look so clear and functional and algorithmic. At some point in the distant future when I find the time I really will attempt something serious such as a web framework. If that takes off we seriously can decide if it really is a good project (hur hur hur).<p>To be fair, &quot;why&quot; can also be pretty easy to answer depending on who is asking: because I could. Because I thought it was kinda cool and that people would be interested. There seems to be some default position in programming that unless your project is silly or sarcastic people assume you are &quot;advocating&quot; something by doing it, or making some kind of political statement on software development. I didn&#x27;t work on this project to try and change the world. Nor to create something better than the alternatives. It doesn&#x27;t change my life if people use Cello or not. I wasn&#x27;t frustrated with C++, and I wasn&#x27;t looking for a cylindrical rolly thing for my cart. I just made it for fun.",
+"time": 1419631046,
+"type": "comment"
+},
+{
+"by": "userbinator",
+"id": 8799520,
+"kids": [
+{
+"by": "edgyswingset",
+"id": 8799633,
+"kids": [
+{
+"by": "pmoriarty",
+"id": 8800191,
+"kids": [
+{
+"by": "maaku",
+"id": 8801595,
+"parent": 8800191,
+"text": "C is a simple language when you compare it to C++. Especially if you need nailed down standards-compliant behavior.",
+"time": 1419651509,
+"type": "comment"
+}
+],
+"parent": 8799633,
+"text": "C is a simple language if you ignore all the traps, pitfalls, gotcha&#x27;s, corner cases, and exceptions to the rules.<p>By that measure, maybe Brainfuck is a simple language too.  But I wouldn&#x27;t want to actually program in it when there are so many sane alternatives available.",
+"time": 1419625175,
+"type": "comment"
+}
+],
+"parent": 8799520,
+"text": "I&#x27;d say it&#x27;s more reminiscent of Python, sans the dollar signs.<p>I feel that calling it a framework is <i>really</i> pushing it.  C is such a simple language, and things like the GNU C extensions and the macros the Linux kernel provide offer some similar semantics, particularly when dealing with linear data structures.  Not to mention, when dealing with POSIX, your coding style completely changes to fit what it gives you.",
+"time": 1419618926,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "The syntax is rather reminiscent of jQuery... and just like how that has created jQuery developers who know next to no JavaScript, I could envision many Cello developers who know almost no C which given the characteristics of the language would probably be an even bigger problem. It&#x27;s good that they have a disclaimer saying that this isn&#x27;t for those who don&#x27;t already know C.<p>I think it&#x27;s more like a framework than a library, based solely on the principle that it basically encourages a completely different syntax and code style that someone else would have to learn in addition to C in order to work with code written using it.",
+"time": 1419617083,
+"type": "comment"
+},
+{
+"by": "runewell",
+"id": 8799422,
+"kids": [
+{
+"by": "AnimalMuppet",
+"id": 8799988,
+"parent": 8799422,
+"text": "Converting a C value to a Cello value is easy.<p><pre><code>  int cValue = 5;  &#x2F;&#x2F; because I randomly feel like that&#x27;s a good number\n  var celloValue = $(Int, cValue);  &#x2F;&#x2F; I&#x27;m pretty sure this works, but I haven&#x27;t proven it\n</code></pre>\nComing back from Cello to C, it appears that you can do this:<p><pre><code>  long anotherCValue = as_long(celloValue);</code></pre>",
+"time": 1419622527,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "I really love this. Are there convenience functions to convert existing values to and from your new data types?<p>I would love to use this library but as C programs often requires third-party libraries I could see many instances of having to use normal C types. Is there a way, for example, to easily convert a float to and from a var (with a Real key&#x2F;value)? How would I use your library to take hash table values and assign them back into standard struct members? Would I just use traditional casting? Something tells me normal casting is not an option, or at least not so easy.",
+"time": 1419615136,
+"type": "comment"
+},
+{
+"by": "antirez",
+"id": 8799448,
+"parent": 8799070,
+"text": "Too high level IMHO... $(Int,5) is not reasonable, also everything is too opaque for it to be a C library. You can go a long way without creating such a layer of abstraction with just a set of libs implementing data structures, dynamic strings, with simple object-alike structures that are reference counted so that it is trivial to have lists of hashes or alike, but where you can also store raw stuff trivially just changing the &quot;method&quot; to free or dup the objects.<p>EDIT: AFAIK &quot;$&quot; is not valid ANSI-C, however I would love it... For example in a reference counting system could be cool to have $() and _() to incr&#x2F;decr references.",
+"time": 1419615660,
+"type": "comment"
+},
+{
+"by": "pavanky",
+"id": 8800377,
+"parent": 8799070,
+"text": "Has the development moved away from github[1] or has it completely stalled ? The last commit I see is from 8 months ago.<p>[1] <a href=\"https://github.com/orangeduck/libCello/\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;orangeduck&#x2F;libCello&#x2F;</a>",
+"time": 1419628035,
+"type": "comment"
+},
+{
+"by": "zserge",
+"id": 8800084,
+"kids": [
+{
+"by": "DSMan195276",
+"id": 8800291,
+"parent": 8800084,
+"text": "You&#x27;re completely right, this definitely uses GNU extensions.<p>A note about the __VA_ARGS__ detail - You can portably avoid it in a lot of cases if you plan ahead and allow __VA_ARGS__ to suck-up one extra always-provided argument, but it&#x27;s not as clean as the GNU extension and can&#x27;t always be done.",
+"time": 1419626718,
+"type": "comment"
+},
+{
+"by": "tedunangst",
+"id": 8800774,
+"parent": 8800084,
+"text": "Also looks like it uses nested functions.",
+"time": 1419633921,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "&gt; To compile Cello requires a C99 compatible C compiler.<p>In fact, it fails to compile with -std=c99, it seems to require GNU extenstions, that&#x27;s why they have -std=gnu99 in their Makefile. They use ##__VA_ARGS__, which is not in the C99 and AFAIK there is no portable way to make a workaround.",
+"time": 1419623779,
+"type": "comment"
+},
+{
+"deleted": true,
+"id": 8799336,
+"parent": 8799070,
+"time": 1419613555,
+"type": "comment"
+},
+{
+"by": "_RPM",
+"id": 8800600,
+"kids": [
+{
+"by": "orangeduck",
+"id": 8800687,
+"parent": 8800600,
+"text": "It uses raw pointers (void*) and something a little like a vtable: <a href=\"http://libcello.org/documentation/hacking\" rel=\"nofollow\">http:&#x2F;&#x2F;libcello.org&#x2F;documentation&#x2F;hacking</a>",
+"time": 1419632547,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "How are you implementing the dynamic type interface? Discriminated union?",
+"time": 1419631382,
+"type": "comment"
+},
+{
+"by": "otis_inf",
+"id": 8799474,
+"kids": [
+{
+"by": "antirez",
+"id": 8799522,
+"kids": [
+{
+"by": "otis_inf",
+"id": 8800281,
+"parent": 8799522,
+"text": "I agree with your argument that C has some bad parts which are desperately in need to be made better, but IMHO it should just stop there. Question of course then is: where is the line where it ends being updating bad parts of C and beginning to become a layer on top of C :) History has taught us that&#x27;s sadly in the eye of the beholder .",
+"time": 1419626556,
+"type": "comment"
+}
+],
+"parent": 8799474,
+"text": "I agree and don&#x27;t agree. This is what I think too if you look at libs like Cello, this is almost an attempt to write a new language on top of C, in some way. It is an interesting experiment, but it can <i>only</i> end writing a compiler IMHO, turning what is sugar here into a real grammar emitting efficient code and so forth.<p>But, C can be improved <i>a lot</i> without violating its nature with better libs. Libc is very unreasonable on what it offers. It should have data structures, dynamic strings, a few buffers that are easy to consume both sides, and so forth. This is what people keep reimplementing again and again and again.",
+"time": 1419617119,
+"type": "comment"
+},
+{
+"by": "eudox",
+"id": 8799739,
+"kids": [
+{
+"by": "ori_b",
+"id": 8800317,
+"parent": 8799739,
+"text": "And I wrote Myrddin[0] for the goal of seeing what C would be if I was reimagining it with the benefit of hindsight.<p>[0]<a href=\"http://eigenstate.org/myrddin\" rel=\"nofollow\">http:&#x2F;&#x2F;eigenstate.org&#x2F;myrddin</a>",
+"time": 1419627054,
+"type": "comment"
+},
+{
+"by": "eps",
+"id": 8800657,
+"parent": 8799739,
+"text": "This is beautiful.",
+"time": 1419632197,
+"type": "comment"
+}
+],
+"parent": 8799474,
+"text": "I wrote cmacro[0] and magma[1] with the goal of a augmenting C while keeping it C-like.<p>[0]: <a href=\"https://github.com/eudoxia0/cmacro\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;eudoxia0&#x2F;cmacro</a>\n[1]: <a href=\"https://github.com/eudoxia0/magma\" rel=\"nofollow\">https:&#x2F;&#x2F;github.com&#x2F;eudoxia0&#x2F;magma</a>",
+"time": 1419620051,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "Let C be C. For the people who don&#x27;t like C for one reason or another, there are a ton of alternatives available, from x64&#x2F;x86 targeting languages to manages stacks. Adding these libraries to C might look nice, but if you want to experience the things it brings to the table use a language where it&#x27;s been borrowed from.",
+"time": 1419616103,
+"type": "comment"
+},
+{
+"by": "diego_moita",
+"id": 8799912,
+"kids": [
+{
+"by": "vowelless",
+"id": 8799929,
+"parent": 8799912,
+"text": "Why would higher level necessarily imply garbage collection?",
+"time": 1419621878,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "&gt; &#x2F;* Heap objects destroyed with &quot;delete&quot; *&#x2F;<p>&gt;   delete(items);<p>This part is funny: &quot;Higher Level&quot; but still no garbage collection.",
+"time": 1419621731,
+"type": "comment"
+},
+{
+"by": "api",
+"id": 8799845,
+"parent": 8799070,
+"text": "It would be very interesting to pair this with a very well designed minimalistic web framework, drivers for things like Redis, etc., for some <i>VERY</i> high-performance web backends.",
+"time": 1419620963,
+"type": "comment"
+},
+{
+"by": "halayli",
+"id": 8800510,
+"parent": 8799070,
+"text": "Just use C++11",
+"time": 1419629953,
+"type": "comment"
+},
+{
+"by": "chris_va",
+"id": 8800012,
+"kids": [
+{
+"by": "AnimalMuppet",
+"id": 8800075,
+"parent": 8800012,
+"text": "Because someone cared enough to make it.<p>(Serious answer.)<p>But I think you&#x27;re really asking a different question than the one your words say.  I suspect you&#x27;re asking why someone should bother to write this.  There are several possible reasons.  &quot;Just because they felt like it&quot; is a perfectly fine reason.  &quot;Because they thought it was interesting&quot; is pretty close to the same reason.  &quot;Because they thought the world needed this language&quot; is probably not as good a reason, because it seems somewhat unlikely to be correct.",
+"time": 1419623656,
+"type": "comment"
+},
+{
+"by": "Havvy",
+"id": 8801144,
+"parent": 8800012,
+"text": "The author answered, and it&#x27;s hovering at the top of the comments.",
+"time": 1419640425,
+"type": "comment"
+},
+{
+"by": "eps",
+"id": 8800662,
+"parent": 8800012,
+"text": "To scratch the itch, obviously.",
+"time": 1419632258,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "Why does this exist?<p>(Serious question)",
+"time": 1419622846,
+"type": "comment"
+},
+{
+"by": "aosmith",
+"id": 8799363,
+"kids": [
+{
+"by": "SwellJoe",
+"id": 8799592,
+"kids": [
+{
+"by": "Cyther606",
+"id": 8799839,
+"parent": 8799592,
+"text": "Nim, with its Pythonic syntax and native code generation via C, compares as well [1].<p><a href=\"http://goran.krampe.se/2014/10/20/i-missed-nim/\" rel=\"nofollow\">http:&#x2F;&#x2F;goran.krampe.se&#x2F;2014&#x2F;10&#x2F;20&#x2F;i-missed-nim&#x2F;</a>",
+"time": 1419620889,
+"type": "comment"
+}
+],
+"parent": 8799363,
+"text": "I don&#x27;t know that I would call it conceptually similar to Go. At least, not if we&#x27;re looking at the Big Pictures concepts, where Go has concurrency as one of its major departures from C. I don&#x27;t see any mention of concurrency primitives in Cello (maybe they&#x27;re there and I didn&#x27;t notice, but I would think the author would have put that on the front page, if it were a thing Cello tried to solve).<p>Go does provide collections and iterators and such, so Cello is similar on that front. But, every modern language provide those things, and Cello collections don&#x27;t seem any more Go-like than they seem Python or ObjC like.<p>Well written C is consistently faster than well-written Go. There are some dynamic runtime elements to Cello that could potentially hurt performance but I doubt it&#x27;s a major factor.<p>I think Rust is probably the better modern language to compare Cello to, and I suspect they&#x27;ll have similar performance. ObjC would also be a reasonable thing to compare.<p>But, for most things, they&#x27;re all Fast Enough. Performance is probably not a useful metric. The reason I could see for using this would be modernizing an existing C codebase (though I&#x27;d be cautious about relying on something like this until it has a healthy uptake among developers), or when working in environments where only C compilers and libraries are available. If I were starting a new systems project, I would start with Rust or Go (or maybe ObjC if I ever had to work on Mac&#x2F;iOS).<p>Mostly though, I think it&#x27;s just a cool experiment, and educational.",
+"time": 1419618408,
+"type": "comment"
+}
+],
+"parent": 8799070,
+"text": "I&#x27;d love to know how this compares to GoLang... Conceptually similar, which is faster?",
+"time": 1419613951,
+"type": "comment"
+}
+]

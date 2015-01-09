@@ -198,6 +198,7 @@ static NSDictionary *remappings()
     NSMutableString *str = [NSMutableString string];
     [str appendString:[NSString stringWithFormat:@"%@\n",[self description]]];
     [str appendString:@"{\n"];
+    // Fix this...
     for (NSString *key in [[self class] propertyNames])
     {
         [str appendString:[NSString stringWithFormat:@"\t%@ : %@\n", key, [self valueForKey:key]]];

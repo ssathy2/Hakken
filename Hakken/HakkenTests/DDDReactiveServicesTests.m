@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "DDDReactiveServices.h"
+#import "DDDDataServices.h"
 
 @interface DDDReactiveServicesTests : XCTestCase
-@property (strong, nonatomic) DDDReactiveServices *services;
+@property (strong, nonatomic) DDDDataServices *services;
 @end
 
 @implementation DDDReactiveServicesTests
@@ -19,7 +19,7 @@
 - (void)setUp {
     [super setUp];
     // Put setup code here. This method is called before the invocation of each test method in the class.
-    self.services = [DDDReactiveServices sharedInstance];
+    self.services = [DDDDataServices sharedInstanceWithConfiguration:@"TestConfiguration" withServicesConfiguration:@"TestServicesConfiguration"];
 }
 
 - (void)tearDown {
@@ -50,12 +50,11 @@
 
 - (void)testFetchCommentsForStoryIdentifier
 {
-    // We'll use story id 8863 because it has a lot of comments...
+    // We've mocked a random comment json so as long as we pass some ID, we'll get back comments
     XCTestExpectation *fetchCommentsExpectation = [self expectationWithDescription:@"Fetch Comments"];
 
     __block NSArray *completedComments;
-    RACSignal *signal = [self.services fetchCommentsForStoryIdentifier:@(8863)];
-//    [signal subscribeOn:[RACScheduler mainThreadScheduler]];
+    RACSignal *signal = [self.services fetchCommentsForStoryIdentifier:@(1)];
     [signal subscribeNext:^(NSArray *comments) {
         completedComments = [comments copy];
         if (completedComments)

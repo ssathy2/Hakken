@@ -5,6 +5,10 @@
     "mock": {
         "isMock"  : true,
         "baseURL" : "mock",
+        "endpoints" : {
+            "getTopStories" : "mock_top_stories",
+            "getComments"   : "mock_getcomments"
+        }
     },
     "custom" : {
         "baseURL" : "http://0.0.0.0:5000/",

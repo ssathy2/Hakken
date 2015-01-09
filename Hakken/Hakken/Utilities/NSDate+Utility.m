@@ -20,21 +20,24 @@
     NSInteger timeVal = 0;
     if (timeDifferenceBetweenDates >= 0 && timeDifferenceBetweenDates < SECONDSINONEMINUTE)
     {
-        timeFormat = @"%i seconds ago";
         timeVal = timeDifferenceBetweenDates;
+        timeFormat = (timeVal == 1) ? @"%i second ago" : @"%i seconds ago";
     }
     else if (timeDifferenceBetweenDates >= SECONDSINONEMINUTE && timeDifferenceBetweenDates < SECONDSINONEHOUR)
     {
-        timeFormat = @"%i minutes ago";
         timeVal = (NSInteger)timeDifferenceBetweenDates/SECONDSINONEMINUTE;
+        timeFormat = (timeVal == 1) ? @"%i minute ago" : @"%i minutes ago";
     }
     else if (timeDifferenceBetweenDates >= SECONDSINONEHOUR && timeDifferenceBetweenDates < SECONDSINONEDAY)
     {
-        timeFormat = @"%i hours ago";
         timeVal = (NSInteger)timeDifferenceBetweenDates/SECONDSINONEHOUR;
+        timeFormat = (timeVal == 1) ? @"%i hour ago" : @"%i hours ago";
     }
     else
-        return @"A while ago";
+    {
+        timeVal = (NSInteger)timeDifferenceBetweenDates/SECONDSINONEDAY;
+        timeFormat = (timeVal == 1) ? @"%i day ago" : @"%i days ago";
+    }
     
     return [NSString stringWithFormat:timeFormat, timeVal];
 }

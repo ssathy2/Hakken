@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDStoryDetailTransitionModel.h"
+#import "DDDStoryTransitionModel.h"
 
-@implementation DDDStoryDetailTransitionModel
+@implementation DDDStoryTransitionModel
 
 @end

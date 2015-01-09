@@ -33,5 +33,6 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 @property (copy,   nonatomic) NSArray *parts;
 
 // generated properties
+@property (readonly, nonatomic) NSDate *dateCreated;
 @property (readonly, nonatomic) NSURL *itemURL;
 @end

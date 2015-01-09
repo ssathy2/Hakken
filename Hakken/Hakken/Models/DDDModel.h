@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+//TODO: Move the nscoding method to a DDDObject subclass
 @interface DDDModel : NSObject<NSCoding>
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
