@@ -15,7 +15,7 @@
 {
     // Load in mock story
 
-    return [[[DDDHelpers arrayFromJSONFile:@"mock_top_stories" async:YES]
+    return [[[DDDFileOperationHelpers arrayFromJSONFile:@"mock_top_stories" async:YES]
                          filter:^BOOL(id value) {
                              return value != nil;
                          }]
@@ -27,7 +27,7 @@
 - (RACSignal *)fetchCommentsForStoryIdentifier:(NSNumber *)identifier
 {
     // Load in mock comments
-    return [[[DDDHelpers arrayFromJSONFile:@"mock_getcomments" async:YES]
+    return [[[DDDFileOperationHelpers arrayFromJSONFile:@"mock_getcomments" async:YES]
              filter:^BOOL(id value) {
                  return value != nil;
              }]

@@ -13,7 +13,8 @@
     #define MAS_SHORTHAND
     #import <Masonry/Masonry.h>
 
-    #import "DDDHelpers.h"
+    #import "DDDFileOperationHelpers.h"
+
     // Categories
     #import "DDDCategories.h"
 #endif

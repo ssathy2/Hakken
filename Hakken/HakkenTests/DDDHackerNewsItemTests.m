@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 #import <XCTest/XCTestCase.h>
 #import "DDDHackerNewsComment.h"
-#import "DDDHelpers.h"
+#import "DDDFileOperationHelpers.h"
 
 @interface DDDHackerNewsItemTests : XCTestCase
 @end
@@ -34,7 +34,7 @@
     // Load in mock story
     RACTestScheduler *testScheduler = [RACTestScheduler new];
     [RACSignal startEagerlyWithScheduler:testScheduler block:^(id<RACSubscriber> subscriber) {
-        [[[DDDHelpers dictionaryFromJSONFile:@"mock_story" async:NO] flattenMap:^RACStream *(NSDictionary *dictionary) {
+        [[[DDDFileOperationHelpers dictionaryFromJSONFile:@"mock_story" async:NO] flattenMap:^RACStream *(NSDictionary *dictionary) {
             return [RACSignal return:[[DDDHackerNewsItem alloc] initWithDictionary:dictionary]];
         }] subscribeNext:^(DDDHackerNewsItem *mockStoryItem) {
             XCTAssert(mockStoryItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
@@ -52,7 +52,7 @@
 - (void)DISABLE_testMockComments
 {
     // Load in mock comment
-    [[[DDDHelpers dictionaryFromJSONFile:@"mock_comment" async:NO] flattenMap:^RACStream *(NSDictionary *dictionary) {
+    [[[DDDFileOperationHelpers dictionaryFromJSONFile:@"mock_comment" async:NO] flattenMap:^RACStream *(NSDictionary *dictionary) {
         return [RACSignal return:[[DDDHackerNewsComment alloc] initWithDictionary:dictionary]];
     }] subscribeNext:^(DDDHackerNewsComment *mockCommentItem) {
         XCTAssert(mockCommentItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
@@ -66,7 +66,7 @@
 - (void)DISABLE_testMockPoll
 {
     // Load in mock poll
-    [[[[DDDHelpers dictionaryFromJSONFile:@"mock_poll" async:NO] filter:^BOOL(id value) {
+    [[[[DDDFileOperationHelpers dictionaryFromJSONFile:@"mock_poll" async:NO] filter:^BOOL(id value) {
         return value != nil;
     }] flattenMap:^RACStream *(id value) {
         return [RACSignal return:[[DDDHackerNewsItem alloc] initWithDictionary:value]];

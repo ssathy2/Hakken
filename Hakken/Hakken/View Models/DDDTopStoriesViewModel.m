@@ -39,7 +39,7 @@
         return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:nil]];
     }];
     [fetchTopStories subscribeNext:^(id x) {
-        weakSelf.latestTopStoriesUpdate = x;
+        weakSelf.latestStoriesUpdate = x;
     }];
 }
 

@@ -61,10 +61,10 @@
 {
     __block NSString *servicesKey;
     __block NSDictionary *servicesConfiguration;
-    [[[[DDDHelpers dictionaryFromJSONFile:configurationFilename async:NO] flattenMap:^RACStream *(NSDictionary *configuration) {
+    [[[[DDDFileOperationHelpers dictionaryFromJSONFile:configurationFilename async:NO] flattenMap:^RACStream *(NSDictionary *configuration) {
         return [RACSignal return:configuration[@"services"]];
     }]
-    concat:[DDDHelpers dictionaryFromJSONFile:servicesConfigurationFilename async:NO]]
+    concat:[DDDFileOperationHelpers dictionaryFromJSONFile:servicesConfigurationFilename async:NO]]
     subscribeNext:^(id x) {
        if ([x isKindOfClass:[NSString class]])
            servicesKey = (NSString *)x;
