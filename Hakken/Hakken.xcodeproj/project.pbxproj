@@ -68,6 +68,7 @@
 		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
 		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
+		DE9C82691A6100D000B738AB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE9C82681A6100D000B738AB /* Main.storyboard */; };
 		DEB22DD21A52656E0027E36D /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
 		DEB22DD41A5267590027E36D /* TestConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD31A5267590027E36D /* TestConfiguration.json */; };
 		DEB22DD61A52676F0027E36D /* TestServicesConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */; };
@@ -156,8 +157,8 @@
 		DE53D4441A5FF13500A8B06A /* DDDWebViewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDWebViewCollectionViewCell.m; sourceTree = "<group>"; };
 		DE53D4451A5FF13500A8B06A /* DDDWebViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDWebViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		DE53D44E1A5FF14A00A8B06A /* CommentsStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsStoryboardIdentifiers.h; sourceTree = "<group>"; };
-		DE53D44F1A5FF14A00A8B06A /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentCollectionViewCell.h; sourceTree = "<group>"; };
-		DE53D4501A5FF14A00A8B06A /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentCollectionViewCell.m; sourceTree = "<group>"; };
+		DE53D44F1A5FF14A00A8B06A /* DDDCommentCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDDCommentCollectionViewCell.h; path = "../../View Controllers/Comments/DDDCommentCollectionViewCell.h"; sourceTree = "<group>"; };
+		DE53D4501A5FF14A00A8B06A /* DDDCommentCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDDCommentCollectionViewCell.m; path = "../../View Controllers/Comments/DDDCommentCollectionViewCell.m"; sourceTree = "<group>"; };
 		DE53D4511A5FF14A00A8B06A /* DDDCommentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewController.h; sourceTree = "<group>"; };
 		DE53D4521A5FF14A00A8B06A /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; };
 		DE53D4531A5FF14A00A8B06A /* DDDCommentTreeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentTreeInfo.h; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
 		DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDArrayInsertionDeletion.m; sourceTree = "<group>"; };
 		DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItem.m; sourceTree = "<group>"; };
+		DE9C82681A6100D000B738AB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		DEB22DD11A52656E0027E36D /* mock_getcomments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_getcomments.json; sourceTree = "<group>"; };
 		DEB22DD31A5267590027E36D /* TestConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestConfiguration.json; sourceTree = "<group>"; };
 		DEB22DD51A52676F0027E36D /* TestServicesConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TestServicesConfiguration.json; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 		DE53D4291A5FF12300A8B06A /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				DE9C82681A6100D000B738AB /* Main.storyboard */,
 				DE53D42A1A5FF12300A8B06A /* CommentsStoryboard.storyboard */,
 				DE53D42B1A5FF12300A8B06A /* DetailStoryboard.storyboard */,
 				DE53D42C1A5FF12300A8B06A /* TopStoriesStoryboard.storyboard */,
@@ -423,9 +426,11 @@
 		DE53D43C1A5FF13500A8B06A /* Collection View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DE53D44F1A5FF14A00A8B06A /* DDDCommentCollectionViewCell.h */,
+				DE53D4501A5FF14A00A8B06A /* DDDCommentCollectionViewCell.m */,
+				DE53D43F1A5FF13500A8B06A /* DDDCommentCollectionViewCell.xib */,
 				DE53D43D1A5FF13500A8B06A /* DDDCollectionViewCell.h */,
 				DE53D43E1A5FF13500A8B06A /* DDDCollectionViewCell.m */,
-				DE53D43F1A5FF13500A8B06A /* DDDCommentCollectionViewCell.xib */,
 				DE53D4401A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.h */,
 				DE53D4411A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.m */,
 				DE53D4421A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.xib */,
@@ -459,8 +464,6 @@
 			isa = PBXGroup;
 			children = (
 				DE53D44E1A5FF14A00A8B06A /* CommentsStoryboardIdentifiers.h */,
-				DE53D44F1A5FF14A00A8B06A /* DDDCommentCollectionViewCell.h */,
-				DE53D4501A5FF14A00A8B06A /* DDDCommentCollectionViewCell.m */,
 				DE53D4511A5FF14A00A8B06A /* DDDCommentsViewController.h */,
 				DE53D4521A5FF14A00A8B06A /* DDDCommentsViewController.m */,
 				DE53D4531A5FF14A00A8B06A /* DDDCommentTreeInfo.h */,
@@ -619,6 +622,7 @@
 				DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */,
 				DE53D4381A5FF12300A8B06A /* CommentsStoryboard.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
+				DE9C82691A6100D000B738AB /* Main.storyboard in Resources */,
 				DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */,
 				DE53D4471A5FF13500A8B06A /* DDDCommentCollectionViewCell.xib in Resources */,
 				DE53D44B1A5FF13500A8B06A /* DDDWebViewCollectionViewCell.xib in Resources */,

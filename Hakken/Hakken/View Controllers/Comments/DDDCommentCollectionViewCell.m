@@ -10,6 +10,8 @@
 #import "DDDCommentTreeInfo.h"
 #import "DDDHackerNewsComment.h"
 
+#import <DTCoreText/DTCoreText.h>
+
 @interface DDDCommentCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;
@@ -29,7 +31,17 @@
     // we can use NSAttributedString's initWithData:options:documentAttributes:error:, but this is SUPER SUPER slow and
     // we can't create the attributed string on a background thread. Using a webview is slow and too cumbersome for what needs
     // to be done here....
-    self.commentTextView.text = commentTreeInfo.comment.text;
+    NSData *data = [commentTreeInfo.comment.text dataUsingEncoding:NSUTF8StringEncoding];
+    UIFont *font = self.commentTextView.font;
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data options:@{
+                                                                                                DTUseiOS6Attributes : @(YES),
+                                                                                                DTDefaultTextColor : [UIColor whiteColor],
+                                                                                                DTDefaultFontName : font.fontName,
+                                                                                                DTDefaultFontFamily : font.familyName,
+                                                                                                DTDefaultFontSize : @(font.pointSize)
+                                                                                                
+                                                                                                } documentAttributes:nil];
+    self.commentTextView.attributedText = attrString;
     
     [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
 }
