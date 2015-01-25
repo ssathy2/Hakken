@@ -40,7 +40,7 @@
     [super viewModelDidLoad];
     
     __weak typeof(self) weakSelf = self;
-    RACSignal *fetchComments = [[DDDDataServices sharedInstance] fetchCommentsForStoryIdentifier:self.transitionModel.story.identifier];
+    RACSignal *fetchComments = [[DDDDataServices sharedInstance] fetchCommentsForStoryIdentifier:@([self.transitionModel.story.identifier integerValue])];
     fetchComments = [fetchComments filter:^BOOL(id value) {
         return value != nil;
     }];

@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Realm/Realm.h>
 
 //TODO: Move the nscoding method to a DDDObject subclass
-@interface DDDModel : NSObject<NSCoding>
+@interface DDDModel : NSObject
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 // Hook to setup mappings with a dictionary

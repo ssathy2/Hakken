@@ -7,7 +7,11 @@
 //
 
 #import "DDDLiveDataServices.h"
+#import "DDDHackerNewsItem.h"
+#import "DDDHackerNewsComment.h"
 #import "DDDHackernewsItemResponseSerializer.h"
+
+@class DDDHackerNewsItem, DDDHackerNewsComment;
 
 @interface DDDLiveDataServices()
 @property (strong, nonatomic) AFHTTPRequestOperationManager *httpRequestManager;
@@ -48,7 +52,12 @@
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  // convert the response object into an array of models
-                                 [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:responseObject]];
+                                 NSMutableArray *arr = [NSMutableArray array];
+                                 [[RLMRealm defaultRealm] beginWriteTransaction];
+                                 for (NSDictionary *item in responseObject)
+                                     [arr addObject:[[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]]];
+                                 [[RLMRealm defaultRealm] commitWriteTransaction];
+                                 [subscriber sendNext:arr];
                                  [subscriber sendCompleted];
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [subscriber sendError:error];
@@ -75,13 +84,63 @@
                               parameters:nil
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      // convert the response object into an array of models
-                                     [subscriber sendNext:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:responseObject]];
+                                     NSMutableArray *arr = [NSMutableArray array];
+                                     [[RLMRealm defaultRealm] beginWriteTransaction];
+                                     for (NSDictionary *item in responseObject)
+                                         [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+                                     [[RLMRealm defaultRealm] commitWriteTransaction];
+                                     [subscriber sendNext:arr];
                                      [subscriber sendCompleted];
                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                      [subscriber sendError:error];
                                  }];
         return nil;
     }];
+}
+
+- (NSDictionary *)remappedResponseDictionaryWithOriginalDictionary:(NSDictionary *)originalDictionary shouldPerformKidsRemapping:(BOOL)shouldPerformKidsRemapping
+{
+    // basically we want to take the mappings in the original dictionary and based on the Key-value pairs in remapDictionary, perform the remapping
+    NSDictionary *remapDictionary = [self remapDictionary];
+    NSMutableDictionary *mutableOriginalDictionary = [NSMutableDictionary dictionaryWithDictionary:originalDictionary];
+    [remapDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
+        id object = [originalDictionary valueForKey:key];
+        NSString *convertedObject;
+        if ([object isKindOfClass:[NSNumber class]])
+            convertedObject = [(NSNumber *)object stringValue];
+        
+        [mutableOriginalDictionary setValue:(convertedObject)?:object forKey:value];
+        [mutableOriginalDictionary removeObjectForKey:key];
+    }];
+    
+    if (shouldPerformKidsRemapping)
+    {
+        NSArray *originalKidsArray = [[mutableOriginalDictionary valueForKey:@"kids"] copy];
+        NSArray *newKidsArray = [self customRemappedKidsArrayFromOriginalKidsArray:originalKidsArray];
+        [mutableOriginalDictionary setObject:newKidsArray forKey:@"kids"];
+    }
+    
+    return mutableOriginalDictionary;
+}
+
+// UGLY AS HELL
+- (NSArray *)customRemappedKidsArrayFromOriginalKidsArray:(NSArray *)array
+{
+    NSMutableArray *remappedKidsArray = [NSMutableArray array];
+    for (NSNumber *kid in array)
+    {
+        [remappedKidsArray addObject:@{
+                                      @"identifier" : [kid stringValue]
+                                      }];
+    }
+    return remappedKidsArray;
+}
+
+- (NSDictionary *)remapDictionary
+{
+    return @{
+             @"id" : @"identifier"
+             };
 }
 
 @end

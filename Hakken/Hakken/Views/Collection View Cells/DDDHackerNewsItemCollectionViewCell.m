@@ -36,7 +36,7 @@
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.9f
+         usingSpringWithDamping:0.7f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(0.90, 0.90);
@@ -47,7 +47,7 @@
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.4f
+         usingSpringWithDamping:0.2f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
@@ -58,7 +58,7 @@
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.4f
+         usingSpringWithDamping:0.2f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
@@ -80,7 +80,7 @@
     
     self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [hnItem.itemURL host]];
     
-    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", hnItem.score, (hnItem.score.integerValue > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
+    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", @(hnItem.score), (hnItem.score > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
     
     // TODO: Get the actual number of comments

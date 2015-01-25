@@ -8,18 +8,32 @@
 
 #import "DDDHackerNewsItem.h"
 
+@implementation RLMNumberObject
+@end
+
 @implementation DDDHackerNewsItem
-- (void)setupPropertyMappingsWithDictionary:(NSDictionary *)dictionary
++ (NSString *)primaryKey
 {
-    [super setupPropertyMappingsWithDictionary:dictionary];
-    [self setEnumerationMapping:@{
-                                  @"story"      : @(DDDHackerNewsItemTypeStory),
-                                  @"comment"    : @(DDDHackerNewsItemTypeComment),
-                                  @"poll"       : @(DDDHackerNewsItemTypePoll),
-                                  @"pollopt"    : @(DDDHackerNewsItemTypePollOption),
-                                  @"job"        : @(DDDHackerNewsItemTypeJob)
-                                  }
-                         forKey:@keypath(self.type)];
+    return @"identifier";
+}
+
+// Ugh pretty stupid that realm actually needs this, what if this doesn't come back in services?
++ (NSDictionary *)defaultPropertyValues
+{
+    return @{
+             @"deleted" : @(NO),
+             @"dead"    : @(NO),
+             @"parent"  : @"",
+             @"text"    : @"",
+             @"userWantsToReadLater" : @(NO),
+             @"dateUserSavedToReadLater" : [NSDate distantPast],
+             @"dateUserLastAccessed" : [NSDate distantPast]
+             };
+}
+
++ (NSArray *)ignoredProperties
+{
+    return @[@"dateCreated", @"itemType", @"itemURL"];
 }
 
 - (NSURL *)itemURL
@@ -29,6 +43,27 @@
 
 - (NSDate *)dateCreated
 {
-    return [NSDate dateWithTimeIntervalSince1970:[self.time doubleValue]];
+    return [NSDate dateWithTimeIntervalSince1970:self.time];
 }
+
+- (DDDHackerNewsItemType)itemType
+{
+    if (_itemType != DDDHackerNewsItemTypeUndetermined)
+    {
+        NSNumber *rawEnumValue = [[self itemTypeMapping] valueForKey:self.type];
+        _itemType = (DDDHackerNewsItemType)rawEnumValue.integerValue;
+    }
+    return _itemType;
+}
+
+- (NSDictionary *)itemTypeMapping
+{
+    return @{
+        @"story"      : @(DDDHackerNewsItemTypeStory),
+        @"comment"    : @(DDDHackerNewsItemTypeComment),
+        @"poll"       : @(DDDHackerNewsItemTypePoll),
+        @"pollopt"    : @(DDDHackerNewsItemTypePollOption),
+        @"job"        : @(DDDHackerNewsItemTypeJob)
+    };
+};
 @end

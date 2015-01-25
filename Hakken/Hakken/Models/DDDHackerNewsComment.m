@@ -9,9 +9,4 @@
 #import "DDDHackerNewsComment.h"
 
 @implementation DDDHackerNewsComment
-- (void)setupPropertyMappingsWithDictionary:(NSDictionary *)dictionary
-{
-    [super setupPropertyMappingsWithDictionary:dictionary];
-    [self setArrayOfModelsWithClass:[DDDHackerNewsComment class] forKey:@"kids"];
-}
 @end

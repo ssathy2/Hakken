@@ -20,7 +20,8 @@
                              return value != nil;
                          }]
             flattenMap:^RACStream *(id value) {
-                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:value]];
+                return nil;
+//                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:value]];
             }];
 }
 
@@ -32,7 +33,8 @@
                  return value != nil;
              }]
             flattenMap:^RACStream *(id value) {
-                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:value]];
+                return nil;
+//                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:value]];
             }];
 }
 @end

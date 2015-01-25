@@ -17,11 +17,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self configureLogging];
     // Override point for customization after application launch.
-    
-    
+    [self configureLogging];
+    [self performRealmMigrationIfNecessary];
     return YES;
+}
+
+- (void)performRealmMigrationIfNecessary
+{
+    // Not really sure what this does yet but since we changed the type of properties in our RLMObject subclasses, we must set a new schema version
+    [RLMRealm setSchemaVersion:[[NSDate date] timeIntervalSince1970] withMigrationBlock:^(RLMMigration *migration, NSUInteger oldSchemaVersion) {
+        NSInteger newVersion = [[NSDate date] timeIntervalSince1970];
+        if (oldSchemaVersion > newVersion)
+        {
+            DDLogError(@"Old scheme version at: %@ is greater than the new schema version at: %@", @(oldSchemaVersion), @(newVersion));
+        }
+    }];
 }
 
 - (void)configureLogging

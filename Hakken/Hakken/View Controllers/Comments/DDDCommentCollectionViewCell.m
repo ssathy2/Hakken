@@ -27,22 +27,19 @@
     self.commentUserLabel.text = commentTreeInfo.comment.by;
     self.distantDateCommentPostedLabel.text = [commentTreeInfo.comment.dateCreated relativeDateTimeStringToNow];
     
-    // TODO: We HAVE to handle text that's marked up with HTML, currently we're not doing that and it looks ugly.
-    // we can use NSAttributedString's initWithData:options:documentAttributes:error:, but this is SUPER SUPER slow and
-    // we can't create the attributed string on a background thread. Using a webview is slow and too cumbersome for what needs
-    // to be done here....
     NSData *data = [commentTreeInfo.comment.text dataUsingEncoding:NSUTF8StringEncoding];
     UIFont *font = self.commentTextView.font;
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data options:@{
-                                                                                                DTUseiOS6Attributes : @(YES),
-                                                                                                DTDefaultTextColor : [UIColor whiteColor],
-                                                                                                DTDefaultFontName : font.fontName,
-                                                                                                DTDefaultFontFamily : font.familyName,
-                                                                                                DTDefaultFontSize : @(font.pointSize)
-                                                                                                
-                                                                                                } documentAttributes:nil];
+    NSDictionary *optionsDict = @{
+                                  DTUseiOS6Attributes    : @(YES),
+                                  DTDefaultTextColor     : [UIColor whiteColor],
+                                  DTDefaultFontName      : font.fontName,
+                                  DTDefaultFontFamily    : font.familyName,
+                                  DTDefaultFontSize      : @(font.pointSize)
+                                  };
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data
+                                                                          options:optionsDict
+                                                               documentAttributes:nil];
     self.commentTextView.attributedText = attrString;
-    
     [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
 }
 

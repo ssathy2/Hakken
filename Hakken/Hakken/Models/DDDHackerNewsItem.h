@@ -10,6 +10,7 @@
 
 typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 {
+    DDDHackerNewsItemTypeUndetermined,
     DDDHackerNewsItemTypeJob,
     DDDHackerNewsItemTypeStory,
     DDDHackerNewsItemTypeComment,
@@ -17,22 +18,37 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
     DDDHackerNewsItemTypePollOption
 };
 
-@interface DDDHackerNewsItem : DDDModel
-@property (copy,   nonatomic) NSNumber *identifier;
+// UGH WHAT A STUPID UGLY HACK...I NEED TO DO THIS TO BE ABLE TO STORE AN ARRAY OF STRINGS ON A RLMOBJECT
+@interface RLMNumberObject : RLMObject
+@property (strong, nonatomic) NSString *identifier;
+@end
+
+@class DDDHackerNewsItem;
+RLM_ARRAY_TYPE(DDDHackerNewsItem);
+RLM_ARRAY_TYPE(RLMNumberObject);
+
+@interface DDDHackerNewsItem : RLMObject
+@property (strong, nonatomic) NSString *identifier;
 @property (assign, nonatomic) BOOL deleted;
-@property (assign, nonatomic) DDDHackerNewsItemType type;
+@property (copy, nonatomic) NSString *type;
 @property (copy,   nonatomic) NSString *by;
-@property (copy,   nonatomic) NSNumber *time;
+@property (assign, nonatomic) double time;
 @property (copy,   nonatomic) NSString *text;
 @property (assign, nonatomic) BOOL dead;
 @property (copy,   nonatomic) NSString *parent;
-@property (copy,   nonatomic) NSArray *kids;
+@property (strong, nonatomic) RLMArray<RLMNumberObject> *kids;
 @property (copy,   nonatomic) NSString *url;
-@property (copy,   nonatomic) NSNumber *score;
+@property (assign, nonatomic) NSInteger score;
 @property (copy,   nonatomic) NSString *title;
-@property (copy,   nonatomic) NSArray *parts;
+@property (strong,   nonatomic) RLMArray<DDDHackerNewsItem> *parts;
 
-// generated properties
+// Generated and Ignored properties
 @property (readonly, nonatomic) NSDate *dateCreated;
 @property (readonly, nonatomic) NSURL *itemURL;
+@property (assign, nonatomic) DDDHackerNewsItemType itemType;
+
+// Properties for save later functionality
+@property (assign, nonatomic) BOOL userWantsToReadLater;
+@property (strong, nonatomic) NSDate *dateUserSavedToReadLater;
+@property (strong, nonatomic) NSDate *dateUserLastAccessed;
 @end

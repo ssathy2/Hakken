@@ -29,20 +29,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="4Sj-gp-KIp"/>
-                            <constraint firstAttribute="centerX" secondItem="URf-vr-I9T" secondAttribute="centerX" id="IaN-12-acN"/>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="bottom" secondItem="8Ab-nG-bdK" secondAttribute="top" id="V9W-ia-9aj"/>
-                            <constraint firstAttribute="centerY" secondItem="URf-vr-I9T" secondAttribute="centerY" id="sb6-pn-eBK"/>
+                            <constraint firstItem="URf-vr-I9T" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="HP7-e2-ftQ"/>
+                            <constraint firstItem="URf-vr-I9T" firstAttribute="top" secondItem="A3q-Jm-kzr" secondAttribute="bottom" id="dNJ-lz-007"/>
+                            <constraint firstAttribute="trailing" secondItem="URf-vr-I9T" secondAttribute="trailing" id="jqm-OP-Fcj"/>
+                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="URf-vr-I9T" secondAttribute="bottom" id="n7b-I4-pml"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="URf-vr-I9T"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="4Sj-gp-KIp"/>
-                                <exclude reference="IaN-12-acN"/>
-                                <exclude reference="V9W-ia-9aj"/>
-                                <exclude reference="sb6-pn-eBK"/>
+                                <exclude reference="HP7-e2-ftQ"/>
+                                <exclude reference="dNJ-lz-007"/>
+                                <exclude reference="jqm-OP-Fcj"/>
+                                <exclude reference="n7b-I4-pml"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -50,14 +50,15 @@
                                 <include reference="URf-vr-I9T"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="4Sj-gp-KIp"/>
-                                <include reference="IaN-12-acN"/>
-                                <include reference="V9W-ia-9aj"/>
-                                <include reference="sb6-pn-eBK"/>
+                                <include reference="HP7-e2-ftQ"/>
+                                <include reference="dNJ-lz-007"/>
+                                <include reference="jqm-OP-Fcj"/>
+                                <include reference="n7b-I4-pml"/>
                             </mask>
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="URf-vr-I9T" id="u5y-mi-El6"/>
                     </connections>

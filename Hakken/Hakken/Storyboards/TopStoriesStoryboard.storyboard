@@ -30,24 +30,20 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" id="5TL-Lz-PpX"/>
                             <constraint firstAttribute="trailing" secondItem="UUO-LM-WyX" secondAttribute="trailing" id="Als-eY-DQD"/>
-                            <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="cbc-ni-JHB"/>
                             <constraint firstItem="UUO-LM-WyX" firstAttribute="leading" secondItem="Kos-2u-mNl" secondAttribute="leading" id="mv9-tZ-2Qr"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" constant="-64" id="o2n-F4-CzG"/>
                             <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="o74-yt-cNN"/>
-                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" id="uqb-db-7r2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="cbc-ni-JHB"/>
-                                <exclude reference="o74-yt-cNN"/>
-                                <exclude reference="5TL-Lz-PpX"/>
                                 <exclude reference="Als-eY-DQD"/>
                                 <exclude reference="mv9-tZ-2Qr"/>
-                                <exclude reference="uqb-db-7r2"/>
+                                <exclude reference="o2n-F4-CzG"/>
+                                <exclude reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -55,20 +51,13 @@
                                 <include reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="o74-yt-cNN"/>
-                                <include reference="5TL-Lz-PpX"/>
                                 <include reference="Als-eY-DQD"/>
                                 <include reference="mv9-tZ-2Qr"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="cbc-ni-JHB"/>
-                                <include reference="uqb-db-7r2"/>
+                                <include reference="o2n-F4-CzG"/>
+                                <include reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="UUO-LM-WyX" id="7BT-YU-Nc3"/>

@@ -46,12 +46,16 @@ PODS:
   - ReactiveCocoa/no-arc (2.3.1)
   - ReactiveCocoa/UI (2.3.1):
     - ReactiveCocoa/Core
+  - Realm (0.89.2):
+    - Realm/Headers
+  - Realm/Headers (0.89.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - CocoaLumberjack
   - DTCoreText
   - ReactiveCocoa
+  - Realm
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
@@ -59,5 +63,6 @@ SPEC CHECKSUMS:
   DTCoreText: 1fc0aadfa238d14c6cc56035af4e2b76b958e3b1
   DTFoundation: 721a63964fb9acd64cb8c9d3d1642ee60bac3d6a
   ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
+  Realm: 4ba08033bea6a32e49eebcfd41e5fd651168135b
 
 COCOAPODS: 0.34.4

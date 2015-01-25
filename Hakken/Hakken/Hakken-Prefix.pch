@@ -9,6 +9,7 @@
     #import <CocoaLumberjack/CocoaLumberjack.h>
     #import <ReactiveCocoa/ReactiveCocoa.h>
     #import <AFNetworking/AFNetworking.h>
+    #import <Realm/Realm.h>
 
     #import "DDDFileOperationHelpers.h"
 

@@ -8,5 +8,9 @@
 
 #import "DDDHackernewsItem.h"
 
+@class DDDHackerNewsComment;
+RLM_ARRAY_TYPE(DDDHackerNewsComment)
+
 @interface DDDHackerNewsComment : DDDHackerNewsItem
+//@property (copy,   nonatomic) RLMArray<DDDHackerNewsComment> *kids;
 @end
