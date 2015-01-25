@@ -28,14 +28,14 @@ RLM_ARRAY_TYPE(DDDHackerNewsItem);
 RLM_ARRAY_TYPE(RLMNumberObject);
 
 @interface DDDHackerNewsItem : RLMObject
-@property (strong, nonatomic) NSString *identifier;
+@property (assign, nonatomic) NSInteger id;
 @property (assign, nonatomic) BOOL deleted;
 @property (copy, nonatomic) NSString *type;
 @property (copy,   nonatomic) NSString *by;
 @property (assign, nonatomic) double time;
 @property (copy,   nonatomic) NSString *text;
 @property (assign, nonatomic) BOOL dead;
-@property (copy,   nonatomic) NSString *parent;
+@property (assign,   nonatomic) double parent;
 @property (strong, nonatomic) RLMArray<RLMNumberObject> *kids;
 @property (copy,   nonatomic) NSString *url;
 @property (assign, nonatomic) NSInteger score;

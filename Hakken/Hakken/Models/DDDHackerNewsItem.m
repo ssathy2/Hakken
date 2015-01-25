@@ -14,7 +14,7 @@
 @implementation DDDHackerNewsItem
 + (NSString *)primaryKey
 {
-    return @"identifier";
+    return @"id";
 }
 
 // Ugh pretty stupid that realm actually needs this, what if this doesn't come back in services?
@@ -23,7 +23,7 @@
     return @{
              @"deleted" : @(NO),
              @"dead"    : @(NO),
-             @"parent"  : @"",
+             @"parent"  : @(0),
              @"text"    : @"",
              @"userWantsToReadLater" : @(NO),
              @"dateUserSavedToReadLater" : [NSDate distantPast],

@@ -56,6 +56,7 @@
                                  [[RLMRealm defaultRealm] beginWriteTransaction];
                                  for (NSDictionary *item in responseObject)
                                      [arr addObject:[[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]]];
+                                 [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
                                  [[RLMRealm defaultRealm] commitWriteTransaction];
                                  [subscriber sendNext:arr];
                                  [subscriber sendCompleted];
@@ -88,6 +89,7 @@
                                      [[RLMRealm defaultRealm] beginWriteTransaction];
                                      for (NSDictionary *item in responseObject)
                                          [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+                                     [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];                                     
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                      [subscriber sendNext:arr];
                                      [subscriber sendCompleted];
@@ -106,11 +108,19 @@
     [remapDictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
         id object = [originalDictionary valueForKey:key];
         NSString *convertedObject;
+        
         if ([object isKindOfClass:[NSNumber class]])
             convertedObject = [(NSNumber *)object stringValue];
         
         [mutableOriginalDictionary setValue:(convertedObject)?:object forKey:value];
         [mutableOriginalDictionary removeObjectForKey:key];
+    }];
+    
+    [[self numberToStringPropertyConverionArray] enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop) {
+        NSNumber *numVal = [mutableOriginalDictionary valueForKey:key];
+        NSString *stringNumVal = [numVal stringValue];
+        if (stringNumVal)
+            [mutableOriginalDictionary setObject:stringNumVal forKey:key];
     }];
     
     if (shouldPerformKidsRemapping)
@@ -138,9 +148,15 @@
 
 - (NSDictionary *)remapDictionary
 {
-    return @{
-             @"id" : @"identifier"
-             };
+    return nil;
+  //@{
+  //           @"id" : @"identifier"
+  //           };
+}
+
+- (NSArray *)numberToStringPropertyConverionArray
+{
+    return nil;//@[@"id", @"parent"];
 }
 
 @end

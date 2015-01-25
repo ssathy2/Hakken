@@ -20,6 +20,8 @@
     // Override point for customization after application launch.
     [self configureLogging];
     [self performRealmMigrationIfNecessary];
+    
+    DDLogDebug(@"Realm Database Location: %@", [RLMRealm defaultRealmPath]);
     return YES;
 }
 

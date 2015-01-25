@@ -100,7 +100,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
 {
     if (indexPath.row == 0)
-        return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:[[[self storyDetailViewModel] transitionModel] story] withModelIdentifier:[[[[self storyDetailViewModel] transitionModel] story] identifier]];
+        return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:[[[self storyDetailViewModel] transitionModel] story] withModelIdentifier:@([[[[self storyDetailViewModel] transitionModel] story] id])];
     else
     {
         UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
