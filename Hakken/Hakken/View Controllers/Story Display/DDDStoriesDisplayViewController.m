@@ -109,6 +109,7 @@ UINavigationControllerDelegate>
     DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row]];
     cell.delegate = self;
+    [collectionView.panGestureRecognizer requireGestureRecognizerToFail:cell.panGestureRecognizer];
     return cell;
 }
 
