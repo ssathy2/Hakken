@@ -18,6 +18,7 @@
 + (NSDictionary *)defaultPropertyValues
 {
     return @{
+             @"id"   : @"",
              @"kids" : @[],
              @"parent"  : @(0),
              @"text"    : @"",
