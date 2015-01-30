@@ -1,6 +1,6 @@
 {
     "live": {
-        "baseURL" : "Moo",
+        "baseURL" : "http://damp-bayou-8238.herokuapp.com/",
     },
     "mock": {
         "isMock"  : true,
