@@ -15,12 +15,12 @@
     UIPanGestureRecognizerDirection direction = UIPanGestureRecognizerDirectionNone;
     if (velocityInView.x > 0)
         direction |= UIPanGestureRecognizerDirectionRight;
-    else
+    else if (velocityInView.x < 0)
         direction |= UIPanGestureRecognizerDirectionLeft;
     
     if (velocityInView.y > 0)
         direction |= UIPanGestureRecognizerDirectionUp;
-    else
+    else if (velocityInView.y < 0)
         direction |= UIPanGestureRecognizerDirectionDown;
 
     return direction;

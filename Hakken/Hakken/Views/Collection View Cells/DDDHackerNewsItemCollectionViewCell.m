@@ -22,11 +22,28 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentTrailingSpaceConstraint;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
-
-@property (assign, nonatomic) CGPoint lastRecordedRecognizerLocationPoint;
 @end
 
 @implementation DDDHackerNewsItemCollectionViewCell
+
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    [self.cellContentView setFrame:self.contentView.bounds];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer == self.panGestureRecognizer)
+    {
+        UIPanGestureRecognizerDirection direction = [self.panGestureRecognizer panGestureDirectionInView:self.cellContentView];
+        if ((direction & UIPanGestureRecognizerDirectionUp) || (direction & UIPanGestureRecognizerDirectionDown))
+            return NO;
+        else return YES;
+    }
+    else return NO;
+}
 
 #pragma mark - Handle Pan Gestures
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panGestureRecognizer
@@ -64,27 +81,42 @@
 
 - (void)handleGestureRecongizerPossibleState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    
+
 }
 
 - (void)handleGestureRecongizerBeganState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    UIPanGestureRecognizerDirection gestureDirection = [panGestureRecognizer panGestureDirectionInView:self.cellContentView];
-    if (gestureDirection & UIPanGestureRecognizerDirectionLeft)
-        self.lastRecordedRecognizerLocationPoint = [panGestureRecognizer locationInView:self.cellContentView];
+ 
 }
 
 - (void)handleGestureRecongizerChangedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     UIPanGestureRecognizerDirection gestureDirection = [panGestureRecognizer panGestureDirectionInView:self.cellContentView];
-    if (gestureDirection & UIPanGestureRecognizerDirectionLeft)
+    if (gestureDirection & UIPanGestureRecognizerDirectionLeft
+        || gestureDirection & UIPanGestureRecognizerDirectionRight)
     {
-        DDLogDebug(@"panGestureRecognizerDirectionLeft");
-        CGPoint currentLocationInView = [panGestureRecognizer locationInView:self.cellContentView];
-        CGFloat constantAmount = abs(currentLocationInView.x - self.lastRecordedRecognizerLocationPoint.x);
-        if (constantAmount > 0)
-            self.cellContentTrailingSpaceConstraint.constant += constantAmount;
+        CGPoint translation = [panGestureRecognizer translationInView:[self.cellContentView superview]];
+        if ([self isProposedCellContentViewTranslationPermitted:translation])
+            [self.cellContentView setCenter:CGPointMake([self.cellContentView center].x + translation.x, [self.cellContentView center].y)];
+        [panGestureRecognizer setTranslation:CGPointZero inView:self.cellContentView];
     }
+    
+}
+
+- (BOOL)isProposedCellContentViewTranslationPermitted:(CGPoint)translation
+{
+    if (translation.x > 0)
+    {
+        CGRect locationInSuperView = [self.cellContentView.superview convertRect:self.cellContentView.frame toView:self.cellContentView.superview];
+        locationInSuperView.origin.x += translation.x;
+        if (locationInSuperView.origin.x < 0)
+            return YES;
+        
+        locationInSuperView.origin.y += translation.y;
+        return CGRectContainsRect(self.frame, locationInSuperView);
+    }
+    else
+        return YES;
 }
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
@@ -116,6 +148,7 @@
         self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
         self.panGestureRecognizer.maximumNumberOfTouches = 1;
         self.panGestureRecognizer.minimumNumberOfTouches = 1;
+        self.panGestureRecognizer.delegate = self;
         [self.cellContentView addGestureRecognizer:self.panGestureRecognizer];
     }
 }
