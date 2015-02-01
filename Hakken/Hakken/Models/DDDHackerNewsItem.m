@@ -7,6 +7,7 @@
 //
 
 #import "DDDHackerNewsItem.h"
+#import "DDDHakkenReadLaterInformation.h"
 
 @implementation RLMNumberObject
 @end
@@ -25,9 +26,7 @@
              @"dead"    : @(NO),
              @"parent"  : @(0),
              @"text"    : @"",
-             @"userWantsToReadLater" : @(NO),
-             @"dateUserSavedToReadLater" : [NSDate distantPast],
-             @"dateUserLastAccessed" : [NSDate distantPast]
+             @"readLaterInformation" : [DDDHakkenReadLaterInformation defaultObject]
              };
 }
 

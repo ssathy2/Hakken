@@ -70,6 +70,15 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yqq-L6-qq1">
+                        <rect key="frame" x="184" y="80" width="71" height="30"/>
+                        <state key="normal" title="Read later">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="readLaterButtonTapped:" destination="hWV-aD-7Oy" eventType="touchUpInside" id="GF6-cl-M3f"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -91,6 +100,7 @@
             <connections>
                 <outlet property="commentsButton" destination="GWH-P2-8Wt" id="stO-J9-K1g"/>
                 <outlet property="pointDatePostedLabel" destination="B40-H9-V3A" id="eVU-Zm-kik"/>
+                <outlet property="readLaterButton" destination="Yqq-L6-qq1" id="HKC-Qa-Ar7"/>
                 <outlet property="titleLabel" destination="FXP-po-bLh" id="iOL-WW-SoK"/>
                 <outlet property="urlLabel" destination="AYm-KU-LxM" id="J5O-8b-C7b"/>
                 <outlet property="userName" destination="zaE-4B-wLQ" id="OtA-47-N4Z"/>

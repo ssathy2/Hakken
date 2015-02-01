@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B92414FD761527F22666A /* libPods.a */; };
+		DE0755BC1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755BB1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m */; };
+		DE0755BF1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755BE1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m */; };
+		DE0755C21A7ECE1F005170D6 /* RLMResults+DDDHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C11A7ECE1F005170D6 /* RLMResults+DDDHelpers.m */; };
+		DE0755C51A7EDF73005170D6 /* DDDReadLaterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C41A7EDF73005170D6 /* DDDReadLaterViewController.m */; };
+		DE0755C81A7EE219005170D6 /* DDDReadLaterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */; };
 		DE124AB71A4B516B00337342 /* mock_top_stories.json in Resources */ = {isa = PBXBuildFile; fileRef = DE124AB61A4B516B00337342 /* mock_top_stories.json */; };
 		DE124AB81A4B516B00337342 /* mock_top_stories.json in Resources */ = {isa = PBXBuildFile; fileRef = DE124AB61A4B516B00337342 /* mock_top_stories.json */; };
 		DE124ABC1A4B537B00337342 /* DDDDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABB1A4B537B00337342 /* DDDDataServices.m */; };
@@ -91,6 +96,17 @@
 		17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DC4B92414FD761527F22666A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE0755B91A7D5667005170D6 /* DDDHakkenReadLater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHakkenReadLater.h; sourceTree = "<group>"; };
+		DE0755BA1A7D7C59005170D6 /* DDDHakkenReadLaterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHakkenReadLaterManager.h; sourceTree = "<group>"; };
+		DE0755BB1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHakkenReadLaterManager.m; sourceTree = "<group>"; };
+		DE0755BD1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHakkenReadLaterInformation.h; sourceTree = "<group>"; };
+		DE0755BE1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHakkenReadLaterInformation.m; sourceTree = "<group>"; };
+		DE0755C01A7ECE1F005170D6 /* RLMResults+DDDHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RLMResults+DDDHelpers.h"; sourceTree = "<group>"; };
+		DE0755C11A7ECE1F005170D6 /* RLMResults+DDDHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RLMResults+DDDHelpers.m"; sourceTree = "<group>"; };
+		DE0755C31A7EDF73005170D6 /* DDDReadLaterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDDReadLaterViewController.h; path = ../DDDReadLaterViewController.h; sourceTree = "<group>"; };
+		DE0755C41A7EDF73005170D6 /* DDDReadLaterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDDReadLaterViewController.m; path = ../DDDReadLaterViewController.m; sourceTree = "<group>"; };
+		DE0755C61A7EE219005170D6 /* DDDReadLaterViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDReadLaterViewModel.h; sourceTree = "<group>"; };
+		DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReadLaterViewModel.m; sourceTree = "<group>"; };
 		DE124AB61A4B516B00337342 /* mock_top_stories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_top_stories.json; sourceTree = "<group>"; };
 		DE124AB91A4B526A00337342 /* DDDServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDServices.h; sourceTree = "<group>"; };
 		DE124ABA1A4B537B00337342 /* DDDDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDDataServices.h; sourceTree = "<group>"; };
@@ -241,6 +257,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		DE0755B81A7D563E005170D6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DE0755B91A7D5667005170D6 /* DDDHakkenReadLater.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		DE3127D51A1ADBBD0020DB40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +278,8 @@
 				DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */,
 				DE3962541A2BB9A2009EEB82 /* DDDStoryTransitionModel.h */,
 				DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */,
+				DE0755BD1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.h */,
+				DE0755BE1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +287,8 @@
 		DE3127D61A1ADBBD0020DB40 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE0755C61A7EE219005170D6 /* DDDReadLaterViewModel.h */,
+				DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */,
 				DE53D4041A5FE4C600A8B06A /* DDDStoryDisplayViewModel.h */,
 				DE53D4051A5FE4C600A8B06A /* DDDStoryDisplayViewModel.m */,
 				DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */,
@@ -367,6 +395,7 @@
 		DE53D4151A5FF12300A8B06A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				DE0755B81A7D563E005170D6 /* Protocols */,
 				DE53D4161A5FF12300A8B06A /* Categories */,
 				DE53D4241A5FF12300A8B06A /* Helpers */,
 			);
@@ -389,6 +418,8 @@
 				DE53D4211A5FF12300A8B06A /* UIColor+DDDAdditions.m */,
 				DE53D4221A5FF12300A8B06A /* UIView+SSAdditions.h */,
 				DE53D4231A5FF12300A8B06A /* UIView+SSAdditions.m */,
+				DE0755C01A7ECE1F005170D6 /* RLMResults+DDDHelpers.h */,
+				DE0755C11A7ECE1F005170D6 /* RLMResults+DDDHelpers.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -496,6 +527,8 @@
 		DE53D4651A5FF14A00A8B06A /* Story Display */ = {
 			isa = PBXGroup;
 			children = (
+				DE0755C31A7EDF73005170D6 /* DDDReadLaterViewController.h */,
+				DE0755C41A7EDF73005170D6 /* DDDReadLaterViewController.m */,
 				DE53D4661A5FF14A00A8B06A /* DDDStoriesDisplayViewController.h */,
 				DE53D4671A5FF14A00A8B06A /* DDDStoriesDisplayViewController.m */,
 			);
@@ -525,6 +558,8 @@
 				DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */,
 				DE124ABE1A4B570400337342 /* DDDMockDataServices.h */,
 				DE124ABF1A4B570400337342 /* DDDMockDataServices.m */,
+				DE0755BA1A7D7C59005170D6 /* DDDHakkenReadLaterManager.h */,
+				DE0755BB1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -693,6 +728,7 @@
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE53D4341A5FF12300A8B06A /* UIColor+DDDAdditions.m in Sources */,
 				DE53D44A1A5FF13500A8B06A /* DDDWebViewCollectionViewCell.m in Sources */,
+				DE0755BC1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE53D4751A5FF14B00A8B06A /* DDDStoriesDisplayViewController.m in Sources */,
 				DE53D46D1A5FF14B00A8B06A /* DDDCommentsViewController.m in Sources */,
@@ -715,10 +751,14 @@
 				DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */,
 				DE62AC481A20FD5300692CB8 /* DDDLiveDataServices.m in Sources */,
 				DE53D46C1A5FF14B00A8B06A /* DDDCommentCollectionViewCell.m in Sources */,
+				DE0755BF1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m in Sources */,
 				DE53D46F1A5FF14B00A8B06A /* DDDContentViewController.m in Sources */,
 				DE53D4371A5FF12300A8B06A /* DDDFileOperationHelpers.m in Sources */,
 				DE53D4461A5FF13500A8B06A /* DDDCollectionViewCell.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
+				DE0755C21A7ECE1F005170D6 /* RLMResults+DDDHelpers.m in Sources */,
+				DE0755C81A7EE219005170D6 /* DDDReadLaterViewModel.m in Sources */,
+				DE0755C51A7EDF73005170D6 /* DDDReadLaterViewController.m in Sources */,
 				DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */,
 				DE53D4731A5FF14B00A8B06A /* DDDCommentsCollectionViewFlowLayout.m in Sources */,
 				DE53D42F1A5FF12300A8B06A /* DDDViewControllerRouter.m in Sources */,

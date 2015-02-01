@@ -12,10 +12,11 @@
     #import <Realm/Realm.h>
 
     #import "DDDFileOperationHelpers.h"
-
     // Categories
     #import "DDDCategories.h"
 #endif
+
+#define safe_block(_block) if(_block)_block
 
 #ifdef DEBUG
 static const int ddLogLevel = DDLogLevelVerbose;

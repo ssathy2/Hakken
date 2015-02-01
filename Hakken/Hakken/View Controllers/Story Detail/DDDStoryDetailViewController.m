@@ -20,7 +20,7 @@
 @interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DDDHackerNewsItemCollectionViewCellDelegate>
 @end
 
-@implementation DDDStoryDetailViewController
+@implementation  DDDStoryDetailViewController
 
 + (NSString *)storyboardIdentifier
 {

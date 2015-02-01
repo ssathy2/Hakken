@@ -12,6 +12,7 @@
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *readLaterButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
@@ -85,5 +86,11 @@
     
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
+}
+
+- (IBAction)readLaterButtonTapped:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:)])
+        [self.delegate cell:self didSelectAddToReadLater:self.model];
 }
 @end

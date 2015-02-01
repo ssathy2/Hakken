@@ -13,7 +13,10 @@
 @class DDDHackerNewsItemCollectionViewCell, DDDHackerNewsItem;
 
 @protocol DDDHackerNewsItemCollectionViewCellDelegate <NSObject>
+@optional
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story;
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story;
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story;
 @end
 
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell
