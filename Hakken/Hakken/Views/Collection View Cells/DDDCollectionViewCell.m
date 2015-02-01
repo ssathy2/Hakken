@@ -10,6 +10,12 @@
 
 @implementation DDDCollectionViewCell
 
+- (void)setBounds:(CGRect)bounds
+{
+    [super setBounds:bounds];
+    self.contentView.frame = bounds;
+}
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];

@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distantDateCommentPostedLabel;
-@property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
 @end
 
 @implementation DDDCommentCollectionViewCell
@@ -28,7 +28,7 @@
     self.distantDateCommentPostedLabel.text = [commentTreeInfo.comment.dateCreated relativeDateTimeStringToNow];
     
     NSData *data = [commentTreeInfo.comment.text dataUsingEncoding:NSUTF8StringEncoding];
-    UIFont *font = self.commentTextView.font;
+    UIFont *font = self.commentLabel.font;
     NSDictionary *optionsDict = @{
                                   DTUseiOS6Attributes    : @(YES),
                                   DTDefaultTextColor     : [UIColor whiteColor],
@@ -39,7 +39,7 @@
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data
                                                                           options:optionsDict
                                                                documentAttributes:nil];
-    self.commentTextView.attributedText = attrString;
+    self.commentLabel.attributedText = attrString;
     [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
 }
 
