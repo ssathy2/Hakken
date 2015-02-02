@@ -85,7 +85,17 @@ UINavigationControllerDelegate>
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView reloadData];
+    if (insertionDeletion)
+    {
+        [self.collectionView performBatchUpdates:^{
+            if (insertionDeletion.indexesInserted)
+                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+            if (insertionDeletion.indexesDeleted)
+                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
