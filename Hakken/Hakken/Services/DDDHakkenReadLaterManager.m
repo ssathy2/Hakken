@@ -15,8 +15,7 @@
 #pragma mark - DDDHakkenReadLater
 + (void)addItemToReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
 {
-    DDDHackerNewsItem *itemInRealm = [DDDHackerNewsItem objectForPrimaryKey:@(item.id)];
-    DDDHakkenReadLaterInformation *info = itemInRealm.readLaterInformation;
+    DDDHakkenReadLaterInformation *info = item.readLaterInformation;
     
     if (info.userWantsToReadLater)
     {
@@ -28,17 +27,16 @@
         info.userWantsToReadLater = YES;
         info.dateUserSavedToReadLater = [NSDate date];
         info.dateUserInitiallySavedToReadLater = [info.dateUserSavedToReadLater copy];
-        itemInRealm.readLaterInformation = info;
-        [DDDHackerNewsItem createOrUpdateInDefaultRealmWithObject:itemInRealm];
+        item.readLaterInformation = info;
+        [[RLMRealm defaultRealm] addOrUpdateObject:item];
         [[RLMRealm defaultRealm] commitWriteTransaction];
-        safe_block(completion)(itemInRealm);
+        safe_block(completion)(item);
     }
 }
 
 + (void)removeItemFromReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
 {
-    DDDHackerNewsItem *itemInRealm = [DDDHackerNewsItem objectForPrimaryKey:@(item.id)];
-    DDDHakkenReadLaterInformation *info = itemInRealm.readLaterInformation;
+    DDDHakkenReadLaterInformation *info = item.readLaterInformation;
     if (!info.userWantsToReadLater)
     {
         safe_block(error)([NSError errorWithDomain:[NSString stringWithFormat:@"Item with id: %li has not been saved to be read later", (long)item.id] code:-1 userInfo:nil]);
@@ -48,54 +46,45 @@
         [[RLMRealm defaultRealm] beginWriteTransaction];
         info.userWantsToReadLater = NO;
         info.dateUserSavedToReadLater = [NSDate distantPast];
-        itemInRealm.readLaterInformation = info;
-        [DDDHackerNewsItem createOrUpdateInDefaultRealmWithObject:itemInRealm];
+        item.readLaterInformation = info;
+        [[RLMRealm defaultRealm] addOrUpdateObject:item];
         [[RLMRealm defaultRealm] commitWriteTransaction];
-        safe_block(completion)(itemInRealm);
+        safe_block(completion)(item);
     }
 }
 
-+ (void)fetchAllItemsToReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(NSError *)error
++ (void)fetchAllItemsToReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithBlock:^BOOL(DDDHackerNewsItem *evaluatedObject, NSDictionary *bindings) {
-        return (evaluatedObject.readLaterInformation.userWantsToReadLater);
-    }];
+    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES"];
     
-    RLMResults *results = [DDDHackerNewsItem objectsInRealm:[RLMRealm defaultRealm] withPredicate:readLaterPredicate];
+    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
     safe_block(completion)([results arrayFromResults]);
 }
 
-+ (void)fetchReadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(NSError *)error
++ (void)fetchReadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithBlock:^BOOL(DDDHackerNewsItem *evaluatedObject, NSDictionary *bindings) {
-        return (evaluatedObject.readLaterInformation.hasUserReadItem);
-    }];
+    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.hasUserReadItem == YES"];
     
-    RLMResults *results = [DDDHackerNewsItem objectsInRealm:[RLMRealm defaultRealm] withPredicate:readLaterPredicate];
+    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
     safe_block(completion)([results arrayFromResults]);
 }
 
-+ (void)fetchUnreadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(NSError *)error
++ (void)fetchUnreadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock *)error
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithBlock:^BOOL(DDDHackerNewsItem *evaluatedObject, NSDictionary *bindings) {
-        return ((!evaluatedObject.readLaterInformation.hasUserReadItem) && (evaluatedObject.readLaterInformation.userWantsToReadLater));
-    }];
+    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.hasUserReadItem == NO"];
     
-    RLMResults *results = [DDDHackerNewsItem objectsInRealm:[RLMRealm defaultRealm] withPredicate:readLaterPredicate];
+    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
     safe_block(completion)([results arrayFromResults]);
 }
 
-+ (void)removeAllItemsFromReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(NSError *)error
++ (void)removeAllItemsFromReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithBlock:^BOOL(DDDHackerNewsItem *evaluatedObject, NSDictionary *bindings) {
-        return (evaluatedObject.readLaterInformation.hasUserReadItem);
-    }];
+    [self fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
+        [items enumerateObjectsUsingBlock:^(DDDHackerNewsItem *item, NSUInteger idx, BOOL *stop) {
+            [self removeItemFromReadLater:item withCompletion:nil withError:nil];
+        }];
+        safe_block(completion)(items);
+    } withError:error];
     
-    RLMResults *results = [DDDHackerNewsItem objectsInRealm:[RLMRealm defaultRealm] withPredicate:readLaterPredicate];
-    NSArray *arrayResults = [results arrayFromResults];
-    [arrayResults enumerateObjectsUsingBlock:^(DDDHackerNewsItem *item, NSUInteger idx, BOOL *stop) {
-        [self removeItemFromReadLater:item withCompletion:nil withError:nil];
-    }];
-    safe_block(completion)(arrayResults);
 }
 @end
