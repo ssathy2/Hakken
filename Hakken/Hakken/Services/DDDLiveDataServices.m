@@ -55,7 +55,12 @@
                                  NSMutableArray *arr = [NSMutableArray array];
                                  [[RLMRealm defaultRealm] beginWriteTransaction];
                                  for (NSDictionary *item in responseObject)
-                                     [arr addObject:[[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]]];
+                                 {
+                                     if (![item isKindOfClass:[NSNull class]])
+                                     {
+                                         [arr addObject:[[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]]];
+                                     }
+                                 }
                                  [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
                                  [[RLMRealm defaultRealm] commitWriteTransaction];
                                  [subscriber sendNext:arr];
@@ -88,7 +93,8 @@
                                      NSMutableArray *arr = [NSMutableArray array];
                                      [[RLMRealm defaultRealm] beginWriteTransaction];
                                      for (NSDictionary *item in responseObject)
-                                         [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+                                         if (item)
+                                             [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
                                      [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];                                     
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                      [subscriber sendNext:arr];
