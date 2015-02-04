@@ -19,7 +19,7 @@
         DDDArrayInsertionDeletion *insertionDeletion    = [DDDArrayInsertionDeletion new];
         insertionDeletion.array                         = items;
         insertionDeletion.indexesDeleted                = nil;
-        insertionDeletion.indexesInserted               = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, (items.count == 0) ? 0 : items.count-1)];
+        insertionDeletion.indexesInserted               = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, items.count)];
         weakSelf.latestStoriesUpdate                    = insertionDeletion;
     } withError:^(NSError *error) {
        

@@ -87,14 +87,16 @@ UINavigationControllerDelegate>
 {
     if (insertionDeletion)
     {
-        [self.collectionView performBatchUpdates:^{
-            if (insertionDeletion.indexesInserted)
-                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-            if (insertionDeletion.indexesDeleted)
-                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-        } completion:^(BOOL finished) {
-            
-        }];
+        [self.collectionView reloadData];
+        // TODO: Fix collectionview perform batch updates assertion failure
+//        [self.collectionView performBatchUpdates:^{
+//            if (insertionDeletion.indexesInserted)
+//                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+//            if (insertionDeletion.indexesDeleted)
+//                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+//        } completion:^(BOOL finished) {
+//            
+//        }];
     }
 }
 
