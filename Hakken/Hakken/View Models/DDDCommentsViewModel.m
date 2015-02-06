@@ -92,6 +92,8 @@
 
 - (DDDCommentTreeInfo *)commentTreeInfoForIndexPath:(NSIndexPath *)idxPath
 {
+    if (self.commentTreeInfos.count == 0)
+        return nil;
     return [self.commentTreeInfos objectAtIndex:idxPath.row];
 }
 

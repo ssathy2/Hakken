@@ -61,10 +61,13 @@
                                      {
                                          DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
                                          DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
-                                         if (!realmItem.readLaterInformation)
-                                             realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
-                                         servicesItem.readLaterInformation = realmItem.readLaterInformation;
-                                         [arr addObject:servicesItem];
+                                         if (servicesItem.deleted == NO)
+                                         {
+                                             if (!realmItem.readLaterInformation)
+                                                 realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
+                                             servicesItem.readLaterInformation = realmItem.readLaterInformation;
+                                             [arr addObject:servicesItem];
+                                         }
                                      }
                                  }
                                  [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];

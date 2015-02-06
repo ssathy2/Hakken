@@ -48,4 +48,6 @@ RLM_ARRAY_TYPE(RLMNumberObject);
 @property (assign, nonatomic) DDDHackerNewsItemType itemType;
 
 @property (strong, nonatomic) DDDHakkenReadLaterInformation *readLaterInformation;
+
+- (BOOL)isItemUserGenerated;
 @end

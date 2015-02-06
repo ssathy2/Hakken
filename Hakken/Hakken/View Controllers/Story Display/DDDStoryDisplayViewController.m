@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDStoriesDisplayViewController.h"
+#import "DDDStoryDisplayViewController.h"
 
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
@@ -22,18 +22,18 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDCollectionViewCellSizingHelper.h"
 
-@interface DDDStoriesDisplayViewController ()<
+@interface DDDStoryDisplayViewController ()<
 DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
 UINavigationControllerDelegate>
 @end
 
-@interface DDDStoriesDisplayViewController()
+@interface DDDStoryDisplayViewController()
 @property (nonatomic, assign) CGFloat previousScrollViewYOffset;
 @end
 
-@implementation DDDStoriesDisplayViewController
+@implementation DDDStoryDisplayViewController
 
 + (NSString *)storyboardName
 {
@@ -136,12 +136,12 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.3
                           delay:0.f
          usingSpringWithDamping:0.7f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            cell.transform = CGAffineTransformMakeScale(0.95f, 0.95);
+                            cell.transform = CGAffineTransformMakeScale(0.85f, 0.85);
                         } completion:^(BOOL finished) {
                         }];
 }
@@ -149,7 +149,7 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.3
                           delay:0.f
          usingSpringWithDamping:0.2
           initialSpringVelocity:0.f
@@ -162,13 +162,17 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
-    transitionModel.story = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
+    DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
+    transitionModel.story = item;
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
-    
+
     // push webview/comments controller here...
-    [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    if (item.isItemUserGenerated)
+        [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    else
+        [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate

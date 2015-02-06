@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 dotdotdot. All rights reserved.
 //
 
-#import "DDDStoriesDisplayViewController.h"
+#import "DDDStoryDisplayViewController.h"
 
-@interface DDDReadLaterViewController : DDDStoriesDisplayViewController
+@interface DDDReadLaterViewController : DDDStoryDisplayViewController
 
 @end

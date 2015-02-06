@@ -48,7 +48,8 @@
     NSParameterAssert(cellClass != nil);
     NSParameterAssert(model != nil);
     
-    DDDCollectionViewCellSizingHelperEntry *sizingEntry = [self.modelIdentifierToSizingHelperEntryMapping objectForKey:modelIdentifier];
+    NSString *helperEntryIdentifier = [NSString stringWithFormat:@"%@_%@", NSStringFromClass(cellClass), modelIdentifier];
+    DDDCollectionViewCellSizingHelperEntry *sizingEntry = [self.modelIdentifierToSizingHelperEntryMapping objectForKey:helperEntryIdentifier];
     if (sizingEntry)
         return sizingEntry.size;
     else
@@ -61,7 +62,7 @@
         sizingEntry = [DDDCollectionViewCellSizingHelperEntry new];
         sizingEntry.cellClass = [cellClass copy];
         sizingEntry.size = size;
-        [self.modelIdentifierToSizingHelperEntryMapping setObject:sizingEntry forKey:modelIdentifier];
+        [self.modelIdentifierToSizingHelperEntryMapping setObject:sizingEntry forKey:helperEntryIdentifier];
         return size;
     }
 }

@@ -26,6 +26,10 @@
              @"dead"    : @(NO),
              @"parent"  : @(0),
              @"text"    : @"",
+             @"by"      : @"",
+             @"url"     : @"",
+             @"score"   : @(0),
+             @"title"   : @"",
              @"readLaterInformation" : [DDDHakkenReadLaterInformation defaultObject]
              };
 }
@@ -65,4 +69,9 @@
         @"job"        : @(DDDHackerNewsItemTypeJob)
     };
 };
+
+- (BOOL)isItemUserGenerated
+{
+    return self.url.length == 0;
+}
 @end
