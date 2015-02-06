@@ -12,7 +12,7 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
                 <subviews>
-                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wC9-TI-195">
+                    <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wC9-TI-195">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </webView>

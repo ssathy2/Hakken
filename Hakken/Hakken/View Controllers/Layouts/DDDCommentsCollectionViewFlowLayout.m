@@ -13,7 +13,7 @@
 
 @interface DDDCommentsCollectionViewFlowLayout()
 @property (strong, nonatomic) NSMutableDictionary *layoutInfo;
-@property (assign, nonatomic) CGFloat collectionViewContentSizeHeight;
+@property (assign, nonatomic) CGFloat contentSizeHeight;
 @end
 
 @implementation DDDCommentsCollectionViewFlowLayout
@@ -48,7 +48,7 @@
 - (void)prepareLayout
 {
     [super prepareLayout];
-    
+    _contentSizeHeight = -1;
     NSMutableDictionary *cellLayoutInfo = [NSMutableDictionary dictionary];
     
     NSInteger sectionCount = [self.collectionView numberOfSections];
@@ -97,14 +97,26 @@
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attrs = (self.layoutInfo[indexPath]) ?: [super layoutAttributesForItemAtIndexPath:indexPath];
-    self.collectionViewContentSizeHeight += attrs.frame.size.height;
     return attrs;
+}
+
+- (CGFloat)contentSizeHeight
+{
+    if (_contentSizeHeight == -1)
+    {
+        __block CGFloat height = 0;
+        [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attrs, BOOL *stop) {
+            height += CGRectGetHeight(attrs.frame);
+        }];
+        _contentSizeHeight = height;
+    }
+    return _contentSizeHeight;
 }
 
 - (CGSize)collectionViewContentSize
 {
     CGFloat contentWidth = self.collectionView.bounds.size.width;
-    CGFloat contentHeight = self.collectionViewContentSizeHeight;
+    CGFloat contentHeight = self.contentSizeHeight;
     return CGSizeMake(contentWidth, contentHeight);
 }
 

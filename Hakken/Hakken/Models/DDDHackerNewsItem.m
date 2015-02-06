@@ -51,7 +51,7 @@
 
 - (DDDHackerNewsItemType)itemType
 {
-    if (_itemType != DDDHackerNewsItemTypeUndetermined)
+    if (_itemType == DDDHackerNewsItemTypeUndetermined)
     {
         NSNumber *rawEnumValue = [[self itemTypeMapping] valueForKey:self.type];
         _itemType = (DDDHackerNewsItemType)rawEnumValue.integerValue;
