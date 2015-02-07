@@ -26,7 +26,8 @@
 DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
-UINavigationControllerDelegate>
+UINavigationControllerDelegate,
+UIGestureRecognizerDelegate>
 @end
 
 @interface DDDStoryDisplayViewController()
@@ -67,7 +68,23 @@ UINavigationControllerDelegate>
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
     
+    // We want to pass pan gestures to each individual cell
+    UIPanGestureRecognizer *cellSwipePanGestureREcognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    cellSwipePanGestureREcognizer.maximumNumberOfTouches = cellSwipePanGestureREcognizer.minimumNumberOfTouches = 1;
+    cellSwipePanGestureREcognizer.delegate = self;
+    self.collectionView.panGestureRecognizer.enabled = NO;
+    [self.collectionView addGestureRecognizer:cellSwipePanGestureREcognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+}
+
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    CGPoint gesturePoint = [gestureRecognizer locationInView:self.collectionView];
+    NSIndexPath *indexPathForPoint = [self.collectionView indexPathForItemAtPoint:gesturePoint];
+    DDDHackerNewsItemCollectionViewCell *cell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPathForPoint];
+    
+    [cell handlePanGesture:gestureRecognizer];
 }
 
 - (void)setupListenersToViewModel
@@ -122,7 +139,7 @@ UINavigationControllerDelegate>
     DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row]];
     cell.delegate = self;
-    [collectionView.panGestureRecognizer requireGestureRecognizerToFail:cell.panGestureRecognizer];
+//    [collectionView.panGestureRecognizer requireGestureRecognizerToFail:cell.panGestureRecognizer];
     return cell;
 }
 
@@ -132,32 +149,6 @@ UINavigationControllerDelegate>
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row];
     CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withModelIdentifier:@(item.id)];
     return size;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.3
-                          delay:0.f
-         usingSpringWithDamping:0.7f
-          initialSpringVelocity:0.f
-                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            cell.transform = CGAffineTransformMakeScale(0.85f, 0.85);
-                        } completion:^(BOOL finished) {
-                        }];
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.3
-                          delay:0.f
-         usingSpringWithDamping:0.2
-          initialSpringVelocity:0.f
-                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            cell.transform = CGAffineTransformMakeScale(1.f, 1.f);
-                        } completion:^(BOOL finished) {
-                        }];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

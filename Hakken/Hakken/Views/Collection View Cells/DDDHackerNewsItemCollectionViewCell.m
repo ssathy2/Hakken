@@ -18,21 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-// Constraints Outlets
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *urlToPointsHoursVerticalSpacing;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleToUrlLabelVerticalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *urlLabelHeight;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentButtonWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentButtonHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonToContainerHorizontalSpaceConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLengthWidthConstraint;
-
-
 @property (weak, nonatomic) IBOutlet UIView *cellContentView;
 @property (weak, nonatomic) IBOutlet UIView *swipeActionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentTrailingSpaceConstraint;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 @end
 
@@ -42,6 +32,8 @@
 {
     [super prepareForReuse];
     self.commentsButton.hidden = self.urlLabel.hidden = NO;
+    self.swipeActionViewWidthConstraint.constant = 0.f;
+    self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
     [self.cellContentView setFrame:self.contentView.bounds];
 }
 
@@ -110,7 +102,11 @@
     {
         CGPoint translation = [panGestureRecognizer translationInView:[self.cellContentView superview]];
         if ([self isProposedCellContentViewTranslationPermitted:translation])
-            [self.cellContentView setCenter:CGPointMake([self.cellContentView center].x + translation.x, [self.cellContentView center].y)];
+        {
+            self.cellContentViewLeadingSpacingConstraint.constant -= translation.x;
+            // Figure out how much the cell has moved by in the X direction sand set the width constraint to that difference
+            self.swipeActionViewWidthConstraint.constant -= translation.x;
+        }
         [panGestureRecognizer setTranslation:CGPointZero inView:self.cellContentView];
     }
     
@@ -134,7 +130,41 @@
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
+    [self resetCellContentView:YES];
+}
 
+- (void)resetCellContentView:(BOOL)animated
+{
+    void(^cellContentViewReset)() = ^() {
+        CGRect cellContentFrame = self.cellContentView.frame;
+        cellContentFrame.origin = CGPointZero;
+        CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 0.f, cellContentFrame.size.height);
+        self.cellContentView.frame = cellContentFrame;
+        self.swipeActionView.frame = swipeActionView;
+        
+    };
+    
+    void(^cellContentViewResetCompletion)() = ^() {
+        self.cellContentViewLeadingSpacingConstraint.constant = self.swipeActionViewWidthConstraint.constant = 0.f;
+    };
+    
+    if (animated)
+    {
+        [UIView animateWithDuration:0.2
+                              delay:0.f
+             usingSpringWithDamping:1.f
+              initialSpringVelocity:0.4
+                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                cellContentViewReset();
+                            } completion:^(BOOL finished) {
+                                //cellContentViewResetCompletion();
+                            }];
+    }
+    else
+    {
+        cellContentViewReset();
+        cellContentViewResetCompletion();
+    }
 }
 
 - (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
@@ -151,7 +181,7 @@
 {
     [super awakeFromNib];
     [self styleCell];
-    [self setupPanGestureRecognizer];
+//    [self setupPanGestureRecognizer];
 }
 
 - (void)setupPanGestureRecognizer
@@ -162,6 +192,7 @@
         self.panGestureRecognizer.maximumNumberOfTouches = 1;
         self.panGestureRecognizer.minimumNumberOfTouches = 1;
         self.panGestureRecognizer.delegate = self;
+        self.panGestureRecognizer.delaysTouchesEnded = YES;
         [self.cellContentView addGestureRecognizer:self.panGestureRecognizer];
     }
 }

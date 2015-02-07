@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC4B92414FD761527F22666A /* libPods.a */; };
+		DE0755B61A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */; };
 		DE0755BC1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755BB1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m */; };
 		DE0755BF1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755BE1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m */; };
 		DE0755C21A7ECE1F005170D6 /* RLMResults+DDDHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C11A7ECE1F005170D6 /* RLMResults+DDDHelpers.m */; };
 		DE0755C51A7EDF73005170D6 /* DDDReadLaterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C41A7EDF73005170D6 /* DDDReadLaterViewController.m */; };
 		DE0755C81A7EE219005170D6 /* DDDReadLaterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */; };
-		DE0755B61A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */; };
 		DE124AB71A4B516B00337342 /* mock_top_stories.json in Resources */ = {isa = PBXBuildFile; fileRef = DE124AB61A4B516B00337342 /* mock_top_stories.json */; };
 		DE124AB81A4B516B00337342 /* mock_top_stories.json in Resources */ = {isa = PBXBuildFile; fileRef = DE124AB61A4B516B00337342 /* mock_top_stories.json */; };
 		DE124ABC1A4B537B00337342 /* DDDDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABB1A4B537B00337342 /* DDDDataServices.m */; };
@@ -99,6 +99,8 @@
 		17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DC4B92414FD761527F22666A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE0755B41A79F751005170D6 /* UIPanGestureRecognizer+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPanGestureRecognizer+Helpers.h"; sourceTree = "<group>"; };
+		DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPanGestureRecognizer+Helpers.m"; sourceTree = "<group>"; };
 		DE0755B91A7D5667005170D6 /* DDDHakkenReadLater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHakkenReadLater.h; sourceTree = "<group>"; };
 		DE0755BA1A7D7C59005170D6 /* DDDHakkenReadLaterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHakkenReadLaterManager.h; sourceTree = "<group>"; };
 		DE0755BB1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHakkenReadLaterManager.m; sourceTree = "<group>"; };
@@ -110,8 +112,6 @@
 		DE0755C41A7EDF73005170D6 /* DDDReadLaterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDDReadLaterViewController.m; path = ../DDDReadLaterViewController.m; sourceTree = "<group>"; };
 		DE0755C61A7EE219005170D6 /* DDDReadLaterViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDReadLaterViewModel.h; sourceTree = "<group>"; };
 		DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReadLaterViewModel.m; sourceTree = "<group>"; };
-		DE0755B41A79F751005170D6 /* UIPanGestureRecognizer+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIPanGestureRecognizer+Helpers.h"; sourceTree = "<group>"; };
-		DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIPanGestureRecognizer+Helpers.m"; sourceTree = "<group>"; };
 		DE124AB61A4B516B00337342 /* mock_top_stories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = mock_top_stories.json; sourceTree = "<group>"; };
 		DE124AB91A4B526A00337342 /* DDDServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDServices.h; sourceTree = "<group>"; };
 		DE124ABA1A4B537B00337342 /* DDDDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDDataServices.h; sourceTree = "<group>"; };
@@ -628,6 +628,7 @@
 				TargetAttributes = {
 					DE475D8C1A1ADB1600970E87 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = S6WS4PD5A7;
 					};
 					DE475DA51A1ADB1600970E87 = {
 						CreatedOnToolsVersion = 6.1;
@@ -909,6 +910,7 @@
 			baseConfigurationReference = 17E13FDE2A17657834EED75B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -920,6 +922,7 @@
 			baseConfigurationReference = 3E05C83E7EC8DC7CD175FE1B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

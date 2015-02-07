@@ -21,5 +21,6 @@
 
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell
 @property (weak, nonatomic) id<DDDHackerNewsItemCollectionViewCellDelegate> delegate;
-@property (strong, readonly) UIPanGestureRecognizer *panGestureRecognizer;
+
+- (void)handlePanGesture:(UIPanGestureRecognizer *)pangestureRecognizer;
 @end
