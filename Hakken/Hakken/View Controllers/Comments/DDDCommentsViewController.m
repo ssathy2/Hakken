@@ -16,6 +16,7 @@
 #import "DDDHackerNewsComment.h"
 #import "DDDCollectionViewCellSizingHelper.h"
 #import "DDDHackernewsItemCollectionViewCell.h"
+#import "DDDHackernewsUserItemCollectionViewCell.h"
 
 typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
@@ -67,6 +68,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDCommentCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackernewsUserItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackernewsUserItemCollectionViewCellIdentifier];
     
     DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;    
     [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
@@ -106,7 +108,10 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return DDDCommentsSectionCount;
+    if ([self commentsViewModel].story.isItemUserGenerated)
+        return 1;
+    else
+        return DDDCommentsSectionCount;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -125,23 +130,30 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDCollectionViewCell *cell;
+    NSString *identifier;
+    id model;
     switch (indexPath.section)
     {
         case DDDCommentsSectionHeader:
         {
-            cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
-            [cell prepareWithModel:[[self commentsViewModel] story]];
+            if ([self commentsViewModel].story.isItemUserGenerated)
+                identifier = DDDHackernewsUserItemCollectionViewCellIdentifier;
+            else
+                identifier = DDDHackerNewsItemCollectionViewCellIdentifier;
+            model = [[self commentsViewModel] story];
             break;
         }
         case DDDCommentsSectionComments:
         {
-            cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier forIndexPath:indexPath];
-            [cell prepareWithModel:[[self commentsViewModel] commentTreeInfoForIndexPath:indexPath]];
+            identifier = DDDCommentCollectionViewCellIdentifier;
+            model = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
             break;
         }
         default:
             break;
     }
+    cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    [cell prepareWithModel:model];
     return cell;
 }
 
@@ -152,7 +164,8 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         case DDDCommentsSectionHeader:
         {
             DDDHackerNewsItem *item = [[self commentsViewModel] story];
-            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:item withModelIdentifier:@(item.id)];
+            Class cellKlass = (item.isItemUserGenerated) ? [DDDHackernewsUserItemCollectionViewCell class] : [DDDHackerNewsItemCollectionViewCell class];
+            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:@(item.id)];
             break;
         }
         case DDDCommentsSectionComments:

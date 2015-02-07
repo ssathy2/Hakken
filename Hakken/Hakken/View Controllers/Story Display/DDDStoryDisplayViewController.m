@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#import "DDDStoriesDisplayViewController.h"
+#import "DDDStoryDisplayViewController.h"
 
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
@@ -22,18 +22,18 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDCollectionViewCellSizingHelper.h"
 
-@interface DDDStoriesDisplayViewController ()<
+@interface DDDStoryDisplayViewController ()<
 DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
 UINavigationControllerDelegate>
 @end
 
-@interface DDDStoriesDisplayViewController()
+@interface DDDStoryDisplayViewController()
 @property (nonatomic, assign) CGFloat previousScrollViewYOffset;
 @end
 
-@implementation DDDStoriesDisplayViewController
+@implementation DDDStoryDisplayViewController
 
 + (NSString *)storyboardName
 {
@@ -42,7 +42,8 @@ UINavigationControllerDelegate>
 
 + (NSString *)storyboardIdentifier
 {
-    return DDDTopStoriesViewControllerIdentifier;
+    DDLogError(@"To use the stories display vc, the subclass of this vc must define the storyboard identifier");
+    return nil;
 }
 
 #pragma mark - Helpers
@@ -84,7 +85,19 @@ UINavigationControllerDelegate>
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView reloadData];
+    if (insertionDeletion)
+    {
+        [self.collectionView reloadData];
+        // TODO: Fix collectionview perform batch updates assertion failure
+//        [self.collectionView performBatchUpdates:^{
+//            if (insertionDeletion.indexesInserted)
+//                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+//            if (insertionDeletion.indexesDeleted)
+//                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+//        } completion:^(BOOL finished) {
+//            
+//        }];
+    }
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -124,12 +137,12 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.3
                           delay:0.f
          usingSpringWithDamping:0.7f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            cell.transform = CGAffineTransformMakeScale(0.95f, 0.95);
+                            cell.transform = CGAffineTransformMakeScale(0.85f, 0.85);
                         } completion:^(BOOL finished) {
                         }];
 }
@@ -137,7 +150,7 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-    [UIView animateWithDuration:0.2
+    [UIView animateWithDuration:0.3
                           delay:0.f
          usingSpringWithDamping:0.2
           initialSpringVelocity:0.f
@@ -150,13 +163,17 @@ UINavigationControllerDelegate>
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
-    transitionModel.story = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
+    DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
+    transitionModel.story = item;
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
-    
+
     // push webview/comments controller here...
-    [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    if (item.isItemUserGenerated)
+        [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    else
+        [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
@@ -171,71 +188,89 @@ UINavigationControllerDelegate>
     [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story
+{
+    [[self storyDisplayViewModel] saveStoryToReadLater:story completion:^(DDDHackerNewsItem *item) {
+       
+    } error:^(NSError *error) {
+       
+    }];
+}
+
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story
+{
+    [[self storyDisplayViewModel] removeStoryFromReadLater:story completion:^(DDDHackerNewsItem *item) {
+      
+    } error:^(NSError *error) {
+      
+    }];
+}
+
 #pragma mark - UIScrollViewDelegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGRect frame = self.navigationController.navigationBar.frame;
-//    CGFloat size = frame.size.height - 21;
-//    CGFloat framePercentageHidden = ((20 - frame.origin.y) / (frame.size.height - 1));
-//    CGFloat scrollOffset = scrollView.contentOffset.y;
-//    CGFloat scrollDiff = scrollOffset - self.previousScrollViewYOffset;
-//    CGFloat scrollHeight = scrollView.frame.size.height;
-//    CGFloat scrollContentSizeHeight = scrollView.contentSize.height + scrollView.contentInset.bottom;
-//    
-//    if (scrollOffset <= -scrollView.contentInset.top) {
-//        frame.origin.y = 20;
-//    } else if ((scrollOffset + scrollHeight) >= scrollContentSizeHeight) {
-//        frame.origin.y = -size;
-//    } else {
-//        frame.origin.y = MIN(20, MAX(-size, frame.origin.y - scrollDiff));
-//    }
-//    
-//    [self.navigationController.navigationBar setFrame:frame];
-//    [self updateBarButtonItems:(1 - framePercentageHidden)];
-//    self.previousScrollViewYOffset = scrollOffset;
-//}
-//
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    [self stoppedScrolling];
-//}
-//
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
-//                  willDecelerate:(BOOL)decelerate
-//{
-//    if (!decelerate) {
-//        [self stoppedScrolling];
-//    }
-//}
-//
-//- (void)stoppedScrolling
-//{
-//    CGRect frame = self.navigationController.navigationBar.frame;
-//    if (frame.origin.y < 20) {
-//        [self animateNavBarTo:-(frame.size.height - 21)];
-//    }
-//}
-//
-//- (void)updateBarButtonItems:(CGFloat)alpha
-//{
-//    [self.navigationItem.leftBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
-//        item.customView.alpha = alpha;
-//    }];
-//    [self.navigationItem.rightBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
-//        item.customView.alpha = alpha;
-//    }];
-//    self.navigationItem.titleView.alpha = alpha;
-//    self.navigationController.navigationBar.tintColor = [self.navigationController.navigationBar.tintColor colorWithAlphaComponent:alpha];
-//}
-//
-//- (void)animateNavBarTo:(CGFloat)y
-//{
-//    [UIView animateWithDuration:0.2 animations:^{
-//        CGRect frame = self.navigationController.navigationBar.frame;
-//        CGFloat alpha = (frame.origin.y >= y ? 0 : 1);
-//        frame.origin.y = y;
-//        [self.navigationController.navigationBar setFrame:frame];
-//        [self updateBarButtonItems:alpha];
-//    }];
-//}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGRect frame = self.navigationController.navigationBar.frame;
+    CGFloat size = frame.size.height - 21;
+    CGFloat framePercentageHidden = ((20 - frame.origin.y) / (frame.size.height - 1));
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    CGFloat scrollDiff = scrollOffset - self.previousScrollViewYOffset;
+    CGFloat scrollHeight = scrollView.frame.size.height;
+    CGFloat scrollContentSizeHeight = scrollView.contentSize.height + scrollView.contentInset.bottom;
+    
+    if (scrollOffset <= -scrollView.contentInset.top) {
+        frame.origin.y = 20;
+    } else if ((scrollOffset + scrollHeight) >= scrollContentSizeHeight) {
+        frame.origin.y = -size;
+    } else {
+        frame.origin.y = MIN(20, MAX(-size, frame.origin.y - scrollDiff));
+    }
+    
+    [self.navigationController.navigationBar setFrame:frame];
+    [self updateBarButtonItems:(1 - framePercentageHidden)];
+    self.previousScrollViewYOffset = scrollOffset;
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self stoppedScrolling];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate) {
+        [self stoppedScrolling];
+    }
+}
+
+- (void)stoppedScrolling
+{
+    CGRect frame = self.navigationController.navigationBar.frame;
+    if (frame.origin.y < 20) {
+        [self animateNavBarTo:-(frame.size.height - 21)];
+    }
+}
+
+- (void)updateBarButtonItems:(CGFloat)alpha
+{
+    [self.navigationItem.leftBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
+        item.customView.alpha = alpha;
+    }];
+    [self.navigationItem.rightBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
+        item.customView.alpha = alpha;
+    }];
+    self.navigationItem.titleView.alpha = alpha;
+    self.navigationController.navigationBar.tintColor = [self.navigationController.navigationBar.tintColor colorWithAlphaComponent:alpha];
+}
+
+- (void)animateNavBarTo:(CGFloat)y
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect frame = self.navigationController.navigationBar.frame;
+        CGFloat alpha = (frame.origin.y >= y ? 0 : 1);
+        frame.origin.y = y;
+        [self.navigationController.navigationBar setFrame:frame];
+        [self updateBarButtonItems:alpha];
+    }];
+}
 @end

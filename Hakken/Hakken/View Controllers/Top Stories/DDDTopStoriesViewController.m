@@ -8,6 +8,8 @@
 
 #import "DDDTopStoriesViewController.h"
 #import "DDDTopStoriesViewModel.h"
+#import "DDDTransitionAttributes.h"
+#import "TopStoryStoryboardIdentifiers.h"
 
 @implementation DDDTopStoriesViewController
 + (Class)viewModelClass
@@ -15,8 +17,15 @@
     return [DDDTopStoriesViewModel class];
 }
 
-- (void)viewDidLoad
++ (NSString *)storyboardIdentifier
 {
-    [super viewDidLoad];
+    return DDDTopStoriesViewControllerIdentifier;
+}
+
+- (IBAction)readLaterButtonTapped:(id)sender
+{
+    DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+    attrs.presentModally = YES;
+    [self.navigationRouter transitionToScreen:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 @end

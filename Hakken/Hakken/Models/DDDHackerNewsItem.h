@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, DDDHackerNewsItemType)
 @property (strong, nonatomic) NSString *identifier;
 @end
 
-@class DDDHackerNewsItem;
+@class DDDHackerNewsItem, DDDHakkenReadLaterInformation;
 RLM_ARRAY_TYPE(DDDHackerNewsItem);
 RLM_ARRAY_TYPE(RLMNumberObject);
 
@@ -47,8 +47,7 @@ RLM_ARRAY_TYPE(RLMNumberObject);
 @property (readonly, nonatomic) NSURL *itemURL;
 @property (assign, nonatomic) DDDHackerNewsItemType itemType;
 
-// Properties for save later functionality
-@property (assign, nonatomic) BOOL userWantsToReadLater;
-@property (strong, nonatomic) NSDate *dateUserSavedToReadLater;
-@property (strong, nonatomic) NSDate *dateUserLastAccessed;
+@property (strong, nonatomic) DDDHakkenReadLaterInformation *readLaterInformation;
+
+- (BOOL)isItemUserGenerated;
 @end

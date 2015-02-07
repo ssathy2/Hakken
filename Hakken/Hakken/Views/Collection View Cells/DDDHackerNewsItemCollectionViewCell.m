@@ -12,10 +12,22 @@
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
+@property (weak, nonatomic) IBOutlet UIButton *readLaterButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+// Constraints Outlets
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *urlToPointsHoursVerticalSpacing;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleToUrlLabelVerticalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *urlLabelHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *commentButtonHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonToContainerHorizontalSpaceConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLengthWidthConstraint;
+
 
 @property (weak, nonatomic) IBOutlet UIView *cellContentView;
 @property (weak, nonatomic) IBOutlet UIView *swipeActionView;
@@ -29,6 +41,7 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
+    self.commentsButton.hidden = self.urlLabel.hidden = NO;
     [self.cellContentView setFrame:self.contentView.bounds];
 }
 
@@ -166,7 +179,7 @@
          usingSpringWithDamping:0.7f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            self.commentsButton.transform = CGAffineTransformMakeScale(0.90, 0.90);
+                            self.commentsButton.transform = CGAffineTransformMakeScale(0.75, 0.75);
                         } completion:nil];
 }
 
@@ -205,12 +218,29 @@
     DDDHackerNewsItem *hnItem = (DDDHackerNewsItem *)model;
     self.userName.text = [NSString stringWithFormat:@"from %@", hnItem.by];
     
-    self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [hnItem.itemURL host]];
-    
     self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", @(hnItem.score), (hnItem.score > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
     self.titleLabel.text = hnItem.title;
     
+    [self styleURLLabelWithHackernewsItem:hnItem];
+    
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
+}
+
+- (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item
+{
+    if (item.isItemUserGenerated)
+        self.urlLabel.hidden = YES;
+    
+    if (item.itemType == DDDHackerNewsItemTypeJob)
+        self.commentsButton.hidden = YES;
+    
+    self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [item.itemURL host]];
+}
+
+- (IBAction)readLaterButtonTapped:(id)sender
+{
+    if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:)])
+        [self.delegate cell:self didSelectAddToReadLater:self.model];
 }
 @end

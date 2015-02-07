@@ -10,35 +10,46 @@
 #import "DDDDataServices.h"
 #import "DDDArrayInsertionDeletion.h"
 
+#define DDDTopStoriesRefreshFetchCount 20
+
 @interface DDDTopStoriesViewModel()
-@property (strong, nonatomic) NSNumber *topStoryFromValue;
-@property (strong, nonatomic) NSNumber *topStoryToValue;
+@property (assign, nonatomic) NSInteger topStoryFromValue;
+@property (assign, nonatomic) NSInteger topStoryToValue;
+
+@property (assign, nonatomic) BOOL isFetchingStories;
 @end
 
 @implementation DDDTopStoriesViewModel
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
-    self.topStoryFromValue = @(0);
-    self.topStoryToValue   = @(100);
+    self.isFetchingStories = NO;
+    self.topStoryFromValue = 0;
+    self.topStoryToValue   = 100;
 }
 
 - (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
+    [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+}
 
+- (void)fetchStoriesFrom:(NSInteger)from to:(NSInteger)to
+{
     __weak typeof(self) weakSelf = self;
-    RACSignal *fetchTopStories = [[DDDDataServices sharedInstance] fetchTopStoriesFromStory:self.topStoryFromValue toStory:self.topStoryToValue];
+    self.isFetchingStories = YES;
+    RACSignal *fetchTopStories = [[DDDDataServices sharedInstance] fetchTopStoriesFromStory:@(from) toStory:@(to)];
     fetchTopStories = [fetchTopStories filter:^BOOL(id value) {
         return value != nil;
     }];
     fetchTopStories = [fetchTopStories flattenMap:^RACStream *(id value) {
         NSIndexSet *inserted = nil;
         if (value)
-            inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [value count])];
+            inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(from, to)];
         return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:nil]];
     }];
     [fetchTopStories subscribeNext:^(id x) {
+        weakSelf.isFetchingStories = NO;
         weakSelf.latestStoriesUpdate = x;
     }];
 }
@@ -52,8 +63,15 @@
     return topStoresUpdate;
 }
 
-- (void)fetchNextStories:(NSNumber *)numberToFetch
+- (void)fetchNextBatchOfStories
 {
-    
+    if (!self.isFetchingStories)
+    {
+        self.topStoryFromValue = self.topStoryToValue+1;
+        self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
+        
+        [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+    }
 }
+
 @end

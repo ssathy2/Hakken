@@ -8,6 +8,6 @@
 
 #import "DDDViewController.h"
 
-@interface DDDStoriesDisplayViewController : DDDViewController
+@interface DDDStoryDisplayViewController : DDDViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @end

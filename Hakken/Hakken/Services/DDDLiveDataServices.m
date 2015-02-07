@@ -10,6 +10,7 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDHackerNewsComment.h"
 #import "DDDHackernewsItemResponseSerializer.h"
+#import "DDDHakkenReadLaterInformation.h"
 
 @class DDDHackerNewsItem, DDDHackerNewsComment;
 
@@ -55,7 +56,20 @@
                                  NSMutableArray *arr = [NSMutableArray array];
                                  [[RLMRealm defaultRealm] beginWriteTransaction];
                                  for (NSDictionary *item in responseObject)
-                                     [arr addObject:[[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]]];
+                                 {
+                                     if (![item isKindOfClass:[NSNull class]])
+                                     {
+                                         DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
+                                         DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
+                                         if (servicesItem.deleted == NO)
+                                         {
+                                             if (!realmItem.readLaterInformation)
+                                                 realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
+                                             servicesItem.readLaterInformation = realmItem.readLaterInformation;
+                                             [arr addObject:servicesItem];
+                                         }
+                                     }
+                                 }
                                  [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
                                  [[RLMRealm defaultRealm] commitWriteTransaction];
                                  [subscriber sendNext:arr];
@@ -88,7 +102,8 @@
                                      NSMutableArray *arr = [NSMutableArray array];
                                      [[RLMRealm defaultRealm] beginWriteTransaction];
                                      for (NSDictionary *item in responseObject)
-                                         [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+                                         if (item)
+                                             [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
                                      [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];                                     
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                      [subscriber sendNext:arr];

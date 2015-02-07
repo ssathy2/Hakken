@@ -11,5 +11,5 @@
 @class DDDArrayInsertionDeletion;
 
 @interface DDDTopStoriesViewModel : DDDStoryDisplayViewModel
-- (void)fetchNextStories:(NSNumber *)numberToFetch;
+- (void)fetchNextBatchOfStories;
 @end

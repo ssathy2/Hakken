@@ -20,7 +20,7 @@
 @interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DDDHackerNewsItemCollectionViewCellDelegate>
 @end
 
-@implementation DDDStoryDetailViewController
+@implementation  DDDStoryDetailViewController
 
 + (NSString *)storyboardIdentifier
 {
@@ -71,7 +71,6 @@
          DDLogInfo(@"Complete!");
      }];
 }
-
 
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

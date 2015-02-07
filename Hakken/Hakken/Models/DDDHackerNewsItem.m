@@ -7,6 +7,7 @@
 //
 
 #import "DDDHackerNewsItem.h"
+#import "DDDHakkenReadLaterInformation.h"
 
 @implementation RLMNumberObject
 @end
@@ -25,9 +26,11 @@
              @"dead"    : @(NO),
              @"parent"  : @(0),
              @"text"    : @"",
-             @"userWantsToReadLater" : @(NO),
-             @"dateUserSavedToReadLater" : [NSDate distantPast],
-             @"dateUserLastAccessed" : [NSDate distantPast]
+             @"by"      : @"",
+             @"url"     : @"",
+             @"score"   : @(0),
+             @"title"   : @"",
+             @"readLaterInformation" : [DDDHakkenReadLaterInformation defaultObject]
              };
 }
 
@@ -48,7 +51,7 @@
 
 - (DDDHackerNewsItemType)itemType
 {
-    if (_itemType != DDDHackerNewsItemTypeUndetermined)
+    if (_itemType == DDDHackerNewsItemTypeUndetermined)
     {
         NSNumber *rawEnumValue = [[self itemTypeMapping] valueForKey:self.type];
         _itemType = (DDDHackerNewsItemType)rawEnumValue.integerValue;
@@ -66,4 +69,9 @@
         @"job"        : @(DDDHackerNewsItemTypeJob)
     };
 };
+
+- (BOOL)isItemUserGenerated
+{
+    return self.url.length == 0;
+}
 @end

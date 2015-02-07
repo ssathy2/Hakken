@@ -8,3 +8,5 @@
 
 #define DDDTopStoriesStoryboardName @"TopStoriesStoryboard"
 #define DDDTopStoriesViewControllerIdentifier @"DDDTopStoriesViewController"
+
+#define DDDSavedStoriesViewControllerIdentifier @"DDDReadLaterViewController"

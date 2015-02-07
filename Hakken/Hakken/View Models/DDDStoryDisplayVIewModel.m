@@ -9,4 +9,13 @@
 #import "DDDStoryDisplayViewModel.h"
 
 @implementation DDDStoryDisplayViewModel
+- (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+{
+    [DDDHakkenReadLaterManager addItemToReadLater:story withCompletion:completion withError:error];
+}
+
+- (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+{
+    [DDDHakkenReadLaterManager removeItemFromReadLater:story withCompletion:completion withError:error];
+}
 @end

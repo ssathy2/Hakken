@@ -7,9 +7,13 @@
 //
 
 #import "DDDViewModel.h"
+#import "DDDHakkenReadLaterManager.h"
 
 @class DDDArrayInsertionDeletion;
 
 @interface DDDStoryDisplayViewModel : DDDViewModel
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestStoriesUpdate;
+
+- (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error;
+- (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error;
 @end
