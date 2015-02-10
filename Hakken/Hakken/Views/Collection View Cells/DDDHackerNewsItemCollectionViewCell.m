@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *cellContentView;
 @property (weak, nonatomic) IBOutlet UIView *swipeActionView;
+@property (weak, nonatomic) IBOutlet UILabel *swipeActionViewLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
 
@@ -28,6 +29,33 @@
 
 @implementation DDDHackerNewsItemCollectionViewCell
 
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self styleCell];
+    [self setupPanGestureRecognizer];
+}
+
+- (void)setupPanGestureRecognizer
+{
+    if (!_panGestureRecognizer)
+    {
+        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+        self.panGestureRecognizer.maximumNumberOfTouches = 1;
+        self.panGestureRecognizer.minimumNumberOfTouches = 1;
+        self.panGestureRecognizer.delegate = self;
+        [self.cellContentView addGestureRecognizer:self.panGestureRecognizer];
+    }
+}
+
+- (void)styleCell
+{
+    self.commentsButton.layer.masksToBounds = NO;
+    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/2];
+    self.swipeActionView.clipsToBounds = YES;
+}
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
@@ -35,6 +63,7 @@
     self.swipeActionViewWidthConstraint.constant = 0.f;
     self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
     [self.cellContentView setFrame:self.contentView.bounds];
+    [self layoutIfNeeded];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -106,31 +135,51 @@
             self.cellContentViewLeadingSpacingConstraint.constant -= translation.x;
             // Figure out how much the cell has moved by in the X direction sand set the width constraint to that difference
             self.swipeActionViewWidthConstraint.constant -= translation.x;
+            
+            [self setSwipeActionViewColors:YES];
         }
         [panGestureRecognizer setTranslation:CGPointZero inView:self.cellContentView];
     }
     
 }
 
-- (BOOL)isProposedCellContentViewTranslationPermitted:(CGPoint)translation
+- (void)setSwipeActionViewColors:(BOOL)animated
 {
-    if (translation.x > 0)
+    void(^setBGColorBlock)() = ^() {
+        CGFloat percentageSwiped = self.swipeActionViewWidthConstraint.constant / CGRectGetWidth(self.contentView.bounds);
+        if (percentageSwiped > 0.4)
+        {
+            self.swipeActionView.backgroundColor = [UIColor swipeActionViewGreenColor];
+            self.swipeActionViewLabel.textColor = [UIColor whiteColor];
+        }
+        else
+        {
+            self.swipeActionView.backgroundColor = [UIColor swipeActionViewRedColor];
+            self.swipeActionViewLabel.textColor = [UIColor whiteColor];
+        }
+    };
+    
+    if (animated)
     {
-        CGRect locationInSuperView = [self.cellContentView.superview convertRect:self.cellContentView.frame toView:self.cellContentView.superview];
-        locationInSuperView.origin.x += translation.x;
-        if (locationInSuperView.origin.x < 0)
-            return YES;
-        
-        locationInSuperView.origin.y += translation.y;
-        return CGRectContainsRect(self.frame, locationInSuperView);
+        [UIView animateWithDuration:0.1 animations:setBGColorBlock];
     }
     else
-        return YES;
+        setBGColorBlock();
+}
+
+- (BOOL)isProposedCellContentViewTranslationPermitted:(CGPoint)translation
+{
+    CGRect locationInSuperView = [self.cellContentView.superview convertRect:self.cellContentView.frame toView:self.cellContentView.superview];
+    locationInSuperView.origin.x += translation.x;
+    locationInSuperView.origin.y += translation.y;
+    
+    
+    return CGRectIntersectsRect(self.contentView.frame, locationInSuperView) && (self.swipeActionViewWidthConstraint.constant - translation.x >= 0);
 }
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES];
+    //[self resetCellContentView:YES];
 }
 
 - (void)resetCellContentView:(BOOL)animated
@@ -145,7 +194,8 @@
     };
     
     void(^cellContentViewResetCompletion)() = ^() {
-        self.cellContentViewLeadingSpacingConstraint.constant = self.swipeActionViewWidthConstraint.constant = 0.f;
+        self.swipeActionViewWidthConstraint.constant = 0.f;
+        [self updateConstraintsIfNeeded];
     };
     
     if (animated)
@@ -157,7 +207,7 @@
                             options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 cellContentViewReset();
                             } completion:^(BOOL finished) {
-                                //cellContentViewResetCompletion();
+             //                   cellContentViewResetCompletion();
                             }];
     }
     else
@@ -175,32 +225,6 @@
 - (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
 
-}
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self styleCell];
-//    [self setupPanGestureRecognizer];
-}
-
-- (void)setupPanGestureRecognizer
-{
-    if (!_panGestureRecognizer)
-    {
-        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-        self.panGestureRecognizer.maximumNumberOfTouches = 1;
-        self.panGestureRecognizer.minimumNumberOfTouches = 1;
-        self.panGestureRecognizer.delegate = self;
-        self.panGestureRecognizer.delaysTouchesEnded = YES;
-        [self.cellContentView addGestureRecognizer:self.panGestureRecognizer];
-    }
-}
-
-- (void)styleCell
-{
-    self.commentsButton.layer.masksToBounds = NO;
-    [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/2];
 }
 
 - (IBAction)didTouchDownOnCommentButton:(UIButton *)sender

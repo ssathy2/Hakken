@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (DDDAdditions)
++ (UIColor *)swipeActionViewRedColor;
++ (UIColor *)swipeActionViewGreenColor;
 + (UIColor *)colorForDepth:(NSInteger)depth;
 @end

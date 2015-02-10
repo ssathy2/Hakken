@@ -68,23 +68,8 @@ UIGestureRecognizerDelegate>
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
     
-    // We want to pass pan gestures to each individual cell
-    UIPanGestureRecognizer *cellSwipePanGestureREcognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    cellSwipePanGestureREcognizer.maximumNumberOfTouches = cellSwipePanGestureREcognizer.minimumNumberOfTouches = 1;
-    cellSwipePanGestureREcognizer.delegate = self;
     self.collectionView.panGestureRecognizer.enabled = NO;
-    [self.collectionView addGestureRecognizer:cellSwipePanGestureREcognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
-}
-
-
-- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer
-{
-    CGPoint gesturePoint = [gestureRecognizer locationInView:self.collectionView];
-    NSIndexPath *indexPathForPoint = [self.collectionView indexPathForItemAtPoint:gesturePoint];
-    DDDHackerNewsItemCollectionViewCell *cell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPathForPoint];
-    
-    [cell handlePanGesture:gestureRecognizer];
 }
 
 - (void)setupListenersToViewModel
@@ -139,7 +124,6 @@ UIGestureRecognizerDelegate>
     DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
     [cell prepareWithModel:[[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row]];
     cell.delegate = self;
-//    [collectionView.panGestureRecognizer requireGestureRecognizerToFail:cell.panGestureRecognizer];
     return cell;
 }
 

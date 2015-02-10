@@ -14,9 +14,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r7B-PB-ybo" userLabel="SwipeView">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="READ LATER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DA2-3R-o5P">
+                                <rect key="frame" x="-49" y="54" width="98" height="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="16"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="DA2-3R-o5P" secondAttribute="centerY" id="O0v-ba-KGZ"/>
                             <constraint firstAttribute="width" id="k7x-0p-ebQ"/>
+                            <constraint firstAttribute="centerX" secondItem="DA2-3R-o5P" secondAttribute="centerX" id="tTe-Tp-6cd"/>
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="urA-DN-lqx" userLabel="ContentView">
@@ -117,6 +127,7 @@
                 <outlet property="commentsButton" destination="GWH-P2-8Wt" id="stO-J9-K1g"/>
                 <outlet property="pointDatePostedLabel" destination="B40-H9-V3A" id="eVU-Zm-kik"/>
                 <outlet property="swipeActionView" destination="r7B-PB-ybo" id="mMx-Ie-Taa"/>
+                <outlet property="swipeActionViewLabel" destination="DA2-3R-o5P" id="bjj-xA-pe1"/>
                 <outlet property="swipeActionViewWidthConstraint" destination="k7x-0p-ebQ" id="WzC-gk-bFB"/>
                 <outlet property="titleLabel" destination="FXP-po-bLh" id="iOL-WW-SoK"/>
                 <outlet property="urlLabel" destination="AYm-KU-LxM" id="J5O-8b-C7b"/>
