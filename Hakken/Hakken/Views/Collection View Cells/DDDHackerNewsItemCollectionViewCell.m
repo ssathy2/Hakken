@@ -87,26 +87,32 @@
         case UIGestureRecognizerStatePossible:
         {
             [self handleGestureRecongizerPossibleState:panGestureRecognizer];
+            break;
         }
         case UIGestureRecognizerStateBegan:
         {
             [self handleGestureRecongizerBeganState:panGestureRecognizer];
+            break;
         }
         case UIGestureRecognizerStateChanged:
         {
             [self handleGestureRecongizerChangedState:panGestureRecognizer];
+            break;
         }
         case UIGestureRecognizerStateEnded:
         {
             [self handleGestureRecongizerEndedState:panGestureRecognizer];
+            break;
         }
         case UIGestureRecognizerStateCancelled:
         {
             [self handleGestureRecongizerCancelledState:panGestureRecognizer];
+            break;
         }
         case UIGestureRecognizerStateFailed:
         {
             [self handleGestureRecongizerFailedState:panGestureRecognizer];
+            break;
         }
         default:
             break;
@@ -138,7 +144,7 @@
             
             [self setSwipeActionViewColors:YES];
         }
-        [panGestureRecognizer setTranslation:CGPointZero inView:self.cellContentView];
+        [panGestureRecognizer setTranslation:CGPointZero inView:self.contentView];
     }
     
 }
@@ -147,7 +153,7 @@
 {
     void(^setBGColorBlock)() = ^() {
         CGFloat percentageSwiped = self.swipeActionViewWidthConstraint.constant / CGRectGetWidth(self.contentView.bounds);
-        if (percentageSwiped > 0.4)
+        if (percentageSwiped > 0.5)
         {
             self.swipeActionView.backgroundColor = [UIColor swipeActionViewGreenColor];
             self.swipeActionViewLabel.textColor = [UIColor whiteColor];
@@ -179,7 +185,7 @@
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    //[self resetCellContentView:YES];
+    [self resetCellContentView:YES];
 }
 
 - (void)resetCellContentView:(BOOL)animated
@@ -190,24 +196,24 @@
         CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 0.f, cellContentFrame.size.height);
         self.cellContentView.frame = cellContentFrame;
         self.swipeActionView.frame = swipeActionView;
-        
     };
     
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
+        self.swipeActionView.backgroundColor = [UIColor swipeActionViewRedColor];
         [self updateConstraintsIfNeeded];
     };
     
     if (animated)
     {
-        [UIView animateWithDuration:0.2
+        [UIView animateWithDuration:0.55f
                               delay:0.f
-             usingSpringWithDamping:1.f
-              initialSpringVelocity:0.4
+             usingSpringWithDamping:0.5f
+              initialSpringVelocity:0.1
                             options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 cellContentViewReset();
                             } completion:^(BOOL finished) {
-             //                   cellContentViewResetCompletion();
+                                cellContentViewResetCompletion();
                             }];
     }
     else
