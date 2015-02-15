@@ -36,9 +36,19 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 @implementation DDDHackerNewsItemCollectionViewCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    self.commentsButton.hidden = self.urlLabel.hidden = NO;
+    self.swipeActionViewWidthConstraint.constant = 0.f;
+    self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
+    [self resetCellContentView:NO];
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    [self resetCellContentView:NO];
     [self styleCell];
     [self setupPanGestureRecognizer];
 }
@@ -60,16 +70,6 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     self.commentsButton.layer.masksToBounds = NO;
     [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/2];
     self.swipeActionView.clipsToBounds = YES;
-}
-
-- (void)prepareForReuse
-{
-    [super prepareForReuse];
-    self.commentsButton.hidden = self.urlLabel.hidden = NO;
-    self.swipeActionViewWidthConstraint.constant = 0.f;
-    self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
-    [self.cellContentView setFrame:self.contentView.bounds];
-    [self layoutIfNeeded];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -177,13 +177,26 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     {
         if (hackernewsItem.readLaterInformation.userWantsToReadLater)
         {
-            if ([self.delegate respondsToSelector:@selector(cell:didSelectRemoveFromReadLater:)])
-                [self.delegate cell:self didSelectRemoveFromReadLater:hackernewsItem];
+            if ([self.delegate respondsToSelector:@selector(cell:didSelectRemoveFromReadLater:withCompletion:withError:)])
+            {
+                [self.delegate cell:self didSelectRemoveFromReadLater:hackernewsItem withCompletion:^(DDDHackerNewsItem *item) {
+                    [self prepareWithModel:hackernewsItem];
+                } withError:^(NSError *error) {
+                    // TODO: handle error here
+                }];
+            }
         }
         else
         {
-            if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:)])
-                [self.delegate cell:self didSelectAddToReadLater:hackernewsItem];
+            if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:withCompletion:withError:)])
+            {
+                [self.delegate cell:self didSelectAddToReadLater:hackernewsItem withCompletion:^(DDDHackerNewsItem *item) {
+                    [self prepareWithModel:hackernewsItem];
+                } withError:^(NSError *error) {
+                    // TODO: Handle error here...
+                }];
+                
+            }
         }
     }
 }
@@ -198,7 +211,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         }
         else
         {
-            self.swipeActionView.backgroundColor = [UIColor swipeActionViewRedColor];
+            self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
             self.swipeActionViewLabel.textColor = [UIColor whiteColor];
         }
     };
@@ -232,7 +245,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
-        self.swipeActionView.backgroundColor = [UIColor swipeActionViewRedColor];
+        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
         [self updateConstraintsIfNeeded];
     };
     
@@ -308,6 +321,8 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     
     // TODO: Get the actual number of comments
     [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
+    
+    self.swipeActionViewLabel.text = (hnItem.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
 }
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item

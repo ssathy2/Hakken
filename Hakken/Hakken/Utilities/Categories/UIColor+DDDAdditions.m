@@ -9,24 +9,9 @@
 #import "UIColor+DDDAdditions.h"
 
 @implementation UIColor (DDDAdditions)
-+ (UIColor *)colorForDepth:(NSInteger)depth
++ (UIColor *)swipeActionViewGrayColor
 {
-    switch (depth) {
-        case 0:
-            return [UIColor clearColor];
-        case 1:
-            return [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
-        case 2:
-            return [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
-        case 3:
-            return [UIColor colorWithRed:1 green:1 blue:0 alpha:1];
-        case 4:
-            return [UIColor colorWithRed:0 green:1 blue:1 alpha:1];
-        case 5:
-            return [UIColor colorWithRed:1 green:1 blue:0 alpha:1];
-        default:
-            return [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
-    }
+    return [UIColor colorWithRed:1.f/3.f green:1.f/3.f blue:1.f/3.f alpha:1.f];
 }
 
 + (UIColor *)swipeActionViewRedColor

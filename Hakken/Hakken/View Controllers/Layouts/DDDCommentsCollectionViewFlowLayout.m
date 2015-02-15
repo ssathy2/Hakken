@@ -76,8 +76,11 @@
     DDDCommentTreeInfo *treeInfo = [self.commentsViewModel commentTreeInfoForIndexPath:indexpath];
     CGRect attributesFrame = attributes.frame;
     if (treeInfo.depth > 0)
-    attributesFrame.origin.x += ((treeInfo.depth-1) * 5);
-    attributesFrame.size.width -= ((treeInfo.depth-1) * 5);
+    {
+        CGFloat depthOffset = ((treeInfo.depth-1) * 20);
+        attributesFrame.size.width -= depthOffset;
+        attributesFrame.origin.x += depthOffset;
+    }
     return attributesFrame;
 }
 

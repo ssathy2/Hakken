@@ -11,5 +11,5 @@
 @interface UIColor (DDDAdditions)
 + (UIColor *)swipeActionViewRedColor;
 + (UIColor *)swipeActionViewGreenColor;
-+ (UIColor *)colorForDepth:(NSInteger)depth;
++ (UIColor *)swipeActionViewGrayColor;
 @end

@@ -69,7 +69,7 @@ UIGestureRecognizerDelegate>
     self.collectionView.dataSource   = self;
     
     self.collectionView.panGestureRecognizer.enabled = NO;
-    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
 }
 
 - (void)setupListenersToViewModel
@@ -203,22 +203,14 @@ UIGestureRecognizerDelegate>
     [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
 {
-    [[self storyDisplayViewModel] saveStoryToReadLater:story completion:^(DDDHackerNewsItem *item) {
-       
-    } error:^(NSError *error) {
-       
-    }];
+    [[self storyDisplayViewModel] saveStoryToReadLater:story completion:completion error:error];
 }
 
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
 {
-    [[self storyDisplayViewModel] removeStoryFromReadLater:story completion:^(DDDHackerNewsItem *item) {
-      
-    } error:^(NSError *error) {
-      
-    }];
+    [[self storyDisplayViewModel] removeStoryFromReadLater:story completion:completion error:error];
 }
 
 //#pragma mark - UIScrollViewDelegate

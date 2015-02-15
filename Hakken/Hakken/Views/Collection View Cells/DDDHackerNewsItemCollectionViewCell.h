@@ -7,6 +7,7 @@
 //
 
 #import "DDDCollectionViewCell.h"
+#import "DDDHakkenReadLater.h"
 
 #define DDDHackerNewsItemCollectionViewCellIdentifier @"DDDHackerNewsItemCollectionViewCell"
 
@@ -15,8 +16,8 @@
 @protocol DDDHackerNewsItemCollectionViewCellDelegate <NSObject>
 @optional
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story;
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story;
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story;
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error;
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error;
 @end
 
 @interface DDDHackerNewsItemCollectionViewCell : DDDCollectionViewCell

@@ -40,11 +40,5 @@
                                                                           options:optionsDict
                                                                documentAttributes:nil];
     self.commentLabel.attributedText = attrString;
-    [self setupDepthIndicatorWithDepth:commentTreeInfo.depth];
-}
-
-- (void)setupDepthIndicatorWithDepth:(NSInteger)depth
-{
-    self.depthIndicatorView.backgroundColor = [UIColor colorForDepth:depth];
 }
 @end

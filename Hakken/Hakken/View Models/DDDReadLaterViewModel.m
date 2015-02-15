@@ -9,20 +9,53 @@
 #import "DDDReadLaterViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHakkenReadLaterManager.h"
+#import "DDDHakkenReadLater.h"
+
+typedef void(^ArrayBlock)(NSArray *array);
+typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInsertionDeletion);
 
 @implementation DDDReadLaterViewModel
 - (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
     __weak typeof(self) weakSelf = self;
+    [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
+        weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
+    } withError:^(NSError *error) {
+        
+    }];
+}
+
+- (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+{
+    [super removeStoryFromReadLater:story completion:completion error:error];
+    __weak typeof(self) weakSelf = self;
+    [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
+        weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
+    } withError:^(NSError *error) {
+        // handle this
+    }];
+}
+
+- (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+{
+    [super saveStoryToReadLater:story completion:completion error:error];
+    __weak typeof(self) weakSelf = self;
+    [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
+        weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
+    } withError:^(NSError *error) {
+        // handle this
+    }];
+}
+
+- (void)generateArrayInsertionDeletionFromUnreadItems:(ArrayInsertionDeletionBlock)completion withError:(ErrorBlock)error
+{
     [DDDHakkenReadLaterManager fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
         DDDArrayInsertionDeletion *insertionDeletion    = [DDDArrayInsertionDeletion new];
         insertionDeletion.array                         = items;
         insertionDeletion.indexesDeleted                = nil;
         insertionDeletion.indexesInserted               = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, items.count)];
-        weakSelf.latestStoriesUpdate                    = insertionDeletion;
-    } withError:^(NSError *error) {
-       
-    }];
+        completion(insertionDeletion);
+    } withError:error];
 }
 @end
