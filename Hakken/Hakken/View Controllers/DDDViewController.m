@@ -13,6 +13,8 @@
 @end
 
 @implementation DDDViewController
+@dynamic navigationController;
+
 #pragma mark - DDDViewControllerInstantiation
 + (instancetype)storyboardInstance
 {
@@ -83,8 +85,5 @@
     [self setValue:segue.destinationViewController forKeyPath:path];
 	if ([segue.destinationViewController respondsToSelector:@selector(setViewModel:)])
 		[segue.destinationViewController performSelector:@selector(setViewModel:) withObject:self.viewModel];
-    
-    if ([segue.destinationViewController respondsToSelector:@selector(setNavigationRouter:)])
-        [segue.destinationViewController performSelector:@selector(setNavigationRouter:) withObject:self.navigationRouter];
 }
 @end

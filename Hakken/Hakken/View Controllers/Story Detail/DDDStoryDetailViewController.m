@@ -117,7 +117,7 @@
     attrs.model = transitionModel;
     
     // push webview/comments controller here...
-    [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 @end

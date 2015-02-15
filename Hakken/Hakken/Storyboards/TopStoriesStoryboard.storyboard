@@ -83,6 +83,7 @@
                         <viewControllerLayoutGuide type="bottom" id="D5d-JJ-xkF"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="bN4-L0-IrE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CxK-dN-8Dh">

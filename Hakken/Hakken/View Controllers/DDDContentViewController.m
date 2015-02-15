@@ -18,7 +18,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationRouter transitionToScreen:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];
+    [self.navigationController transitionToScreen:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];
 }
 
 

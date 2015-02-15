@@ -32,13 +32,12 @@
 
 - (void)setupNavigationRouter
 {
-    self.navigationRouter = [[DDDViewControllerRouter alloc] initWithNavigationController:self.navigationController];
-    [self.navigationRouter updateScreenMapping:@{
-                                                 DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
-                                                 DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },
-                                                 DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class], @"isRootView" : @(NO) },
-                                                 DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class], @"isRootView" : @(NO) }
-                                                 }];
+    [self.navigationController updateScreenMapping:@{
+                                                     DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
+                                                     DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },
+                                                     DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class], @"isRootView" : @(NO) },
+                                                     DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class], @"isRootView" : @(NO) }
+                                                     }];
 }
 
 - (NSDictionary *)segueIdentifierToContainerViewControllerMapping

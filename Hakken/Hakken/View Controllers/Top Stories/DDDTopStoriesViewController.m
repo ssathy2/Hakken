@@ -26,6 +26,6 @@
 {
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.presentModally = YES;
-    [self.navigationRouter transitionToScreen:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
+    [self.navigationController transitionToScreen:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 @end

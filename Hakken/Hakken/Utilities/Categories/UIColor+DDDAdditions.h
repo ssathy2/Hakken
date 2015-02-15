@@ -12,4 +12,6 @@
 + (UIColor *)swipeActionViewRedColor;
 + (UIColor *)swipeActionViewGreenColor;
 + (UIColor *)swipeActionViewGrayColor;
+
++ (UIColor *)navigationBarBackgroundColor;
 @end

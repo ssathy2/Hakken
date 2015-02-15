@@ -10,20 +10,53 @@
 #import "DDDViewController.h"
 #import "DDDScreen.h"
 #import "DDDTransitionAttributes.h"
+#import "UIColor+DDDAdditions.h"
 
 @interface DDDViewControllerRouter ()
 @property (strong, nonatomic) NSMutableDictionary *screenMapping;
-@property (strong, nonatomic) UINavigationController *navigationController;
 @end
 
 @implementation DDDViewControllerRouter
 
-- (instancetype)initWithNavigationController:(UINavigationController *)navigationController
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self sharedInit];
+    }
+    return self;
+}
+
+- (instancetype)init
 {
     self = [super init];
     if (self)
-        self.navigationController = navigationController;
+    {
+        [self sharedInit];
+    }
     return self;
+}
+
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
+{
+    self = [super initWithRootViewController:rootViewController];
+    if (self)
+    {
+        [self sharedInit];
+    }
+    return self;
+}
+
+- (void)sharedInit
+{
+    [self setupNavigationController];
+}
+
+- (void)setupNavigationController
+{
+    self.navigationBar.barTintColor = [UIColor navigationBarBackgroundColor];
+    self.navigationBar.barStyle = UIStatusBarStyleLightContent;
 }
 
 - (void)updateScreenMapping:(NSDictionary *)screenMapping
@@ -38,13 +71,19 @@
     for (id object in rawScreenMapping)
     {
         DDDScreen *screen = [self.screenMapping objectForKey:object];
-        id rawScreenDictionary = [rawScreenMapping valueForKey:object];
-        if (![rawScreenDictionary isKindOfClass:[NSDictionary class]])
+        id screenValue = [rawScreenMapping valueForKey:object];
+        if (![screenValue isKindOfClass:[NSDictionary class]] && ![screenValue isKindOfClass:[DDDScreen class]])
         {
-            DDLogError(@"ERROR: Entry for screen: %@ is not a dictionary", object);
+            DDLogError(@"ERROR: Entry for screen: %@ is not a dictionary or DDDSreen ", object);
             continue;
         }
-        screen = [[DDDScreen alloc] initWithDictionary:rawScreenDictionary];
+        
+        if ([screenValue isKindOfClass:[NSDictionary class]])
+            screen = [[DDDScreen alloc] initWithDictionary:screenValue];
+        
+        if (screen == nil)
+            screen = screenValue;
+        
         [self.screenMapping setObject:screen forKey:object];
     }
 }
@@ -57,19 +96,22 @@
     // check if the screen is a root view
     DDDScreen *screenObject = [self.screenMapping objectForKey:screen];
     DDDViewController *vc = [self viewControllerForScreen:screen];
-    [vc setNavigationRouter:self];
     [vc prepareWithModel:attributes.model];
 
     // instantiate the view and replace root view if it is, if it's not then push it on
     // modal presentation takes precedence over root view
     if (attributes.presentModally)
-        [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:vc] animated:animated completion:nil];
+    {
+        DDDViewControllerRouter *router = [[DDDViewControllerRouter alloc] initWithRootViewController:vc];;
+        [router updateScreenMapping:[self.screenMapping copy]];
+        [self presentViewController:router animated:animated completion:nil];
+    }
     else
     {
         if (screenObject.isRootView)
-            [self.navigationController setViewControllers:@[vc] animated:animated];
+            [self setViewControllers:@[vc] animated:animated];
         else
-            [self.navigationController pushViewController:vc animated:animated];
+            [self pushViewController:vc animated:animated];
     }
 }
 
