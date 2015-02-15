@@ -8,11 +8,17 @@
 
 #import "DDDHackerNewsItemCollectionViewCell.h"
 #import "DDDHackerNewsItem.h"
+#import "DDDHakkenReadLaterInformation.h"
+
+typedef NS_ENUM(NSInteger, DDDCellSwipeState)
+{
+    DDDCellSwipeStateUnselected,
+    DDDCellSwipeStateSelected
+};
 
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
-@property (weak, nonatomic) IBOutlet UIButton *readLaterButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
@@ -25,10 +31,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
+@property (readonly, nonatomic) DDDCellSwipeState cellSwipeState;
 @end
 
 @implementation DDDHackerNewsItemCollectionViewCell
-
 
 - (void)awakeFromNib
 {
@@ -129,6 +135,16 @@
  
 }
 
+- (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    
+}
+
+- (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    
+}
+
 - (void)handleGestureRecongizerChangedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
     UIPanGestureRecognizerDirection gestureDirection = [panGestureRecognizer panGestureDirectionInView:self.cellContentView];
@@ -146,14 +162,36 @@
         }
         [panGestureRecognizer setTranslation:CGPointZero inView:self.contentView];
     }
-    
+}
+
+- (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
+{
+    [self resetCellContentView:YES];
+    [self notifyDelegateAboutCellSwipeState];
+}
+
+- (void)notifyDelegateAboutCellSwipeState
+{
+    DDDHackerNewsItem *hackernewsItem = (DDDHackerNewsItem *)self.model;
+    if (self.cellSwipeState == DDDCellSwipeStateSelected)
+    {
+        if (hackernewsItem.readLaterInformation.userWantsToReadLater)
+        {
+            if ([self.delegate respondsToSelector:@selector(cell:didSelectRemoveFromReadLater:)])
+                [self.delegate cell:self didSelectRemoveFromReadLater:hackernewsItem];
+        }
+        else
+        {
+            if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:)])
+                [self.delegate cell:self didSelectAddToReadLater:hackernewsItem];
+        }
+    }
 }
 
 - (void)setSwipeActionViewColors:(BOOL)animated
 {
     void(^setBGColorBlock)() = ^() {
-        CGFloat percentageSwiped = self.swipeActionViewWidthConstraint.constant / CGRectGetWidth(self.contentView.bounds);
-        if (percentageSwiped > 0.5)
+        if (self.cellSwipeState == DDDCellSwipeStateSelected)
         {
             self.swipeActionView.backgroundColor = [UIColor swipeActionViewGreenColor];
             self.swipeActionViewLabel.textColor = [UIColor whiteColor];
@@ -179,13 +217,7 @@
     locationInSuperView.origin.x += translation.x;
     locationInSuperView.origin.y += translation.y;
     
-    
     return CGRectIntersectsRect(self.contentView.frame, locationInSuperView) && (self.swipeActionViewWidthConstraint.constant - translation.x >= 0);
-}
-
-- (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-    [self resetCellContentView:YES];
 }
 
 - (void)resetCellContentView:(BOOL)animated
@@ -223,21 +255,11 @@
     }
 }
 
-- (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-
-}
-
-- (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
-{
-
-}
-
 - (IBAction)didTouchDownOnCommentButton:(UIButton *)sender
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.7f
+         usingSpringWithDamping:0.4f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(0.75, 0.75);
@@ -248,7 +270,7 @@
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.2f
+         usingSpringWithDamping:0.4f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
@@ -259,7 +281,7 @@
 {
     [UIView animateWithDuration:0.2
                           delay:0.f
-         usingSpringWithDamping:0.2f
+         usingSpringWithDamping:0.4f
           initialSpringVelocity:0.f
                         options:UIViewAnimationOptionCurveEaseInOut animations:^{
                             self.commentsButton.transform = CGAffineTransformMakeScale(1.f, 1.f);
@@ -290,7 +312,7 @@
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item
 {
-    if (item.isItemUserGenerated)
+    if (item.isUserGenerated)
         self.urlLabel.hidden = YES;
     
     if (item.itemType == DDDHackerNewsItemTypeJob)
@@ -299,9 +321,13 @@
     self.urlLabel.text = [NSString stringWithFormat:@"(%@)", [item.itemURL host]];
 }
 
-- (IBAction)readLaterButtonTapped:(id)sender
+#pragma mark - Custom Getters
+- (DDDCellSwipeState)cellSwipeState
 {
-    if ([self.delegate respondsToSelector:@selector(cell:didSelectAddToReadLater:)])
-        [self.delegate cell:self didSelectAddToReadLater:self.model];
+    CGFloat percentageSwiped = self.swipeActionViewWidthConstraint.constant / CGRectGetWidth(self.contentView.bounds);
+    if (percentageSwiped > 0.5)
+        return DDDCellSwipeStateSelected;
+    else
+        return DDDCellSwipeStateUnselected;
 }
 @end

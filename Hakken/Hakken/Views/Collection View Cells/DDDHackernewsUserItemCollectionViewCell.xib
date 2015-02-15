@@ -77,7 +77,7 @@
                 <outlet property="userItemTextLabel" destination="VVI-Qj-A6I" id="vE0-UG-uys"/>
                 <outlet property="usernameLabel" destination="kJW-ds-PB9" id="e7j-8Q-eYV"/>
             </connections>
-            <point key="canvasLocation" x="515.5" y="327.5"/>
+            <point key="canvasLocation" x="421.5" y="310.5"/>
         </collectionViewCell>
     </objects>
 </document>

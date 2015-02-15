@@ -108,7 +108,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    if ([self commentsViewModel].story.isItemUserGenerated)
+    if ([self commentsViewModel].story.isUserGenerated && [self commentsViewModel].story.itemType == DDDHackerNewsItemTypeJob)
         return 1;
     else
         return DDDCommentsSectionCount;
@@ -136,7 +136,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     {
         case DDDCommentsSectionHeader:
         {
-            if ([self commentsViewModel].story.isItemUserGenerated)
+            if ([self commentsViewModel].story.isUserGenerated)
                 identifier = DDDHackernewsUserItemCollectionViewCellIdentifier;
             else
                 identifier = DDDHackerNewsItemCollectionViewCellIdentifier;
@@ -164,9 +164,8 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         case DDDCommentsSectionHeader:
         {
             DDDHackerNewsItem *item = [[self commentsViewModel] story];
-            Class cellKlass = (item.isItemUserGenerated) ? [DDDHackernewsUserItemCollectionViewCell class] : [DDDHackerNewsItemCollectionViewCell class];
+            Class cellKlass = (item.isUserGenerated) ? [DDDHackernewsUserItemCollectionViewCell class] : [DDDHackerNewsItemCollectionViewCell class];
             return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:@(item.id)];
-            break;
         }
         case DDDCommentsSectionComments:
         {

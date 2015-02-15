@@ -70,7 +70,7 @@
     };
 };
 
-- (BOOL)isItemUserGenerated
+- (BOOL)isUserGenerated
 {
     return self.url.length == 0;
 }

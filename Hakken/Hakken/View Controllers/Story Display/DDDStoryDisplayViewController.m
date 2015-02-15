@@ -135,20 +135,60 @@ UIGestureRecognizerDelegate>
     return size;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self shrinkCellAtIndexPath:indexPath animated:YES];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didUnhighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self expandCellAtIndexPath:indexPath animated:YES];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self shrinkCellAtIndexPath:indexPath animated:YES];
+    [self expandCellAtIndexPath:indexPath animated:YES];
+    
     DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
     transitionModel.story = item;
     
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
-
+    
     // push webview/comments controller here...
-    if (item.isItemUserGenerated)
+    if (item.isUserGenerated)
         [self.navigationRouter transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
     else
         [self.navigationRouter transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+}
+
+
+- (void)shrinkCellAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+{
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.6f
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(0.85f, 0.85);
+                        } completion:^(BOOL finished) {
+                        }];
+}
+
+- (void)expandCellAtIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated
+{
+    UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.6
+          initialSpringVelocity:0.f
+                        options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            cell.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        } completion:^(BOOL finished) {
+                        }];
 }
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate

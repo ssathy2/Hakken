@@ -49,5 +49,5 @@ RLM_ARRAY_TYPE(RLMNumberObject);
 
 @property (strong, nonatomic) DDDHakkenReadLaterInformation *readLaterInformation;
 
-- (BOOL)isItemUserGenerated;
+- (BOOL)isUserGenerated;
 @end

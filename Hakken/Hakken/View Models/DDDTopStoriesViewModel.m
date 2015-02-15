@@ -25,7 +25,7 @@
     [super prepareWithModel:model];
     self.isFetchingStories = NO;
     self.topStoryFromValue = 0;
-    self.topStoryToValue   = 20;
+    self.topStoryToValue   = 60;
 }
 
 - (void)viewModelDidLoad
