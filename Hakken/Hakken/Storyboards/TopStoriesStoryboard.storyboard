@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="145.5" y="320"/>
         </scene>
-        <!--Read Later View Controller-->
+        <!--Saved Stories-->
         <scene sceneID="mhS-jM-0wB">
             <objects>
-                <viewController storyboardIdentifier="DDDReadLaterViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QJd-Bb-5ou" customClass="DDDReadLaterViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DDDReadLaterViewController" title="Saved Stories" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QJd-Bb-5ou" customClass="DDDReadLaterViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fQU-J2-tRM"/>
                         <viewControllerLayoutGuide type="bottom" id="D5d-JJ-xkF"/>
@@ -127,6 +127,7 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Saved Stories" id="RqQ-bF-hCn"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="CxK-dN-8Dh" id="Ezk-Fx-QzM"/>

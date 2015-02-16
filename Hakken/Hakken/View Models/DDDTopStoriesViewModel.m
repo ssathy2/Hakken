@@ -25,7 +25,7 @@
     [super prepareWithModel:model];
     self.isFetchingStories = NO;
     self.topStoryFromValue = 0;
-    self.topStoryToValue   = 60;
+    self.topStoryToValue   = 20;
 }
 
 - (void)viewModelDidLoad
@@ -52,10 +52,7 @@
         NSIndexSet *deleted = nil;
         if (value)
             inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(from, to)];
-        
-        if (weakSelf.latestStoriesUpdate.indexesInserted)
-            deleted = weakSelf.latestStoriesUpdate.indexesInserted;
-        
+    
         return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:deleted]];
     }];
     
@@ -66,9 +63,15 @@
         weakSelf.viewModelError = error;
     } completed:^{
         weakSelf.latestStoriesUpdate = arrayInsertion;
+//        weakSelf.latestStoriesUpdate = [self mergeRecentArrayInsertionDeletion:arrayInsertion withExistingArrayInsertionDeletion:weakSelf.latestStoriesUpdate];
         weakSelf.isFetchingStories = NO;
     }];
 }
+
+//- (DDDArrayInsertionDeletion *)mergeRecentArrayInsertionDeletion:(DDDArrayInsertionDeletion *)recentArrayInsertionDeletion withExistingArrayInsertionDeletion:(DDDArrayInsertionDeletion *)existingArrayInsertionDeletion
+//{
+//    
+//}
 
 - (DDDArrayInsertionDeletion *)updateWithStories:(NSArray *)stories indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
 {

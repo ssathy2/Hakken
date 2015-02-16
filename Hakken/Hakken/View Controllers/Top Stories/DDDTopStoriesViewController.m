@@ -28,6 +28,11 @@
     return DDDTopStoriesViewControllerIdentifier;
 }
 
+- (DDDTopStoriesViewModel *)topstoriesViewModel
+{
+    return (DDDTopStoriesViewModel *)self.viewModel;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,12 +71,11 @@
     [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
     self.collectionView.alwaysBounceVertical = YES;
-    [self.refreshControl beginRefreshing];
 }
 
 - (void)refreshControlValueChanged
 {
-    [(DDDTopStoriesViewModel *)self.viewModel refreshCurrentBatchOfStories];
+    [[self topstoriesViewModel] refreshCurrentBatchOfStories];
 }
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
@@ -79,5 +83,18 @@
     [super updateWithInsertionDeletion:insertionDeletion];
     [self.refreshControl endRefreshing];
 }
+//
+//#pragma mark - UIScrollViewDelegate
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (scrollView == self.collectionView)
+//    {
+//        float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
+//        if (bottomEdge >= scrollView.contentSize.height)
+//        {
+//            [[self topstoriesViewModel] fetchNextBatchOfStories];
+//        }
+//    }
+//}
 
 @end

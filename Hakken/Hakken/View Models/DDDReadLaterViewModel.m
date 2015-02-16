@@ -10,6 +10,7 @@
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHakkenReadLaterManager.h"
 #import "DDDHakkenReadLater.h"
+#import "DDDHackerNewsItem.h"
 
 typedef void(^ArrayBlock)(NSArray *array);
 typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInsertionDeletion);
@@ -22,36 +23,70 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
     [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
         weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
     } withError:^(NSError *error) {
-        // TODO: handle this
+        weakSelf.viewModelError = error;
     }];
 }
 
 - (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
 {
-    [super removeStoryFromReadLater:story completion:completion error:error];
-    __weak typeof(self) weakSelf = self;
-    [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
-        weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
-    } withError:^(NSError *error) {
-        // TODO: handle this
-    }];
+    [super removeStoryFromReadLater:story completion:^(DDDHackerNewsItem *item){
+        __weak typeof(self) weakSelf = self;
+        [DDDHakkenReadLaterManager fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
+            DDDArrayInsertionDeletion *arrayInsertionDeletion = [DDDArrayInsertionDeletion new];
+            NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
+            NSIndexSet *idxPathsRemoved = [self indexSetFromIndexPaths:@[idxPathForStory]];
+            arrayInsertionDeletion.array = items;
+            arrayInsertionDeletion.indexesDeleted = idxPathsRemoved;
+            arrayInsertionDeletion.indexesInserted = nil;
+            weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
+        } withError:error];;
+    } error:error];
 }
 
 - (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
 {
-    [super saveStoryToReadLater:story completion:completion error:error];
-    __weak typeof(self) weakSelf = self;
-    [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
-        weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
-    } withError:^(NSError *error) {
-        // handle this
-    }];
+    [super saveStoryToReadLater:story completion:^(DDDHackerNewsItem *item){
+        __weak typeof(self) weakSelf = self;
+        [DDDHakkenReadLaterManager fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
+            DDDArrayInsertionDeletion *arrayInsertionDeletion = [DDDArrayInsertionDeletion new];
+            NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
+            NSIndexSet *idxPathsAdded = [self indexSetFromIndexPaths:@[idxPathForStory]];
+            arrayInsertionDeletion.array = items;
+            arrayInsertionDeletion.indexesDeleted = nil;
+            arrayInsertionDeletion.indexesInserted = idxPathsAdded;
+            weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
+        } withError:error];;
+    } error:error];
 }
 
-//- (DDDArrayInsertionDeletion *)arrayInsertionDeletionFromInsertedIndexPaths:(NSArray *)insertedIndexpaths withRemovedIndexPaths:(NSArray *)removedIndexpaths withArray:(NSArray *)array
-//{
-//    
-//}
+- (NSIndexPath *)indexPathOfItem:(DDDHackerNewsItem *)item inArrayInsertionDeletion:(DDDArrayInsertionDeletion *)arrayInsertionDeletion
+{
+    __block NSInteger itemIdx = NSNotFound;
+    [self.latestStoriesUpdate.array enumerateObjectsUsingBlock:^(DDDHackerNewsItem *obj, NSUInteger idx, BOOL *stop) {
+        if (item.id  == obj.id)
+            itemIdx = idx;
+    }];
+    return [NSIndexPath indexPathForRow:itemIdx inSection:0];
+}
+
+- (NSIndexSet *)indexSetFromIndexPaths:(NSArray *)indexPaths
+{
+    NSMutableIndexSet *idxSet = [NSMutableIndexSet indexSet];
+    for (NSIndexPath *idxPath in indexPaths)
+        [idxSet addIndex:idxPath.row];
+    return idxSet;
+}
+
+- (DDDArrayInsertionDeletion *)arrayInsertionDeletionFromInsertedIndexPaths:(NSArray *)insertedIndexpaths
+                                                      withDeletedIndexPaths:(NSArray *)deletedIndexpaths
+                                                                  withArray:(NSArray *)array
+{
+    DDDArrayInsertionDeletion *insertionDeletion = [DDDArrayInsertionDeletion new];
+    insertionDeletion.indexesDeleted = [self indexSetFromIndexPaths:deletedIndexpaths];
+    insertionDeletion.indexesInserted = [self indexSetFromIndexPaths:insertedIndexpaths];
+    insertionDeletion.array = array;
+    return insertionDeletion;
+}
 
 - (void)generateArrayInsertionDeletionFromUnreadItems:(ArrayInsertionDeletionBlock)completion withError:(ErrorBlock)error
 {

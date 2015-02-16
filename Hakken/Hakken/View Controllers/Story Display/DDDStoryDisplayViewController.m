@@ -31,7 +31,6 @@ UIGestureRecognizerDelegate>
 @end
 
 @interface DDDStoryDisplayViewController()
-@property (nonatomic, assign) CGFloat previousScrollViewYOffset;
 @property (assign, nonatomic) BOOL viewIsVisible;
 @end
 
@@ -92,21 +91,21 @@ UIGestureRecognizerDelegate>
          return value != nil;
      }];
     
-     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
-         DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);
-         [self updateWithInsertionDeletion:latestInsertionDeletion];
-     } error:^(NSError *error) {
-         DDLogError(@"%@", error);
-     } completed:^{
-         DDLogInfo(@"Complete!");
-     }];
+    __weak typeof(self) weakSelf = self;
+    [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
+        DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);
+        [weakSelf updateWithInsertionDeletion:latestInsertionDeletion];
+    } error:^(NSError *error) {
+        DDLogError(@"%@", error);
+    } completed:^{
+        DDLogInfo(@"Complete!");
+    }];
 }
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
     if (insertionDeletion)
     {
-        // TODO: Fix collectionview perform batch updates assertion failure
         if (self.viewIsVisible)
         {
             if (insertionDeletion.indexesInserted && insertionDeletion.indexesDeleted)
@@ -145,11 +144,6 @@ UIGestureRecognizerDelegate>
 }
 
 #pragma mark - UICollectionViewDataSource
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger items = [[[[self storyDisplayViewModel] latestStoriesUpdate] array] count];
@@ -251,71 +245,4 @@ UIGestureRecognizerDelegate>
     [[self storyDisplayViewModel] removeStoryFromReadLater:story completion:completion error:error];
 }
 
-//#pragma mark - UIScrollViewDelegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    CGRect frame = self.navigationController.navigationBar.frame;
-//    CGFloat size = frame.size.height - 21;
-//    CGFloat framePercentageHidden = ((20 - frame.origin.y) / (frame.size.height - 1));
-//    CGFloat scrollOffset = scrollView.contentOffset.y;
-//    CGFloat scrollDiff = scrollOffset - self.previousScrollViewYOffset;
-//    CGFloat scrollHeight = scrollView.frame.size.height;
-//    CGFloat scrollContentSizeHeight = scrollView.contentSize.height + scrollView.contentInset.bottom;
-//    
-//    if (scrollOffset <= -scrollView.contentInset.top) {
-//        frame.origin.y = 20;
-//    } else if ((scrollOffset + scrollHeight) >= scrollContentSizeHeight) {
-//        frame.origin.y = -size;
-//    } else {
-//        frame.origin.y = MIN(20, MAX(-size, frame.origin.y - scrollDiff));
-//    }
-//    
-//    [self.navigationController.navigationBar setFrame:frame];
-//    [self updateBarButtonItems:(1 - framePercentageHidden)];
-//    self.previousScrollViewYOffset = scrollOffset;
-//}
-//
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-//{
-//    [self stoppedScrolling];
-//}
-//
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
-//                  willDecelerate:(BOOL)decelerate
-//{
-//    if (!decelerate) {
-//        [self stoppedScrolling];
-//    }
-//}
-//
-//- (void)stoppedScrolling
-//{
-//    CGRect frame = self.navigationController.navigationBar.frame;
-//    if (frame.origin.y < 20) {
-//        [self animateNavBarTo:-(frame.size.height - 21)];
-//    }
-//}
-//
-//- (void)updateBarButtonItems:(CGFloat)alpha
-//{
-//    [self.navigationItem.leftBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
-//        item.customView.alpha = alpha;
-//    }];
-//    [self.navigationItem.rightBarButtonItems enumerateObjectsUsingBlock:^(UIBarButtonItem* item, NSUInteger i, BOOL *stop) {
-//        item.customView.alpha = alpha;
-//    }];
-//    self.navigationItem.titleView.alpha = alpha;
-//    self.navigationController.navigationBar.tintColor = [self.navigationController.navigationBar.tintColor colorWithAlphaComponent:alpha];
-//}
-//
-//- (void)animateNavBarTo:(CGFloat)y
-//{
-//    [UIView animateWithDuration:0.2 animations:^{
-//        CGRect frame = self.navigationController.navigationBar.frame;
-//        CGFloat alpha = (frame.origin.y >= y ? 0 : 1);
-//        frame.origin.y = y;
-//        [self.navigationController.navigationBar setFrame:frame];
-//        [self updateBarButtonItems:alpha];
-//    }];
-//}
 @end
