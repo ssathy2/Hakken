@@ -8,6 +8,10 @@
 
 #import "DDDViewController.h"
 
+@class DDDArrayInsertionDeletion;
+
 @interface DDDStoryDisplayViewController : DDDViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+- (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion;
 @end

@@ -32,6 +32,7 @@ UIGestureRecognizerDelegate>
 
 @interface DDDStoryDisplayViewController()
 @property (nonatomic, assign) CGFloat previousScrollViewYOffset;
+@property (assign, nonatomic) BOOL viewIsVisible;
 @end
 
 @implementation DDDStoryDisplayViewController
@@ -58,9 +59,21 @@ UIGestureRecognizerDelegate>
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self setupListenersToViewModel];
+
     [self setupCollectionView];
+    [self setupListenersToViewModel];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.viewIsVisible = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.viewIsVisible = NO;
 }
 
 - (void)setupCollectionView
@@ -74,8 +87,12 @@ UIGestureRecognizerDelegate>
 
 - (void)setupListenersToViewModel
 {
-    [RACObserve([self storyDisplayViewModel], latestStoriesUpdate)
-     subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
+    RACSignal *latestStoriesUpdateSignal = [RACObserve([self storyDisplayViewModel], latestStoriesUpdate)
+     filter:^BOOL(id value) {
+         return value != nil;
+     }];
+    
+     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
          DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);
          [self updateWithInsertionDeletion:latestInsertionDeletion];
      } error:^(NSError *error) {
@@ -89,24 +106,38 @@ UIGestureRecognizerDelegate>
 {
     if (insertionDeletion)
     {
-        [self.collectionView reloadData];
         // TODO: Fix collectionview perform batch updates assertion failure
-//        [self.collectionView performBatchUpdates:^{
-//            if (insertionDeletion.indexesInserted)
-//                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-//            if (insertionDeletion.indexesDeleted)
-//                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-//        } completion:^(BOOL finished) {
-//            
-//        }];
+        if (self.viewIsVisible)
+        {
+            if (insertionDeletion.indexesInserted && insertionDeletion.indexesDeleted)
+            {
+                [self.collectionView performBatchUpdates:^{
+                        [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+                        [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
+            else if (insertionDeletion.indexesDeleted && !insertionDeletion.indexesInserted)
+                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+            else if (!insertionDeletion.indexesDeleted && insertionDeletion.indexesInserted)
+                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+
+        }
+        else
+            [self.collectionView reloadData];
     }
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
 {
+    if (!set)
+        return nil;
+    
     NSMutableArray *indexPaths = [NSMutableArray array];
     NSUInteger currentIndex = [set firstIndex];
-    while (currentIndex != NSNotFound) {
+    while (currentIndex != NSNotFound)
+    {
         [indexPaths addObject:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
         currentIndex = [set indexGreaterThanIndex:currentIndex];
     }
@@ -114,9 +145,16 @@ UIGestureRecognizerDelegate>
 }
 
 #pragma mark - UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [[[[self storyDisplayViewModel] latestStoriesUpdate] array] count];
+    NSInteger items = [[[[self storyDisplayViewModel] latestStoriesUpdate] array] count];
+    DDLogDebug(@"%@ count-> %li", NSStringFromSelector(_cmd), items);
+    return items;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

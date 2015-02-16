@@ -22,7 +22,7 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
     [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
         weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
     } withError:^(NSError *error) {
-        
+        // TODO: handle this
     }];
 }
 
@@ -33,7 +33,7 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
     [self generateArrayInsertionDeletionFromUnreadItems:^(DDDArrayInsertionDeletion *arrayInsertionDeletion) {
         weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
     } withError:^(NSError *error) {
-        // handle this
+        // TODO: handle this
     }];
 }
 
@@ -47,6 +47,11 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
         // handle this
     }];
 }
+
+//- (DDDArrayInsertionDeletion *)arrayInsertionDeletionFromInsertedIndexPaths:(NSArray *)insertedIndexpaths withRemovedIndexPaths:(NSArray *)removedIndexpaths withArray:(NSArray *)array
+//{
+//    
+//}
 
 - (void)generateArrayInsertionDeletionFromUnreadItems:(ArrayInsertionDeletionBlock)completion withError:(ErrorBlock)error
 {

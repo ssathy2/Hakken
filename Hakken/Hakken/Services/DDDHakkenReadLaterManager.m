@@ -24,6 +24,8 @@
     else
     {
         [[RLMRealm defaultRealm] beginWriteTransaction];
+        if (!info)
+            info = [DDDHakkenReadLaterInformation new];
         info.userWantsToReadLater = YES;
         info.dateUserSavedToReadLater = [NSDate date];
         info.dateUserInitiallySavedToReadLater = [info.dateUserSavedToReadLater copy];
@@ -44,6 +46,8 @@
     else
     {
         [[RLMRealm defaultRealm] beginWriteTransaction];
+        if (!info)
+            info = [DDDHakkenReadLaterInformation new];
         info.userWantsToReadLater = NO;
         info.dateUserSavedToReadLater = [NSDate distantPast];
         item.readLaterInformation = info;

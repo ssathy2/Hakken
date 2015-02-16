@@ -34,6 +34,11 @@
     [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
 }
 
+- (void)refreshCurrentBatchOfStories
+{
+    [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+}
+
 - (void)fetchStoriesFrom:(NSInteger)from to:(NSInteger)to
 {
     __weak typeof(self) weakSelf = self;
@@ -44,13 +49,24 @@
     }];
     fetchTopStories = [fetchTopStories flattenMap:^RACStream *(id value) {
         NSIndexSet *inserted = nil;
+        NSIndexSet *deleted = nil;
         if (value)
             inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(from, to)];
-        return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:nil]];
+        
+        if (weakSelf.latestStoriesUpdate.indexesInserted)
+            deleted = weakSelf.latestStoriesUpdate.indexesInserted;
+        
+        return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:deleted]];
     }];
+    
+    __block DDDArrayInsertionDeletion *arrayInsertion;
     [fetchTopStories subscribeNext:^(id x) {
+        arrayInsertion = x;
+    } error:^(NSError *error) {
+        weakSelf.viewModelError = error;
+    } completed:^{
+        weakSelf.latestStoriesUpdate = arrayInsertion;
         weakSelf.isFetchingStories = NO;
-        weakSelf.latestStoriesUpdate = x;
     }];
 }
 
@@ -67,8 +83,11 @@
 {
     if (!self.isFetchingStories)
     {
-        self.topStoryFromValue = self.topStoryToValue+1;
-        self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
+        if (self.topStoryFromValue != 0)
+        {
+            self.topStoryFromValue = self.topStoryToValue+1;
+            self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
+        }
         
         [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
     }

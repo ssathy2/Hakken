@@ -11,5 +11,6 @@
 @class DDDArrayInsertionDeletion;
 
 @interface DDDTopStoriesViewModel : DDDStoryDisplayViewModel
+- (void)refreshCurrentBatchOfStories;
 - (void)fetchNextBatchOfStories;
 @end

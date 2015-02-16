@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface DDDViewModel : NSObject
+@property (strong, nonatomic) NSError *viewModelError;
+
 - (void)prepareWithModel:(id)model;
 
 //TODO:
