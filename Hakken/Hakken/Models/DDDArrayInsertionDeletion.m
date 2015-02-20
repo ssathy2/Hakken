@@ -64,6 +64,7 @@
     [scratchArray removeObjectsAtIndexes:indexesToRemove];
     self.array                          = scratchArray;
     self.indexesDeleted                 = indexesToRemove;
+    self.indexesInserted                = nil;
     [self updateSignalSubscribers];
 }
 
@@ -72,8 +73,9 @@
     NSMutableArray *scratchArray         = [NSMutableArray arrayWithArray:self.array];
     NSMutableIndexSet *indexSetAdded     = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(self.array.count, array.count)];
     [scratchArray addObjectsFromArray:array];
-    self.array = scratchArray;
-    self.indexesInserted = indexSetAdded;
+    self.array                           = scratchArray;
+    self.indexesInserted                 = indexSetAdded;
+    self.indexesDeleted                  = nil;
     [self updateSignalSubscribers];
 }
 

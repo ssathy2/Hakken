@@ -14,6 +14,6 @@
 @interface DDDStoryDisplayViewModel : DDDViewModel
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestStoriesUpdate;
 
-- (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error;
-- (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error;
+- (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story;
+- (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story;
 @end

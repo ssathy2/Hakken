@@ -23,7 +23,6 @@
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
-    self.latestStoriesUpdate = [DDDArrayInsertionDeletion new];
     self.isFetchingStories = NO;
     self.topStoryFromValue = 0;
     self.topStoryToValue   = 20;

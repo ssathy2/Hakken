@@ -105,7 +105,7 @@ UIGestureRecognizerDelegate>
 {
     RACSignal *latestStoriesUpdateSignal = [[self storyDisplayViewModel].latestStoriesUpdate.arrayChangedSignal filter:^BOOL(id value) {
                                                 return value != nil;
-    }];
+                                            }];
     
     __weak typeof(self) weakSelf = self;
     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
@@ -273,14 +273,28 @@ UIGestureRecognizerDelegate>
     [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)errorBlock
 {
-    [[self storyDisplayViewModel] saveStoryToReadLater:story completion:completion error:error];
+    __block DDDHackerNewsItem *item;
+    [[[self storyDisplayViewModel] saveStoryToReadLater:story] subscribeNext:^(id x) {
+        item = x;
+    } error:^(NSError *error) {
+        errorBlock(error);
+    } completed:^{
+        completion(item);
+    }];
 }
 
-- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)errorBlock
 {
-    [[self storyDisplayViewModel] removeStoryFromReadLater:story completion:completion error:error];
+    __block DDDHackerNewsItem *item;
+    [[[self storyDisplayViewModel] removeStoryFromReadLater:story] subscribeNext:^(id x) {
+        item = x;
+    } error:^(NSError *error) {
+        errorBlock(error);
+    } completed:^{
+        completion(item);
+    }];
 }
 
 @end

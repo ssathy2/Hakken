@@ -83,18 +83,23 @@
     [super updateWithInsertionDeletion:insertionDeletion];
     [self.refreshControl endRefreshing];
 }
-//
-//#pragma mark - UIScrollViewDelegate
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    if (scrollView == self.collectionView)
-//    {
-//        float bottomEdge = scrollView.contentOffset.y + scrollView.frame.size.height;
-//        if (bottomEdge >= scrollView.contentSize.height)
-//        {
-//            [[self topstoriesViewModel] fetchNextBatchOfStories];
-//        }
-//    }
-//}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    float scrollViewHeight = scrollView.frame.size.height;
+    float scrollContentSizeHeight = scrollView.contentSize.height;
+    float scrollOffset = scrollView.contentOffset.y;
+    
+    if (scrollOffset == 0)
+    {
+        // then we are at the top
+    }
+    else if (scrollOffset + scrollViewHeight == scrollContentSizeHeight)
+    {
+        // then we are at the end
+        [[self topstoriesViewModel] fetchNextBatchOfStories];
+    }
+}
 
 @end

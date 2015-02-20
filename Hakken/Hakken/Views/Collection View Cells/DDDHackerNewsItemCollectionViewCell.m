@@ -327,7 +327,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 - (DDDCellSwipeState)cellSwipeState
 {
     CGFloat percentageSwiped = self.swipeActionViewWidthConstraint.constant / CGRectGetWidth(self.contentView.bounds);
-    if (percentageSwiped > 0.5)
+    if (percentageSwiped > 0.3)
         return DDDCellSwipeStateSelected;
     else
         return DDDCellSwipeStateUnselected;

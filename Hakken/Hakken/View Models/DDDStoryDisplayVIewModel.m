@@ -7,15 +7,22 @@
 //
 
 #import "DDDStoryDisplayViewModel.h"
+#import "DDDArrayInsertionDeletion.h"
 
 @implementation DDDStoryDisplayViewModel
-- (void)saveStoryToReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+- (void)prepareWithModel:(id)model
 {
-    [DDDHakkenReadLaterManager addItemToReadLater:story withCompletion:completion withError:error];
+    [super prepareWithModel:model];
+    self.latestStoriesUpdate = [DDDArrayInsertionDeletion new];
 }
 
-- (void)removeStoryFromReadLater:(DDDHackerNewsItem *)story completion:(DDDHackerNewsItemBlock)completion error:(ErrorBlock)error
+- (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story;
 {
-    [DDDHakkenReadLaterManager removeItemFromReadLater:story withCompletion:completion withError:error];
+    return [DDDHakkenReadLaterManager addItemToReadLater:story];
+}
+
+- (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story
+{
+    return [DDDHakkenReadLaterManager removeItemFromReadLater:story];
 }
 @end
