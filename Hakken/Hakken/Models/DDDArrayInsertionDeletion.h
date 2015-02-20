@@ -9,7 +9,22 @@
 #import "DDDModel.h"
 
 @interface DDDArrayInsertionDeletion : DDDModel
-@property (strong, nonatomic) NSArray *array;
-@property (strong, nonatomic) NSIndexSet *indexesInserted;
-@property (strong, nonatomic) NSIndexSet *indexesDeleted;
+@property (strong, nonatomic, readonly) NSArray *array;
+@property (strong, nonatomic, readonly) NSIndexSet *indexesInserted;
+@property (strong, nonatomic, readonly) NSIndexSet *indexesDeleted;
+
+@property (strong, nonatomic, readonly) RACSignal *arrayChangedSignal;
+
+/*
+ - Empties out all of the contents of the existing array,
+ - sets the indexesDeleted to the indexes of the deleted array
+ - sets the indexes inserted to the indexes of the parameter array
+ */
+- (void)resetArrayWithArray:(NSArray *)array;
+
+// Removes the items from the array at the indexes removed
+- (void)removeIndexesFromArray:(NSIndexSet *)indexesToRemove;
+
+// Adds all of the items in the parameter array to the internal array, indexesInserted gets updated
+- (void)addAllItemsIntoArrayFromArray:(NSArray *)array;
 @end

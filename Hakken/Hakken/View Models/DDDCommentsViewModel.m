@@ -48,7 +48,8 @@
         NSIndexSet *inserted = nil;
         if (value)
             inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [value count])];
-        return [RACSignal return:[self updateWithComments:value indexesInserted:inserted indexesDeleted:nil]];
+        return nil;
+        //return [RACSignal return:[self updateWithComments:value indexesInserted:inserted indexesDeleted:nil]];
     }];
     [fetchComments subscribeNext:^(id x) {
         [weakSelf formCommentTreeInfosArrayWithComments:[x array]];
@@ -100,15 +101,6 @@
 - (NSInteger)commentCount
 {
     return [self.commentTreeInfos count];
-}
-
-- (DDDArrayInsertionDeletion *)updateWithComments:(NSArray *)comments indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
-{
-    DDDArrayInsertionDeletion *topStoresUpdate = [DDDArrayInsertionDeletion new];
-    topStoresUpdate.array = comments;
-    topStoresUpdate.indexesDeleted = indexesDeleted;
-    topStoresUpdate.indexesInserted = indexesInserted;
-    return topStoresUpdate;
 }
 
 @end

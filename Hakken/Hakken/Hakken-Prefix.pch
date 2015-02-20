@@ -18,6 +18,9 @@
 
 #define safe_block(_block) if(_block)_block
 
+typedef void(^ArrayBlock)(NSArray *array);
+typedef void(^ErrorBlock)(NSError *error);
+
 #ifdef DEBUG
 static const int ddLogLevel = DDLogLevelVerbose;
 #else

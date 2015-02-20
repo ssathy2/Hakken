@@ -13,82 +13,106 @@
 @implementation DDDHakkenReadLaterManager
 
 #pragma mark - DDDHakkenReadLater
-+ (void)addItemToReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
++ (RACSignal *)addItemToReadLater:(DDDHackerNewsItem *)item
 {
-    DDDHakkenReadLaterInformation *info = item.readLaterInformation;
-    
-    if (info.userWantsToReadLater)
-    {
-        safe_block(error)([NSError errorWithDomain:[NSString stringWithFormat:@"Item with id: %li already has been saved to be read later", (long)item.id] code:-1 userInfo:nil]);
-    }
-    else
-    {
-        [[RLMRealm defaultRealm] beginWriteTransaction];
-        if (!info)
-            info = [DDDHakkenReadLaterInformation new];
-        info.userWantsToReadLater = YES;
-        info.dateUserSavedToReadLater = [NSDate date];
-        info.dateUserInitiallySavedToReadLater = [info.dateUserSavedToReadLater copy];
-        item.readLaterInformation = info;
-        [[RLMRealm defaultRealm] addOrUpdateObject:item];
-        [[RLMRealm defaultRealm] commitWriteTransaction];
-        safe_block(completion)(item);
-    }
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        DDDHakkenReadLaterInformation *info = item.readLaterInformation;
+        
+        if (info.userWantsToReadLater)
+            [subscriber sendError:[NSError errorWithDomain:[NSString stringWithFormat:@"Item with id: %li already has been saved to be read later", (long)item.id] code:-1 userInfo:nil]];
+        else
+        {
+            [[RLMRealm defaultRealm] beginWriteTransaction];
+            if (!info)
+                info = [DDDHakkenReadLaterInformation new];
+            info.userWantsToReadLater = YES;
+            info.dateUserSavedToReadLater = [NSDate date];
+            info.dateUserInitiallySavedToReadLater = [info.dateUserSavedToReadLater copy];
+            item.readLaterInformation = info;
+            [[RLMRealm defaultRealm] addOrUpdateObject:item];
+            [[RLMRealm defaultRealm] commitWriteTransaction];
+            [subscriber sendNext:item];
+            [subscriber sendCompleted];
+        }
+        return nil;
+    }];
 }
 
-+ (void)removeItemFromReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
++ (RACSignal *)removeItemFromReadLater:(DDDHackerNewsItem *)item
 {
-    DDDHakkenReadLaterInformation *info = item.readLaterInformation;
-    if (!info.userWantsToReadLater)
-    {
-        safe_block(error)([NSError errorWithDomain:[NSString stringWithFormat:@"Item with id: %li has not been saved to be read later", (long)item.id] code:-1 userInfo:nil]);
-    }
-    else
-    {
-        [[RLMRealm defaultRealm] beginWriteTransaction];
-        if (!info)
-            info = [DDDHakkenReadLaterInformation new];
-        info.userWantsToReadLater = NO;
-        info.dateUserSavedToReadLater = [NSDate distantPast];
-        item.readLaterInformation = info;
-        [[RLMRealm defaultRealm] addOrUpdateObject:item];
-        [[RLMRealm defaultRealm] commitWriteTransaction];
-        safe_block(completion)(item);
-    }
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        DDDHakkenReadLaterInformation *info = item.readLaterInformation;
+        if (!info.userWantsToReadLater)
+            [subscriber sendError:[NSError errorWithDomain:[NSString stringWithFormat:@"Item with id: %li has not been saved to be read later", (long)item.id] code:-1 userInfo:nil]];
+        else
+        {
+            [[RLMRealm defaultRealm] beginWriteTransaction];
+            if (!info)
+                info = [DDDHakkenReadLaterInformation new];
+            info.userWantsToReadLater = NO;
+            info.dateUserSavedToReadLater = [NSDate distantPast];
+            item.readLaterInformation = info;
+            [[RLMRealm defaultRealm] addOrUpdateObject:item];
+            [[RLMRealm defaultRealm] commitWriteTransaction];
+            [subscriber sendNext:item];
+            [subscriber sendCompleted];
+        }
+        return nil;
+    }];
 }
 
-+ (void)fetchAllItemsToReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
++ (RACSignal *)fetchAllItemsToReadLater
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES"];
-    
-    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
-    safe_block(completion)([results arrayFromResults]);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES"];
+        
+        RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
+        [subscriber sendNext:[results arrayFromResults]];
+        [subscriber sendCompleted];
+        return nil;
+    }];
 }
 
-+ (void)fetchReadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
++ (RACSignal *)fetchReadReadLaterItems
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.hasUserReadItem == YES"];
-    
-    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
-    safe_block(completion)([results arrayFromResults]);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.hasUserReadItem == YES"];
+        
+        RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
+        [subscriber sendNext:[results arrayFromResults]];
+        [subscriber sendCompleted];
+        return nil;
+    }];
 }
 
-+ (void)fetchUnreadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock *)error
++ (RACSignal *)fetchUnreadReadLaterItems
 {
-    NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.hasUserReadItem == NO"];
-    
-    RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
-    safe_block(completion)([results arrayFromResults]);
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.hasUserReadItem == NO"];
+        
+        RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
+        [subscriber sendNext:[results arrayFromResults]];
+        [subscriber sendCompleted];
+        return nil;
+    }];
 }
 
-+ (void)removeAllItemsFromReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error
++ (RACSignal *)removeAllItemsFromReadLater
 {
-    [self fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
-        [items enumerateObjectsUsingBlock:^(DDDHackerNewsItem *item, NSUInteger idx, BOOL *stop) {
-            [self removeItemFromReadLater:item withCompletion:nil withError:nil];
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        __block NSArray *readItems;
+        [[self fetchAllItemsToReadLater] subscribeNext:^(id x) {
+            readItems = x;
+        } error:^(NSError *error) {
+            [subscriber sendError:error];
+        } completed:^{
+            [readItems enumerateObjectsUsingBlock:^(DDDHackerNewsItem *item, NSUInteger idx, BOOL *stop) {
+                [self removeItemFromReadLater:item];
+            }];
+            [subscriber sendNext:readItems];
+            [subscriber sendCompleted];
         }];
-        safe_block(completion)(items);
-    } withError:error];
-    
+        return nil;
+    }];
 }
 @end

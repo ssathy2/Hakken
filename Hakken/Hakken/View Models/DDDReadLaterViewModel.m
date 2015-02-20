@@ -35,9 +35,6 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
             DDDArrayInsertionDeletion *arrayInsertionDeletion = [DDDArrayInsertionDeletion new];
             NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
             NSIndexSet *idxPathsRemoved = [self indexSetFromIndexPaths:@[idxPathForStory]];
-            arrayInsertionDeletion.array = items;
-            arrayInsertionDeletion.indexesDeleted = idxPathsRemoved;
-            arrayInsertionDeletion.indexesInserted = nil;
             weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
         } withError:error];;
     } error:error];
@@ -51,9 +48,6 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
             DDDArrayInsertionDeletion *arrayInsertionDeletion = [DDDArrayInsertionDeletion new];
             NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
             NSIndexSet *idxPathsAdded = [self indexSetFromIndexPaths:@[idxPathForStory]];
-            arrayInsertionDeletion.array = items;
-            arrayInsertionDeletion.indexesDeleted = nil;
-            arrayInsertionDeletion.indexesInserted = idxPathsAdded;
             weakSelf.latestStoriesUpdate = arrayInsertionDeletion;
         } withError:error];;
     } error:error];
@@ -77,25 +71,14 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
     return idxSet;
 }
 
-- (DDDArrayInsertionDeletion *)arrayInsertionDeletionFromInsertedIndexPaths:(NSArray *)insertedIndexpaths
-                                                      withDeletedIndexPaths:(NSArray *)deletedIndexpaths
-                                                                  withArray:(NSArray *)array
-{
-    DDDArrayInsertionDeletion *insertionDeletion = [DDDArrayInsertionDeletion new];
-    insertionDeletion.indexesDeleted = [self indexSetFromIndexPaths:deletedIndexpaths];
-    insertionDeletion.indexesInserted = [self indexSetFromIndexPaths:insertedIndexpaths];
-    insertionDeletion.array = array;
-    return insertionDeletion;
-}
-
-- (void)generateArrayInsertionDeletionFromUnreadItems:(ArrayInsertionDeletionBlock)completion withError:(ErrorBlock)error
+- (RACSignal *)fetchUnreadItems
 {
     [DDDHakkenReadLaterManager fetchAllItemsToReadLaterWithCompletion:^(NSArray *items) {
         DDDArrayInsertionDeletion *insertionDeletion    = [DDDArrayInsertionDeletion new];
-        insertionDeletion.array                         = items;
-        insertionDeletion.indexesDeleted                = nil;
-        insertionDeletion.indexesInserted               = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, items.count)];
-        completion(insertionDeletion);
+//        insertionDeletion.array                         = items;
+//        insertionDeletion.indexesDeleted                = nil;
+//        insertionDeletion.indexesInserted               = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, items.count)];
+//        completion(insertionDeletion);
     } withError:error];
 }
 @end

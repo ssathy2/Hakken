@@ -89,13 +89,6 @@ UIGestureRecognizerDelegate>
     self.cellSwipePangestureRecognizer.maximumNumberOfTouches = 1;
     self.cellSwipePangestureRecognizer.minimumNumberOfTouches = 1;
     self.cellSwipePangestureRecognizer.delegate = self;
-    
-    NSArray *collectionViewGestureRecognizers = [self.collectionView gestureRecognizers];
-    for (UIGestureRecognizer *gestureRecognizer in collectionViewGestureRecognizers)
-    {
-        if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
-            self.collectionViewPanGestureRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
-    }
 }
 
 - (void)setupCollectionView
@@ -110,10 +103,9 @@ UIGestureRecognizerDelegate>
 
 - (void)setupListenersToViewModel
 {
-    RACSignal *latestStoriesUpdateSignal = [RACObserve([self storyDisplayViewModel], latestStoriesUpdate)
-                                            filter:^BOOL(id value) {
+    RACSignal *latestStoriesUpdateSignal = [[self storyDisplayViewModel].latestStoriesUpdate.arrayChangedSignal filter:^BOOL(id value) {
                                                 return value != nil;
-                                            }];
+    }];
     
     __weak typeof(self) weakSelf = self;
     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {

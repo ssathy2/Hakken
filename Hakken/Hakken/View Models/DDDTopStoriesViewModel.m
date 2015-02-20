@@ -23,77 +23,64 @@
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
+    self.latestStoriesUpdate = [DDDArrayInsertionDeletion new];
     self.isFetchingStories = NO;
     self.topStoryFromValue = 0;
-    self.topStoryToValue   = 100;
+    self.topStoryToValue   = 20;
 }
 
 - (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
-    [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+    
+    __block NSArray *results;
+    [[self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue] subscribeNext:^(id x) {
+        results = x;
+    } error:^(NSError *error) {
+        self.viewModelError = error;
+    } completed:^{
+        [self.latestStoriesUpdate addAllItemsIntoArrayFromArray:results];
+    }];
 }
 
 - (void)refreshCurrentBatchOfStories
 {
-    [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+    __block NSArray *results;
+    [[self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue] subscribeNext:^(id x) {
+        results = x;
+    } error:^(NSError *error) {
+        self.viewModelError = error;
+    } completed:^{
+        [self.latestStoriesUpdate resetArrayWithArray:results];
+    }];
 }
 
-- (void)fetchStoriesFrom:(NSInteger)from to:(NSInteger)to
+- (RACSignal *)fetchStoriesFrom:(NSInteger)from to:(NSInteger)to
 {
-    __weak typeof(self) weakSelf = self;
-    self.isFetchingStories = YES;
     RACSignal *fetchTopStories = [[DDDDataServices sharedInstance] fetchTopStoriesFromStory:@(from) toStory:@(to)];
     fetchTopStories = [fetchTopStories filter:^BOOL(id value) {
         return value != nil;
     }];
-    fetchTopStories = [fetchTopStories flattenMap:^RACStream *(id value) {
-        NSIndexSet *inserted = nil;
-        NSIndexSet *deleted = nil;
-        if (value)
-            inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(from, to)];
-    
-        return [RACSignal return:[self updateWithStories:(NSArray *)value indexesInserted:inserted indexesDeleted:deleted]];
-    }];
-    
-    __block DDDArrayInsertionDeletion *arrayInsertion;
-    [fetchTopStories subscribeNext:^(id x) {
-        arrayInsertion = x;
-    } error:^(NSError *error) {
-        weakSelf.viewModelError = error;
-    } completed:^{
-        weakSelf.latestStoriesUpdate = arrayInsertion;
-//        weakSelf.latestStoriesUpdate = [self mergeRecentArrayInsertionDeletion:arrayInsertion withExistingArrayInsertionDeletion:weakSelf.latestStoriesUpdate];
-        weakSelf.isFetchingStories = NO;
-    }];
-}
-
-//- (DDDArrayInsertionDeletion *)mergeRecentArrayInsertionDeletion:(DDDArrayInsertionDeletion *)recentArrayInsertionDeletion withExistingArrayInsertionDeletion:(DDDArrayInsertionDeletion *)existingArrayInsertionDeletion
-//{
-//    
-//}
-
-- (DDDArrayInsertionDeletion *)updateWithStories:(NSArray *)stories indexesInserted:(NSIndexSet *)indexesInserted indexesDeleted:(NSIndexSet *)indexesDeleted
-{
-    DDDArrayInsertionDeletion *topStoresUpdate = [DDDArrayInsertionDeletion new];
-    topStoresUpdate.array = stories;
-    topStoresUpdate.indexesDeleted = indexesDeleted;
-    topStoresUpdate.indexesInserted = indexesInserted;
-    return topStoresUpdate;
+    return fetchTopStories;
 }
 
 - (void)fetchNextBatchOfStories
 {
-    if (!self.isFetchingStories)
+    if (self.topStoryFromValue != 0)
     {
-        if (self.topStoryFromValue != 0)
-        {
-            self.topStoryFromValue = self.topStoryToValue+1;
-            self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
-        }
-        
-        [self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue];
+        self.topStoryFromValue = self.topStoryToValue+1;
+        self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
     }
+    
+    __block NSArray *results;
+    
+    [[self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue] subscribeNext:^(id x) {
+        results = x;
+    } error:^(NSError *error) {
+        self.viewModelError = error;
+    } completed:^{
+        [self.latestStoriesUpdate addAllItemsIntoArrayFromArray:results];
+    }];
 }
 
 @end

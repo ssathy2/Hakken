@@ -10,20 +10,14 @@
 
 @class DDDHackerNewsItem;
 
-typedef void(^ErrorBlock)(NSError *error);
-typedef void(^DDDHackerNewsItemBlock)(DDDHackerNewsItem *item);
-
-// Array in parameter to block has objects of type DDDHackerNewsItem
-typedef void(^DDDHackerNewsItemArrayBlock)(NSArray *items);
-
 @protocol DDDHakkenReadLater <NSObject>
 @optional
-+ (void)addItemToReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error;
-+ (void)removeItemFromReadLater:(DDDHackerNewsItem *)item withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error;
-+ (void)fetchAllItemsToReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error;
-+ (void)fetchUnreadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock*)error;
-+ (void)fetchReadReadLaterItemsWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error;
++ (RACSignal *)addItemToReadLater:(DDDHackerNewsItem *)item;
++ (RACSignal *)removeItemFromReadLater:(DDDHackerNewsItem *)item;
++ (RACSignal *)fetchAllItemsToReadLater;
++ (RACSignal *)fetchUnreadReadLaterItems;
++ (RACSignal *)fetchReadReadLaterItems;
 
 // The completion contains all of the items that were removed from the readlater queue
-+ (void)removeAllItemsFromReadLaterWithCompletion:(DDDHackerNewsItemArrayBlock)completion withError:(ErrorBlock)error;
++ (RACSignal *)removeAllItemsFromReadLater;
 @end
