@@ -50,19 +50,6 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     [super awakeFromNib];
     [self resetCellContentView:NO];
     [self styleCell];
-    [self setupPanGestureRecognizer];
-}
-
-- (void)setupPanGestureRecognizer
-{
-    if (!_panGestureRecognizer)
-    {
-        self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-        self.panGestureRecognizer.maximumNumberOfTouches = 1;
-        self.panGestureRecognizer.minimumNumberOfTouches = 1;
-        self.panGestureRecognizer.delegate = self;
-        [self.cellContentView addGestureRecognizer:self.panGestureRecognizer];
-    }
 }
 
 - (void)styleCell

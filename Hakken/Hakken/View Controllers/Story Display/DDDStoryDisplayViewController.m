@@ -22,6 +22,8 @@
 #import "DDDHackerNewsItem.h"
 #import "DDDCollectionViewCellSizingHelper.h"
 
+#import "UIPanGestureRecognizer+Helpers.h"
+
 @interface DDDStoryDisplayViewController ()<
 DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
@@ -32,6 +34,9 @@ UIGestureRecognizerDelegate>
 
 @interface DDDStoryDisplayViewController()
 @property (assign, nonatomic) BOOL viewIsVisible;
+@property (strong, nonatomic) UIPanGestureRecognizer *cellSwipePangestureRecognizer;
+
+@property (strong, nonatomic) UIPanGestureRecognizer *collectionViewPanGestureRecognizer;
 @end
 
 @implementation DDDStoryDisplayViewController
@@ -59,6 +64,7 @@ UIGestureRecognizerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    [self setupCellSwipePanGestureRecognizer];
     [self setupCollectionView];
     [self setupListenersToViewModel];
 }
@@ -75,21 +81,39 @@ UIGestureRecognizerDelegate>
     self.viewIsVisible = NO;
 }
 
+#pragma mark - Setup Methods
+
+- (void)setupCellSwipePanGestureRecognizer
+{
+    self.cellSwipePangestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    self.cellSwipePangestureRecognizer.maximumNumberOfTouches = 1;
+    self.cellSwipePangestureRecognizer.minimumNumberOfTouches = 1;
+    self.cellSwipePangestureRecognizer.delegate = self;
+    
+    NSArray *collectionViewGestureRecognizers = [self.collectionView gestureRecognizers];
+    for (UIGestureRecognizer *gestureRecognizer in collectionViewGestureRecognizers)
+    {
+        if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+            self.collectionViewPanGestureRecognizer = (UIPanGestureRecognizer *)gestureRecognizer;
+    }
+}
+
 - (void)setupCollectionView
 {
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
     
-    self.collectionView.panGestureRecognizer.enabled = NO;
+    [self.collectionView addGestureRecognizer:self.cellSwipePangestureRecognizer];
+    [self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:self.cellSwipePangestureRecognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
 }
 
 - (void)setupListenersToViewModel
 {
     RACSignal *latestStoriesUpdateSignal = [RACObserve([self storyDisplayViewModel], latestStoriesUpdate)
-     filter:^BOOL(id value) {
-         return value != nil;
-     }];
+                                            filter:^BOOL(id value) {
+                                                return value != nil;
+                                            }];
     
     __weak typeof(self) weakSelf = self;
     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
@@ -100,6 +124,28 @@ UIGestureRecognizerDelegate>
     } completed:^{
         DDLogInfo(@"Complete!");
     }];
+}
+
+
+#pragma mark - UIGestureRecognizer Related
+- (void)handlePanGesture:(UIPanGestureRecognizer *)pangestureRecognizer
+{
+    CGPoint locationInCollectionView = [pangestureRecognizer locationInView:self.collectionView];
+    NSIndexPath *cellIdxPath = [self.collectionView indexPathForItemAtPoint:locationInCollectionView];
+    DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
+    if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
+        [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
+}
+
+-(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    if ([gestureRecognizer isEqual:self.cellSwipePangestureRecognizer])
+    {
+        UIPanGestureRecognizerDirection direction = [gestureRecognizer panGestureDirectionInView:self.collectionView];
+        return (direction & UIPanGestureRecognizerDirectionLeft) || (direction & UIPanGestureRecognizerDirectionRight);
+    }
+    else
+        return YES;
 }
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
