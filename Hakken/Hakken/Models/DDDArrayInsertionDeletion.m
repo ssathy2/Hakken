@@ -82,6 +82,8 @@
 - (void)updateSignalSubscribers
 {
     for (id<RACSubscriber> subscriber in self.signalSubscribers)
+    {
         [subscriber sendNext:self];
+    }
 }
 @end

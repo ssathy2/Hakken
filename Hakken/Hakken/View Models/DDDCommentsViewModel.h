@@ -17,4 +17,6 @@
 - (DDDHackerNewsComment *)commentForRootItemIndex:(NSInteger)rootItemIndex forDepth:(NSInteger)depth;
 - (DDDCommentTreeInfo *)commentTreeInfoForIndexPath:(NSIndexPath *)idxPath;
 - (NSInteger)commentCount;
+
+- (void)refreshComments;
 @end

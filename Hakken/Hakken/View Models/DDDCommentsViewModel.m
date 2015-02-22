@@ -26,6 +26,7 @@
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
+    self.latestComments = [DDDArrayInsertionDeletion new];
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
 }
@@ -38,23 +39,7 @@
 - (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
-    
-    __weak typeof(self) weakSelf = self;
-    RACSignal *fetchComments = [[DDDDataServices sharedInstance] fetchCommentsForStoryIdentifier:@(self.transitionModel.story.id)];
-    fetchComments = [fetchComments filter:^BOOL(id value) {
-        return value != nil;
-    }];
-    fetchComments = [fetchComments flattenMap:^RACStream *(id value) {
-        NSIndexSet *inserted = nil;
-        if (value)
-            inserted = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [value count])];
-        return nil;
-        //return [RACSignal return:[self updateWithComments:value indexesInserted:inserted indexesDeleted:nil]];
-    }];
-    [fetchComments subscribeNext:^(id x) {
-        [weakSelf formCommentTreeInfosArrayWithComments:[x array]];
-        weakSelf.latestComments = x;
-    }];
+    [self refreshComments];
 }
 
 - (void)formCommentTreeInfosArrayWithComments:(NSArray *)comments
@@ -103,4 +88,23 @@
     return [self.commentTreeInfos count];
 }
 
+- (void)refreshComments
+{
+    
+    __weak typeof(self) weakSelf = self;
+    RACSignal *fetchComments = [[DDDDataServices sharedInstance] fetchCommentsForStoryIdentifier:@(self.transitionModel.story.id)];
+    fetchComments = [fetchComments filter:^BOOL(id value) {
+        return value != nil;
+    }];
+    
+    __block NSArray *comments;
+    [fetchComments subscribeNext:^(id x) {
+        comments = x;
+    } error:^(NSError *error) {
+        weakSelf.viewModelError = error;
+    } completed:^{
+        [weakSelf formCommentTreeInfosArrayWithComments:comments];
+        [weakSelf.latestComments addAllItemsIntoArrayFromArray:self.commentTreeInfos];
+    }];
+}
 @end

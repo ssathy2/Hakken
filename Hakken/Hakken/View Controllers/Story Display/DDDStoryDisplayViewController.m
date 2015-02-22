@@ -106,7 +106,6 @@ UIGestureRecognizerDelegate>
     RACSignal *latestStoriesUpdateSignal = [[self storyDisplayViewModel].latestStoriesUpdate.arrayChangedSignal filter:^BOOL(id value) {
                                                 return value != nil;
                                             }];
-    
     __weak typeof(self) weakSelf = self;
     [latestStoriesUpdateSignal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
         DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);

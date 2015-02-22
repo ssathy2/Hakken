@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 @interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation DDDCommentsViewController
@@ -59,6 +60,21 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     // Do any additional setup after loading the view.
     [self setupViewModelListeners];
     [self setupCollectionView];
+    [self setupRefreshControl];
+}
+
+- (void)setupRefreshControl
+{
+    self.refreshControl             = [UIRefreshControl new];
+    self.refreshControl.tintColor   = [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(refreshControlValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
+}
+
+- (void)refreshControlValueChanged:(UIRefreshControl *)refreshControl
+{
+    [[self commentsViewModel] refreshComments];
 }
 
 - (void)setupCollectionView
@@ -76,10 +92,14 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 - (void)setupViewModelListeners
 {
-    [RACObserve([self commentsViewModel], latestComments)
-     subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
+    __weak typeof(self) weakSelf = self;
+    RACSignal *signal = [self commentsViewModel].latestComments.arrayChangedSignal;
+    signal = [signal filter:^BOOL(id value) {
+        return value != nil;
+    }];
+    [signal subscribeNext:^(DDDArrayInsertionDeletion *latestInsertionDeletion) {
          DDLogInfo(@"latestInsertionDeletion: %@", latestInsertionDeletion);
-         [self updateWithInsertionDeletion:latestInsertionDeletion];
+        [weakSelf updateWithInsertionDeletion:latestInsertionDeletion];
      } error:^(NSError *error) {
          DDLogError(@"%@", error);
      } completed:^{
@@ -91,6 +111,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set

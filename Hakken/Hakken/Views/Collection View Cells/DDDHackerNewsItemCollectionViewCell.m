@@ -124,12 +124,15 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 - (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    
+    [self resetCellContentView:YES];
+    [self notifyDelegateAboutCellSwipeState];
+
 }
 
 - (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    
+    [self resetCellContentView:YES];
+    [self notifyDelegateAboutCellSwipeState];
 }
 
 - (void)handleGestureRecongizerChangedState:(UIPanGestureRecognizer *)panGestureRecognizer
