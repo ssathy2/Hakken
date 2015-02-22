@@ -64,6 +64,8 @@
 		DE53D4751A5FF14B00A8B06A /* DDDStoryDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4671A5FF14A00A8B06A /* DDDStoryDisplayViewController.m */; };
 		DE53D4761A5FF14B00A8B06A /* DDDTopStoriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D46A1A5FF14A00A8B06A /* DDDTopStoriesViewController.m */; };
 		DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */; };
+		DE61ADA61A9A659D00714D5A /* DDDLoadingCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE61ADA41A9A659D00714D5A /* DDDLoadingCollectionReusableView.m */; };
+		DE61ADA71A9A659D00714D5A /* DDDLoadingCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE61ADA51A9A659D00714D5A /* DDDLoadingCollectionReusableView.xib */; };
 		DE62AC381A1EE98600692CB8 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
 		DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128041A1EE4D70020DB40 /* mock_comment.json */; };
 		DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
@@ -205,6 +207,9 @@
 		DE53D46B1A5FF14A00A8B06A /* TopStoryStoryboardIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopStoryStoryboardIdentifiers.h; sourceTree = "<group>"; };
 		DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentsViewModel.h; sourceTree = "<group>"; };
 		DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewModel.m; sourceTree = "<group>"; };
+		DE61ADA31A9A659D00714D5A /* DDDLoadingCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDLoadingCollectionReusableView.h; sourceTree = "<group>"; };
+		DE61ADA41A9A659D00714D5A /* DDDLoadingCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDLoadingCollectionReusableView.m; sourceTree = "<group>"; };
+		DE61ADA51A9A659D00714D5A /* DDDLoadingCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDLoadingCollectionReusableView.xib; sourceTree = "<group>"; };
 		DE62AC451A20FD5300692CB8 /* DDDLiveDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDLiveDataServices.h; sourceTree = "<group>"; };
 		DE62AC461A20FD5300692CB8 /* DDDLiveDataServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDLiveDataServices.m; sourceTree = "<group>"; };
 		DE62AC471A20FD5300692CB8 /* ServicesConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServicesConfiguration.json; sourceTree = "<group>"; };
@@ -460,6 +465,9 @@
 			isa = PBXGroup;
 			children = (
 				DE53D43C1A5FF13500A8B06A /* Collection View Cells */,
+				DE61ADA31A9A659D00714D5A /* DDDLoadingCollectionReusableView.h */,
+				DE61ADA41A9A659D00714D5A /* DDDLoadingCollectionReusableView.m */,
+				DE61ADA51A9A659D00714D5A /* DDDLoadingCollectionReusableView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -669,6 +677,7 @@
 				DE62AC391A1EE98600692CB8 /* mock_comment.json in Resources */,
 				DE62AC4D1A21010200692CB8 /* Configuration.json in Resources */,
 				DE62AC491A20FD5300692CB8 /* ServicesConfiguration.json in Resources */,
+				DE61ADA71A9A659D00714D5A /* DDDLoadingCollectionReusableView.xib in Resources */,
 				DE62AC3A1A1EE98600692CB8 /* mock_poll.json in Resources */,
 				DE53D4381A5FF12300A8B06A /* CommentsStoryboard.storyboard in Resources */,
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
@@ -776,6 +785,7 @@
 				DE0755C21A7ECE1F005170D6 /* RLMResults+DDDHelpers.m in Sources */,
 				DE0755C81A7EE219005170D6 /* DDDReadLaterViewModel.m in Sources */,
 				DE0755C51A7EDF73005170D6 /* DDDReadLaterViewController.m in Sources */,
+				DE61ADA61A9A659D00714D5A /* DDDLoadingCollectionReusableView.m in Sources */,
 				DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */,
 				DE53D4731A5FF14B00A8B06A /* DDDCommentsCollectionViewFlowLayout.m in Sources */,
 				DE53D42F1A5FF12300A8B06A /* DDDViewControllerRouter.m in Sources */,

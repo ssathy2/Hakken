@@ -23,6 +23,7 @@
 #import "DDDCollectionViewCellSizingHelper.h"
 
 #import "UIPanGestureRecognizer+Helpers.h"
+#import "DDDLoadingCollectionReusableView.h"
 
 @interface DDDStoryDisplayViewController ()<
 DDDHackerNewsItemCollectionViewCellDelegate,
@@ -66,6 +67,7 @@ UIGestureRecognizerDelegate>
 
     [self setupCellSwipePanGestureRecognizer];
     [self setupCollectionView];
+    [self setupFlowLayout];
     [self setupListenersToViewModel];
 }
 
@@ -99,6 +101,13 @@ UIGestureRecognizerDelegate>
     [self.collectionView addGestureRecognizer:self.cellSwipePangestureRecognizer];
     [self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:self.cellSwipePangestureRecognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDLoadingCollectionReusableView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier];
+}
+
+- (void)setupFlowLayout
+{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    flowLayout.footerReferenceSize = CGSizeMake(self.collectionView.frame.size.width, 50.f);
 }
 
 - (void)setupListenersToViewModel
@@ -194,6 +203,12 @@ UIGestureRecognizerDelegate>
     [cell prepareWithModel:[[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row]];
     cell.delegate = self;
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    DDDLoadingCollectionReusableView *loadingView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier forIndexPath:indexPath];
+    return loadingView;
 }
 
 #pragma mark - UICollectionViewDelegate
