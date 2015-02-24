@@ -160,6 +160,12 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     [self notifyDelegateAboutCellSwipeState];
 }
 
+- (void)closeCellSwipeContainer
+{
+    [self resetCellContentView:YES];    
+    [self notifyDelegateAboutCellSwipeState];
+}
+
 - (void)notifyDelegateAboutCellSwipeState
 {
     DDDHackerNewsItem *hackernewsItem = (DDDHackerNewsItem *)self.model;

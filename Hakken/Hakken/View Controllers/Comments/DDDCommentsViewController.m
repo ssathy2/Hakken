@@ -17,6 +17,7 @@
 #import "DDDCollectionViewCellSizingHelper.h"
 #import "DDDHackernewsItemCollectionViewCell.h"
 #import "DDDHackernewsUserItemCollectionViewCell.h"
+#import "DDDLoadingCollectionReusableView.h"
 
 typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
@@ -29,6 +30,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 @interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL viewIsVisible;
 @end
 
 @implementation DDDCommentsViewController
@@ -63,6 +65,18 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     [self setupRefreshControl];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.viewIsVisible = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.viewIsVisible = NO;
+}
+
 - (void)setupRefreshControl
 {
     self.refreshControl             = [UIRefreshControl new];
@@ -81,13 +95,15 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
+
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDCommentCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDCommentCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackernewsUserItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackernewsUserItemCollectionViewCellIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDLoadingCollectionReusableView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier];
     
     DDDCommentsCollectionViewFlowLayout *commentsCollectionViewLayout = (DDDCommentsCollectionViewFlowLayout *)self.collectionView.collectionViewLayout;    
     [commentsCollectionViewLayout setCommentsViewModel:[self commentsViewModel]];
+    [commentsCollectionViewLayout setFooterReferenceSize:CGSizeMake(self.collectionView.frame.size.width, 50.f)];
 }
 
 - (void)setupViewModelListeners
@@ -109,9 +125,30 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
 {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
-    [self.refreshControl endRefreshing];
+    if (insertionDeletion)
+    {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+        if (self.viewIsVisible)
+        {
+            if (insertionDeletion.indexesInserted && insertionDeletion.indexesDeleted)
+            {
+                [self.collectionView performBatchUpdates:^{
+                    [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+                    [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+                } completion:^(BOOL finished) {
+                    
+                }];
+            }
+            else if (insertionDeletion.indexesDeleted && !insertionDeletion.indexesInserted)
+                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+            else if (!insertionDeletion.indexesDeleted && insertionDeletion.indexesInserted)
+                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+            
+        }
+        else
+            [self.collectionView reloadData];
+        [self.refreshControl endRefreshing];
+    }
 }
 
 - (NSArray *)indexPathsFromIndexSet:(NSIndexSet *)set
@@ -119,7 +156,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     NSMutableArray *indexPaths = [NSMutableArray array];
     NSUInteger currentIndex = [set firstIndex];
     while (currentIndex != NSNotFound) {
-        [indexPaths addObject:[NSIndexPath indexPathForRow:currentIndex inSection:0]];
+        [indexPaths addObject:[NSIndexPath indexPathForRow:currentIndex inSection:1]];
         currentIndex = [set indexGreaterThanIndex:currentIndex];
     }
     return indexPaths;
@@ -176,6 +213,23 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     [cell prepareWithModel:model];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    DDDLoadingCollectionReusableView *loadingView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier forIndexPath:indexPath];
+    return loadingView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
+    if ([self commentsViewModel].story.isUserGenerated && [self commentsViewModel].story.itemType == DDDHackerNewsItemTypeJob)
+        return CGSizeZero;
+    else if ([[self commentsViewModel] shouldShowLoadingFooter])
+        return flowLayout.footerReferenceSize;
+    else
+        return CGSizeZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

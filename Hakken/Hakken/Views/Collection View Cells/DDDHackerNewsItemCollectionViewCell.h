@@ -24,4 +24,5 @@
 @property (weak, nonatomic) id<DDDHackerNewsItemCollectionViewCellDelegate> delegate;
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)pangestureRecognizer;
+- (void)closeCellSwipeContainer;
 @end

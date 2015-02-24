@@ -25,4 +25,9 @@
 {
     return [DDDHakkenReadLaterManager removeItemFromReadLater:story];
 }
+
+- (BOOL)canLoadMoreStories
+{
+    return NO;
+}
 @end

@@ -90,7 +90,6 @@
 
 - (void)refreshComments
 {
-    
     __weak typeof(self) weakSelf = self;
     RACSignal *fetchComments = [[DDDDataServices sharedInstance] fetchCommentsForStoryIdentifier:@(self.transitionModel.story.id)];
     fetchComments = [fetchComments filter:^BOOL(id value) {
@@ -106,5 +105,10 @@
         [weakSelf formCommentTreeInfosArrayWithComments:comments];
         [weakSelf.latestComments addAllItemsIntoArrayFromArray:self.commentTreeInfos];
     }];
+}
+
+- (BOOL)shouldShowLoadingFooter
+{
+    return (self.latestComments.array.count == 0);
 }
 @end

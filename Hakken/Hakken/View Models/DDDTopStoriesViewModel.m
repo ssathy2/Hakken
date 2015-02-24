@@ -10,7 +10,8 @@
 #import "DDDDataServices.h"
 #import "DDDArrayInsertionDeletion.h"
 
-#define DDDTopStoriesRefreshFetchCount 20
+#define DDDTopStoriesRefreshFetchCount  20
+#define DDDMaxTopStoriesCount           100
 
 @interface DDDTopStoriesViewModel()
 @property (assign, nonatomic) NSInteger topStoryFromValue;
@@ -25,7 +26,7 @@
     [super prepareWithModel:model];
     self.isFetchingStories = NO;
     self.topStoryFromValue = 0;
-    self.topStoryToValue   = 20;
+    self.topStoryToValue   = DDDTopStoriesRefreshFetchCount;
 }
 
 - (void)viewModelDidLoad
@@ -78,4 +79,8 @@
     }];
 }
 
+- (BOOL)canLoadMoreStories
+{
+    return (self.topStoryToValue < DDDMaxTopStoriesCount);
+}
 @end

@@ -19,9 +19,4 @@
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
 }
-
-- (void)viewModelDidLoad
-{
-    [super viewModelDidLoad];
-}
 @end

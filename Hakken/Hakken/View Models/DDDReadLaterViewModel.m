@@ -92,4 +92,9 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
         [idxSet addIndex:idxPath.row];
     return idxSet;
 }
+
+- (BOOL)canLoadMoreStories
+{
+    return NO;
+}
 @end

@@ -19,4 +19,5 @@
 - (NSInteger)commentCount;
 
 - (void)refreshComments;
+- (BOOL)shouldShowLoadingFooter;
 @end

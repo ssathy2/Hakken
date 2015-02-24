@@ -36,6 +36,7 @@ UIGestureRecognizerDelegate>
 @interface DDDStoryDisplayViewController()
 @property (assign, nonatomic) BOOL viewIsVisible;
 @property (strong, nonatomic) UIPanGestureRecognizer *cellSwipePangestureRecognizer;
+@property (strong, nonatomic) NSIndexPath *cellIndexPathBeingSwiped;
 
 @property (strong, nonatomic) UIPanGestureRecognizer *collectionViewPanGestureRecognizer;
 @end
@@ -132,9 +133,26 @@ UIGestureRecognizerDelegate>
 {
     CGPoint locationInCollectionView = [pangestureRecognizer locationInView:self.collectionView];
     NSIndexPath *cellIdxPath = [self.collectionView indexPathForItemAtPoint:locationInCollectionView];
-    DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
-    if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
-        [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
+    
+    if ([self.cellIndexPathBeingSwiped isEqual:cellIdxPath])
+    {
+        DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
+        if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
+            [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
+    }
+    else
+    {
+        if (cellIdxPath)
+        {
+            DDDHackerNewsItemCollectionViewCell *prevCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.cellIndexPathBeingSwiped];
+            [prevCell closeCellSwipeContainer];
+            self.cellIndexPathBeingSwiped = nil;
+        }
+        DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
+        self.cellIndexPathBeingSwiped = cellIdxPath;
+        if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
+            [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
+    }
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
@@ -217,6 +235,15 @@ UIGestureRecognizerDelegate>
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row];
     CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withModelIdentifier:@(item.id)];
     return size;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
+    if (![[self storyDisplayViewModel] canLoadMoreStories])
+        return CGSizeZero;
+    else
+        return flowLayout.footerReferenceSize;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didHighlightItemAtIndexPath:(NSIndexPath *)indexPath
