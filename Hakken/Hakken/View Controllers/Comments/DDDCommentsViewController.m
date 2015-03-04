@@ -218,6 +218,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     DDDLoadingCollectionReusableView *loadingView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier forIndexPath:indexPath];
+    [loadingView setLabel:@"Loading Comments"];
     return loadingView;
 }
 

@@ -103,7 +103,7 @@
         weakSelf.viewModelError = error;
     } completed:^{
         [weakSelf formCommentTreeInfosArrayWithComments:comments];
-        [weakSelf.latestComments addAllItemsIntoArrayFromArray:self.commentTreeInfos];
+        [weakSelf.latestComments resetArrayWithArray:self.commentTreeInfos];
     }];
 }
 

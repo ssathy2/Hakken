@@ -20,4 +20,9 @@
     [self.loadingIndicator startAnimating];
 }
 
+- (void)setLabel:(NSString *)label
+{
+    self.loadingLabel.text = label;
+}
+
 @end

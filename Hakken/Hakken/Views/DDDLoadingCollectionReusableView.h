@@ -11,5 +11,5 @@
 #define DDDLoadingCollectionResuableViewIdentifier @"DDDLoadingCollectionReusableView"
 
 @interface DDDLoadingCollectionReusableView : UICollectionReusableView
-
+- (void)setLabel:(NSString *)label;
 @end

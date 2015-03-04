@@ -100,7 +100,6 @@ UIGestureRecognizerDelegate>
     self.collectionView.dataSource   = self;
     
     [self.collectionView addGestureRecognizer:self.cellSwipePangestureRecognizer];
-    [self.collectionView.panGestureRecognizer requireGestureRecognizerToFail:self.cellSwipePangestureRecognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDLoadingCollectionReusableView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier];
 }
@@ -226,6 +225,7 @@ UIGestureRecognizerDelegate>
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     DDDLoadingCollectionReusableView *loadingView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier forIndexPath:indexPath];
+    [loadingView setLabel:@"Loading Stories"];
     return loadingView;
 }
 
