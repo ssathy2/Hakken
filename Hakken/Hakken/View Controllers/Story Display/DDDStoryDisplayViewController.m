@@ -154,6 +154,21 @@ UIGestureRecognizerDelegate>
     }
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if([gestureRecognizer isEqual:self.cellSwipePangestureRecognizer])
+    {
+        CGPoint point = [self.cellSwipePangestureRecognizer translationInView:self.collectionView];
+        if(point.x != 0)
+        { //adjust this condition if you want some leniency on the X axis
+            //The translation was on the X axis, i.e. right/left,
+            //so this gesture recognizer shouldn't do anything about it
+            return NO;
+        }
+    }
+    return YES;
+}
+
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
     if ([gestureRecognizer isEqual:self.cellSwipePangestureRecognizer])

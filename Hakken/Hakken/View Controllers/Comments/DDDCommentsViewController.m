@@ -246,7 +246,8 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         case DDDCommentsSectionComments:
         {
             DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:@(treeInfo.comment.id)];
+            CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:@(treeInfo.comment.id)];
+            return CGSizeMake(CGRectGetWidth(collectionView.bounds), size.height);
         }
         default:
         {

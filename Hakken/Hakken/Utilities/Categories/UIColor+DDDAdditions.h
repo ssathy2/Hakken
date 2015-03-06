@@ -14,4 +14,5 @@
 + (UIColor *)swipeActionViewGrayColor;
 
 + (UIColor *)navigationBarBackgroundColor;
++ (UIColor *)colorForDepth:(NSInteger)depth;
 @end

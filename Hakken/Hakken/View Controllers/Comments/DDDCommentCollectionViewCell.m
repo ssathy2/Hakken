@@ -26,6 +26,7 @@
     DDDCommentTreeInfo *commentTreeInfo = (DDDCommentTreeInfo *)model;
     self.commentUserLabel.text = commentTreeInfo.comment.by;
     self.distantDateCommentPostedLabel.text = [commentTreeInfo.comment.dateCreated relativeDateTimeStringToNow];
+    self.depthIndicatorView.backgroundColor = [UIColor colorForDepth:commentTreeInfo.depth];
     
     NSData *data = [commentTreeInfo.comment.text dataUsingEncoding:NSUTF8StringEncoding];
     UIFont *font = self.commentLabel.font;
@@ -39,6 +40,9 @@
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data
                                                                           options:optionsDict
                                                                documentAttributes:nil];
-    self.commentLabel.attributedText = attrString;
+    NSMutableAttributedString *mutAttrString = [attrString mutableCopy];
+    [mutAttrString deleteCharactersInRange:NSMakeRange(mutAttrString.length-1, 1)];
+    
+    self.commentLabel.attributedText = mutAttrString;
 }
 @end

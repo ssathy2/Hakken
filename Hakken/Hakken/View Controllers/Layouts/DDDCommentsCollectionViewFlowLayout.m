@@ -73,7 +73,6 @@
                 supplementaryViewInfo[indexPath] = footerAttributes;
             if (headerAttributes)
                 supplementaryViewInfo[indexPath] = headerAttributes;
-            
         }
     }
     
@@ -87,7 +86,7 @@
     CGRect attributesFrame = attributes.frame;
     if (treeInfo.depth > 0)
     {
-        CGFloat depthOffset = ((treeInfo.depth-1) * 20);
+        CGFloat depthOffset = ((treeInfo.depth-1) * 12);
         attributesFrame.size.width -= depthOffset;
         attributesFrame.origin.x += depthOffset;
     }
