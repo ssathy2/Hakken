@@ -22,14 +22,15 @@
 + (NSDictionary *)defaultPropertyValues
 {
     return @{
-             @"deleted" : @(NO),
-             @"dead"    : @(NO),
-             @"parent"  : @(0),
-             @"text"    : @"",
-             @"by"      : @"",
-             @"url"     : @"",
-             @"score"   : @(0),
-             @"title"   : @"",
+             @"descendants"          : @(0),
+             @"deleted"              : @(NO),
+             @"dead"                 : @(NO),
+             @"parent"               : @(0),
+             @"text"                 : @"",
+             @"by"                   : @"",
+             @"url"                  : @"",
+             @"score"                : @(0),
+             @"title"                : @"",
              @"readLaterInformation" : [DDDHakkenReadLaterInformation defaultObject]
              };
 }

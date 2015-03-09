@@ -315,8 +315,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     
     [self styleURLLabelWithHackernewsItem:hnItem];
     
-    // TODO: Get the actual number of comments
-    [self.commentsButton setTitle:[@(hnItem.kids.count) stringValue] forState:UIControlStateNormal];
+    [self.commentsButton setTitle:[@(hnItem.descendants) stringValue] forState:UIControlStateNormal];
     
     self.swipeActionViewLabel.text = (hnItem.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
 }

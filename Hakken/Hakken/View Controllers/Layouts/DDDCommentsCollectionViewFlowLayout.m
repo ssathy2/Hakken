@@ -86,7 +86,7 @@
     CGRect attributesFrame = attributes.frame;
     if (treeInfo.depth > 0)
     {
-        CGFloat depthOffset = ((treeInfo.depth-1) * 12);
+        CGFloat depthOffset = (treeInfo.depth * 12);
         attributesFrame.size.width -= depthOffset;
         attributesFrame.origin.x += depthOffset;
     }

@@ -73,11 +73,8 @@
                                     <action selector="resetButtonTransform:" destination="hWV-aD-7Oy" eventType="touchCancel" id="O4H-TH-9Wi"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FXP-po-bLh">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" text="Show HN: GitBlah - Does absolutely nothing for anyone" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="FXP-po-bLh">
                                 <rect key="frame" x="15" y="15" width="275" height="49"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="275" id="Vxu-xA-tuI"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -100,6 +97,7 @@
                             <constraint firstItem="zaE-4B-wLQ" firstAttribute="leading" secondItem="B40-H9-V3A" secondAttribute="leading" id="3TG-OH-ug6"/>
                             <constraint firstAttribute="centerY" secondItem="GWH-P2-8Wt" secondAttribute="centerY" constant="-0.5" id="3ya-6E-yF2"/>
                             <constraint firstItem="B40-H9-V3A" firstAttribute="leading" secondItem="AYm-KU-LxM" secondAttribute="leading" id="9X8-d7-v1r"/>
+                            <constraint firstAttribute="trailing" secondItem="GWH-P2-8Wt" secondAttribute="trailing" constant="10" id="Bev-NC-DDn"/>
                             <constraint firstItem="AYm-KU-LxM" firstAttribute="top" secondItem="FXP-po-bLh" secondAttribute="bottom" constant="2" id="I6m-S4-vM0"/>
                             <constraint firstItem="FXP-po-bLh" firstAttribute="leading" secondItem="urA-DN-lqx" secondAttribute="leading" constant="15" id="KAp-W4-WOC"/>
                             <constraint firstItem="FXP-po-bLh" firstAttribute="leading" secondItem="AYm-KU-LxM" secondAttribute="leading" id="L4P-YH-YuF"/>

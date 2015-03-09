@@ -11,7 +11,7 @@
 #import "DDDArrayInsertionDeletion.h"
 
 #define DDDTopStoriesRefreshFetchCount  20
-#define DDDMaxTopStoriesCount           100
+#define DDDMaxTopStoriesCount           500
 
 @interface DDDTopStoriesViewModel()
 @property (assign, nonatomic) NSInteger topStoryFromValue;

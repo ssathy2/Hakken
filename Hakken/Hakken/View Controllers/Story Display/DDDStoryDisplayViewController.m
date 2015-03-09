@@ -29,16 +29,13 @@
 DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
-UINavigationControllerDelegate,
 UIGestureRecognizerDelegate>
 @end
 
 @interface DDDStoryDisplayViewController()
 @property (assign, nonatomic) BOOL viewIsVisible;
 @property (strong, nonatomic) UIPanGestureRecognizer *cellSwipePangestureRecognizer;
-@property (strong, nonatomic) NSIndexPath *cellIndexPathBeingSwiped;
-
-@property (strong, nonatomic) UIPanGestureRecognizer *collectionViewPanGestureRecognizer;
+@property (strong, nonatomic) NSIndexPath *previousCellSwipedIndexPath;
 @end
 
 @implementation DDDStoryDisplayViewController
@@ -99,6 +96,7 @@ UIGestureRecognizerDelegate>
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
     
+
     [self.collectionView addGestureRecognizer:self.cellSwipePangestureRecognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDLoadingCollectionReusableView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier];
@@ -132,41 +130,29 @@ UIGestureRecognizerDelegate>
 {
     CGPoint locationInCollectionView = [pangestureRecognizer locationInView:self.collectionView];
     NSIndexPath *cellIdxPath = [self.collectionView indexPathForItemAtPoint:locationInCollectionView];
-    
-    if ([self.cellIndexPathBeingSwiped isEqual:cellIdxPath])
+
+    if ((pangestureRecognizer.state == UIGestureRecognizerStateEnded) || (pangestureRecognizer.state == UIGestureRecognizerStateFailed))
     {
-        DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
-        if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
-            [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
+        [self.collectionView.visibleCells enumerateObjectsUsingBlock:^(DDDHackerNewsItemCollectionViewCell *cell, NSUInteger idx, BOOL *stop) {
+            if ([cell respondsToSelector:@selector(handlePanGesture:)])
+                [cell handlePanGesture:pangestureRecognizer];
+        }];
     }
     else
     {
-        if (cellIdxPath)
-        {
-            DDDHackerNewsItemCollectionViewCell *prevCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.cellIndexPathBeingSwiped];
-            [prevCell closeCellSwipeContainer];
-            self.cellIndexPathBeingSwiped = nil;
-        }
         DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
-        self.cellIndexPathBeingSwiped = cellIdxPath;
         if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
             [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if([gestureRecognizer isEqual:self.cellSwipePangestureRecognizer])
-    {
-        CGPoint point = [self.cellSwipePangestureRecognizer translationInView:self.collectionView];
-        if(point.x != 0)
-        { //adjust this condition if you want some leniency on the X axis
-            //The translation was on the X axis, i.e. right/left,
-            //so this gesture recognizer shouldn't do anything about it
-            return NO;
-        }
-    }
-    return YES;
+    if (gestureRecognizer == self.collectionView.panGestureRecognizer && otherGestureRecognizer == self.cellSwipePangestureRecognizer)
+        return YES;
+    if (gestureRecognizer == self.cellSwipePangestureRecognizer && otherGestureRecognizer == self.collectionView.panGestureRecognizer)
+        return YES;
+    return NO;
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer

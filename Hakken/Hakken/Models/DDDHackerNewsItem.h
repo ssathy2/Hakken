@@ -29,6 +29,7 @@ RLM_ARRAY_TYPE(RLMNumberObject);
 
 @interface DDDHackerNewsItem : RLMObject
 @property (assign, nonatomic) NSInteger id;
+@property (assign, nonatomic) NSInteger descendants;
 @property (assign, nonatomic) BOOL deleted;
 @property (copy, nonatomic) NSString *type;
 @property (copy,   nonatomic) NSString *by;
