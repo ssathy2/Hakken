@@ -57,17 +57,14 @@
                                  [[RLMRealm defaultRealm] beginWriteTransaction];
                                  for (NSDictionary *item in responseObject)
                                  {
-                                     if (![item isKindOfClass:[NSNull class]])
+                                     DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
+                                     DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
+                                     if (servicesItem.deleted == NO)
                                      {
-                                         DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
-                                         DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
-                                         if (servicesItem.deleted == NO)
-                                         {
-                                             if (!realmItem.readLaterInformation)
-                                                 realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
-                                             servicesItem.readLaterInformation = realmItem.readLaterInformation;
-                                             [arr addObject:servicesItem];
-                                         }
+                                         if (!realmItem.readLaterInformation)
+                                             realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
+                                         servicesItem.readLaterInformation = realmItem.readLaterInformation;
+                                         [arr addObject:servicesItem];
                                      }
                                  }
                                  [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];

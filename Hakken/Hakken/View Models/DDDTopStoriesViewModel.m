@@ -67,7 +67,7 @@
 - (void)fetchNextBatchOfStories
 {
     self.topStoryFromValue = self.topStoryToValue+1;
-    self.topStoryToValue += DDDTopStoriesRefreshFetchCount;
+    self.topStoryToValue += (DDDTopStoriesRefreshFetchCount+1);
     __block NSArray *results;
     
     [[self fetchStoriesFrom:self.topStoryFromValue to:self.topStoryToValue] subscribeNext:^(id x) {
