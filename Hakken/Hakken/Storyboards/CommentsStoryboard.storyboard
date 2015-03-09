@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Comments View Controller-->
+        <!--Comments-->
         <scene sceneID="08F-ti-8YA">
             <objects>
                 <viewController storyboardIdentifier="DDDCommentsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Avq-g0-6wy" customClass="DDDCommentsViewController" sceneMemberID="viewController">
@@ -66,6 +66,8 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Comments" id="cJD-qV-CQM"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="AeX-C6-s6L" id="4qk-pJ-LfE"/>
                     </connections>

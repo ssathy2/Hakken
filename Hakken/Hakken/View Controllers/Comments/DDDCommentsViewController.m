@@ -235,26 +235,31 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    CGSize preferredSize;
     switch (indexPath.section)
     {
         case DDDCommentsSectionHeader:
         {
             DDDHackerNewsItem *item = [[self commentsViewModel] story];
             Class cellKlass = (item.isUserGenerated) ? [DDDHackernewsUserItemCollectionViewCell class] : [DDDHackerNewsItemCollectionViewCell class];
-            return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:@(item.id)];
+            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:@(item.id)];
+            break;
         }
         case DDDCommentsSectionComments:
         {
             DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-            CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:@(treeInfo.comment.id)];
-            return CGSizeMake(CGRectGetWidth(collectionView.bounds), size.height);
+            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:@(treeInfo.comment.id)];
+            break;
         }
         default:
         {
             UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
-            return flowLayout.itemSize;
+            preferredSize = flowLayout.itemSize;
+            break;
         }
     }
+    
+    return CGSizeMake(CGRectGetWidth(collectionView.bounds), preferredSize.height);
 }
 
 @end

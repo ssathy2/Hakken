@@ -55,18 +55,20 @@
                                  // convert the response object into an array of models
                                  NSMutableArray *arr = [NSMutableArray array];
                                  [[RLMRealm defaultRealm] beginWriteTransaction];
-                                 for (NSDictionary *item in responseObject)
-                                 {
-                                     DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
-                                     DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
-                                     if (servicesItem.deleted == NO)
+                                 [responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
+                                     if ([self shouldModelHackernewsResponseDictionary:item])
                                      {
-                                         if (!realmItem.readLaterInformation)
-                                             realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
-                                         servicesItem.readLaterInformation = realmItem.readLaterInformation;
-                                         [arr addObject:servicesItem];
+                                         DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
+                                         DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
+                                         if (servicesItem.deleted == NO)
+                                         {
+                                             if (!realmItem.readLaterInformation)
+                                                 realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
+                                             servicesItem.readLaterInformation = realmItem.readLaterInformation;
+                                             [arr addObject:servicesItem];
+                                         }
                                      }
-                                 }
+                                 }];
                                  [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
                                  [[RLMRealm defaultRealm] commitWriteTransaction];
                                  [subscriber sendNext:arr];
@@ -98,9 +100,10 @@
                                      // convert the response object into an array of models
                                      NSMutableArray *arr = [NSMutableArray array];
                                      [[RLMRealm defaultRealm] beginWriteTransaction];
-                                     for (NSDictionary *item in responseObject)
-                                         if (item)
+                                     [responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
+                                         if ([self shouldModelHackernewsResponseDictionary:item])
                                              [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+                                     }];
                                      [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];                                     
                                      [[RLMRealm defaultRealm] commitWriteTransaction];
                                      [subscriber sendNext:arr];
@@ -110,6 +113,11 @@
                                  }];
         return nil;
     }];
+}
+
+- (BOOL)shouldModelHackernewsResponseDictionary:(NSDictionary *)responseDictionary
+{
+    return (![responseDictionary valueForKey:@"error"]);
 }
 
 - (NSDictionary *)remappedResponseDictionaryWithOriginalDictionary:(NSDictionary *)originalDictionary shouldPerformKidsRemapping:(BOOL)shouldPerformKidsRemapping
@@ -161,14 +169,11 @@
 - (NSDictionary *)remapDictionary
 {
     return nil;
-  //@{
-  //           @"id" : @"identifier"
-  //           };
 }
 
 - (NSArray *)numberToStringPropertyConverionArray
 {
-    return nil;//@[@"id", @"parent"];
+    return nil;
 }
 
 @end

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Story Detail View Controller-->
+        <!--Detail-->
         <scene sceneID="Pjs-Tu-HGP">
             <objects>
                 <viewController storyboardIdentifier="DDDStoryDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jQk-Zl-2PC" customClass="DDDStoryDetailViewController" sceneMemberID="viewController">
@@ -58,6 +58,7 @@
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Detail" id="RcC-D5-3Ix"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="URf-vr-I9T" id="u5y-mi-El6"/>

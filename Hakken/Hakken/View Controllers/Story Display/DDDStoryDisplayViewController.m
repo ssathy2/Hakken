@@ -96,7 +96,6 @@ UIGestureRecognizerDelegate>
     self.collectionView.delegate     = self;
     self.collectionView.dataSource   = self;
     
-
     [self.collectionView addGestureRecognizer:self.cellSwipePangestureRecognizer];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDHackerNewsItemCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([DDDLoadingCollectionReusableView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:DDDLoadingCollectionResuableViewIdentifier];
@@ -131,39 +130,26 @@ UIGestureRecognizerDelegate>
     CGPoint locationInCollectionView = [pangestureRecognizer locationInView:self.collectionView];
     NSIndexPath *cellIdxPath = [self.collectionView indexPathForItemAtPoint:locationInCollectionView];
 
-    if ((pangestureRecognizer.state == UIGestureRecognizerStateEnded) || (pangestureRecognizer.state == UIGestureRecognizerStateFailed))
+    if (pangestureRecognizer.state == UIGestureRecognizerStateBegan)
+        self.previousCellSwipedIndexPath = cellIdxPath;
+    else if ((pangestureRecognizer.state == UIGestureRecognizerStateEnded) || (pangestureRecognizer.state == UIGestureRecognizerStateFailed))
     {
+        self.previousCellSwipedIndexPath = nil;
         [self.collectionView.visibleCells enumerateObjectsUsingBlock:^(DDDHackerNewsItemCollectionViewCell *cell, NSUInteger idx, BOOL *stop) {
             if ([cell respondsToSelector:@selector(handlePanGesture:)])
                 [cell handlePanGesture:pangestureRecognizer];
         }];
     }
-    else
-    {
-        DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:cellIdxPath];
-        if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
-            [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
-    }
-}
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    if (gestureRecognizer == self.collectionView.panGestureRecognizer && otherGestureRecognizer == self.cellSwipePangestureRecognizer)
-        return YES;
-    if (gestureRecognizer == self.cellSwipePangestureRecognizer && otherGestureRecognizer == self.collectionView.panGestureRecognizer)
-        return YES;
-    return NO;
+    DDDHackerNewsItemCollectionViewCell *newsItemCollectionViewCell = (DDDHackerNewsItemCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:self.previousCellSwipedIndexPath];
+    if ([newsItemCollectionViewCell respondsToSelector:@selector(handlePanGesture:)])
+        [newsItemCollectionViewCell handlePanGesture:pangestureRecognizer];
 }
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    if ([gestureRecognizer isEqual:self.cellSwipePangestureRecognizer])
-    {
-        UIPanGestureRecognizerDirection direction = [gestureRecognizer panGestureDirectionInView:self.collectionView];
-        return (direction & UIPanGestureRecognizerDirectionLeft) || (direction & UIPanGestureRecognizerDirectionRight);
-    }
-    else
-        return YES;
+    CGPoint translation = [gestureRecognizer translationInView:self.collectionView];
+    return (translation.y * translation.y < translation.x * translation.x);
 }
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion
