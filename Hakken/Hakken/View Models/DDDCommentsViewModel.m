@@ -44,8 +44,7 @@
 
 - (void)formCommentTreeInfosArrayWithComments:(NSArray *)comments
 {
-    if (!self.commentTreeInfos)
-        self.commentTreeInfos = [NSMutableArray array];
+    self.commentTreeInfos = [NSMutableArray array];
  
     NSInteger depth = 0;
     for (DDDHackerNewsComment *comment in comments)
@@ -54,11 +53,12 @@
                                       
 - (void)formCommentTreeWithRootComment:(DDDHackerNewsComment *)rootComment withDepth:(NSInteger)depth
 {
+    if (!rootComment.kids)
+        return;
+    
     if (![self shouldIgnoreComment:rootComment])
         [self.commentTreeInfos addObject:[DDDCommentTreeInfo commentTreeInfoWithComment:rootComment withDepth:depth]];
     
-    if (!rootComment.kids)
-        return;
     for (DDDHackerNewsComment *childComment in rootComment.kids)
     {
         depth++;
@@ -103,7 +103,7 @@
         weakSelf.viewModelError = error;
     } completed:^{
         [weakSelf formCommentTreeInfosArrayWithComments:comments];
-        [weakSelf.latestComments resetArrayWithArray:self.commentTreeInfos];
+        [weakSelf.latestComments resetArrayWithArray:weakSelf.commentTreeInfos];
     }];
 }
 

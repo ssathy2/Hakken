@@ -18,6 +18,9 @@
 #import "DDDHackernewsItemCollectionViewCell.h"
 #import "DDDHackernewsUserItemCollectionViewCell.h"
 #import "DDDLoadingCollectionReusableView.h"
+#import "DDDStoryTransitionModel.h"
+#import "DDDTransitionAttributes.h"
+#import "DetailStoryboardIdentifiers.h"
 
 typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
@@ -160,6 +163,23 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         currentIndex = [set indexGreaterThanIndex:currentIndex];
     }
     return indexPaths;
+}
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    DDDHackerNewsItem *item = [[self commentsViewModel] story];
+    if (indexPath.section == DDDCommentsSectionHeader && !item.isUserGenerated)
+    {
+        DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
+
+        transitionModel.story = item;
+        
+        DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+        attrs.model = transitionModel;
+        
+        [self.navigationController transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource
