@@ -11,9 +11,11 @@
 #import "DDDTransitionAttributes.h"
 #import "TopStoryStoryboardIdentifiers.h"
 #import "DDDArrayInsertionDeletion.h"
+#import "DDDRightNavigationView.h"
 
 @interface DDDTopStoriesViewController()
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) DDDRightNavigationView *rightNavView;
 @end
 
 @implementation DDDTopStoriesViewController
@@ -38,6 +40,20 @@
     [super viewDidLoad];
     [self setupReactions];
     [self setupRefreshControl];
+    [self setupNavigationButton];
+}
+
+- (void)setupNavigationButton
+{
+    self.rightNavView = [DDDRightNavigationView instance];
+    [self.rightNavView setBackgroundColor:[UIColor clearColor]];
+    CGRect navFrame = self.rightNavView.frame;
+    navFrame.size.height = 35.f;
+    navFrame.size.width  = 40.f;
+    self.rightNavView.frame = navFrame;
+    [self.rightNavView setNumber:4 animated:NO withCustomAnimations:nil];
+    [self.rightNavView addTarget:self action:@selector(readLaterButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightNavView]];
 }
 
 - (void)setupReactions
@@ -57,7 +73,7 @@
     [self.refreshControl endRefreshing];
 }
 
-- (IBAction)readLaterButtonTapped:(id)sender
+- (void)readLaterButtonTapped:(id)sender
 {
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.presentModally = YES;

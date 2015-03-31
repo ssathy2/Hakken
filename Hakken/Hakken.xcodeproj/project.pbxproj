@@ -87,6 +87,9 @@
 		DEBE3B771A561A5400AA194F /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
 		DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */; };
 		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
+		F97A5A941ACB008B004B71D6 /* DDDRightNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97A5A931ACB008B004B71D6 /* DDDRightNavigationView.m */; };
+		F97A5A961ACB009E004B71D6 /* DDDRightNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F97A5A951ACB009E004B71D6 /* DDDRightNavigationView.xib */; };
+		F97A5A991ACB18D3004B71D6 /* UIView+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = F97A5A981ACB18D3004B71D6 /* UIView+Utility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -237,6 +240,11 @@
 		DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewModel.h; sourceTree = "<group>"; };
 		DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewModel.m; sourceTree = "<group>"; };
 		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
+		F97A5A921ACB008B004B71D6 /* DDDRightNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDRightNavigationView.h; sourceTree = "<group>"; };
+		F97A5A931ACB008B004B71D6 /* DDDRightNavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDRightNavigationView.m; sourceTree = "<group>"; };
+		F97A5A951ACB009E004B71D6 /* DDDRightNavigationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDRightNavigationView.xib; sourceTree = "<group>"; };
+		F97A5A971ACB18D3004B71D6 /* UIView+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utility.h"; sourceTree = "<group>"; };
+		F97A5A981ACB18D3004B71D6 /* UIView+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utility.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -425,9 +433,9 @@
 			children = (
 				DE53D4171A5FF12300A8B06A /* DDDCategories.h */,
 				DE53D4181A5FF12300A8B06A /* NSDate+Utility.h */,
+				DE53D41B1A5FF12300A8B06A /* NSDictionary+DDDAdditions.m */,
 				DE53D4191A5FF12300A8B06A /* NSDate+Utility.m */,
 				DE53D41A1A5FF12300A8B06A /* NSDictionary+DDDAdditions.h */,
-				DE53D41B1A5FF12300A8B06A /* NSDictionary+DDDAdditions.m */,
 				DE53D41C1A5FF12300A8B06A /* NSMutableArray+Modification.h */,
 				DE53D41D1A5FF12300A8B06A /* NSMutableArray+Modification.m */,
 				DE53D41E1A5FF12300A8B06A /* NSObject+Introspection.h */,
@@ -440,6 +448,8 @@
 				DE0755C11A7ECE1F005170D6 /* RLMResults+DDDHelpers.m */,
 				DE0755B41A79F751005170D6 /* UIPanGestureRecognizer+Helpers.h */,
 				DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */,
+				F97A5A971ACB18D3004B71D6 /* UIView+Utility.h */,
+				F97A5A981ACB18D3004B71D6 /* UIView+Utility.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -469,6 +479,7 @@
 		DE53D43B1A5FF13500A8B06A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F97A5A911ACB0040004B71D6 /* Navigation */,
 				DE53D43C1A5FF13500A8B06A /* Collection View Cells */,
 				DE61ADA31A9A659D00714D5A /* DDDLoadingCollectionReusableView.h */,
 				DE61ADA41A9A659D00714D5A /* DDDLoadingCollectionReusableView.m */,
@@ -593,6 +604,16 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		F97A5A911ACB0040004B71D6 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				F97A5A921ACB008B004B71D6 /* DDDRightNavigationView.h */,
+				F97A5A931ACB008B004B71D6 /* DDDRightNavigationView.m */,
+				F97A5A951ACB009E004B71D6 /* DDDRightNavigationView.xib */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -692,6 +713,7 @@
 				DE475DA11A1ADB1600970E87 /* LaunchScreen.xib in Resources */,
 				DE9C82691A6100D000B738AB /* Main.storyboard in Resources */,
 				DE475D9E1A1ADB1600970E87 /* Images.xcassets in Resources */,
+				F97A5A961ACB009E004B71D6 /* DDDRightNavigationView.xib in Resources */,
 				DE53D4471A5FF13500A8B06A /* DDDCommentCollectionViewCell.xib in Resources */,
 				DE53D44B1A5FF13500A8B06A /* DDDWebViewCollectionViewCell.xib in Resources */,
 				DE53D43A1A5FF12300A8B06A /* TopStoriesStoryboard.storyboard in Resources */,
@@ -779,6 +801,7 @@
 				DE6F01BB1A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.m in Sources */,
 				DE53D4741A5FF14B00A8B06A /* DDDStoryDetailViewController.m in Sources */,
 				DE53D4721A5FF14B00A8B06A /* DDDBouncyCollectionViewFlowLayout.m in Sources */,
+				F97A5A991ACB18D3004B71D6 /* UIView+Utility.m in Sources */,
 				DE53D4761A5FF14B00A8B06A /* DDDTopStoriesViewController.m in Sources */,
 				DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */,
 				DE53D4331A5FF12300A8B06A /* NSObject+Introspection.m in Sources */,
@@ -789,6 +812,7 @@
 				DEB590401AAE4389002D7603 /* DDDNoContentView.m in Sources */,
 				DE0755BF1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m in Sources */,
 				DE53D46F1A5FF14B00A8B06A /* DDDContentViewController.m in Sources */,
+				F97A5A941ACB008B004B71D6 /* DDDRightNavigationView.m in Sources */,
 				DE53D4371A5FF12300A8B06A /* DDDFileOperationHelpers.m in Sources */,
 				DE53D4461A5FF13500A8B06A /* DDDCollectionViewCell.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
@@ -932,9 +956,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -945,9 +971,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

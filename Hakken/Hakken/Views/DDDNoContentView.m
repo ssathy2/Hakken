@@ -16,7 +16,7 @@
 @implementation DDDNoContentView
 + (instancetype)instanceWithText:(NSString *)noContentText
 {
-    DDDNoContentView *contentView = (DDDNoContentView *)[[[UINib nibWithNibName:NSStringFromClass([DDDNoContentView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+    DDDNoContentView *contentView = (DDDNoContentView *)[[[UINib nibWithNibName:NSStringFromClass(self) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
     contentView.noContentLabel.text = noContentText;
     return contentView;
 }

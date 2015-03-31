@@ -21,5 +21,4 @@
     [self.navigationController transitionToScreen:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];
 }
 
-
 @end

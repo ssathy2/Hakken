@@ -55,8 +55,8 @@
 
 - (void)setupNavigationController
 {
-    self.navigationBar.barTintColor = [UIColor navigationBarBackgroundColor];
-    self.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    [self.navigationBar setBackgroundColor:[UIColor navigationBarBackgroundColor]];
+    self.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 - (void)updateScreenMapping:(NSDictionary *)screenMapping

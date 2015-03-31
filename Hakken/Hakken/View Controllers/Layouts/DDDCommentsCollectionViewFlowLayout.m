@@ -52,6 +52,10 @@
     _contentSizeHeight = -1;
     NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary dictionary];
     NSMutableDictionary *supplementaryViewInfo  = [NSMutableDictionary dictionary];
+    
+    NSMutableDictionary *footerViewInfo         = [NSMutableDictionary dictionary];
+    NSMutableDictionary *headerViewInfo         = [NSMutableDictionary dictionary];
+    
     NSInteger sectionCount                      = [self.collectionView numberOfSections];
     NSIndexPath *indexPath                      = [NSIndexPath indexPathForItem:0 inSection:0];
     
@@ -63,18 +67,21 @@
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *headerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
+
             itemAttributes.frame = [self frameForLayoutAttributes:itemAttributes atIndexPath:indexPath];
             if (itemAttributes)
                 cellLayoutInfo[indexPath] = itemAttributes;
-            
-            UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
-            UICollectionViewLayoutAttributes *headerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
             if (footerAttributes)
-                supplementaryViewInfo[indexPath] = footerAttributes;
+               footerViewInfo[indexPath] = footerAttributes;
             if (headerAttributes)
-                supplementaryViewInfo[indexPath] = headerAttributes;
+                headerViewInfo[indexPath] = headerAttributes;
         }
     }
+    
+    supplementaryViewInfo[UICollectionElementKindSectionFooter] = footerViewInfo;
+    supplementaryViewInfo[UICollectionElementKindSectionHeader] = headerViewInfo;
     
     self.cellLayoutInfo = cellLayoutInfo;
     self.supplementaryViewLayoutInfo = supplementaryViewInfo;
@@ -98,44 +105,47 @@
     NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.cellLayoutInfo.count];
     
     [self.cellLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
+        if (CGRectIntersectsRect(rect, attributes.frame))
+            [allAttributes addObject:attributes];
+    }];
+
+    [self.supplementaryViewLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *dict, BOOL *stop) {
+        [dict enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attributes, BOOL *stop) {
             if (CGRectIntersectsRect(rect, attributes.frame))
                 [allAttributes addObject:attributes];
+        }];
     }];
     
-    [self.supplementaryViewLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
-            if (CGRectIntersectsRect(rect, attributes.frame))
-                [allAttributes addObject:attributes];
-    }];
     return allAttributes;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *attrs = (self.cellLayoutInfo[indexPath]) ?: [super layoutAttributesForItemAtIndexPath:indexPath];
-    return attrs;
+    return (self.cellLayoutInfo[indexPath]) ?: [super layoutAttributesForItemAtIndexPath:indexPath];
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewLayoutAttributes *attrs = (self.supplementaryViewLayoutInfo[indexPath]) ?: [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
-    return attrs;
+    return (self.supplementaryViewLayoutInfo[indexPath]) ?: [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
 }
 
 - (CGFloat)contentSizeHeight
 {
-    if (_contentSizeHeight == -1)
-    {
-        __block CGFloat height = 0;
-        [self.cellLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attrs, BOOL *stop) {
-            height += CGRectGetHeight(attrs.frame);
+    if (_contentSizeHeight != -1)
+        return _contentSizeHeight;
+    
+    __block CGFloat height = 0;
+    [self.cellLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attrs, BOOL *stop) {
+        height += CGRectGetHeight(attrs.frame);
+    }];
+    
+    [self.supplementaryViewLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSDictionary *dict, BOOL *stop) {
+        [dict enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attributes, BOOL *stop) {
+            height += CGRectGetHeight(attributes.frame);
         }];
-        
-        [self.supplementaryViewLayoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *idxPath, UICollectionViewLayoutAttributes *attrs, BOOL *stop) {
-            height += CGRectGetHeight(attrs.frame);
-        }];
-        
-        _contentSizeHeight = height;
-    }
+    }];
+    
+    _contentSizeHeight = height;
     return _contentSizeHeight;
 }
 
