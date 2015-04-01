@@ -9,6 +9,10 @@
 #import "DDDStoryDisplayViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 
+@interface DDDStoryDisplayViewModel()
+@property (strong, nonatomic) RACSignal *unreadStoriesSignal;
+@end
+
 @implementation DDDStoryDisplayViewModel
 - (void)prepareWithModel:(id)model
 {
@@ -18,16 +22,32 @@
 
 - (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story;
 {
-    return [DDDHakkenReadLaterManager addItemToReadLater:story];
+    return [[DDDHakkenReadLaterManager addItemToReadLater:story] then:^RACSignal *{
+        return [self fetchUnreadStories];
+    }];
 }
 
 - (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story
 {
-    return [DDDHakkenReadLaterManager removeItemFromReadLater:story];
+    return [[DDDHakkenReadLaterManager removeItemFromReadLater:story] then:^RACSignal *{
+        return [self fetchUnreadStories];
+    }];
+}
+
+- (RACSignal *)fetchUnreadStories
+{
+    if (!_unreadStoriesSignal)
+    {
+        _unreadStoriesSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            return [[DDDHakkenReadLaterManager fetchUnreadReadLaterItems] subscribe:subscriber];
+        }];
+    }
+    return _unreadStoriesSignal;
 }
 
 - (BOOL)canLoadMoreStories
 {
     return NO;
 }
+
 @end

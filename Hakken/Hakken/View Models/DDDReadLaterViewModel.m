@@ -34,33 +34,7 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
 - (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story
 {
     __weak typeof(self) weakSelf = self;
-    [[super removeStoryFromReadLater:story] subscribeNext:^(id x) {
-       
-    } error:^(NSError *error) {
-        weakSelf.viewModelError = error;
-    } completed:^{
-        __block NSArray *results;
-       [[DDDHakkenReadLaterManager fetchAllItemsToReadLater] subscribeNext:^(id x) {
-           results = x;
-       } error:^(NSError *error) {
-           weakSelf.viewModelError = error;
-       } completed:^{
-           NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
-           NSIndexSet *idxPathsRemoved = [self indexSetFromIndexPaths:@[idxPathForStory]];
-           [weakSelf.latestStoriesUpdate removeIndexesFromArray:idxPathsRemoved];
-       }];
-    }];
-    return nil;
-}
-
-- (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story
-{
-    __weak typeof(self) weakSelf = self;
-    [[super saveStoryToReadLater:story] subscribeNext:^(id x) {
-        
-    } error:^(NSError *error) {
-        weakSelf.viewModelError = error;
-    } completed:^{
+    return [[self removeStoryFromReadLater:story] then:^RACSignal *{
         __block NSArray *results;
         [[DDDHakkenReadLaterManager fetchAllItemsToReadLater] subscribeNext:^(id x) {
             results = x;
@@ -71,8 +45,26 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
             NSIndexSet *idxPathsRemoved = [self indexSetFromIndexPaths:@[idxPathForStory]];
             [weakSelf.latestStoriesUpdate removeIndexesFromArray:idxPathsRemoved];
         }];
+        return nil;
     }];
-    return nil;
+}
+
+- (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story
+{
+    __weak typeof(self) weakSelf = self;
+    return [[self saveStoryToReadLater:story] then:^RACSignal *{
+        __block NSArray *results;
+        [[DDDHakkenReadLaterManager fetchAllItemsToReadLater] subscribeNext:^(id x) {
+            results = x;
+        } error:^(NSError *error) {
+            weakSelf.viewModelError = error;
+        } completed:^{
+            NSIndexPath *idxPathForStory = [self indexPathOfItem:story inArrayInsertionDeletion:self.latestStoriesUpdate];
+            NSIndexSet *idxPathsRemoved = [self indexSetFromIndexPaths:@[idxPathForStory]];
+            [weakSelf.latestStoriesUpdate removeIndexesFromArray:idxPathsRemoved];
+        }];
+        return nil;
+    }];
 }
 
 - (NSIndexPath *)indexPathOfItem:(DDDHackerNewsItem *)item inArrayInsertionDeletion:(DDDArrayInsertionDeletion *)arrayInsertionDeletion

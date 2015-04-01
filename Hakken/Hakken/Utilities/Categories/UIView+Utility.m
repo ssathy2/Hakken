@@ -14,13 +14,10 @@
     return [[[UINib nibWithNibName:NSStringFromClass(self) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
 }
 
-- (void)applyRoundedCornersWithRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color
+- (void)applyRoundedCornersWithRadius:(CGFloat)radius
 {
-    self.clipsToBounds      = YES;
-    self.layer.cornerRadius = radius;
-    self.layer.borderWidth  = width;
-    
-    if (color)
-        self.layer.borderColor = color.CGColor;
+    self.clipsToBounds          = YES;
+    self.layer.masksToBounds    = YES;
+    self.layer.cornerRadius     = radius;
 }
 @end

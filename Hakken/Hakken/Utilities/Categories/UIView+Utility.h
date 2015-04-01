@@ -11,5 +11,5 @@
 @interface UIView (Utility)
 + (instancetype)instance;
 
-- (void)applyRoundedCornersWithRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
+- (void)applyRoundedCornersWithRadius:(CGFloat)radius;
 @end

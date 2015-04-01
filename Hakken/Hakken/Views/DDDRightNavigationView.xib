@@ -13,14 +13,14 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="folder" translatesAutoresizingMaskIntoConstraints="NO" id="zFa-y7-qcF">
                     <rect key="frame" x="0.0" y="8" width="40" height="32"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="20" translatesAutoresizingMaskIntoConstraints="NO" id="TZ2-dl-EFC">
-                    <rect key="frame" x="25" y="0.0" width="20" height="20"/>
-                    <color key="backgroundColor" red="0.99215686270000003" green="0.098039215690000001" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="17" translatesAutoresizingMaskIntoConstraints="NO" id="TZ2-dl-EFC">
+                    <rect key="frame" x="27" y="0.0" width="18" height="18"/>
+                    <color key="backgroundColor" red="0.66613399620000002" green="0.0" blue="0.020081045879999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="20" id="MEn-hZ-jax"/>
-                        <constraint firstAttribute="height" constant="20" id="bT2-ue-9Lt"/>
+                        <constraint firstAttribute="width" constant="18" id="MEn-hZ-jax"/>
+                        <constraint firstAttribute="height" constant="18" id="bT2-ue-9Lt"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="10"/>
                     <color key="textColor" red="0.93300002810000005" green="0.93300002810000005" blue="0.93300002810000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>

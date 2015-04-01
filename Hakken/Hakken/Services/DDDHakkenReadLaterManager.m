@@ -88,7 +88,7 @@
 + (RACSignal *)fetchUnreadReadLaterItems
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.hasUserReadItem == NO"];
+        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.dateUserLastRead == %@", [NSDate distantPast]];
         
         RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
         [subscriber sendNext:[results arrayFromResults]];

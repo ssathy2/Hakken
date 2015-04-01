@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
 
+@property (weak, nonatomic) IBOutlet UIView *unreadIndicatorView;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 @property (readonly, nonatomic) DDDCellSwipeState cellSwipeState;
 @end
@@ -56,6 +57,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 {
     self.commentsButton.layer.masksToBounds = NO;
     [self.commentsButton.layer setCornerRadius:self.commentsButton.frame.size.height/2];
+    [self.unreadIndicatorView applyRoundedCornersWithRadius:CGRectGetHeight(self.unreadIndicatorView.bounds)];
     self.swipeActionView.clipsToBounds = YES;
 }
 
@@ -303,21 +305,19 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
                         }];
 }
 
-- (void)prepareWithModel:(id)model
+- (void)prepareWithModel:(DDDHackerNewsItem *)model
 {
     [super prepareWithModel:model];
+    self.userName.text = [NSString stringWithFormat:@"from %@", model.by];
     
-    DDDHackerNewsItem *hnItem = (DDDHackerNewsItem *)model;
-    self.userName.text = [NSString stringWithFormat:@"from %@", hnItem.by];
+    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", @(model.score), (model.score > 1) ? @"points" : @"point", [[model dateCreated] relativeDateTimeStringToNow]];
+    self.titleLabel.text = model.title;
     
-    self.pointDatePostedLabel.text = [NSString stringWithFormat:@"%@ %@ - %@", @(hnItem.score), (hnItem.score > 1) ? @"points" : @"point", [[hnItem dateCreated] relativeDateTimeStringToNow]];
-    self.titleLabel.text = hnItem.title;
+    [self styleURLLabelWithHackernewsItem:model];
     
-    [self styleURLLabelWithHackernewsItem:hnItem];
+    [self.commentsButton setTitle:[@(model.descendants) stringValue] forState:UIControlStateNormal];
     
-    [self.commentsButton setTitle:[@(hnItem.descendants) stringValue] forState:UIControlStateNormal];
-    
-    self.swipeActionViewLabel.text = (hnItem.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
+    self.swipeActionViewLabel.text = (model.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
 }
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item

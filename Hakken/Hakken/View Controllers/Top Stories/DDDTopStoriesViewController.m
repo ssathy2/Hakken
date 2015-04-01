@@ -38,9 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupReactions];
     [self setupRefreshControl];
     [self setupNavigationButton];
+    [self setupReactions];
 }
 
 - (void)setupNavigationButton
@@ -50,8 +50,8 @@
     CGRect navFrame = self.rightNavView.frame;
     navFrame.size.height = 35.f;
     navFrame.size.width  = 40.f;
+    navFrame.origin.x    = 0.f;
     self.rightNavView.frame = navFrame;
-    [self.rightNavView setNumber:4 animated:NO withCustomAnimations:nil];
     [self.rightNavView addTarget:self action:@selector(readLaterButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightNavView]];
 }
@@ -66,6 +66,23 @@
     } completed:^{
         [self handleErrorState];
     }];
+    
+    __block NSInteger unreadSavedStoriesCount = 0;
+    [[[self topstoriesViewModel] fetchUnreadSavedStories] subscribeNext:^(NSArray *unreadSavedStories) {
+        unreadSavedStoriesCount = unreadSavedStories.count;
+    } error:^(NSError *error) {
+        
+    } completed:^{
+        [self updateNavViewWithCount:unreadSavedStoriesCount];
+    }];
+}
+
+- (void)updateNavViewWithCount:(NSInteger)count
+{
+    if (count == 0)
+        [self.rightNavView setNumberViewHidden:YES animated:YES];
+    else
+        [self.rightNavView setNumber:count animated:YES withCustomAnimations:nil];
 }
 
 - (void)handleErrorState

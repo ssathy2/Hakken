@@ -12,6 +12,9 @@
 
 @interface DDDTopStoriesViewModel : DDDStoryDisplayViewModel
 
+- (RACSignal *)fetchUnreadSavedStories;
+- (RACSignal *)fetchAllSavedStories;
+
 - (void)refreshCurrentBatchOfStories;
 - (void)fetchNextBatchOfStories;
 @end

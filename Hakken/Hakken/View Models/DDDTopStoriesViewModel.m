@@ -79,6 +79,16 @@
     }];
 }
 
+- (RACSignal *)fetchUnreadSavedStories
+{
+    return [DDDHakkenReadLaterManager fetchUnreadReadLaterItems];
+}
+
+- (RACSignal *)fetchAllSavedStories
+{
+    return [DDDHakkenReadLaterManager fetchAllItemsToReadLater];
+}
+
 - (BOOL)canLoadMoreStories
 {
     return (self.topStoryToValue < DDDMaxTopStoriesCount);

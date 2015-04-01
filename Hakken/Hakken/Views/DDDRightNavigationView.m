@@ -17,7 +17,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self.numberLabel applyRoundedCornersWithRadius:CGRectGetHeight(self.numberLabel.bounds)/2 width:CGRectGetWidth(self.numberLabel.bounds)/2 color:[UIColor redColor]];
+    [self.numberLabel applyRoundedCornersWithRadius:(CGRectGetHeight(self.numberLabel.bounds)/2)];
     self.gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
 }
 
