@@ -12,12 +12,26 @@
 #import "DDDStoryTransitionModel.h"
 #import "DDDHackerNewsItem.h"
 #import "DDDHackerNewsItemCollectionViewCell.h"
-#import "DDDWebViewCollectionViewCell.h"
 #import "CommentsStoryboardIdentifiers.h"
 #import "DDDCollectionViewCellSizingHelper.h"
 #import "DDDTransitionAttributes.h"
 
-@interface DDDStoryDetailViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DDDHackerNewsItemCollectionViewCellDelegate>
+typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
+{
+    UIScrollViewDirectionNone         = 0,
+    UIScrollViewDirectionLeft         = 1 << 0,
+    UIScrollViewDirectionRight        = 1 << 1,
+    UIScrollViewDirectionUp           = 1 << 2,
+    UIScrollViewDirectionDown         = 1 << 3
+};
+
+@interface DDDStoryDetailViewController ()<DDDHackerNewsItemCollectionViewCellDelegate, UIScrollViewDelegate>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailContainerHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIView *hackernewsItemDetailContainer;
+@property (weak, nonatomic) IBOutlet UIWebView *webview;
+@property (assign, nonatomic) CGFloat lastContentOffset;
+@property (assign, nonatomic) CGSize expandedItemDetailSize;
+@property (assign, nonatomic) BOOL  isStoryInformationCellExpanded;
 @end
 
 @implementation  DDDStoryDetailViewController
@@ -46,17 +60,15 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setupCollectionView];
+    
+    self.isStoryInformationCellExpanded = YES;
+    [self setupWebview];
     [self setupListenersToViewModel];
 }
 
-- (void)setupCollectionView
+- (void)setupWebview
 {
-    self.collectionView.dataSource  = self;
-    self.collectionView.delegate    = self;
-    
-    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDHackerNewsItemCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"DDDWebViewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:DDDWebViewCollectionViewCellIdentifier];
+    self.webview.scrollView.delegate = self;
 }
 
 - (void)setupListenersToViewModel
@@ -64,7 +76,7 @@
     [RACObserve([self storyDetailViewModel], transitionModel)
      subscribeNext:^(DDDStoryTransitionModel *transitionModel) {
          DDLogInfo(@"transitionModel: %@", transitionModel);
-         [self.collectionView reloadData];
+         [self applyStoryToView:transitionModel.story];
      } error:^(NSError *error) {
          DDLogError(@"%@", error);
      } completed:^{
@@ -72,41 +84,47 @@
      }];
 }
 
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (void)applyStoryToView:(DDDHackerNewsItem *)story
 {
-    return 2;
+    [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:story.url]]];
+    [self loadDetailViewIntoContainerWithStory:story];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)loadDetailViewIntoContainerWithStory:(DDDHackerNewsItem *)story
 {
-    if (indexPath.row == 0)
-    {
-        DDDHackerNewsItemCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDHackerNewsItemCollectionViewCellIdentifier forIndexPath:indexPath];
-        cell.delegate = self;
-        [cell prepareWithModel:[[[self storyDetailViewModel] transitionModel] story]];
-        return cell;
-    }
-    else
-    {
-        DDDCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:DDDWebViewCollectionViewCellIdentifier forIndexPath:indexPath];
-        [cell prepareWithModel:[[[self storyDetailViewModel] transitionModel] story]];
-        return cell;
-    }
+    DDDHackerNewsItemCollectionViewCell *cell = [DDDHackerNewsItemCollectionViewCell instance];
+    [cell prepareWithModel:story];
+    CGSize cellSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:story withModelIdentifier:[@(story.id) stringValue]];
+    self.detailContainerHeightConstraint.constant = cellSize.height;
+    self.expandedItemDetailSize = cellSize;
+    [self.hackernewsItemDetailContainer addSubviewWithConstraints:cell];
 }
 
-#pragma mark - UICollectionViewDelegateFlowLayout
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (indexPath.row == 0)
-        return [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:[[[self storyDetailViewModel] transitionModel] story] withModelIdentifier:@([[[[self storyDetailViewModel] transitionModel] story] id])];
-    else
-    {
-        UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)collectionViewLayout;
-        return CGSizeMake(flowLayout.itemSize.width, collectionView.bounds.size.height - flowLayout.itemSize.height);
-    }
+    UIScrollViewDirection scrollDirection;
+    if (self.lastContentOffset > scrollView.contentOffset.y)
+        scrollDirection = UIScrollViewDirectionUp;
+    else if (self.lastContentOffset < scrollView.contentOffset.y)
+        scrollDirection = UIScrollViewDirectionDown;
+    
+    self.lastContentOffset = scrollView.contentOffset.x;
+    
+    [self adjustCellSizesWithScrollDirection:scrollDirection];
 }
 
+- (void)adjustCellSizesWithScrollDirection:(UIScrollViewDirection)direction
+{
+    if (direction & UIScrollViewDirectionUp)
+        self.isStoryInformationCellExpanded = YES;
+    else if (direction & UIScrollViewDirectionDown)
+        self.isStoryInformationCellExpanded = NO;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.detailContainerHeightConstraint.constant = (self.isStoryInformationCellExpanded) ? self.expandedItemDetailSize.height : 0.f;
+    } completion:nil];
+}
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story

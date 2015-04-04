@@ -42,7 +42,7 @@
     self.cellClassToSizingCellMapping = [NSMutableDictionary new];
 }
 
-- (CGSize)preferredLayoutSizeWithCellClass:(Class)cellClass withCellModel:(id)model withModelIdentifier:(id)modelIdentifier
+- (CGSize)preferredLayoutSizeWithCellClass:(Class)cellClass withCellModel:(id)model withModelIdentifier:(NSString *)modelIdentifier
 {
     NSParameterAssert(modelIdentifier != nil);
     NSParameterAssert(cellClass != nil);

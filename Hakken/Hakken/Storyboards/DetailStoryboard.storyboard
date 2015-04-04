@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C81f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14D130a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -16,44 +16,66 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="URf-vr-I9T">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrD-2a-QeR" userLabel="HackernewsItemContainerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FbV-Ht-ptO">
-                                    <size key="itemSize" width="375" height="140"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                            </collectionView>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.0" blue="0.20292436520000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="1FS-xh-ZL6"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1FS-xh-ZL6"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1FS-xh-ZL6"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyv-Vr-SGC">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="HP7-e2-ftQ"/>
-                            <constraint firstItem="URf-vr-I9T" firstAttribute="top" secondItem="A3q-Jm-kzr" secondAttribute="bottom" id="dNJ-lz-007"/>
-                            <constraint firstAttribute="trailing" secondItem="URf-vr-I9T" secondAttribute="trailing" id="jqm-OP-Fcj"/>
-                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="URf-vr-I9T" secondAttribute="bottom" id="n7b-I4-pml"/>
+                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="fyv-Vr-SGC" secondAttribute="bottom" id="32w-SV-RGB"/>
+                            <constraint firstAttribute="trailing" secondItem="hrD-2a-QeR" secondAttribute="trailing" id="7B2-X3-7rP"/>
+                            <constraint firstAttribute="trailing" secondItem="fyv-Vr-SGC" secondAttribute="trailing" id="Gh5-7i-fyt"/>
+                            <constraint firstItem="hrD-2a-QeR" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="QAe-pZ-g4G"/>
+                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="Wde-eh-080"/>
+                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="top" secondItem="hrD-2a-QeR" secondAttribute="bottom" id="aPt-N1-20g"/>
+                            <constraint firstItem="hrD-2a-QeR" firstAttribute="top" secondItem="A3q-Jm-kzr" secondAttribute="bottom" id="jb1-Xd-Lnm"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="URf-vr-I9T"/>
+                                <exclude reference="hrD-2a-QeR"/>
+                                <exclude reference="fyv-Vr-SGC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="n7b-I4-pml"/>
-                                <exclude reference="HP7-e2-ftQ"/>
-                                <exclude reference="dNJ-lz-007"/>
-                                <exclude reference="jqm-OP-Fcj"/>
+                                <exclude reference="7B2-X3-7rP"/>
+                                <exclude reference="QAe-pZ-g4G"/>
+                                <exclude reference="jb1-Xd-Lnm"/>
+                                <exclude reference="Gh5-7i-fyt"/>
+                                <exclude reference="Wde-eh-080"/>
+                                <exclude reference="aPt-N1-20g"/>
+                                <exclude reference="32w-SV-RGB"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="URf-vr-I9T"/>
+                                <include reference="hrD-2a-QeR"/>
+                                <include reference="fyv-Vr-SGC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="n7b-I4-pml"/>
-                                <include reference="HP7-e2-ftQ"/>
-                                <include reference="dNJ-lz-007"/>
-                                <include reference="jqm-OP-Fcj"/>
+                                <include reference="7B2-X3-7rP"/>
+                                <include reference="QAe-pZ-g4G"/>
+                                <include reference="jb1-Xd-Lnm"/>
+                                <include reference="Gh5-7i-fyt"/>
+                                <include reference="Wde-eh-080"/>
+                                <include reference="aPt-N1-20g"/>
+                                <include reference="32w-SV-RGB"/>
                             </mask>
                         </variation>
                     </view>
@@ -61,7 +83,9 @@
                     <navigationItem key="navigationItem" title="Detail" id="RcC-D5-3Ix"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="collectionView" destination="URf-vr-I9T" id="u5y-mi-El6"/>
+                        <outlet property="detailContainerHeightConstraint" destination="1FS-xh-ZL6" id="JfC-nc-UEQ"/>
+                        <outlet property="hackernewsItemDetailContainer" destination="hrD-2a-QeR" id="OyT-a9-TjQ"/>
+                        <outlet property="webview" destination="fyv-Vr-SGC" id="5YO-od-idS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQc-K3-sz7" userLabel="First Responder" sceneMemberID="firstResponder"/>

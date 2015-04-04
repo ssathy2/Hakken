@@ -7,6 +7,7 @@
 //
 
 #import "UIView+Utility.h"
+#import "NSLayoutConstraint+Utility.h"
 
 @implementation UIView (Utility)
 + (instancetype)instance
@@ -19,5 +20,12 @@
     self.clipsToBounds          = YES;
     self.layer.masksToBounds    = YES;
     self.layer.cornerRadius     = radius;
+}
+
+- (void)addSubviewWithConstraints:(UIView *)subview
+{
+    [self addSubview:subview];
+    [self addConstraints:[NSLayoutConstraint constraintsToContainerForView:subview insets:UIEdgeInsetsZero]];
+    [subview setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 @end

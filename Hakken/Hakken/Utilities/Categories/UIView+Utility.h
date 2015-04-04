@@ -12,4 +12,5 @@
 + (instancetype)instance;
 
 - (void)applyRoundedCornersWithRadius:(CGFloat)radius;
+- (void)addSubviewWithConstraints:(UIView *)subview;
 @end

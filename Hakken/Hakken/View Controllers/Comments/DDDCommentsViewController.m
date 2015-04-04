@@ -262,13 +262,13 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         {
             DDDHackerNewsItem *item = [[self commentsViewModel] story];
             Class cellKlass = (item.isUserGenerated) ? [DDDHackernewsUserItemCollectionViewCell class] : [DDDHackerNewsItemCollectionViewCell class];
-            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:@(item.id)];
+            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:[@(item.id) stringValue]];
             break;
         }
         case DDDCommentsSectionComments:
         {
             DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:@(treeInfo.comment.id)];
+            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:[@(treeInfo.comment.id) stringValue]];
             break;
         }
         default:
