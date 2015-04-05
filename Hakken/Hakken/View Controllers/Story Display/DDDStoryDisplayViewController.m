@@ -10,7 +10,6 @@
 
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
-#import "DDDHackerNewsItemCollectionViewCell.h"
 
 #import "TopStoryStoryboardIdentifiers.h"
 #import "DetailStoryboardIdentifiers.h"
@@ -26,7 +25,6 @@
 #import "DDDLoadingCollectionReusableView.h"
 
 @interface DDDStoryDisplayViewController ()<
-DDDHackerNewsItemCollectionViewCellDelegate,
 UICollectionViewDataSource,
 UICollectionViewDelegate,
 UIGestureRecognizerDelegate>
@@ -221,7 +219,7 @@ UIGestureRecognizerDelegate>
 {
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate] array][indexPath.row];
     CGSize size = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:item withModelIdentifier:[@(item.id) stringValue]];
-    return size;
+    return CGSizeMake(CGRectGetWidth(collectionView.bounds), size.height);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section

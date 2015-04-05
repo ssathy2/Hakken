@@ -43,6 +43,12 @@
     [self setupReactions];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateNavViewAnimated:NO];
+}
+
 - (void)setupNavigationButton
 {
     self.rightNavView = [DDDRightNavigationView instance];
@@ -66,23 +72,26 @@
     } completed:^{
         [self handleErrorState];
     }];
-    
+}
+
+- (void)updateNavViewAnimated:(BOOL)animated
+{
     __block NSInteger unreadSavedStoriesCount = 0;
     [[[self topstoriesViewModel] fetchUnreadSavedStories] subscribeNext:^(NSArray *unreadSavedStories) {
         unreadSavedStoriesCount = unreadSavedStories.count;
     } error:^(NSError *error) {
         
     } completed:^{
-        [self updateNavViewWithCount:unreadSavedStoriesCount];
+        [self updateNavViewWithCount:unreadSavedStoriesCount animated:animated];
     }];
 }
 
-- (void)updateNavViewWithCount:(NSInteger)count
+- (void)updateNavViewWithCount:(NSInteger)count animated:(BOOL)animated
 {
     if (count == 0)
-        [self.rightNavView setNumberViewHidden:YES animated:YES];
+        [self.rightNavView setNumberViewHidden:YES animated:animated];
     else
-        [self.rightNavView setNumber:count animated:YES withCustomAnimations:nil];
+        [self.rightNavView setNumber:count animated:animated withCustomAnimations:nil];
 }
 
 - (void)handleErrorState
@@ -115,6 +124,19 @@
 {
     [super updateWithInsertionDeletion:insertionDeletion];
     [self.refreshControl endRefreshing];
+}
+
+#pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
+{
+    [super cell:cell didSelectAddToReadLater:story withCompletion:completion withError:error];
+    [self updateNavViewAnimated:YES];
+}
+
+- (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectRemoveFromReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)error
+{
+    [super cell:cell didSelectRemoveFromReadLater:story withCompletion:completion withError:error];
+    [self updateNavViewAnimated:YES];
 }
 
 #pragma mark - UIScrollViewDelegate

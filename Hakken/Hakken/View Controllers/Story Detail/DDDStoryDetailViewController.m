@@ -70,6 +70,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
 - (void)setupWebview
 {
     self.webview.scrollView.delegate = self;
+    self.webview.scrollView.bounces = NO;
 }
 
 - (void)setupListenersToViewModel
@@ -114,6 +115,8 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     UIScrollViewDirection scrollDirection;
     if (previousContentOffset.y < 0 || scrollViewOffset.y < 0)
         scrollDirection = UIScrollViewDirectionUp;
+    else if (previousContentOffset.y > self.webview.scrollView.contentSize.height || scrollViewOffset.y > self.webview.scrollView.contentSize.height)
+        scrollDirection = UIScrollViewDirectionDown;
     else if (previousContentOffset.y > scrollViewOffset.y)
         scrollDirection = UIScrollViewDirectionUp;
     else if (previousContentOffset.y < scrollViewOffset.y)

@@ -43,15 +43,21 @@
         }
         else
         {
-            [UIView animateWithDuration:0.2 delay:0.f usingSpringWithDamping:0.3 initialSpringVelocity:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [UIView animateWithDuration:0.15 delay:0.f usingSpringWithDamping:0.3 initialSpringVelocity:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.numberLabel.transform = CGAffineTransformMakeScale(1.6f, 1.6f);
                 setNumberBlock();
-            } completion:nil];
+            } completion:^(BOOL finished) {
+                if (finished)
+                {
+                    [UIView animateWithDuration:0.15 delay:0.f usingSpringWithDamping:0.4 initialSpringVelocity:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                        self.numberLabel.transform = CGAffineTransformIdentity;
+                    } completion:nil];
+                }
+            }];
         }
     }
     else
         setNumberBlock();
-    
-    [self.numberLabel sizeToFit];
 }
 
 - (void)setNumberViewHidden:(BOOL)hidden animated:(BOOL)animated

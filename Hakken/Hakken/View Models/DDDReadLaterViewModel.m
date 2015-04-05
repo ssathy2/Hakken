@@ -34,7 +34,7 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
 - (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story
 {
     __weak typeof(self) weakSelf = self;
-    return [[self removeStoryFromReadLater:story] then:^RACSignal *{
+    return [[super removeStoryFromReadLater:story] then:^RACSignal *{
         __block NSArray *results;
         [[DDDHakkenReadLaterManager fetchAllItemsToReadLater] subscribeNext:^(id x) {
             results = x;
@@ -52,7 +52,7 @@ typedef void(^ArrayInsertionDeletionBlock)(DDDArrayInsertionDeletion *arrayInser
 - (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story
 {
     __weak typeof(self) weakSelf = self;
-    return [[self saveStoryToReadLater:story] then:^RACSignal *{
+    return [[super saveStoryToReadLater:story] then:^RACSignal *{
         __block NSArray *results;
         [[DDDHakkenReadLaterManager fetchAllItemsToReadLater] subscribeNext:^(id x) {
             results = x;

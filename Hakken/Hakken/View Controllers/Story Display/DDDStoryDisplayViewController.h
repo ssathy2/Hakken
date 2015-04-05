@@ -7,10 +7,11 @@
 //
 
 #import "DDDViewController.h"
+#import "DDDHackerNewsItemCollectionViewCell.h"
 
 @class DDDArrayInsertionDeletion;
 
-@interface DDDStoryDisplayViewController : DDDViewController
+@interface DDDStoryDisplayViewController : DDDViewController<DDDHackerNewsItemCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion;

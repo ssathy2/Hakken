@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
+@property (weak, nonatomic) IBOutlet UIView *confirmationView;
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
@@ -43,13 +44,14 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     self.commentsButton.hidden = self.urlLabel.hidden = NO;
     self.swipeActionViewWidthConstraint.constant = 0.f;
     self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
-    [self resetCellContentView:NO];
+    self.confirmationView.hidden = YES;
+    [self resetCellContentView:NO shouldShowConfirmationView:NO];
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self resetCellContentView:NO];
+    [self resetCellContentView:NO shouldShowConfirmationView:NO];
     [self styleCell];
 }
 
@@ -126,14 +128,14 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 - (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES];
+    [self resetCellContentView:YES shouldShowConfirmationView:NO];
     [self notifyDelegateAboutCellSwipeState];
 
 }
 
 - (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES];
+    [self resetCellContentView:YES shouldShowConfirmationView:NO];
     [self notifyDelegateAboutCellSwipeState];
 }
 
@@ -158,13 +160,13 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES];
+    [self resetCellContentView:YES shouldShowConfirmationView:(self.cellSwipeState == DDDCellSwipeStateSelected)];
     [self notifyDelegateAboutCellSwipeState];
 }
 
 - (void)closeCellSwipeContainer
 {
-    [self resetCellContentView:YES];    
+    [self resetCellContentView:YES shouldShowConfirmationView:NO];
     [self notifyDelegateAboutCellSwipeState];
 }
 
@@ -231,7 +233,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     return CGRectIntersectsRect(self.contentView.frame, locationInSuperView) && (self.swipeActionViewWidthConstraint.constant - translation.x >= 0);
 }
 
-- (void)resetCellContentView:(BOOL)animated
+- (void)resetCellContentView:(BOOL)animated shouldShowConfirmationView:(BOOL)shouldShowConfirmationView
 {
     void(^cellContentViewReset)() = ^() {
         CGRect cellContentFrame = self.cellContentView.frame;
