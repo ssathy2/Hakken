@@ -54,13 +54,13 @@
                                 <exclude reference="fyv-Vr-SGC"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="7B2-X3-7rP"/>
-                                <exclude reference="QAe-pZ-g4G"/>
-                                <exclude reference="jb1-Xd-Lnm"/>
+                                <exclude reference="32w-SV-RGB"/>
                                 <exclude reference="Gh5-7i-fyt"/>
                                 <exclude reference="Wde-eh-080"/>
                                 <exclude reference="aPt-N1-20g"/>
-                                <exclude reference="32w-SV-RGB"/>
+                                <exclude reference="7B2-X3-7rP"/>
+                                <exclude reference="QAe-pZ-g4G"/>
+                                <exclude reference="jb1-Xd-Lnm"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -69,13 +69,13 @@
                                 <include reference="fyv-Vr-SGC"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="7B2-X3-7rP"/>
-                                <include reference="QAe-pZ-g4G"/>
-                                <include reference="jb1-Xd-Lnm"/>
+                                <include reference="32w-SV-RGB"/>
                                 <include reference="Gh5-7i-fyt"/>
                                 <include reference="Wde-eh-080"/>
                                 <include reference="aPt-N1-20g"/>
-                                <include reference="32w-SV-RGB"/>
+                                <include reference="7B2-X3-7rP"/>
+                                <include reference="QAe-pZ-g4G"/>
+                                <include reference="jb1-Xd-Lnm"/>
                             </mask>
                         </variation>
                     </view>
@@ -83,8 +83,9 @@
                     <navigationItem key="navigationItem" title="Detail" id="RcC-D5-3Ix"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="detailContainerHeightConstraint" destination="1FS-xh-ZL6" id="JfC-nc-UEQ"/>
                         <outlet property="hackernewsItemDetailContainer" destination="hrD-2a-QeR" id="OyT-a9-TjQ"/>
+                        <outlet property="itemDetailContainerHeightConstraint" destination="1FS-xh-ZL6" id="GbP-YW-zPl"/>
+                        <outlet property="itemDetailContainerTopSpaceConstraint" destination="jb1-Xd-Lnm" id="jxM-Kz-jcW"/>
                         <outlet property="webview" destination="fyv-Vr-SGC" id="5YO-od-idS"/>
                     </connections>
                 </viewController>

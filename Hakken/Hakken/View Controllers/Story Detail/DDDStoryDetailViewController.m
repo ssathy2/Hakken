@@ -26,10 +26,11 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
 };
 
 @interface DDDStoryDetailViewController ()<DDDHackerNewsItemCollectionViewCellDelegate, UIScrollViewDelegate>
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailContainerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemDetailContainerHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemDetailContainerTopSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIView *hackernewsItemDetailContainer;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
-@property (assign, nonatomic) CGFloat lastContentOffset;
+@property (assign, nonatomic) CGPoint lastContentOffset;
 @property (assign, nonatomic) CGSize expandedItemDetailSize;
 @property (assign, nonatomic) BOOL  isStoryInformationCellExpanded;
 @end
@@ -95,7 +96,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     DDDHackerNewsItemCollectionViewCell *cell = [DDDHackerNewsItemCollectionViewCell instance];
     [cell prepareWithModel:story];
     CGSize cellSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:story withModelIdentifier:[@(story.id) stringValue]];
-    self.detailContainerHeightConstraint.constant = cellSize.height;
+    self.itemDetailContainerHeightConstraint.constant = cellSize.height;
     self.expandedItemDetailSize = cellSize;
     [self.hackernewsItemDetailContainer addSubviewWithConstraints:cell];
 }
@@ -103,15 +104,21 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    UIScrollViewDirection scrollDirection;
-    if (self.lastContentOffset > scrollView.contentOffset.y)
-        scrollDirection = UIScrollViewDirectionUp;
-    else if (self.lastContentOffset < scrollView.contentOffset.y)
-        scrollDirection = UIScrollViewDirectionDown;
-    
-    self.lastContentOffset = scrollView.contentOffset.x;
-    
+    UIScrollViewDirection scrollDirection = [self scrollViewDirectionFromScrollViewContentOffset:scrollView.contentOffset withPreviousContentOffset:self.lastContentOffset];
+    self.lastContentOffset = scrollView.contentOffset;
     [self adjustCellSizesWithScrollDirection:scrollDirection];
+}
+
+- (UIScrollViewDirection)scrollViewDirectionFromScrollViewContentOffset:(CGPoint)scrollViewOffset withPreviousContentOffset:(CGPoint)previousContentOffset
+{
+    UIScrollViewDirection scrollDirection;
+    if (previousContentOffset.y < 0 || scrollViewOffset.y < 0)
+        scrollDirection = UIScrollViewDirectionUp;
+    else if (previousContentOffset.y > scrollViewOffset.y)
+        scrollDirection = UIScrollViewDirectionUp;
+    else if (previousContentOffset.y < scrollViewOffset.y)
+        scrollDirection = UIScrollViewDirectionDown;
+    return scrollDirection;
 }
 
 - (void)adjustCellSizesWithScrollDirection:(UIScrollViewDirection)direction
@@ -122,7 +129,8 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
         self.isStoryInformationCellExpanded = NO;
     
     [UIView animateWithDuration:0.2 animations:^{
-        self.detailContainerHeightConstraint.constant = (self.isStoryInformationCellExpanded) ? self.expandedItemDetailSize.height : 0.f;
+        self.itemDetailContainerTopSpaceConstraint.constant = (self.isStoryInformationCellExpanded) ? 0.f : -(self.expandedItemDetailSize.height);
+        [self.view layoutIfNeeded];
     } completion:nil];
 }
 
