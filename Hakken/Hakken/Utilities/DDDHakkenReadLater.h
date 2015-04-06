@@ -18,6 +18,9 @@
 + (RACSignal *)fetchUnreadReadLaterItems;
 + (RACSignal *)fetchReadReadLaterItems;
 
++ (RACSignal *)markStoryAsRead:(DDDHackerNewsItem *)item;
++ (RACSignal *)markStoryAsUnread:(DDDHackerNewsItem *)item;
+
 // The completion contains all of the items that were removed from the readlater queue
 + (RACSignal *)removeAllItemsFromReadLater;
 @end

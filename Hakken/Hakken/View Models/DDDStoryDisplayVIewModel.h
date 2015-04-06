@@ -16,6 +16,8 @@
 
 - (RACSignal *)saveStoryToReadLater:(DDDHackerNewsItem *)story;
 - (RACSignal *)removeStoryFromReadLater:(DDDHackerNewsItem *)story;
+- (RACSignal *)markStoryAsRead:(DDDHackerNewsItem *)story;
+- (RACSignal *)markStoryAsUnread:(DDDHackerNewsItem *)story;
 
 - (BOOL)canLoadMoreStories;
 @end

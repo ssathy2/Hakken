@@ -26,7 +26,7 @@
 + (instancetype)defaultObject
 {
     DDDHakkenReadLaterInformation *readLaterInformation = [DDDHakkenReadLaterInformation new];
-    readLaterInformation.userWantsToReadLater       = NO;
+    readLaterInformation.userWantsToReadLater           = NO;
     readLaterInformation.dateUserInitiallySavedToReadLater = readLaterInformation.dateUserLastRead = readLaterInformation.dateUserSavedToReadLater = [NSDate distantPast];
     return readLaterInformation;
 }

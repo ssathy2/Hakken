@@ -35,17 +35,25 @@
         case 0:
             return [UIColor clearColor];
         case 1:
-            return [UIColor colorWithRed:0 green:255 blue:0 alpha:1];
+            return [UIColor colorWithRed:50/256.f green:200/256.f blue:50/256.f alpha:1];
         case 2:
-            return [UIColor colorWithRed:0 green:0 blue:255 alpha:1];
+            return [UIColor colorWithRed:50/256.f green:50/256.f blue:200/256.f alpha:1];
         case 3:
-            return [UIColor colorWithRed:255 green:255 blue:0 alpha:1];
+            return [UIColor colorWithRed:200/256.f green:200/256.f blue:50/256.f alpha:1];
         case 4:
-            return [UIColor colorWithRed:0 green:255 blue:255 alpha:1];
+            return [UIColor colorWithRed:50/256.f green:200/256.f blue:200/256.f alpha:1];
         case 5:
-            return [UIColor colorWithRed:255 green:255 blue:0 alpha:1];
+            return [UIColor colorWithRed:200/256.f green:200/256.f blue:50/256.f alpha:1];
+        case 6:
+            return [UIColor colorWithRed:150/256.f green:150/256.f blue:150/256.f alpha:1];
+        case 7:
+            return [UIColor colorWithRed:110/256.f green:110/256.f blue:110/256.f alpha:1];
+        case 8:
+            return [UIColor colorWithRed:50/256.f green:50/256.f blue:200/256.f alpha:1];
+        case 9:
+            return [UIColor colorWithRed:200/256.f green:50/256.f blue:50/256.f alpha:1];
         default:
-            return [UIColor colorWithRed:255 green:255 blue:255 alpha:1];
+            return [UIColor colorWithRed:200/256.f green:200/256.f blue:200/256.f alpha:1];
     }
 }
 @end

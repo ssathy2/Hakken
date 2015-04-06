@@ -29,6 +29,17 @@
     return [DDDHakkenReadLaterManager removeItemFromReadLater:story];
 }
 
+- (RACSignal *)markStoryAsRead:(DDDHackerNewsItem *)story
+{
+    return [DDDHakkenReadLaterManager markStoryAsRead:story];
+}
+
+- (RACSignal *)markStoryAsUnread:(DDDHackerNewsItem *)story
+{
+    return [DDDHakkenReadLaterManager markStoryAsUnread:story];
+}
+
+
 - (BOOL)canLoadMoreStories
 {
     return NO;

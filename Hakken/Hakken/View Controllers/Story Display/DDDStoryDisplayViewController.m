@@ -253,6 +253,7 @@ UIGestureRecognizerDelegate>
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
     
+    [[self storyDisplayViewModel] markStoryAsUnread:item];
     // push webview/comments controller here...
     if (item.isUserGenerated)
         [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];

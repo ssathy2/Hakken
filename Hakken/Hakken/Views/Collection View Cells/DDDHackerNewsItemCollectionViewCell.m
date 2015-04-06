@@ -320,6 +320,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     [self.commentsButton setTitle:[@(model.descendants) stringValue] forState:UIControlStateNormal];
     
     self.swipeActionViewLabel.text = (model.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
+    self.unreadIndicatorView.hidden = (model.readLaterInformation.userWantsToReadLater && !model.readLaterInformation.hasUserReadItem);
 }
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item

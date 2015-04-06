@@ -38,6 +38,35 @@
     }];
 }
 
++ (RACSignal *)markStoryAsRead:(DDDHackerNewsItem *)item
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        DDDHakkenReadLaterInformation *info = item.readLaterInformation;
+        info.dateUserLastRead = [NSDate date];
+        item.readLaterInformation = info;
+        [[RLMRealm defaultRealm] addOrUpdateObject:item];
+        [[RLMRealm defaultRealm] commitWriteTransaction];
+        [subscriber sendNext:item];
+        [subscriber sendCompleted];
+        return nil;
+    }];
+}
+
++ (RACSignal *)markStoryAsUnread:(DDDHackerNewsItem *)item
+{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        DDDHakkenReadLaterInformation *info = item.readLaterInformation;
+        info.dateUserLastRead = [NSDate distantPast];
+        [[RLMRealm defaultRealm] addOrUpdateObject:item];
+        [[RLMRealm defaultRealm] commitWriteTransaction];
+        [subscriber sendNext:item];
+        [subscriber sendCompleted];
+        return nil;
+    }];
+}
+
 + (RACSignal *)removeItemFromReadLater:(DDDHackerNewsItem *)item
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
