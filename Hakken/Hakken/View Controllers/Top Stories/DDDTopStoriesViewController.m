@@ -91,7 +91,10 @@
     if (count == 0)
         [self.rightNavView setNumberViewHidden:YES animated:animated];
     else
+    {
+        [self.rightNavView setNumberViewHidden:NO animated:animated];
         [self.rightNavView setNumber:count animated:animated withCustomAnimations:nil];
+    }
 }
 
 - (void)handleErrorState

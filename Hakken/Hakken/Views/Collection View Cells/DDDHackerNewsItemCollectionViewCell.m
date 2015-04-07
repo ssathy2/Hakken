@@ -206,7 +206,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     void(^setBGColorBlock)() = ^() {
         if (self.cellSwipeState == DDDCellSwipeStateSelected)
         {
-            self.swipeActionView.backgroundColor = [UIColor swipeActionViewGreenColor];
+            self.swipeActionView.backgroundColor = ([[self.model readLaterInformation] userWantsToReadLater]) ? [UIColor swipeActionViewRedColor] : [UIColor swipeActionViewGreenColor];
             self.swipeActionViewLabel.textColor = [UIColor whiteColor];
         }
         else
@@ -243,29 +243,87 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         self.swipeActionView.frame = swipeActionView;
     };
     
+    void(^cellContentViewResetWithConfirmation)() = ^() {
+        CGRect cellContentFrame = self.cellContentView.frame;
+        cellContentFrame.origin = CGPointMake(-50.f, 0.f);
+        CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 50.f, cellContentFrame.size.height);
+        self.cellContentView.frame = cellContentFrame;
+        self.swipeActionView.frame = swipeActionView;
+    };
+    
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
-        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
+        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];        
         [self updateConstraintsIfNeeded];
     };
     
     if (animated)
     {
-        [UIView animateWithDuration:0.55f
-                              delay:0.f
-             usingSpringWithDamping:0.5f
-              initialSpringVelocity:0.1
-                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                cellContentViewReset();
-                            } completion:^(BOOL finished) {
-                                cellContentViewResetCompletion();
-                            }];
+        if (shouldShowConfirmationView)
+        {
+            [UIView animateWithDuration:0.3
+                                  delay:0.f
+                 usingSpringWithDamping:0.5f
+                  initialSpringVelocity:0.1
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 cellContentViewResetWithConfirmation();
+                             } completion:^(BOOL finished) {
+                                 if (finished)
+                                     [self performSelector:@selector(contentViewReset) withObject:self afterDelay:0.4f];
+                             }];
+
+
+            
+        }
+        else
+        {
+            [UIView animateWithDuration:0.55f
+                                  delay:0.f
+                 usingSpringWithDamping:0.5f
+                  initialSpringVelocity:0.1
+                                options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                    cellContentViewReset();
+                                } completion:^(BOOL finished) {
+                                    if (finished)
+                                        cellContentViewResetCompletion();
+                                }];
+        }
     }
     else
     {
         cellContentViewReset();
         cellContentViewResetCompletion();
     }
+}
+
+- (void)contentViewReset
+{
+    void(^cellContentViewResetCompletion)() = ^() {
+        self.swipeActionViewWidthConstraint.constant = 0.f;
+        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
+        [self updateConstraintsIfNeeded];
+    };
+    
+    void(^cellContentViewReset)() = ^() {
+        CGRect cellContentFrame = self.cellContentView.frame;
+        cellContentFrame.origin = CGPointZero;
+        CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 0.f, cellContentFrame.size.height);
+        self.cellContentView.frame = cellContentFrame;
+        self.swipeActionView.frame = swipeActionView;
+    };
+    
+    [UIView animateWithDuration:0.2
+                          delay:0.f
+         usingSpringWithDamping:0.5f
+          initialSpringVelocity:0.1
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         cellContentViewReset();
+                     } completion:^(BOOL finished) {
+                        if (finished)
+                            cellContentViewResetCompletion();
+                     }];
 }
 
 - (IBAction)didTouchDownOnCommentButton:(UIButton *)sender
@@ -320,7 +378,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     [self.commentsButton setTitle:[@(model.descendants) stringValue] forState:UIControlStateNormal];
     
     self.swipeActionViewLabel.text = (model.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
-    self.unreadIndicatorView.hidden = (model.readLaterInformation.userWantsToReadLater && !model.readLaterInformation.hasUserReadItem);
+    self.unreadIndicatorView.hidden = !(model.readLaterInformation.userWantsToReadLater && !model.readLaterInformation.hasUserReadItem);
 }
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item
