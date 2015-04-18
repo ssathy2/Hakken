@@ -33,11 +33,11 @@ PODS:
     - DTFoundation/DTAnimatedGIF (~> 1.7.1)
     - DTFoundation/DTHTMLParser (~> 1.7.1)
     - DTFoundation/UIKit (~> 1.7.1)
-  - DTFoundation/Core (1.7.4)
-  - DTFoundation/DTAnimatedGIF (1.7.4)
-  - DTFoundation/DTHTMLParser (1.7.4):
+  - DTFoundation/Core (1.7.5)
+  - DTFoundation/DTAnimatedGIF (1.7.5)
+  - DTFoundation/DTHTMLParser (1.7.5):
     - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.4):
+  - DTFoundation/UIKit (1.7.5):
     - DTFoundation/Core
   - ReactiveCocoa (2.3.1):
     - ReactiveCocoa/UI
@@ -49,6 +49,7 @@ PODS:
   - Realm (0.89.2):
     - Realm/Headers
   - Realm/Headers (0.89.2)
+  - TTTAttributedLabel (1.13.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -56,13 +57,15 @@ DEPENDENCIES:
   - DTCoreText
   - ReactiveCocoa
   - Realm
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
-  AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
-  CocoaLumberjack: 24153b24b17d853d7182b22b128971fb98e8cb18
-  DTCoreText: 1fc0aadfa238d14c6cc56035af4e2b76b958e3b1
-  DTFoundation: 721a63964fb9acd64cb8c9d3d1642ee60bac3d6a
-  ReactiveCocoa: dca75777b9d18990c8714a3a6f2149f29b4d1462
-  Realm: 4ba08033bea6a32e49eebcfd41e5fd651168135b
+  AFNetworking: 96ac9bf3eda33582701cb1fcc5b896aa1e20311e
+  CocoaLumberjack: 44fc4ab64ee7cb9703df5de6d5012cf917775938
+  DTCoreText: be48bbe94562eeb24b29110d25bd9d0dcc566a6c
+  DTFoundation: 1d28080c20c3da041706545363f8238ab53a6204
+  ReactiveCocoa: 334468a83b2c5f669f7cfb9a084415ee23219b4f
+  Realm: 66d433a705f1d1ff0d574d5d646986514448dacc
+  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
 
 COCOAPODS: 0.34.4

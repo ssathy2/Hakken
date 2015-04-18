@@ -29,7 +29,7 @@
     self.topStoryToValue   = DDDTopStoriesRefreshFetchCount;
 }
 
-- (void)viewModelWillAppear
+- (void)viewModelDidLoad
 {
     [super viewModelDidLoad];
     
@@ -39,8 +39,34 @@
     } error:^(NSError *error) {
         self.viewModelError = error;
     } completed:^{
-        [self.latestStoriesUpdate resetArrayWithArray:results];
+        [self.latestStoriesUpdate addAllItemsIntoArrayFromArray:results];
     }];
+}
+
+- (void)viewModelWillAppear
+{
+    [super viewModelWillAppear];
+    
+    if (!self.isFetchingStories)
+    {
+        __block NSArray *results;
+        [[self fetchReadSavedStories] subscribeNext:^(id x) {
+            results = x;
+        } completed:^{
+            [self.latestStoriesUpdate updateItemsAtIndexes:[self indexSetWithItems:results inAllItems:self.latestStoriesUpdate.array] withItems:results];
+        }];
+    }
+}
+
+- (NSIndexSet *)indexSetWithItems:(NSArray *)items inAllItems:(NSArray *)allItems
+{
+    NSMutableIndexSet *mutableIndexSet = [NSMutableIndexSet new];
+    [items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSUInteger idxOfObj = [allItems indexOfObjectIdenticalTo:obj];
+        if (idxOfObj != NSNotFound)
+            [mutableIndexSet addIndex:idxOfObj];
+    }];
+    return mutableIndexSet;
 }
 
 - (void)refreshCurrentBatchOfStories
@@ -57,11 +83,15 @@
 
 - (RACSignal *)fetchStoriesFrom:(NSInteger)from to:(NSInteger)to
 {
+    self.isFetchingStories = YES;
     RACSignal *fetchTopStories = [[DDDDataServices sharedInstance] fetchTopStoriesFromStory:@(from) toStory:@(to)];
     fetchTopStories = [fetchTopStories filter:^BOOL(id value) {
         return value != nil;
     }];
-    return fetchTopStories;
+    return [fetchTopStories then:^RACSignal *{
+        self.isFetchingStories = NO;
+        return fetchTopStories;
+    }];
 }
 
 - (void)fetchNextBatchOfStories

@@ -82,25 +82,25 @@
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_Core
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_Core 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_Core 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_Core 4
+#define COCOAPODS_VERSION_PATCH_DTFoundation_Core 5
 
 // DTFoundation/DTAnimatedGIF
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_DTAnimatedGIF
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_DTAnimatedGIF 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_DTAnimatedGIF 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_DTAnimatedGIF 4
+#define COCOAPODS_VERSION_PATCH_DTFoundation_DTAnimatedGIF 5
 
 // DTFoundation/DTHTMLParser
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_DTHTMLParser
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_DTHTMLParser 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_DTHTMLParser 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_DTHTMLParser 4
+#define COCOAPODS_VERSION_PATCH_DTFoundation_DTHTMLParser 5
 
 // DTFoundation/UIKit
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_UIKit
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_UIKit 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_UIKit 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_UIKit 4
+#define COCOAPODS_VERSION_PATCH_DTFoundation_UIKit 5
 
 // ReactiveCocoa
 #define COCOAPODS_POD_AVAILABLE_ReactiveCocoa
@@ -137,4 +137,10 @@
 #define COCOAPODS_VERSION_MAJOR_Realm_Headers 0
 #define COCOAPODS_VERSION_MINOR_Realm_Headers 89
 #define COCOAPODS_VERSION_PATCH_Realm_Headers 2
+
+// TTTAttributedLabel
+#define COCOAPODS_POD_AVAILABLE_TTTAttributedLabel
+#define COCOAPODS_VERSION_MAJOR_TTTAttributedLabel 1
+#define COCOAPODS_VERSION_MINOR_TTTAttributedLabel 13
+#define COCOAPODS_VERSION_PATCH_TTTAttributedLabel 3
 

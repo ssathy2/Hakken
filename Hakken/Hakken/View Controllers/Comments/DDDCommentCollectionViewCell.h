@@ -8,5 +8,12 @@
 
 #import "DDDCollectionViewCell.h"
 
+@class DDDCommentCollectionViewCell, DDDHackerNewsComment;
+
+@protocol DDDCommentCollectionViewCellDelegate <NSObject>
+- (void)commentCollectionViewCell:(DDDCommentCollectionViewCell *)cell didTapOnLinkInComment:(DDDHackerNewsComment *)comment withLink:(NSURL *)link;
+@end
+
 @interface DDDCommentCollectionViewCell : DDDCollectionViewCell
+@property (weak, nonatomic) id<DDDCommentCollectionViewCellDelegate> delegate;
 @end
