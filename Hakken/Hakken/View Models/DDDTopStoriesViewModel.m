@@ -29,7 +29,7 @@
     self.topStoryToValue   = DDDTopStoriesRefreshFetchCount;
 }
 
-- (void)viewModelDidLoad
+- (void)viewModelWillAppear
 {
     [super viewModelDidLoad];
     
@@ -39,7 +39,7 @@
     } error:^(NSError *error) {
         self.viewModelError = error;
     } completed:^{
-        [self.latestStoriesUpdate addAllItemsIntoArrayFromArray:results];
+        [self.latestStoriesUpdate resetArrayWithArray:results];
     }];
 }
 
@@ -77,6 +77,11 @@
     } completed:^{
         [self.latestStoriesUpdate addAllItemsIntoArrayFromArray:results];
     }];
+}
+     
+- (RACSignal *)fetchReadSavedStories
+{
+    return [DDDHakkenReadLaterManager fetchReadReadLaterItems];
 }
 
 - (RACSignal *)fetchUnreadSavedStories

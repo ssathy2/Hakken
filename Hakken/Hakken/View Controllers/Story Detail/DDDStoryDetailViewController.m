@@ -62,28 +62,21 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    __block DDDHackerNewsItem *item;
+    [[[self storyDetailViewModel] markStoryAsRead] subscribeNext:^(DDDHackerNewsItem *x) {
+        item = x;
+    } completed:^{
+        [self applyStoryToView:item];
+    }];
+    
     self.isStoryInformationCellExpanded = YES;
     [self setupWebview];
-    [self setupListenersToViewModel];
 }
 
 - (void)setupWebview
 {
     self.webview.scrollView.delegate = self;
     self.webview.scrollView.bounces = NO;
-}
-
-- (void)setupListenersToViewModel
-{
-    [RACObserve([self storyDetailViewModel], transitionModel)
-     subscribeNext:^(DDDStoryTransitionModel *transitionModel) {
-         DDLogInfo(@"transitionModel: %@", transitionModel);
-         [self applyStoryToView:transitionModel.story];
-     } error:^(NSError *error) {
-         DDLogError(@"%@", error);
-     } completed:^{
-         DDLogInfo(@"Complete!");
-     }];
 }
 
 - (void)applyStoryToView:(DDDHackerNewsItem *)story
@@ -99,6 +92,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     CGSize cellSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:story withModelIdentifier:[@(story.id) stringValue]];
     self.itemDetailContainerHeightConstraint.constant = cellSize.height;
     self.expandedItemDetailSize = cellSize;
+    cell.delegate = self;
     [self.hackernewsItemDetailContainer addSubviewWithConstraints:cell];
 }
 

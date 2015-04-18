@@ -7,10 +7,8 @@
 //
 
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
-
-@end
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @implementation AppDelegate
 
@@ -22,6 +20,7 @@
     [self performRealmMigrationIfNecessary];
     
     DDLogDebug(@"Realm Database Location: %@", [RLMRealm defaultRealmPath]);
+    [Fabric with:@[CrashlyticsKit]];
     return YES;
 }
 

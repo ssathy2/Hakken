@@ -16,6 +16,8 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     DDDCellSwipeStateSelected
 };
 
+#define CHECKMARKLAYERNAME @"CHECKMARKLAYERNAME"
+
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;
@@ -270,7 +272,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
                                  cellContentViewResetWithConfirmation();
                              } completion:^(BOOL finished) {
                                  if (finished)
-                                     [self performSelector:@selector(contentViewReset) withObject:self afterDelay:0.4f];
+                                     [self performConfirmationIconAnimation];
                              }];
 
 
@@ -296,6 +298,63 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         cellContentViewResetCompletion();
     }
 }
+
+- (void)performConfirmationIconAnimation
+{
+    CGRect bezierPathBounds = self.swipeActionView.bounds;
+    CGFloat bezierPathStartX = 7.f;
+    CGFloat bezierPathStartY = CGRectGetHeight(bezierPathBounds)/2;
+    
+    CGFloat bezierPathEndX   = CGRectGetWidth(bezierPathBounds) - 7.f;
+    CGFloat bezierPathEndY   = bezierPathStartY - 20.f;
+    
+    UIBezierPath *bezierPath    = [UIBezierPath bezierPath];
+    bezierPath.lineCapStyle     = kCGLineCapRound;
+    bezierPath.lineJoinStyle    = kCGLineJoinBevel;
+
+    [bezierPath moveToPoint: CGPointMake(bezierPathStartX, bezierPathStartY)];
+    [bezierPath addLineToPoint: CGPointMake(bezierPathStartX+13, bezierPathStartY+13)];
+    [bezierPath addLineToPoint: CGPointMake(bezierPathEndX, bezierPathEndY)];
+    
+    bezierPath.lineWidth = 3;
+    
+    CAShapeLayer *progressLayer = [CAShapeLayer layer];
+    [progressLayer setPath: bezierPath.CGPath];
+    
+    [progressLayer setStrokeColor:[UIColor blackColor].CGColor];
+    [progressLayer setFillColor:[UIColor clearColor].CGColor];
+    [progressLayer setLineWidth:3];
+    
+    [progressLayer setStrokeStart:0.0];
+    [progressLayer setStrokeEnd:1.0];
+    
+    [progressLayer setFrame:bezierPathBounds];
+    [progressLayer setName:CHECKMARKLAYERNAME];
+    [self.swipeActionView.layer addSublayer:progressLayer];
+    
+    CABasicAnimation *animateStrokeEnd = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    animateStrokeEnd.duration  = 0.1;
+    animateStrokeEnd.fromValue = [NSNumber numberWithFloat:0.0f];
+    animateStrokeEnd.toValue   = [NSNumber numberWithFloat:1.0f];
+    animateStrokeEnd.removedOnCompletion  = YES;
+    animateStrokeEnd.delegate = self;
+    [progressLayer addAnimation:animateStrokeEnd forKey:nil];
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if (flag)
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[self.swipeActionView.layer sublayers] enumerateObjectsUsingBlock:^(CALayer *layer, NSUInteger idx, BOOL *stop) {
+                if ([layer.name isEqualToString:CHECKMARKLAYERNAME])
+                    [layer removeFromSuperlayer];
+            }];
+            [self contentViewReset];
+        });
+    }
+}
+
 
 - (void)contentViewReset
 {

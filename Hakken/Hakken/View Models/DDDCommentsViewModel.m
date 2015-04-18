@@ -13,6 +13,7 @@
 #import "DDDArrayInsertionDeletion.h"
 #import "DDDHackerNewsComment.h"
 #import "DDDCommentTreeInfo.h"
+#import "DDDHakkenReadLaterManager.h"
 
 @interface DDDCommentsViewModel()
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestComments;
@@ -29,6 +30,15 @@
     self.latestComments = [DDDArrayInsertionDeletion new];
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
+}
+
+- (RACSignal *)markStoryAsRead
+{
+    if (self.story.isUserGenerated)
+    {
+        return [DDDHakkenReadLaterManager markStoryAsRead:self.story];
+    }
+    else return nil;
 }
 
 - (DDDHackerNewsItem *)story

@@ -29,7 +29,7 @@
 - (void)setNumber:(NSInteger)number animated:(BOOL)animated withCustomAnimations:(ViewAnimationBlock)animationBlock
 {
     void(^setNumberBlock)() = ^() {
-        self.numberLabel.text = [NSString stringWithFormat:@"%li", number];
+        self.numberLabel.text = [NSString stringWithFormat:@"%li", (long)number];
     };
     
     if (animated)

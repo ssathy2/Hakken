@@ -17,6 +17,7 @@
 #import "DDDStoryDetailViewController.h"
 #import "DDDCommentsViewController.h"
 #import "DDDReadLaterViewController.h"
+#import "UINavigationBar+Styling.h"
 
 @interface DDDMainViewController ()
 @property (weak, nonatomic) DDDContentViewController *contentViewController;
@@ -32,6 +33,7 @@
 
 - (void)setupNavigationRouter
 {
+    [UINavigationBar applyGlobalNavigationBarStyles];
     [self.navigationController updateScreenMapping:@{
                                                      DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
                                                      DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },

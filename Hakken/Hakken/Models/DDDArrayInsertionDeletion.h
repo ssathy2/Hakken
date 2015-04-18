@@ -25,6 +25,12 @@
 // Removes the items from the array at the indexes removed
 - (void)removeIndexesFromArray:(NSIndexSet *)indexesToRemove;
 
+// Updates the item at parameter idx with the parameter item
+- (void)updateItemAtIndex:(NSInteger)index withItems:(id)object;
+
+// Updates the items at parameter indexes with the parameter items
+- (void)updateItemsAtIndexes:(NSIndexSet *)indexesToUpdate withItems:(NSArray *)items;
+
 // Adds all of the items in the parameter array to the internal array, indexesInserted gets updated
 - (void)addAllItemsIntoArrayFromArray:(NSArray *)array;
 @end

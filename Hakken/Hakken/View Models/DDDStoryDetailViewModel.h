@@ -11,4 +11,6 @@
 
 @interface DDDStoryDetailViewModel : DDDViewModel
 @property (strong, nonatomic, readonly) DDDStoryTransitionModel *transitionModel;
+
+- (RACSignal *)markStoryAsRead;
 @end

@@ -8,6 +8,7 @@
 
 #import "DDDStoryDetailViewModel.h"
 #import "DDDStoryTransitionModel.h"
+#import "DDDHakkenReadLaterManager.h"
 
 @interface DDDStoryDetailViewModel()
 @property (strong, nonatomic) DDDStoryTransitionModel *transitionModel;
@@ -18,5 +19,10 @@
     [super prepareWithModel:model];
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
+}
+
+- (RACSignal *)markStoryAsRead
+{
+    return [DDDHakkenReadLaterManager markStoryAsRead:self.transitionModel.story];
 }
 @end

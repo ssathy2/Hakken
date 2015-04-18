@@ -19,6 +19,9 @@
 		DE124ABC1A4B537B00337342 /* DDDDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABB1A4B537B00337342 /* DDDDataServices.m */; };
 		DE124ABD1A4B537B00337342 /* DDDDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABB1A4B537B00337342 /* DDDDataServices.m */; };
 		DE124AC01A4B570400337342 /* DDDMockDataServices.m in Sources */ = {isa = PBXBuildFile; fileRef = DE124ABF1A4B570400337342 /* DDDMockDataServices.m */; };
+		DE24307E1AD8A64600F05838 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE24307C1AD8A64600F05838 /* Crashlytics.framework */; };
+		DE24307F1AD8A64600F05838 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE24307D1AD8A64600F05838 /* Fabric.framework */; };
+		DE2430821AE2CEA600F05838 /* UINavigationBar+Styling.m in Sources */ = {isa = PBXBuildFile; fileRef = DE2430811AE2CEA600F05838 /* UINavigationBar+Styling.m */; };
 		DE3127DE1A1ADC380020DB40 /* DDDViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */; };
 		DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3127E61A1AE9B00020DB40 /* DDDModel.m */; };
 		DE3128071A1EE4D70020DB40 /* mock_story.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128031A1EE4D70020DB40 /* mock_story.json */; };
@@ -124,6 +127,10 @@
 		DE124ABB1A4B537B00337342 /* DDDDataServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDDataServices.m; sourceTree = "<group>"; };
 		DE124ABE1A4B570400337342 /* DDDMockDataServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMockDataServices.h; sourceTree = "<group>"; };
 		DE124ABF1A4B570400337342 /* DDDMockDataServices.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMockDataServices.m; sourceTree = "<group>"; };
+		DE24307C1AD8A64600F05838 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		DE24307D1AD8A64600F05838 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		DE2430801AE2CEA600F05838 /* UINavigationBar+Styling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Styling.h"; sourceTree = "<group>"; };
+		DE2430811AE2CEA600F05838 /* UINavigationBar+Styling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Styling.m"; sourceTree = "<group>"; };
 		DE3127DC1A1ADC380020DB40 /* DDDViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewModel.h; sourceTree = "<group>"; };
 		DE3127DD1A1ADC380020DB40 /* DDDViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDViewModel.m; sourceTree = "<group>"; };
 		DE3127E51A1AE9B00020DB40 /* DDDModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDModel.h; sourceTree = "<group>"; };
@@ -250,7 +257,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE24307E1AD8A64600F05838 /* Crashlytics.framework in Frameworks */,
 				C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */,
+				DE24307F1AD8A64600F05838 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +276,8 @@
 		4AEFAB96A037F3056B270F18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DE24307C1AD8A64600F05838 /* Crashlytics.framework */,
+				DE24307D1AD8A64600F05838 /* Fabric.framework */,
 				DC4B92414FD761527F22666A /* libPods.a */,
 			);
 			name = Frameworks;
@@ -450,6 +461,8 @@
 				DE0755B51A79F751005170D6 /* UIPanGestureRecognizer+Helpers.m */,
 				F97A5A971ACB18D3004B71D6 /* UIView+Utility.h */,
 				F97A5A981ACB18D3004B71D6 /* UIView+Utility.m */,
+				DE2430801AE2CEA600F05838 /* UINavigationBar+Styling.h */,
+				DE2430811AE2CEA600F05838 /* UINavigationBar+Styling.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -623,6 +636,7 @@
 				DE475D8A1A1ADB1600970E87 /* Frameworks */,
 				DE475D8B1A1ADB1600970E87 /* Resources */,
 				EF6575B35B3EF278267B3846 /* Copy Pods Resources */,
+				DE24307B1AD8A5E400F05838 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -748,6 +762,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		DE24307B1AD8A5E400F05838 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 8f7b9cd25db07a44be756a881a17a96e04944c4b 092f028b18363cfff807ed427d3e456474871411d3a3f9fe8e26a84ca1407e74";
+		};
 		EF6575B35B3EF278267B3846 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -793,6 +820,7 @@
 				DE53D4061A5FE4C600A8B06A /* DDDStoryDisplayViewModel.m in Sources */,
 				DE53D4351A5FF12300A8B06A /* UIView+SSAdditions.m in Sources */,
 				DE53D4361A5FF12300A8B06A /* DDDCollectionViewCellSizingHelper.m in Sources */,
+				DE2430821AE2CEA600F05838 /* UINavigationBar+Styling.m in Sources */,
 				DE53D4481A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.m in Sources */,
 				DE6F01BB1A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.m in Sources */,
 				DE53D4741A5FF14B00A8B06A /* DDDStoryDetailViewController.m in Sources */,
@@ -953,6 +981,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -966,8 +998,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Hakken/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

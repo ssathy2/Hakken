@@ -195,7 +195,7 @@ UIGestureRecognizerDelegate>
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSInteger items = [[[[self storyDisplayViewModel] latestStoriesUpdate] array] count];
-    DDLogDebug(@"%@ count-> %li", NSStringFromSelector(_cmd), items);
+    DDLogDebug(@"%@ count-> %li", NSStringFromSelector(_cmd), (long)items);
     return items;
 }
 
@@ -253,7 +253,12 @@ UIGestureRecognizerDelegate>
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.model = transitionModel;
     
-    [[self storyDisplayViewModel] markStoryAsUnread:item];
+    [[[self storyDisplayViewModel] markStoryAsRead:item] subscribeNext:^(id x) {
+        [[[self storyDisplayViewModel] latestStoriesUpdate] updateItemAtIndex:indexPath.row withItems:x];
+    } completed:^{
+        DDLogInfo(@"Update completed!");
+    }];
+    
     // push webview/comments controller here...
     if (item.isUserGenerated)
         [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];

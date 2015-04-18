@@ -62,6 +62,12 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
     [super viewDidLoad];
     
+    [[[self commentsViewModel] markStoryAsRead] subscribeNext:^(id x) {
+        DDLogInfo(@"X: x");
+    } completed:^{
+        DDLogInfo(@"Story Mark as read!");
+    }];
+    
     // Do any additional setup after loading the view.
     [self setupViewModelListeners];
     [self setupCollectionView];
@@ -269,6 +275,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         {
             DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
             preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:[@(treeInfo.comment.id) stringValue]];
+            preferredSize.height += 20;
             break;
         }
         default:

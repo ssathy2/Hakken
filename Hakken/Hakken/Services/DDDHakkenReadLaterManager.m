@@ -76,10 +76,10 @@
         else
         {
             [[RLMRealm defaultRealm] beginWriteTransaction];
-            if (!info)
-                info = [DDDHakkenReadLaterInformation new];
+            info = [DDDHakkenReadLaterInformation new];
             info.userWantsToReadLater = NO;
             info.dateUserSavedToReadLater = [NSDate distantPast];
+            info.dateUserLastRead = [NSDate distantPast];
             item.readLaterInformation = info;
             [[RLMRealm defaultRealm] addOrUpdateObject:item];
             [[RLMRealm defaultRealm] commitWriteTransaction];
@@ -105,7 +105,7 @@
 + (RACSignal *)fetchReadReadLaterItems
 {
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.hasUserReadItem == YES"];
+NSPredicate *readLaterPredicate = [NSPredicate predicateWithFormat:@"readLaterInformation.userWantsToReadLater == YES AND readLaterInformation.dateUserLastRead != %@", [NSDate distantPast]];
         
         RLMResults *results = [DDDHackerNewsItem objectsWithPredicate:readLaterPredicate];
         [subscriber sendNext:[results arrayFromResults]];

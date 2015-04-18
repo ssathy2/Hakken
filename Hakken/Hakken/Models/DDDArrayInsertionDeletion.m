@@ -79,6 +79,32 @@
     [self updateSignalSubscribers];
 }
 
+- (void)updateItemAtIndex:(NSInteger)index withItems:(id)object
+{
+    NSAssert(object != nil, @"'object' parameter to %@ cannot be nil", NSStringFromSelector(_cmd));
+    NSMutableArray *scratchArray = [NSMutableArray arrayWithArray:self.array];
+    scratchArray[index] = object;
+    self.array = scratchArray;
+    self.indexesDeleted  = [NSIndexSet indexSetWithIndex:index];
+    self.indexesInserted = [NSIndexSet indexSetWithIndex:index];
+    [self updateSignalSubscribers];
+}
+
+- (void)updateItemsAtIndexes:(NSIndexSet *)indexesToUpdate withItems:(NSArray *)items
+{
+    NSAssert(items != nil, @"'object' parameter to %@ is nil", NSStringFromSelector(_cmd));
+    NSMutableArray *scratchArray = [NSMutableArray arrayWithArray:self.array];
+    NSUInteger currentIndex = [indexesToUpdate firstIndex];
+    while (currentIndex != NSNotFound) {
+        scratchArray[currentIndex] = items[currentIndex];
+        currentIndex = [indexesToUpdate indexGreaterThanIndex:currentIndex];
+    }
+    self.array = scratchArray;
+    self.indexesDeleted  = indexesToUpdate;
+    self.indexesInserted = indexesToUpdate;
+    [self updateSignalSubscribers];
+}
+
 - (void)updateSignalSubscribers
 {
     for (id<RACSubscriber> subscriber in self.signalSubscribers)
