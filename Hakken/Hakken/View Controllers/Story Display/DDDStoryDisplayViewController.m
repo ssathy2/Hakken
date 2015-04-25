@@ -121,7 +121,6 @@ UIGestureRecognizerDelegate>
     }];
 }
 
-
 #pragma mark - UIGestureRecognizer Related
 - (void)handlePanGesture:(UIPanGestureRecognizer *)pangestureRecognizer
 {

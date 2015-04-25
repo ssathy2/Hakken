@@ -10,7 +10,6 @@
     #import <ReactiveCocoa/ReactiveCocoa.h>
     #import <AFNetworking/AFNetworking.h>
     #import <Realm/Realm.h>
-    #import <TTTAttributedLabel/TTTAttributedLabel.h>
     #import "DDDFileOperationHelpers.h"
     // Categories
     #import "DDDCategories.h"

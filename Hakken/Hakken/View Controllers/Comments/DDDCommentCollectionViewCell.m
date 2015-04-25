@@ -12,19 +12,22 @@
 
 #import <DTCoreText/DTCoreText.h>
 
-@interface DDDCommentCollectionViewCell()<TTTAttributedLabelDelegate>
+@interface DDDCommentCollectionViewCell()
 @property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distantDateCommentPostedLabel;
-@property (weak, nonatomic) IBOutlet TTTAttributedLabel *commentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+@property (strong, nonatomic) NSArray *linkRanges; // -> contains dictionaries containing mappings { 'range' : <# range #>, 'url' : <# url #> }
+@property (assign, nonatomic) CGPoint lastTappedLocation;
 @end
 
 @implementation DDDCommentCollectionViewCell
 
-- (void)awakeFromNib
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [super awakeFromNib];
-    self.commentLabel.delegate = self;
+    [super touchesBegan:touches withEvent:event];
+    UITouch *touch = [touches anyObject];
+    self.lastTappedLocation = [touch locationInView:self];
 }
 
 - (void)prepareWithModel:(DDDCommentTreeInfo *)model
@@ -38,6 +41,7 @@
     UIFont *font = self.commentLabel.font;
     NSDictionary *optionsDict = @{
                                   DTUseiOS6Attributes    : @(YES),
+                                  DTDefaultLinkColor     : [UIColor yellowColor],
                                   DTDefaultTextColor     : [UIColor whiteColor],
                                   DTDefaultFontName      : font.fontName,
                                   DTDefaultFontFamily    : font.familyName,
@@ -46,42 +50,67 @@
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithHTMLData:data
                                                                           options:optionsDict
                                                                documentAttributes:nil];
+
     NSMutableAttributedString *mutAttrString = [attrString mutableCopy];
+    [mutAttrString removeAttribute:@"CTForegroundColorFromContext" range:NSMakeRange(0, mutAttrString.length)];
 
     // remove the new line at the end of the attr string
     [mutAttrString deleteCharactersInRange:NSMakeRange(mutAttrString.length-1, 1)];
     self.commentLabel.attributedText = mutAttrString;
-    
-    __block id genericUrl;
-    __block NSRange urlRange;
-    [mutAttrString enumerateAttribute:NSLinkAttributeName inRange:NSMakeRange(0, mutAttrString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+}
+
+- (NSURL *)tappedLinkInCell
+{
+    __block NSURL *tappedLinkInCell = nil;
+    [self.linkRanges enumerateObjectsUsingBlock:^(NSDictionary *dict, NSUInteger idx, BOOL *stop) {
+        CGRect clickHereRect = [self boundingRectForCharacterRange:[[dict valueForKey:@"range"] rangeValue]];
+        CGPoint convertedPoint = [self convertPoint:self.lastTappedLocation toView:self.commentLabel];
+        if (CGRectContainsPoint(clickHereRect, convertedPoint))
+        {
+            tappedLinkInCell = [dict valueForKey:@"url"];
+            return ;
+        }
+    }];
+    return tappedLinkInCell;
+}
+
+- (NSArray *)linkRanges
+{
+    if (_linkRanges)
+        return _linkRanges;
+    NSMutableArray *urlRanges = [NSMutableArray array];
+    [self.commentLabel.attributedText enumerateAttribute:NSLinkAttributeName inRange:NSMakeRange(0, self.commentLabel.attributedText.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
         if (value)
         {
-            genericUrl = value;
-            urlRange = range;
+            [urlRanges addObject:@{
+                                   @"url"   : value,
+                                   @"range" : [NSValue valueWithRange:range]
+                                   }];
         }
     }];
     
-    if (urlRange.location != NSNotFound && genericUrl)
-    {
-        NSURL *actualURL;
-        if ([genericUrl isKindOfClass:[NSString class]])
-            actualURL = [NSURL URLWithString:genericUrl];
-        else if ([genericUrl isKindOfClass:[NSURL class]])
-            actualURL = genericUrl;
-        self.commentLabel.linkAttributes = @{
-                                             (id)kCTForegroundColorAttributeName: [UIColor blueColor],
-                                             (id)kCTUnderlineStyleAttributeName: [NSNumber numberWithInt:NSUnderlineStyleSingle]
-                                             };
-        [self.commentLabel addLinkToURL:actualURL withRange:urlRange];
-    }
-    
+    _linkRanges = urlRanges;
+    return _linkRanges;
 }
 
-- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+- (CGRect)boundingRectForCharacterRange:(NSRange)range
 {
-    if ([self.delegate respondsToSelector:@selector(commentCollectionViewCell:didTapOnLinkInComment:withLink:)])
-        [self.delegate commentCollectionViewCell:self didTapOnLinkInComment:self.model withLink:url];
+    NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:self.commentLabel.attributedText];
+    NSLayoutManager *layoutManager = [[NSLayoutManager alloc] init];
+    [textStorage addLayoutManager:layoutManager];
+    NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:[self bounds].size];
+    textContainer.lineFragmentPadding = 0;
+    [layoutManager addTextContainer:textContainer];
+    
+    NSRange glyphRange;
+    
+    // Convert the range for glyphs.
+    [layoutManager characterRangeForGlyphRange:range actualGlyphRange:&glyphRange];
+    
+    CGRect rect = [layoutManager boundingRectForGlyphRange:glyphRange inTextContainer:textContainer];
+    rect.origin.y += 5;
+    rect.size.height += 10;
+    return rect;
 }
 
 @end

@@ -175,6 +175,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDHackerNewsItem *item = [[self commentsViewModel] story];
+    DDDCommentCollectionViewCell *cell = (DDDCommentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (indexPath.section == DDDCommentsSectionHeader && !item.isUserGenerated)
     {
         DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
@@ -185,6 +186,15 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         attrs.model = transitionModel;
         
         [self.navigationController transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    }
+    else if ([cell respondsToSelector:@selector(tappedLinkInCell)])
+    {
+        NSURL *url = [cell tappedLinkInCell];
+        if (url)
+        {
+            // navigate to link in cell here
+            DDLogDebug(@"Moo, %@", url);
+        }
     }
 }
 

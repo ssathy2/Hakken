@@ -66,9 +66,9 @@
         {
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
-            UICollectionViewLayoutAttributes *itemAttributes = [self layoutAttributesForItemAtIndexPath:indexPath];
-            UICollectionViewLayoutAttributes *footerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
-            UICollectionViewLayoutAttributes *headerAttributes = [self layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *itemAttributes = [super layoutAttributesForItemAtIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *footerAttributes = [super layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter atIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *headerAttributes = [super layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
 
             itemAttributes.frame = [self frameForLayoutAttributes:itemAttributes atIndexPath:indexPath];
             if (itemAttributes)

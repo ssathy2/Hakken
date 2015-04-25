@@ -1,71 +1,68 @@
 PODS:
-  - AFNetworking (2.5.0):
+  - AFNetworking (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.5.0):
+  - AFNetworking/NSURLConnection (2.5.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.5.0):
+  - AFNetworking/NSURLSession (2.5.3):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.5.0)
-  - AFNetworking/Security (2.5.0)
-  - AFNetworking/Serialization (2.5.0)
-  - AFNetworking/UIKit (2.5.0):
+  - AFNetworking/Reachability (2.5.3)
+  - AFNetworking/Security (2.5.3)
+  - AFNetworking/Serialization (2.5.3)
+  - AFNetworking/UIKit (2.5.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - CocoaLumberjack (2.0.0-beta4):
+  - CocoaLumberjack (2.0.0):
     - CocoaLumberjack/Default
     - CocoaLumberjack/Extensions
-  - CocoaLumberjack/Core (2.0.0-beta4)
-  - CocoaLumberjack/Default (2.0.0-beta4):
+  - CocoaLumberjack/Core (2.0.0)
+  - CocoaLumberjack/Default (2.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.0.0-beta4):
+  - CocoaLumberjack/Extensions (2.0.0):
     - CocoaLumberjack/Default
-  - DTCoreText (1.6.14):
-    - DTFoundation/Core (~> 1.7.1)
-    - DTFoundation/DTAnimatedGIF (~> 1.7.1)
-    - DTFoundation/DTHTMLParser (~> 1.7.1)
-    - DTFoundation/UIKit (~> 1.7.1)
+  - DTCoreText (1.6.15):
+    - DTFoundation/Core (~> 1.7.5)
+    - DTFoundation/DTAnimatedGIF (~> 1.7.5)
+    - DTFoundation/DTHTMLParser (~> 1.7.5)
+    - DTFoundation/UIKit (~> 1.7.5)
   - DTFoundation/Core (1.7.5)
   - DTFoundation/DTAnimatedGIF (1.7.5)
   - DTFoundation/DTHTMLParser (1.7.5):
     - DTFoundation/Core
   - DTFoundation/UIKit (1.7.5):
     - DTFoundation/Core
-  - ReactiveCocoa (2.3.1):
+  - ReactiveCocoa (2.4.7):
     - ReactiveCocoa/UI
-  - ReactiveCocoa/Core (2.3.1):
+  - ReactiveCocoa/Core (2.4.7):
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.3.1)
-  - ReactiveCocoa/UI (2.3.1):
+  - ReactiveCocoa/no-arc (2.4.7)
+  - ReactiveCocoa/UI (2.4.7):
     - ReactiveCocoa/Core
   - Realm (0.89.2):
     - Realm/Headers
   - Realm/Headers (0.89.2)
-  - TTTAttributedLabel (1.13.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - CocoaLumberjack
   - DTCoreText
-  - ReactiveCocoa
-  - Realm
-  - TTTAttributedLabel
+  - ReactiveCocoa (= 2.4.7)
+  - Realm (= 0.89.2)
 
 SPEC CHECKSUMS:
-  AFNetworking: 96ac9bf3eda33582701cb1fcc5b896aa1e20311e
-  CocoaLumberjack: 44fc4ab64ee7cb9703df5de6d5012cf917775938
-  DTCoreText: be48bbe94562eeb24b29110d25bd9d0dcc566a6c
+  AFNetworking: e1d86c2a96bb5d2e7408da36149806706ee122fe
+  CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
+  DTCoreText: 13ce06e63204a3b47c9db974e3d9be982bb0b1ed
   DTFoundation: 1d28080c20c3da041706545363f8238ab53a6204
-  ReactiveCocoa: 334468a83b2c5f669f7cfb9a084415ee23219b4f
+  ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
   Realm: 66d433a705f1d1ff0d574d5d646986514448dacc
-  TTTAttributedLabel: 6f3174aef8e738f44dff97c2eb7d8184f6ab6277
 
 COCOAPODS: 0.34.4

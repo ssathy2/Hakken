@@ -40,7 +40,7 @@
 
 - (void)sharedInit
 {
-    self.signalSubscribers  = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
+    self.signalSubscribers  = [NSHashTable hashTableWithOptions:NSPointerFunctionsStrongMemory];
     __weak typeof(self) weakSelf = self;
     self.arrayChangedSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         [weakSelf.signalSubscribers addObject:subscriber];

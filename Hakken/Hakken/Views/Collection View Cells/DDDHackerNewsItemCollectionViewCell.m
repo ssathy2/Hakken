@@ -243,6 +243,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 0.f, cellContentFrame.size.height);
         self.cellContentView.frame = cellContentFrame;
         self.swipeActionView.frame = swipeActionView;
+        self.swipeActionViewLabel.hidden = YES;
     };
     
     void(^cellContentViewResetWithConfirmation)() = ^() {
@@ -251,11 +252,13 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 50.f, cellContentFrame.size.height);
         self.cellContentView.frame = cellContentFrame;
         self.swipeActionView.frame = swipeActionView;
+        self.swipeActionViewLabel.hidden = YES;
     };
     
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
-        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];        
+        self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
+        self.swipeActionViewLabel.hidden = NO;
         [self updateConstraintsIfNeeded];
     };
     
@@ -272,7 +275,9 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
                                  cellContentViewResetWithConfirmation();
                              } completion:^(BOOL finished) {
                                  if (finished)
+                                 {
                                      [self performConfirmationIconAnimation];
+                                 }
                              }];
 
 
@@ -355,12 +360,12 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     }
 }
 
-
 - (void)contentViewReset
 {
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
         self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
+        self.swipeActionViewLabel.hidden = NO;
         [self updateConstraintsIfNeeded];
     };
     
