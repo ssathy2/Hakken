@@ -24,7 +24,7 @@ typedef void(^ErrorBlock)(NSError *error);
 typedef void(^DDDHackerNewsItemBlock)(DDDHackerNewsItem *item);
 
 #ifdef DEBUG
-static const int ddLogLevel = DDLogLevelAll;
+static const NSUInteger ddLogLevel = DDLogLevelAll;
 #else
-static const int ddLogLevel = DDLogLevelOff;
+static const NSUInteger ddLogLevel = DDLogLevelOff;
 #endif

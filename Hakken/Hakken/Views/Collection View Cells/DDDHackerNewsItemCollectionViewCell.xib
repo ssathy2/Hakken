@@ -154,6 +154,7 @@
                 <outlet property="cellContentViewLeadingSpacingConstraint" destination="EED-86-UYB" id="ufA-xd-ARR"/>
                 <outlet property="commentsButton" destination="GWH-P2-8Wt" id="stO-J9-K1g"/>
                 <outlet property="confirmationView" destination="Iq6-91-2aA" id="kTA-HB-c3u"/>
+                <outlet property="contentViewWidthConstraint" destination="Xzh-2O-Pec" id="Mo2-vq-UBw"/>
                 <outlet property="pointDatePostedLabel" destination="B40-H9-V3A" id="eVU-Zm-kik"/>
                 <outlet property="swipeActionView" destination="r7B-PB-ybo" id="mMx-Ie-Taa"/>
                 <outlet property="swipeActionViewLabel" destination="DA2-3R-o5P" id="bjj-xA-pe1"/>

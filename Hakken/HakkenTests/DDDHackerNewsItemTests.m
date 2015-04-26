@@ -39,7 +39,7 @@
 //            return [RACSignal return:[[DDDHackerNewsItem alloc] initWithDictionary:dictionary]];
         }] subscribeNext:^(DDDHackerNewsItem *mockStoryItem) {
             //XCTAssert(mockStoryItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
-            XCTAssert(mockStoryItem.type == DDDHackerNewsItemTypeStory, @"FAIL: The type of this item should be a story!");
+            XCTAssert(mockStoryItem.itemType == DDDHackerNewsItemTypeStory, @"FAIL: The type of this item should be a story!");
             [subscriber sendNext:mockStoryItem];
         } error:^(NSError *error) {
             XCTAssert(error == nil, @"FAIL: %@", error);
@@ -57,7 +57,7 @@
         return nil;//return [RACSignal return:[[DDDHackerNewsComment alloc] initWithDictionary:dictionary]];
     }] subscribeNext:^(DDDHackerNewsComment *mockCommentItem) {
         XCTAssert(mockCommentItem.kids.count == 1, @"FAIL: Number of kids should be 1...");
-        XCTAssert(mockCommentItem.type == DDDHackerNewsItemTypeComment, @"FAIL: The type of this item should be a comment!");
+        XCTAssert(mockCommentItem.itemType == DDDHackerNewsItemTypeComment, @"FAIL: The type of this item should be a comment!");
     } error:^(NSError *error) {
         XCTAssert(error == nil, @"FAIL: %@", error);
     } completed:^{

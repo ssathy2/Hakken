@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 @property (weak, nonatomic) IBOutlet UILabel *swipeActionViewLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UIView *unreadIndicatorView;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
@@ -55,6 +56,12 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     [super awakeFromNib];
     [self resetCellContentView:NO shouldShowConfirmationView:NO];
     [self styleCell];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.contentViewWidthConstraint.constant = CGRectGetWidth(self.bounds);
 }
 
 - (void)styleCell
@@ -351,10 +358,13 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     if (flag)
     {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            __block CALayer *layerToRemove;
             [[self.swipeActionView.layer sublayers] enumerateObjectsUsingBlock:^(CALayer *layer, NSUInteger idx, BOOL *stop) {
                 if ([layer.name isEqualToString:CHECKMARKLAYERNAME])
-                    [layer removeFromSuperlayer];
+                    layerToRemove = layer;
             }];
+            if (layerToRemove)
+                [layerToRemove removeFromSuperlayer];
             [self contentViewReset];
         });
     }
