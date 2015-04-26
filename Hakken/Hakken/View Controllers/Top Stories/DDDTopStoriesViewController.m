@@ -56,7 +56,6 @@
     CGRect navFrame = self.rightNavView.frame;
     navFrame.size.height = 35.f;
     navFrame.size.width  = 40.f;
-    navFrame.origin.x    = 0.f;
     self.rightNavView.frame = navFrame;
     [self.rightNavView addTarget:self action:@selector(readLaterButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:self.rightNavView]];

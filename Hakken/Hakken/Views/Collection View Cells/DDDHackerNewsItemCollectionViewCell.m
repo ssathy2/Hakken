@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 @property (weak, nonatomic) IBOutlet UILabel *swipeActionViewLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidthConstraint;
 
 @property (weak, nonatomic) IBOutlet UIView *unreadIndicatorView;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
@@ -48,6 +49,12 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
     self.confirmationView.hidden = YES;
     [self resetCellContentView:NO shouldShowConfirmationView:NO];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    self.contentViewWidthConstraint.constant = CGRectGetWidth(self.contentView.bounds);
 }
 
 - (void)awakeFromNib
