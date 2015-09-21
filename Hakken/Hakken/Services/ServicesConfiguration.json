@@ -1,6 +1,6 @@
 {
     "live": {
-        "baseURL" : "http://damp-bayou-8238.herokuapp.com/",
+        "baseURL" : "http://hackernews-api-newyork1.siddsathyam.com/",
     },
     "mock": {
         "isMock"  : true,

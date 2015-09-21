@@ -69,9 +69,9 @@ NS_INLINE NSLayoutAttribute DDDParentAttributeForAttribute(NSLayoutAttribute att
     switch(attribute)
     {
         case NSLayoutAttributeLeading:
-            return NSLayoutAttributeLeft;
+            return NSLayoutAttributeLeading;
         case NSLayoutAttributeTrailing:
-            return NSLayoutAttributeRight;
+            return NSLayoutAttributeTrailing;
         default:
             return attribute;
     }
@@ -82,9 +82,9 @@ NS_INLINE NSLayoutAttribute DDDSiblingAttributeForAttribute(NSLayoutAttribute at
     switch (attribute)
     {
         case NSLayoutAttributeTrailing:
-            return NSLayoutAttributeLeft;
+            return NSLayoutAttributeLeading;
         case NSLayoutAttributeLeading:
-            return NSLayoutAttributeRight;
+            return NSLayoutAttributeTrailing;
         default:
             return attribute;
     }
