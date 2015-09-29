@@ -191,10 +191,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     {
         NSURL *url = [cell tappedLinkInCell];
         if (url)
-        {
-            // navigate to link in cell here
-            DDLogDebug(@"Moo, %@", url);
-        }
+            [[UIApplication sharedApplication] openURL:url];
     }
 }
 

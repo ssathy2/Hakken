@@ -53,7 +53,7 @@
 {
     self.rightNavView = [DDDRightNavigationView instance];
     [self.rightNavView setBackgroundColor:[UIColor clearColor]];
-    CGRect navFrame = self.rightNavView.frame;
+    CGRect navFrame      = self.rightNavView.frame;
     navFrame.size.height = 35.f;
     navFrame.size.width  = 40.f;
     navFrame.origin.x    = 0.f;
@@ -76,13 +76,13 @@
 
 - (void)updateNavViewAnimated:(BOOL)animated
 {
-    __block NSInteger unreadSavedStoriesCount = 0;
-    [[[self topstoriesViewModel] fetchUnreadSavedStories] subscribeNext:^(NSArray *unreadSavedStories) {
-        unreadSavedStoriesCount = unreadSavedStories.count;
+    __block NSInteger savedStoriesCount = 0;
+    [[[self topstoriesViewModel] fetchAllSavedStories] subscribeNext:^(NSArray *savedStories) {
+        savedStoriesCount = savedStories.count;
     } error:^(NSError *error) {
         
     } completed:^{
-        [self updateNavViewWithCount:unreadSavedStoriesCount animated:animated];
+        [self updateNavViewWithCount:savedStoriesCount animated:animated];
     }];
 }
 

@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *swipeActionViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cellContentViewLeadingSpacingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *bookmarkImageView;
 
 @property (weak, nonatomic) IBOutlet UIView *unreadIndicatorView;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
@@ -48,13 +49,15 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     self.swipeActionViewWidthConstraint.constant = 0.f;
     self.cellContentViewLeadingSpacingConstraint.constant = 0.f;
     self.confirmationView.hidden = YES;
-    [self resetCellContentView:NO shouldShowConfirmationView:NO];
+    self.bookmarkImageView.alpha = 0.f;
+    [self resetCellContentView:NO];
 }
 
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    [self resetCellContentView:NO shouldShowConfirmationView:NO];
+    [self.bookmarkImageView setImage:[UIImage imageNamed:@"bookmark"]];
+    [self resetCellContentView:NO];
     [self styleCell];
 }
 
@@ -137,14 +140,14 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 - (void)handleGestureRecongizerCancelledState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES shouldShowConfirmationView:NO];
+    [self resetCellContentView:YES];
     [self notifyDelegateAboutCellSwipeState];
 
 }
 
 - (void)handleGestureRecongizerFailedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES shouldShowConfirmationView:NO];
+    [self resetCellContentView:YES];
     [self notifyDelegateAboutCellSwipeState];
 }
 
@@ -169,13 +172,13 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
 
 - (void)handleGestureRecongizerEndedState:(UIPanGestureRecognizer *)panGestureRecognizer
 {
-    [self resetCellContentView:YES shouldShowConfirmationView:(self.cellSwipeState == DDDCellSwipeStateSelected)];
+    [self resetCellContentView:YES];
     [self notifyDelegateAboutCellSwipeState];
 }
 
 - (void)closeCellSwipeContainer
 {
-    [self resetCellContentView:YES shouldShowConfirmationView:NO];
+    [self resetCellContentView:YES];
     [self notifyDelegateAboutCellSwipeState];
 }
 
@@ -242,7 +245,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     return CGRectIntersectsRect(self.contentView.frame, locationInSuperView) && (self.swipeActionViewWidthConstraint.constant - translation.x >= 0);
 }
 
-- (void)resetCellContentView:(BOOL)animated shouldShowConfirmationView:(BOOL)shouldShowConfirmationView
+- (void)resetCellContentView:(BOOL)animated
 {
     void(^cellContentViewReset)() = ^() {
         CGRect cellContentFrame = self.cellContentView.frame;
@@ -252,16 +255,7 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
         self.swipeActionView.frame = swipeActionView;
         self.swipeActionViewLabel.hidden = YES;
     };
-    
-    void(^cellContentViewResetWithConfirmation)() = ^() {
-        CGRect cellContentFrame = self.cellContentView.frame;
-        cellContentFrame.origin = CGPointMake(-50.f, 0.f);
-        CGRect swipeActionView = CGRectMake(cellContentFrame.origin.x + cellContentFrame.size.width, 0.f, 50.f, cellContentFrame.size.height);
-        self.cellContentView.frame = cellContentFrame;
-        self.swipeActionView.frame = swipeActionView;
-        self.swipeActionViewLabel.hidden = YES;
-    };
-    
+
     void(^cellContentViewResetCompletion)() = ^() {
         self.swipeActionViewWidthConstraint.constant = 0.f;
         self.swipeActionView.backgroundColor = [UIColor swipeActionViewGrayColor];
@@ -271,102 +265,21 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     
     if (animated)
     {
-        if (shouldShowConfirmationView)
-        {
-            [UIView animateWithDuration:0.3
-                                  delay:0.f
-                 usingSpringWithDamping:0.5f
-                  initialSpringVelocity:0.1
-                                options:UIViewAnimationOptionCurveEaseInOut
-                             animations:^{
-                                 cellContentViewResetWithConfirmation();
-                             } completion:^(BOOL finished) {
-                                 if (finished)
-                                 {
-                                     [self performConfirmationIconAnimation];
-                                 }
-                             }];
-
-
-            
-        }
-        else
-        {
-            [UIView animateWithDuration:0.55f
-                                  delay:0.f
-                 usingSpringWithDamping:0.5f
-                  initialSpringVelocity:0.1
-                                options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                                    cellContentViewReset();
-                                } completion:^(BOOL finished) {
-                                    if (finished)
-                                        cellContentViewResetCompletion();
-                                }];
-        }
+        [UIView animateWithDuration:0.55f
+                              delay:0.f
+             usingSpringWithDamping:0.5f
+              initialSpringVelocity:0.1
+                            options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                cellContentViewReset();
+                            } completion:^(BOOL finished) {
+                                if (finished)
+                                    cellContentViewResetCompletion();
+                            }];
     }
     else
     {
         cellContentViewReset();
         cellContentViewResetCompletion();
-    }
-}
-
-- (void)performConfirmationIconAnimation
-{
-    CGRect bezierPathBounds = self.swipeActionView.bounds;
-    CGFloat bezierPathStartX = 7.f;
-    CGFloat bezierPathStartY = CGRectGetHeight(bezierPathBounds)/2;
-    
-    CGFloat bezierPathEndX   = CGRectGetWidth(bezierPathBounds) - 7.f;
-    CGFloat bezierPathEndY   = bezierPathStartY - 20.f;
-    
-    UIBezierPath *bezierPath    = [UIBezierPath bezierPath];
-    bezierPath.lineCapStyle     = kCGLineCapRound;
-    bezierPath.lineJoinStyle    = kCGLineJoinBevel;
-
-    [bezierPath moveToPoint: CGPointMake(bezierPathStartX, bezierPathStartY)];
-    [bezierPath addLineToPoint: CGPointMake(bezierPathStartX+13, bezierPathStartY+13)];
-    [bezierPath addLineToPoint: CGPointMake(bezierPathEndX, bezierPathEndY)];
-    
-    bezierPath.lineWidth = 3;
-    
-    CAShapeLayer *progressLayer = [CAShapeLayer layer];
-    [progressLayer setPath: bezierPath.CGPath];
-    
-    [progressLayer setStrokeColor:[UIColor blackColor].CGColor];
-    [progressLayer setFillColor:[UIColor clearColor].CGColor];
-    [progressLayer setLineWidth:3];
-    
-    [progressLayer setStrokeStart:0.0];
-    [progressLayer setStrokeEnd:1.0];
-    
-    [progressLayer setFrame:bezierPathBounds];
-    [progressLayer setName:CHECKMARKLAYERNAME];
-    [self.swipeActionView.layer addSublayer:progressLayer];
-    
-    CABasicAnimation *animateStrokeEnd = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    animateStrokeEnd.duration  = 0.1;
-    animateStrokeEnd.fromValue = [NSNumber numberWithFloat:0.0f];
-    animateStrokeEnd.toValue   = [NSNumber numberWithFloat:1.0f];
-    animateStrokeEnd.removedOnCompletion  = YES;
-    animateStrokeEnd.delegate = self;
-    [progressLayer addAnimation:animateStrokeEnd forKey:nil];
-}
-
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
-    if (flag)
-    {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.9f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            __block CALayer *layerToRemove;
-            [[self.swipeActionView.layer sublayers] enumerateObjectsUsingBlock:^(CALayer *layer, NSUInteger idx, BOOL *stop) {
-                if ([layer.name isEqualToString:CHECKMARKLAYERNAME])
-                    layerToRemove = layer;
-            }];
-            if (layerToRemove)
-                [layerToRemove removeFromSuperlayer];
-            [self contentViewReset];
-        });
     }
 }
 
@@ -453,12 +366,16 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     
     self.swipeActionViewLabel.text = (model.readLaterInformation.userWantsToReadLater) ? @"Remove from read later" : @"Add to read later";
     self.unreadIndicatorView.hidden = !(model.readLaterInformation.userWantsToReadLater && !model.readLaterInformation.hasUserReadItem);
+    
+    [UIView animateWithDuration:0.2f animations:^{
+        self.bookmarkImageView.alpha = (model.readLaterInformation.userWantsToReadLater);
+    }];
 }
 
 - (void)styleURLLabelWithHackernewsItem:(DDDHackerNewsItem *)item
 {
     if (item.isUserGenerated)
-        self.urlLabel.hidden = YES;
+        self.urlLabel.text = nil;
     
     if (item.itemType == DDDHackerNewsItemTypeJob)
         self.commentsButton.hidden = YES;

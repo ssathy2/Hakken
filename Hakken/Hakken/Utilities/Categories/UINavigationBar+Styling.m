@@ -15,5 +15,6 @@
                                                 NSForegroundColorAttributeName: [UIColor whiteColor],
                                                 NSFontAttributeName           : [UIFont fontWithName:@"AvenirNext-DemiBold" size:18.f],
                                                 }];
+    [[self appearance] setTintColor:[UIColor whiteColor]];
 }
 @end
