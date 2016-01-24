@@ -18,12 +18,13 @@
 + (NSDictionary *)defaultPropertyValues
 {
     return @{
-             @"id"   : @"",
-             @"kids" : @[],
-             @"parent"  : @(0),
-             @"text"    : @"",
-             @"deleted" : @(NO),
-             @"by"      : @""
+             @"kids"                    : @[],
+             @"parent"                  : @(0),
+             @"text"                    : @"",
+             @"deleted"                 : @(NO),
+             @"by"                      : @"",
+             @"isCollapsed"             : @(NO),
+             @"areChildrenCollapsed"    : @(NO)
              };
 }
 

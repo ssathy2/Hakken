@@ -20,8 +20,11 @@
                              return value != nil;
                          }]
             flattenMap:^RACStream *(id value) {
-                return nil;
-//                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:value]];
+                NSArray *arr = [DDDHackernewsItemResponseSerializer arrayOfItemsFromJSONArray:value];
+                [[RLMRealm defaultRealm] beginWriteTransaction];
+                [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
+                [[RLMRealm defaultRealm] commitWriteTransaction];
+                return [RACSignal return:arr];
             }];
 }
 
@@ -33,8 +36,11 @@
                  return value != nil;
              }]
             flattenMap:^RACStream *(id value) {
-                return nil;
-//                return [RACSignal return:[DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:value]];
+                NSArray *arr = [DDDHackernewsItemResponseSerializer arrayOfCommentsFromJSONArray:value];
+                [[RLMRealm defaultRealm] beginWriteTransaction];
+                [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
+                [[RLMRealm defaultRealm] commitWriteTransaction];
+                return [RACSignal return:arr];
             }];
 }
 @end

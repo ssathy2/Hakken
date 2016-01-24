@@ -11,8 +11,9 @@
 @class DDDHackerNewsComment;
 
 @interface DDDCommentTreeInfo : DDDModel
-@property (strong, nonatomic) DDDHackerNewsComment *comment;
+@property (nonatomic, strong) DDDHackerNewsComment *comment;
 @property (nonatomic, assign) NSInteger depth;
+@property (nonatomic, strong) NSIndexPath *indexPath;
 
 + (DDDCommentTreeInfo *)commentTreeInfoWithComment:(DDDHackerNewsComment *)comment withDepth:(NSInteger)depth;
 @end

@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DDDHackernewsItemResponseSerializer : NSObject
-//
-//+ (NSArray *)arrayOfCommentsFromJSONArray:(NSArray *)json;
-//+ (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray;
+@interface DDDHackernewsItemResponseSerializer : NSObject//
++ (NSArray *)arrayOfCommentsFromJSONArray:(NSArray *)json;
++ (NSArray *)arrayOfItemsFromJSONArray:(NSArray *)jsonArray;
 @end

@@ -21,6 +21,7 @@
 #import "DDDStoryTransitionModel.h"
 #import "DDDTransitionAttributes.h"
 #import "DetailStoryboardIdentifiers.h"
+#import <SafariServices/SFSafariViewController.h>
 
 typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
@@ -30,14 +31,14 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     DDDCommentsSectionCount
 };
 
-@interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DDDCommentsViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, DDDCommentsViewModelDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL viewIsVisible;
 @end
 
 @implementation DDDCommentsViewController
-
+@dynamic indexPathsCollapsedBlock, indexPathsExpandedBlock;
 + (NSString *)storyboardIdentifier
 {
     return DDDCommentsViewControllerIdentifier;
@@ -61,7 +62,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [[self commentsViewModel] setDelegate:self];
     [[[self commentsViewModel] markStoryAsRead] subscribeNext:^(id x) {
         DDLogInfo(@"X: x");
     } completed:^{
@@ -136,23 +137,29 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
     if (insertionDeletion)
     {
-        [self.collectionView.collectionViewLayout invalidateLayout];
         if (self.viewIsVisible)
         {
-            if (insertionDeletion.indexesInserted && insertionDeletion.indexesDeleted)
+            if (insertionDeletion.indexesInserted.count > 0 && insertionDeletion.indexesDeleted.count > 0)
             {
+                [self.collectionView.collectionViewLayout invalidateLayout];
                 [self.collectionView performBatchUpdates:^{
                     [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
                     [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-                } completion:^(BOOL finished) {
-                    
-                }];
+                } completion:nil];
             }
-            else if (insertionDeletion.indexesDeleted && !insertionDeletion.indexesInserted)
-                [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
-            else if (!insertionDeletion.indexesDeleted && insertionDeletion.indexesInserted)
-                [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
-            
+            else if (insertionDeletion.indexesDeleted.count > 0 && insertionDeletion.indexesInserted.count == 0)
+            {
+                [self.collectionView performBatchUpdates:^{
+                    [self.collectionView deleteItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesDeleted]];
+                } completion:nil];
+            }
+            else if (insertionDeletion.indexesDeleted.count == 0 && insertionDeletion.indexesInserted.count > 0)
+            {
+                [self.collectionView.collectionViewLayout invalidateLayout];                
+                [self.collectionView performBatchUpdates:^{
+                    [self.collectionView insertItemsAtIndexPaths:[self indexPathsFromIndexSet:insertionDeletion.indexesInserted]];
+                } completion:nil];
+            }
         }
         else
             [self.collectionView reloadData];
@@ -164,7 +171,8 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 {
     NSMutableArray *indexPaths = [NSMutableArray array];
     NSUInteger currentIndex = [set firstIndex];
-    while (currentIndex != NSNotFound) {
+    while (currentIndex != NSNotFound)
+    {
         [indexPaths addObject:[NSIndexPath indexPathForRow:currentIndex inSection:1]];
         currentIndex = [set indexGreaterThanIndex:currentIndex];
     }
@@ -175,7 +183,6 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     DDDHackerNewsItem *item = [[self commentsViewModel] story];
-    DDDCommentCollectionViewCell *cell = (DDDCommentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     if (indexPath.section == DDDCommentsSectionHeader && !item.isUserGenerated)
     {
         DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
@@ -187,12 +194,9 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         
         [self.navigationController transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
     }
-    else if ([cell respondsToSelector:@selector(tappedLinkInCell)])
-    {
-        NSURL *url = [cell tappedLinkInCell];
-        if (url)
-            [[UIApplication sharedApplication] openURL:url];
-    }
+    // TODO: Handle URL's tapped in teh cell
+    else
+        [[self commentsViewModel] toggleChildCommentsExpandedCollapsedWithRootCommentAtIndexPath:indexPath];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -213,7 +217,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
             return [[self commentsViewModel] commentCount];
         case DDDCommentsSectionHeader:
             return 1;
-        default:
+        default:    
             return 0;
     }
 }
@@ -278,11 +282,16 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
             preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:cellKlass withCellModel:item withModelIdentifier:[@(item.id) stringValue]];
             break;
         }
-        case DDDCommentsSectionComments:
+        case DDDCommentsSectionComments:	
         {
             DDDCommentTreeInfo *treeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
-            preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:[@(treeInfo.comment.id) stringValue]];
-            preferredSize.height += 20;
+            if (treeInfo.comment.isCollapsed)
+                preferredSize = CGSizeZero;
+            else
+            {
+                preferredSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDCommentCollectionViewCell class] withCellModel:treeInfo withModelIdentifier:[@(treeInfo.comment.id) stringValue]];
+                preferredSize.height += 20;
+            }
             break;
         }
         default:
@@ -294,6 +303,26 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     }
     
     return CGSizeMake(CGRectGetWidth(collectionView.bounds), preferredSize.height);
+}
+
+#pragma mark - DDDCommentsViewModelDelegate
+
+- (ArrayParameterBlock)indexPathsCollapsedBlock
+{
+    __weak typeof(self) weakSelf = self;
+    return ^(NSArray *indexPathsCollapsed) {
+        if (indexPathsCollapsed.count > 0)
+            [weakSelf.collectionView reloadItemsAtIndexPaths:indexPathsCollapsed];
+    };
+}
+
+- (ArrayParameterBlock)indexPathsExpandedBlock
+{
+    __weak typeof(self) weakSelf = self;
+    return ^(NSArray *indexPathsExpanded) {
+        if (indexPathsExpanded.count > 0)
+            [weakSelf.collectionView reloadItemsAtIndexPaths:indexPathsExpanded];
+    };
 }
 
 @end

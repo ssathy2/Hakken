@@ -10,11 +10,13 @@
 #import "DDDCommentsViewModel.h"
 #import "DDDCommentTreeInfo.h"
 #import "DDDCommentCollectionViewCell.h"
+#import "DDDHackerNewsComment.h"
 
 @interface DDDCommentsCollectionViewFlowLayout()
 @property (strong, nonatomic) NSMutableDictionary *cellLayoutInfo;
 @property (strong, nonatomic) NSMutableDictionary *supplementaryViewLayoutInfo;
 @property (assign, nonatomic) CGFloat contentSizeHeight;
+//@property (strong, nonatomic) NSMutableArray *collapsedIndexPaths;
 @end
 
 @implementation DDDCommentsCollectionViewFlowLayout
@@ -43,7 +45,7 @@
 
 - (void)setup
 {
-    
+
 }
 
 - (void)prepareLayout
@@ -91,12 +93,14 @@
 {
     DDDCommentTreeInfo *treeInfo = [self.commentsViewModel commentTreeInfoForIndexPath:indexpath];
     CGRect attributesFrame = attributes.frame;
+    
     if (treeInfo.depth > 0)
     {
         CGFloat depthOffset = (treeInfo.depth * 12);
         attributesFrame.size.width -= depthOffset;
         attributesFrame.origin.x += depthOffset;
     }
+
     return attributesFrame;
 }
 
@@ -126,7 +130,7 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
-    return (self.supplementaryViewLayoutInfo[indexPath]) ?: [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
+    return (self.supplementaryViewLayoutInfo[elementKind][indexPath]) ?: [super layoutAttributesForSupplementaryViewOfKind:elementKind atIndexPath:indexPath];
 }
 
 - (CGFloat)contentSizeHeight
@@ -156,4 +160,48 @@
     return CGSizeMake(contentWidth, contentHeight);
 }
 
+//- (void)handleCommentTappedAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [self.collectionView.collectionViewLayout invalidateLayout];
+//    DDDCommentCollectionViewCell *__weak cell = [self.collectionView cellForItemAtIndexPath:indexPath]; // Avoid retain cycles
+//    
+//   // recursive grab all of the index paths that are children of parameter index path and then invalidate layout for ONLY those indexpaths
+//    NSArray *childIndexPathsForCommentIndexPath = [self indexPathsForChildrenOfCommentStartingAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section]];
+//    if (childIndexPathsForCommentIndexPath.count == 0)
+//        return;
+//    
+//    DDLogDebug(@"%@", childIndexPathsForCommentIndexPath);
+//    
+//    // We can't collapse a leaf comment
+//    if ([self.collapsedIndexPaths containsObject:indexPath])
+//        // we want to expand the comments at this index path, we remove the index path from the collapsed index path array and relayout
+//        [self.collapsedIndexPaths removeObject:indexPath];
+//    else
+//        [self.collapsedIndexPaths addObject:indexPath];
+//    
+////    UICollectionViewFlowLayoutInvalidationContext *invalidationContext = [UICollectionViewFlowLayoutInvalidationContext new];
+////    [invalidationContext invalidateItemsAtIndexPaths:childIndexPathsForCommentIndexPath];
+////    [self invalidateLayoutWithContext:invalidationContext];
+//}
+//
+//- (NSArray *)indexPathsForChildrenOfCommentStartingAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    DDDCommentTreeInfo *info = [self.commentsViewModel commentTreeInfoForIndexPath:indexPath];
+//    if (!info)
+//        return [NSArray new];
+//    
+//    if (info.comment.kids.count == 0)
+//        return @[info.indexPath];
+//    
+//    NSMutableArray *idxPaths = [NSMutableArray array];
+//    [idxPaths addObject:info.indexPath];
+//    for (DDDHackerNewsComment *comment in info.comment.kids)
+//    {
+//        NSArray *recursiveCallArr = [self indexPathsForChildrenOfCommentStartingAtIndexPath:[self.commentsViewModel commentTreeInfoForComment:comment].indexPath];
+//        if (recursiveCallArr.count > 0)
+//            [idxPaths addObjectsFromArray:recursiveCallArr];
+//    }
+//    
+//    return idxPaths;
+//}
 @end

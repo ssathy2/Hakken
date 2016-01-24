@@ -9,9 +9,9 @@
 #import "DDDModel.h"
 
 @interface DDDArrayInsertionDeletion : DDDModel
-@property (strong, nonatomic, readonly) NSArray *array;
-@property (strong, nonatomic, readonly) NSIndexSet *indexesInserted;
-@property (strong, nonatomic, readonly) NSIndexSet *indexesDeleted;
+@property (copy, nonatomic, readonly) NSArray *array;
+@property (copy, nonatomic, readonly) NSIndexSet *indexesInserted;
+@property (copy, nonatomic, readonly) NSIndexSet *indexesDeleted;
 
 @property (strong, nonatomic, readonly) RACSignal *arrayChangedSignal;
 

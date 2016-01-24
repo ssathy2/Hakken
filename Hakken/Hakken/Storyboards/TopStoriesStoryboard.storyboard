@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--Top Stories-->
@@ -19,7 +19,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UUO-LM-WyX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.13725490196078433" green="0.14509803921568629" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Plw-39-rgl">
                                     <size key="itemSize" width="375" height="130"/>
@@ -30,15 +29,13 @@
                                 <cells/>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NOT_USED_" id="bGA-rE-uXw">
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UUO-LM-WyX" secondAttribute="trailing" id="Als-eY-DQD"/>
-                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" id="ZWR-kd-W8y"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" constant="-64" id="ZWR-kd-W8y"/>
                             <constraint firstItem="UUO-LM-WyX" firstAttribute="leading" secondItem="Kos-2u-mNl" secondAttribute="leading" id="mv9-tZ-2Qr"/>
                             <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="o74-yt-cNN"/>
                         </constraints>
@@ -47,10 +44,10 @@
                                 <exclude reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="o74-yt-cNN"/>
                                 <exclude reference="Als-eY-DQD"/>
                                 <exclude reference="ZWR-kd-W8y"/>
                                 <exclude reference="mv9-tZ-2Qr"/>
-                                <exclude reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -58,9 +55,9 @@
                                 <include reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="o74-yt-cNN"/>
                                 <include reference="Als-eY-DQD"/>
                                 <include reference="mv9-tZ-2Qr"/>
-                                <include reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -93,7 +90,6 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CxK-dN-8Dh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <animations/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="txn-Re-3Zo">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -103,7 +99,6 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CxK-dN-8Dh" firstAttribute="top" secondItem="fQU-J2-tRM" secondAttribute="bottom" id="Bfl-qv-OLT"/>

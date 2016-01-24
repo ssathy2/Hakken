@@ -21,6 +21,9 @@ RLM_ARRAY_TYPE(DDDHackerNewsComment)
 @property (assign, nonatomic) double parent;
 @property (assign, nonatomic) BOOL deleted;
 
+@property (assign, nonatomic) BOOL isCollapsed;
+@property (assign, nonatomic) BOOL areChildrenCollapsed;
+
 // Generated and Ignored properties
 @property (readonly, nonatomic) NSDate *dateCreated;
 @property (assign, nonatomic) DDDHackerNewsItemType itemType;

@@ -76,6 +76,7 @@
 		DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = DE62AC521A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m */; };
 		DE6F01BB1A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6F01BA1A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.m */; };
 		DE6F01BD1A845BEA0084953A /* DDDHackernewsUserItemCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE6F01BC1A845BEA0084953A /* DDDHackernewsUserItemCollectionViewCell.xib */; };
+		DE8B5CBF1C0CFFC800A53A42 /* RotatableArrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE8B5CBE1C0CFFC800A53A42 /* RotatableArrow.swift */; };
 		DE9517E41A23E2B90068FAD8 /* DDDTopStoriesViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */; };
 		DE9517E71A23E9510068FAD8 /* DDDArrayInsertionDeletion.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9517E61A23E9510068FAD8 /* DDDArrayInsertionDeletion.m */; };
 		DE9665B11A26DF4700A40A1A /* DDDHackerNewsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = DE9665B01A26DF4700A40A1A /* DDDHackerNewsItem.m */; };
@@ -88,6 +89,7 @@
 		DEBE3B771A561A5400AA194F /* mock_getcomments.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB22DD11A52656E0027E36D /* mock_getcomments.json */; };
 		DEC57A7E1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */; };
 		DEE038EE1A2294AE00979793 /* DDDReactiveServicesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */; };
+		DEE14CC91C2E0533003B46A0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEE14CC81C2E0533003B46A0 /* SafariServices.framework */; };
 		DEE8F5DD1AD0754300C8026B /* NSLayoutConstraint+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE8F5DC1AD0754300C8026B /* NSLayoutConstraint+Utility.m */; };
 		F97A5A941ACB008B004B71D6 /* DDDRightNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = F97A5A931ACB008B004B71D6 /* DDDRightNavigationView.m */; };
 		F97A5A961ACB009E004B71D6 /* DDDRightNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F97A5A951ACB009E004B71D6 /* DDDRightNavigationView.xib */; };
@@ -228,6 +230,8 @@
 		DE6F01B91A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackernewsUserItemCollectionViewCell.h; sourceTree = "<group>"; };
 		DE6F01BA1A845BDA0084953A /* DDDHackernewsUserItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackernewsUserItemCollectionViewCell.m; sourceTree = "<group>"; };
 		DE6F01BC1A845BEA0084953A /* DDDHackernewsUserItemCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DDDHackernewsUserItemCollectionViewCell.xib; sourceTree = "<group>"; };
+		DE8B5CBD1C0CFFC700A53A42 /* Hakken-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hakken-Bridging-Header.h"; sourceTree = "<group>"; };
+		DE8B5CBE1C0CFFC800A53A42 /* RotatableArrow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatableArrow.swift; sourceTree = "<group>"; };
 		DE9517E21A23E2B90068FAD8 /* DDDTopStoriesViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDTopStoriesViewModel.h; sourceTree = "<group>"; };
 		DE9517E31A23E2B90068FAD8 /* DDDTopStoriesViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDTopStoriesViewModel.m; sourceTree = "<group>"; };
 		DE9517E51A23E9510068FAD8 /* DDDArrayInsertionDeletion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDArrayInsertionDeletion.h; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 		DEC57A7C1A2AA33F00D89A96 /* DDDStoryDetailViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryDetailViewModel.h; sourceTree = "<group>"; };
 		DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryDetailViewModel.m; sourceTree = "<group>"; };
 		DEE038ED1A2294AE00979793 /* DDDReactiveServicesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDReactiveServicesTests.m; sourceTree = "<group>"; };
+		DEE14CC81C2E0533003B46A0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		DEE8F5DB1AD0754300C8026B /* NSLayoutConstraint+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Utility.h"; sourceTree = "<group>"; };
 		DEE8F5DC1AD0754300C8026B /* NSLayoutConstraint+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Utility.m"; sourceTree = "<group>"; };
 		F97A5A921ACB008B004B71D6 /* DDDRightNavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDRightNavigationView.h; sourceTree = "<group>"; };
@@ -257,6 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEE14CC91C2E0533003B46A0 /* SafariServices.framework in Frameworks */,
 				DE24307E1AD8A64600F05838 /* Crashlytics.framework in Frameworks */,
 				C2C23FCEF18EA316535B66DC /* libPods.a in Frameworks */,
 				DE24307F1AD8A64600F05838 /* Fabric.framework in Frameworks */,
@@ -276,6 +282,7 @@
 		4AEFAB96A037F3056B270F18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DEE14CC81C2E0533003B46A0 /* SafariServices.framework */,
 				DE24307C1AD8A64600F05838 /* Crashlytics.framework */,
 				DE24307D1AD8A64600F05838 /* Fabric.framework */,
 				DC4B92414FD761527F22666A /* libPods.a */,
@@ -500,6 +507,8 @@
 				DEB5903E1AAE4389002D7603 /* DDDNoContentView.h */,
 				DEB5903F1AAE4389002D7603 /* DDDNoContentView.m */,
 				DEB590411AAE43B1002D7603 /* DDDNoContentView.xib */,
+				DE8B5CBE1C0CFFC800A53A42 /* RotatableArrow.swift */,
+				DE8B5CBD1C0CFFC700A53A42 /* Hakken-Bridging-Header.h */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -671,6 +680,7 @@
 		DE475D851A1ADB1600970E87 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = dotdotdot;
 				TargetAttributes = {
@@ -818,6 +828,7 @@
 				DE3962561A2BB9A2009EEB82 /* DDDStoryTransitionModel.m in Sources */,
 				DE53D4311A5FF12300A8B06A /* NSDictionary+DDDAdditions.m in Sources */,
 				DE53D4061A5FE4C600A8B06A /* DDDStoryDisplayViewModel.m in Sources */,
+				DE8B5CBF1C0CFFC800A53A42 /* RotatableArrow.swift in Sources */,
 				DE53D4351A5FF12300A8B06A /* UIView+SSAdditions.m in Sources */,
 				DE53D4361A5FF12300A8B06A /* DDDCollectionViewCellSizingHelper.m in Sources */,
 				DE2430821AE2CEA600F05838 /* UINavigationBar+Styling.m in Sources */,
@@ -980,6 +991,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -991,6 +1003,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dotdotdot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hakken/Views/Hakken-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -1000,6 +1014,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1011,6 +1026,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dotdotdot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "fcaa41e1-9c29-4c85-8237-d0be0919fbd1";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hakken/Views/Hakken-Bridging-Header.h";
 			};
 			name = Release;
 		};

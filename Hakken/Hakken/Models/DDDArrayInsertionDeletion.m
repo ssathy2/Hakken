@@ -9,12 +9,12 @@
 #import "DDDArrayInsertionDeletion.h"
 
 @interface DDDArrayInsertionDeletion()
-@property (strong, nonatomic) NSArray *array;
-@property (strong, nonatomic) NSIndexSet *indexesInserted;
-@property (strong, nonatomic) NSIndexSet *indexesDeleted;
+@property (copy, nonatomic) NSArray *array;
+@property (copy, nonatomic) NSIndexSet *indexesInserted;
+@property (copy, nonatomic) NSIndexSet *indexesDeleted;
 
 @property (strong, nonatomic) RACSignal *arrayChangedSignal;
-@property (strong, nonatomic) NSHashTable *signalSubscribers;
+@property (copy, nonatomic) NSHashTable *signalSubscribers;
 @end
 
 @implementation DDDArrayInsertionDeletion
@@ -22,9 +22,7 @@
 {
     self = [super initWithDictionary:dictionary];
     if (self)
-    {
         [self sharedInit];
-    }
     return self;
 }
 
@@ -32,9 +30,7 @@
 {
     self = [super init];
     if (self)
-    {
         [self sharedInit];
-    }
     return self;
 }
 

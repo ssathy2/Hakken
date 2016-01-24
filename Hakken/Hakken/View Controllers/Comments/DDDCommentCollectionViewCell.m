@@ -93,6 +93,17 @@
     return _linkRanges;
 }
 
+#pragma mark - Cell Comment Collapse/Expand styling
+- (void)handleCellCollapsed
+{
+    
+}
+
+- (void)handleCellExpanded
+{
+    
+}
+
 - (CGRect)boundingRectForCharacterRange:(NSRange)range
 {
     NSTextStorage *textStorage = [[NSTextStorage alloc] initWithAttributedString:self.commentLabel.attributedText];
