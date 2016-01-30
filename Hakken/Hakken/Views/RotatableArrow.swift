@@ -45,6 +45,7 @@ class RotatableArrow : UIView {
             // animate the direction changing here
             self.updateLayer(direction, newDirection: newDirection, animated: animated, clockwise: clockwise)
             // update the stored direction with newDirection
+            direction = newDirection
         }
     }
     

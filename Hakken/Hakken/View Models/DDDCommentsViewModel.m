@@ -19,7 +19,6 @@
 @property (strong, nonatomic) DDDArrayInsertionDeletion *latestComments;
 @property (strong, nonatomic) DDDStoryTransitionModel *transitionModel;
 @property (strong, nonatomic) NSMutableArray *commentTreeInfos;
-@property (strong, nonatomic) NSMutableDictionary *collapsedComments; // a mapping of indexpath -> comment tree info
 @end
 
 @implementation DDDCommentsViewModel
@@ -27,7 +26,6 @@
 - (void)prepareWithModel:(id)model
 {
     [super prepareWithModel:model];
-    self.collapsedComments = [NSMutableDictionary dictionary];
     self.latestComments = [DDDArrayInsertionDeletion new];
     DDDStoryTransitionModel *transitionModel = (DDDStoryTransitionModel *)model;
     self.transitionModel = transitionModel;
@@ -107,10 +105,8 @@
 // store this somewhere, and then update the collection view with these indexpaths that we're removing
 - (void)collapseChildCommentsAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *childIndexPaths = [self indexPathsForChildrenOfCommentStartingAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section]];
-    for (NSIndexPath *idxPath in childIndexPaths)
-        self.collapsedComments[@(idxPath.row)] = self.latestComments.array[idxPath.row];
-    
+    NSArray *childIndexPaths = [self indexPathsForChildrenOfCommentStartingAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] isCollapsingComments:YES];
+
     if (self.delegate.indexPathsCollapsedBlock)
         self.delegate.indexPathsCollapsedBlock(childIndexPaths);
 }
@@ -119,18 +115,20 @@
 // reinsert this and then update the collection view with these indexpaths that we're adding...
 - (void)expandChildCommentsAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    NSArray *childIndexPaths = [self indexPathsForChildrenOfCommentStartingAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section] isCollapsingComments:NO];
+    
+    if (self.delegate.indexPathsExpandedBlock)
+    self.delegate.indexPathsExpandedBlock(childIndexPaths);
 }
 
-- (NSArray *)indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:(NSIndexPath *)indexPath
+- (NSArray *)indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:(NSIndexPath *)indexPath isCollapsingComments:(BOOL)isCollapsingComments
 {
     DDDCommentTreeInfo *info = [self commentTreeInfoForIndexPath:indexPath];
     if (!info)
         return [NSArray new];
     
-    info.comment.isCollapsed = !info.comment.isCollapsed;
-    info.comment.areChildrenCollapsed = info.comment.areChildrenCollapsed;
-
+    info.comment.isCollapsed = isCollapsingComments;
+    
     [[RLMRealm defaultRealm] addOrUpdateObject:info.comment];
 
     if (info.comment.kids.count == 0)
@@ -140,7 +138,7 @@
     [idxPaths addObject:info.indexPath];
     for (DDDHackerNewsComment *comment in info.comment.kids)
     {
-        NSArray *recursiveCallArr = [self indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:[self commentTreeInfoForComment:comment].indexPath];
+        NSArray *recursiveCallArr = [self indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:[self commentTreeInfoForComment:comment].indexPath isCollapsingComments:isCollapsingComments];
         if (recursiveCallArr.count > 0)
             [idxPaths addObjectsFromArray:recursiveCallArr];
     }
@@ -148,22 +146,17 @@
     return idxPaths;
 }
 
-- (NSArray *)indexPathsForChildrenOfCommentStartingAtIndexPath:(NSIndexPath *)indexPath
+- (NSArray *)indexPathsForChildrenOfCommentStartingAtIndexPath:(NSIndexPath *)indexPath isCollapsingComments:(BOOL)isCollapsingComments
 {
     NSMutableArray *idxPaths = [NSMutableArray array];
     DDDCommentTreeInfo *info = [self commentTreeInfoForIndexPath:indexPath];
-
-    info.comment.isCollapsed = !info.comment.isCollapsed;
-    info.comment.areChildrenCollapsed = info.comment.areChildrenCollapsed;
-    
-    [[RLMRealm defaultRealm] addOrUpdateObject:info.comment];
 
     if (!info || info.comment.kids.count == 0)
         return [NSArray new];
     
     for (DDDHackerNewsComment *comment in info.comment.kids)
     {
-        NSArray *recursiveCallArr = [self indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:[self commentTreeInfoForComment:comment].indexPath];
+        NSArray *recursiveCallArr = [self indexPathsForChildrenOfCommentsStartingAtIndexPath_Helper:[self commentTreeInfoForComment:comment].indexPath isCollapsingComments:isCollapsingComments];
         if (recursiveCallArr.count > 0)
             [idxPaths addObjectsFromArray:recursiveCallArr];
     }

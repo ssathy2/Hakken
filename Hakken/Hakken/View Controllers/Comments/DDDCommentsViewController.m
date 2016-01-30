@@ -312,7 +312,9 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     __weak typeof(self) weakSelf = self;
     return ^(NSArray *indexPathsCollapsed) {
         if (indexPathsCollapsed.count > 0)
-            [weakSelf.collectionView reloadItemsAtIndexPaths:indexPathsCollapsed];
+        {
+            [weakSelf.collectionView performBatchUpdates:nil completion:nil];
+        }
     };
 }
 
@@ -321,7 +323,9 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     __weak typeof(self) weakSelf = self;
     return ^(NSArray *indexPathsExpanded) {
         if (indexPathsExpanded.count > 0)
-            [weakSelf.collectionView reloadItemsAtIndexPaths:indexPathsExpanded];
+        {
+            [weakSelf.collectionView performBatchUpdates:nil completion:nil];
+        }
     };
 }
 
