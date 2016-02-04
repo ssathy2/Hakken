@@ -9,53 +9,93 @@
 import UIKit
 
 @objc enum ArrowDirection : Int {
-    case ArrowDirectionNone = -1
-    case ArrowDirectionUp = 0
-    case ArrowDirectionDown = 1
-    case ArrowDirectionLeft = 2
-    case ArrowDirectionRight = 3
+    case ArrowDirectionDown = 0
+    case ArrowDirectionRight = 1
 }
 
 class RotatableArrow : UIView {
-    private var direction : ArrowDirection = ArrowDirection.ArrowDirectionNone
+    private var direction : ArrowDirection = ArrowDirection.ArrowDirectionDown
     private var arrowLayer : CAShapeLayer?
     private var arrowBezierPath : UIBezierPath?
 
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
-        if (arrowLayer == nil) {
-            self.setupArrowLayer()
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupArrowLayer()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.updateArrowLayer(self.bounds)
+    }
+    
+    private func updateArrowLayer(var newFrame: CGRect) {
+        newFrame.origin.x += 2
+        newFrame.origin.y += 2
+        newFrame.size.height -= 2
+        newFrame.size.width -= 2
+        self.arrowLayer!.frame = newFrame
+        self.arrowLayer!.lineWidth = 1.0
+        self.arrowLayer!.strokeColor = UIColor.grayColor().CGColor
+        self.updateArrowBezierPath(self.arrowLayer!.bounds)
+    }
+    
+    private func updateArrowBezierPath(newFrame: CGRect) {
+        self.arrowBezierPath = UIBezierPath.init()
+        let startPoint = CGPointZero
+        self.arrowBezierPath!.moveToPoint(startPoint)
+        self.arrowBezierPath!.addLineToPoint(CGPointMake(CGRectGetMidX(newFrame), CGRectGetMaxY(newFrame)))
+        self.arrowBezierPath!.addLineToPoint(CGPointMake(CGRectGetMaxX(newFrame), CGRectGetMinY(newFrame)))
+        self.arrowBezierPath!.closePath()
+        self.arrowLayer!.path = self.arrowBezierPath!.CGPath
     }
     
     private func setupArrowLayer() {
         self.arrowLayer = CAShapeLayer()
-        var arrowLayerFrame = self.bounds
-        arrowLayerFrame.origin.x += 2
-        arrowLayerFrame.origin.y += 2
-        arrowLayerFrame.size.height -= 2
-        arrowLayerFrame.size.width -= 2
-        self.arrowLayer!.frame = arrowLayerFrame
-        self.updateLayer(ArrowDirection.ArrowDirectionNone, newDirection: ArrowDirection.ArrowDirectionUp, animated: false, clockwise: true)
-    }
+        self.arrowLayer!.anchorPoint = CGPointMake(0.5, 0.5);
+        self.updateArrowLayer(self.bounds)
+        self.updateArrowBezierPath(self.arrowLayer!.bounds)
+        self.layer.addSublayer(self.arrowLayer!)
+    }       
     
-    func setDirection(newDirection: ArrowDirection, animated: Bool, clockwise: Bool) {
+    func setDirection(newDirection: ArrowDirection, animated: Bool) {
         if (direction != newDirection)
         {
             // animate the direction changing here
-            self.updateLayer(direction, newDirection: newDirection, animated: animated, clockwise: clockwise)
+            self.updateLayer(direction, newDirection: newDirection, animated: animated)
             // update the stored direction with newDirection
             direction = newDirection
         }
     }
     
-    private func updateLayer(oldDirection: ArrowDirection, newDirection: ArrowDirection, animated: Bool, clockwise: Bool) {
-        // 1. the old direction is the same as newdirection, so we do nothing here...
-        // 2. the old direction is different from the new direction ->
-            // if the bezier path property is nil, we're drawing for the first time
-            // create the bezier path and set it equal to the path property on the shapelayer
+    private func updateLayer(oldDirection: ArrowDirection, newDirection: ArrowDirection, animated: Bool) {
+        // if the bezier path property is nil, we're drawing for the first time
+        if (self.arrowLayer == nil)
+        {
+            self.setupArrowLayer()
+        }
+        
+        let totalRotations = (newDirection.rawValue - oldDirection.rawValue) * -1
+        // figure out how many radians to rotate layer by
+        let CGRotationTransform = CGAffineTransformRotate(CATransform3DGetAffineTransform(self.arrowLayer!.transform), CGFloat(Double(totalRotations) * M_PI_2))
+        let rotationTransform = CATransform3DMakeAffineTransform(CGRotationTransform)
+        let transformClosure = {
+            self.arrowLayer!.transform = rotationTransform
+        }
+        
         // 3. animate the rotation of the layer from oldDirection to newDirection
             // derive the angle of rotation from the oldDirection to newDirection AND clockwise param
+        if (animated)
+        {
+            UIView.animateWithDuration(0.2, animations: transformClosure)
+        }
+        else
+        {
+            transformClosure()
+        }
     }
     
     

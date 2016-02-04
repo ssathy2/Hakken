@@ -9,19 +9,27 @@
 #import "DDDCommentCollectionViewCell.h"
 #import "DDDCommentTreeInfo.h"
 #import "DDDHackerNewsComment.h"
-
+#import "Hakken-Swift.h"
 #import <DTCoreText/DTCoreText.h>
 
 @interface DDDCommentCollectionViewCell()
-@property (weak, nonatomic) IBOutlet UIView *depthIndicatorView;
+@property (weak, nonatomic) IBOutlet UIView *subcommentsArrowContainer;
 @property (weak, nonatomic) IBOutlet UILabel *commentUserLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distantDateCommentPostedLabel;
 @property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+@property (strong, nonatomic) RotatableArrow *rotatableArrow;
 @property (strong, nonatomic) NSArray *linkRanges; // -> contains dictionaries containing mappings { 'range' : <# range #>, 'url' : <# url #> }
 @property (assign, nonatomic) CGPoint lastTappedLocation;
 @end
 
 @implementation DDDCommentCollectionViewCell
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    self.rotatableArrow = [[RotatableArrow alloc] initWithFrame:self.bounds];
+    [self.subcommentsArrowContainer addSubviewWithConstraints:self.rotatableArrow];
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -35,7 +43,6 @@
     [super prepareWithModel:model];
     self.commentUserLabel.text = model.comment.by;
     self.distantDateCommentPostedLabel.text = [model.comment.dateCreated relativeDateTimeStringToNow];
-    self.depthIndicatorView.backgroundColor = [UIColor colorForDepth:model.depth];
     
     NSData *data = [model.comment.text dataUsingEncoding:NSUTF8StringEncoding];
     UIFont *font = self.commentLabel.font;
@@ -94,14 +101,14 @@
 }
 
 #pragma mark - Cell Comment Collapse/Expand styling
-- (void)handleCellCollapsed
+- (void)showCollapsedView
 {
-    
+    [self.rotatableArrow setDirection:ArrowDirectionArrowDirectionRight animated:YES];
 }
 
-- (void)handleCellExpanded
+- (void)showExpandedView
 {
-    
+    [self.rotatableArrow setDirection:ArrowDirectionArrowDirectionDown animated:YES];
 }
 
 - (CGRect)boundingRectForCharacterRange:(NSRange)range

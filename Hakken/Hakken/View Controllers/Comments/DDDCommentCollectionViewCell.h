@@ -17,6 +17,7 @@
 @interface DDDCommentCollectionViewCell : DDDCollectionViewCell
 @property (weak, nonatomic) id<DDDCommentCollectionViewCellDelegate> delegate;
 
-- (void)handleCellTapped;
+- (void)showCollapsedView;
+- (void)showExpandedView;
 - (NSURL *)tappedLinkInCell;
 @end

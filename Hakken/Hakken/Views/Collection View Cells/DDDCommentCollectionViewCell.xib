@@ -26,7 +26,7 @@
                                 <color key="textColor" red="0.6173453283" green="0.6173453283" blue="0.6173453283" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4p-q5-eud" userLabel="SubcommentsArrow">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4p-q5-eud" userLabel="SubcommentsArrowContainer">
                                 <rect key="frame" x="10" y="5" width="15" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -78,6 +78,7 @@
                 <outlet property="commentLabel" destination="hRI-cs-pME" id="Dkb-rz-a8d"/>
                 <outlet property="commentUserLabel" destination="G1x-ml-vhn" id="W4X-Lp-gIr"/>
                 <outlet property="distantDateCommentPostedLabel" destination="ptj-0S-i48" id="Bgn-Xq-A7e"/>
+                <outlet property="subcommentsArrowContainer" destination="h4p-q5-eud" id="TcQ-IP-NJg"/>
             </connections>
             <point key="canvasLocation" x="47.5" y="302"/>
         </collectionViewCell>
