@@ -197,8 +197,11 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     // TODO: Handle URL's tapped in teh cell
     else
     {
-        [[self commentsViewModel] toggleChildCommentsExpandedCollapsedWithRootCommentAtIndexPath:indexPath];
         DDDCommentTreeInfo *commentTreeInfo = [[self commentsViewModel] commentTreeInfoForIndexPath:indexPath];
+        if (commentTreeInfo.comment.kids.count == 0)
+            return;
+        
+        [[self commentsViewModel] toggleChildCommentsExpandedCollapsedWithRootCommentAtIndexPath:indexPath];
         DDDCommentCollectionViewCell *commentCVC = (DDDCommentCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
         if (commentTreeInfo.comment.areChildrenCollapsed)
             [commentCVC showCollapsedView];

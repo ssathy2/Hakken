@@ -63,21 +63,16 @@
     if (!rootComment.kids)
         return;
     
-    if (![self shouldIgnoreComment:rootComment])
-    {
-        DDDCommentTreeInfo *treeInfo = [DDDCommentTreeInfo new];
-        treeInfo.comment = rootComment;
-        treeInfo.depth = depth;
-        // TODO: Remove this hard-coded section here...
-        treeInfo.indexPath = [NSIndexPath indexPathForRow:self.commentTreeInfos.count inSection:0];
-        [self.commentTreeInfos addObject:treeInfo];
-    }
+    DDDCommentTreeInfo *treeInfo = [DDDCommentTreeInfo new];
+    treeInfo.comment = rootComment;
+    treeInfo.depth = depth;
+    // TODO: Remove this hard-coded section here...
+    treeInfo.indexPath = [NSIndexPath indexPathForRow:self.commentTreeInfos.count inSection:0];
+    [self.commentTreeInfos addObject:treeInfo];
 
+    depth++;
     for (DDDHackerNewsComment *childComment in rootComment.kids)
-    {
-        depth++;
         [self formCommentTreeWithRootComment:childComment withDepth:depth];
-    }
 }
 
 - (void)toggleChildCommentsExpandedCollapsedWithRootCommentAtIndexPath:(NSIndexPath *)idxPath
@@ -162,11 +157,6 @@
     }
     
     return idxPaths;
-}
-
-- (BOOL)shouldIgnoreComment:(DDDHackerNewsComment *)comment
-{
-    return comment.deleted;
 }
 
 - (DDDHackerNewsComment *)commentForRootItemIndex:(NSInteger)rootItemIndex forDepth:(NSInteger)depth

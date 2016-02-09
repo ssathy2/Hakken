@@ -28,90 +28,67 @@
 {
     self = [super init];
     if (self)
-    {
         self.httpRequestManager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:url];
-    }
     return self;
 }
 
 - (RACSignal *)fetchTopStoriesFromStory:(NSNumber *)fromStory toStory:(NSNumber *)toStory
 {
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        NSString *endPoint;
-        if (fromStory == 0 || toStory == 0)
-            endPoint = [NSString stringWithFormat:@"%@", @"getTopStories"];
-        else
-        {
-            NSDictionary *paramsDictionary = @{
-                                               @"fromStory" : fromStory,
-                                               @"toStory"   : toStory
-                                               };
-            endPoint = [NSString stringWithFormat:@"%@?%@", @"getTopStories", [paramsDictionary urlEncodedParameterString]];
-        }
-        
-        [self.httpRequestManager GET:endPoint
-                          parameters:nil
-                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 // convert the response object into an array of models
-                                 NSMutableArray *arr = [NSMutableArray array];
-                                 [[RLMRealm defaultRealm] beginWriteTransaction];
-                                 [responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
-                                     if ([self shouldModelHackernewsResponseDictionary:item])
-                                     {
-                                         DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
-                                         DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
-                                         if (servicesItem.deleted == NO)
-                                         {
-                                             if (!realmItem.readLaterInformation)
-                                                 realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
-                                             servicesItem.readLaterInformation = realmItem.readLaterInformation;
-                                             [arr addObject:servicesItem];
-                                         }
-                                     }
-                                 }];
-                                 [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
-                                 [[RLMRealm defaultRealm] commitWriteTransaction];
-                                 [subscriber sendNext:arr];
-                                 [subscriber sendCompleted];
-                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                 [subscriber sendError:error];
-                             }];
-        return nil;
+    NSString *endPoint;
+    NSDictionary *paramsDictionary;
+    if (fromStory == 0 || toStory == 0)
+        endPoint = [NSString stringWithFormat:@"%@", @"getTopStories"];
+    else
+    {
+        paramsDictionary = @{
+                             @"fromStory" : fromStory,
+                             @"toStory"   : toStory
+                             };
+        endPoint = [NSString stringWithFormat:@"%@", @"getTopStories"];
+    }
+
+    return [[self.httpRequestManager hakken_GETSignalWithURLString:endPoint urlParameters:paramsDictionary] map:^id(AFHTTPRequestOperation *operation) {
+        NSMutableArray *arr = [NSMutableArray array];
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        [operation.responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
+            if ([self shouldModelHackernewsResponseDictionary:item])
+            {
+                DDDHackerNewsItem *servicesItem = [[DDDHackerNewsItem alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:YES]];
+                DDDHackerNewsItem *realmItem = [DDDHackerNewsItem objectForPrimaryKey:@(servicesItem.id)];
+                if (servicesItem.deleted == NO)
+                {
+                    if (!realmItem.readLaterInformation)
+                        realmItem.readLaterInformation = [DDDHakkenReadLaterInformation defaultObject];
+                    servicesItem.readLaterInformation = realmItem.readLaterInformation;
+                    [arr addObject:servicesItem];
+                }
+            }
+        }];
+        [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
+        [[RLMRealm defaultRealm] commitWriteTransaction];
+        return arr;
     }];
 }
 
 - (RACSignal *)fetchCommentsForStoryIdentifier:(NSNumber *)identifier
 {
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-        if (identifier == 0)
-        {
-            [subscriber sendError:[NSError errorWithDomain:@"Invalid identifier" code:-1 userInfo:nil]];
-            return nil;
-        }
-        
-        NSDictionary *paramsDictionary = @{
-                                           @"storyID" : identifier,
-                                           };
-        NSString *endPoint = [NSString stringWithFormat:@"%@?%@", @"getComments", [paramsDictionary urlEncodedParameterString]];
-            
-        [self.httpRequestManager GET:endPoint
-                              parameters:nil
-                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                     // convert the response object into an array of models
-                                     NSMutableArray *arr = [NSMutableArray array];
-                                     [[RLMRealm defaultRealm] beginWriteTransaction];
-                                     [responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
-                                         if ([self shouldModelHackernewsResponseDictionary:item])
-                                             [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
-                                     }];
-                                     [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];                                     
-                                     [[RLMRealm defaultRealm] commitWriteTransaction];
-                                     [subscriber sendNext:arr];
-                                     [subscriber sendCompleted];
-                                 } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                     [subscriber sendError:error];
-                                 }];
+    if (!identifier)
         return nil;
+    NSDictionary *paramsDictionary = @{
+                                       @"storyID" : identifier,
+                                       };
+    NSString *endPoint = [NSString stringWithFormat:@"%@", @"getComments"];
+    
+    return [[self.httpRequestManager hakken_GETSignalWithURLString:endPoint urlParameters:paramsDictionary] map:^id(AFHTTPRequestOperation *operation) {
+        NSMutableArray *arr = [NSMutableArray array];
+        [[RLMRealm defaultRealm] beginWriteTransaction];
+        [operation.responseObject enumerateObjectsUsingBlock:^(NSDictionary *item, NSUInteger idx, BOOL *stop) {
+            if ([self shouldModelHackernewsResponseDictionary:item])
+                [arr addObject:[[DDDHackerNewsComment alloc] initWithObject:[self remappedResponseDictionaryWithOriginalDictionary:item shouldPerformKidsRemapping:NO]]];
+        }];
+        [[RLMRealm defaultRealm] addOrUpdateObjectsFromArray:arr];
+        [[RLMRealm defaultRealm] commitWriteTransaction];
+        return arr;
     }];
 }
 

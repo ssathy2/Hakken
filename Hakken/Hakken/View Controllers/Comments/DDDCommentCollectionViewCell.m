@@ -63,7 +63,15 @@
 
     // remove the new line at the end of the attr string
     [mutAttrString deleteCharactersInRange:NSMakeRange(mutAttrString.length-1, 1)];
-    self.commentLabel.attributedText = mutAttrString;
+    if (model.comment.deleted)
+    {
+        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"Deleted" attributes:@{
+                                                                                                            NSFontAttributeName : [UIFont italicFontOfSize:self.commentLabel.font.pointSize]
+                                                                                                            }];
+        self.commentLabel.attributedText = attrString;
+    }
+    else
+        self.commentLabel.attributedText = mutAttrString;
 }
 
 - (NSURL *)tappedLinkInCell
