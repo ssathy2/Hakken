@@ -72,6 +72,12 @@
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack_Extensions 0
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack_Extensions 1
 
+// Crashlytics
+#define COCOAPODS_POD_AVAILABLE_Crashlytics
+#define COCOAPODS_VERSION_MAJOR_Crashlytics 3
+#define COCOAPODS_VERSION_MINOR_Crashlytics 6
+#define COCOAPODS_VERSION_PATCH_Crashlytics 0
+
 // DTCoreText
 #define COCOAPODS_POD_AVAILABLE_DTCoreText
 #define COCOAPODS_VERSION_MAJOR_DTCoreText 1
@@ -82,25 +88,31 @@
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_Core
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_Core 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_Core 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_Core 7
+#define COCOAPODS_VERSION_PATCH_DTFoundation_Core 9
 
 // DTFoundation/DTAnimatedGIF
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_DTAnimatedGIF
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_DTAnimatedGIF 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_DTAnimatedGIF 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_DTAnimatedGIF 7
+#define COCOAPODS_VERSION_PATCH_DTFoundation_DTAnimatedGIF 9
 
 // DTFoundation/DTHTMLParser
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_DTHTMLParser
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_DTHTMLParser 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_DTHTMLParser 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_DTHTMLParser 7
+#define COCOAPODS_VERSION_PATCH_DTFoundation_DTHTMLParser 9
 
 // DTFoundation/UIKit
 #define COCOAPODS_POD_AVAILABLE_DTFoundation_UIKit
 #define COCOAPODS_VERSION_MAJOR_DTFoundation_UIKit 1
 #define COCOAPODS_VERSION_MINOR_DTFoundation_UIKit 7
-#define COCOAPODS_VERSION_PATCH_DTFoundation_UIKit 7
+#define COCOAPODS_VERSION_PATCH_DTFoundation_UIKit 9
+
+// Fabric
+#define COCOAPODS_POD_AVAILABLE_Fabric
+#define COCOAPODS_VERSION_MAJOR_Fabric 1
+#define COCOAPODS_VERSION_MINOR_Fabric 6
+#define COCOAPODS_VERSION_PATCH_Fabric 5
 
 // ReactiveCocoa
 #define COCOAPODS_POD_AVAILABLE_ReactiveCocoa

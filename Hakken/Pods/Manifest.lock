@@ -28,17 +28,20 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.1):
     - CocoaLumberjack/Default
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
   - DTCoreText (1.6.16):
     - DTFoundation/Core (~> 1.7.5)
     - DTFoundation/DTAnimatedGIF (~> 1.7.5)
     - DTFoundation/DTHTMLParser (~> 1.7.5)
     - DTFoundation/UIKit (~> 1.7.5)
-  - DTFoundation/Core (1.7.7)
-  - DTFoundation/DTAnimatedGIF (1.7.7)
-  - DTFoundation/DTHTMLParser (1.7.7):
+  - DTFoundation/Core (1.7.9)
+  - DTFoundation/DTAnimatedGIF (1.7.9)
+  - DTFoundation/DTHTMLParser (1.7.9):
     - DTFoundation/Core
-  - DTFoundation/UIKit (1.7.7):
+  - DTFoundation/UIKit (1.7.9):
     - DTFoundation/Core
+  - Fabric (1.6.5)
   - ReactiveCocoa (2.4.7):
     - ReactiveCocoa/UI
   - ReactiveCocoa/Core (2.4.7):
@@ -53,15 +56,19 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - CocoaLumberjack
+  - Crashlytics
   - DTCoreText
+  - Fabric
   - ReactiveCocoa (= 2.4.7)
   - Realm (= 0.89.2)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
   DTCoreText: 934a16fe9ffdd169c96261721b39dc312b75713d
-  DTFoundation: c9b3362b83f0017389082ec067ede719826a579d
+  DTFoundation: 70a0765e3596f82dd421832e95c65e2166eb3102
+  Fabric: 338ffd3c2afcab120638907b4251189de9ad17b3
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
   Realm: 66d433a705f1d1ff0d574d5d646986514448dacc
 
