@@ -106,7 +106,7 @@
 {
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.presentModally = YES;
-    [self.navigationController transitionToScreen:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
+    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 - (void)setupRefreshControl

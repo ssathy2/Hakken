@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Home View Controller-->
+        <scene sceneID="pxw-jz-8PP">
+            <objects>
+                <splitViewController storyboardIdentifier="DDDHomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Vf-g7-6GI" customClass="DDDHomeViewController" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="IGC-a3-s8B" kind="relationship" relationship="masterViewController" id="KjX-EK-k3p"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5U3-rd-4UR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-943" y="-152"/>
+        </scene>
         <!--Top Stories-->
         <scene sceneID="S5K-xc-S92">
             <objects>
@@ -35,19 +47,35 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="UUO-LM-WyX" secondAttribute="trailing" id="Als-eY-DQD"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="leading" secondItem="Kos-2u-mNl" secondAttribute="leading" id="BDQ-4f-rki"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="Kos-2u-mNl" secondAttribute="top" id="BcY-Qp-BK6"/>
+                            <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="Kli-YB-Okt"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="leading" secondItem="Kos-2u-mNl" secondAttribute="leading" id="LzZ-oz-Y1Y"/>
                             <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="gvI-Vp-7Ya" secondAttribute="bottom" constant="-64" id="ZWR-kd-W8y"/>
+                            <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="cvM-wD-eio"/>
+                            <constraint firstItem="UUO-LM-WyX" firstAttribute="top" secondItem="Kos-2u-mNl" secondAttribute="top" id="eQ2-aH-dzN"/>
                             <constraint firstItem="UUO-LM-WyX" firstAttribute="leading" secondItem="Kos-2u-mNl" secondAttribute="leading" id="mv9-tZ-2Qr"/>
                             <constraint firstItem="dX5-2d-P9H" firstAttribute="top" secondItem="UUO-LM-WyX" secondAttribute="bottom" id="o74-yt-cNN"/>
+                            <constraint firstAttribute="trailing" secondItem="UUO-LM-WyX" secondAttribute="trailing" id="qRp-vZ-rtc"/>
+                            <constraint firstAttribute="trailing" secondItem="UUO-LM-WyX" secondAttribute="trailing" id="uSj-yl-9SG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="o74-yt-cNN"/>
                                 <exclude reference="Als-eY-DQD"/>
+                                <exclude reference="BDQ-4f-rki"/>
+                                <exclude reference="BcY-Qp-BK6"/>
+                                <exclude reference="LzZ-oz-Y1Y"/>
                                 <exclude reference="ZWR-kd-W8y"/>
+                                <exclude reference="eQ2-aH-dzN"/>
                                 <exclude reference="mv9-tZ-2Qr"/>
+                                <exclude reference="qRp-vZ-rtc"/>
+                                <exclude reference="uSj-yl-9SG"/>
+                                <exclude reference="Kli-YB-Okt"/>
+                                <exclude reference="cvM-wD-eio"/>
+                                <exclude reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -55,14 +83,29 @@
                                 <include reference="UUO-LM-WyX"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="o74-yt-cNN"/>
                                 <include reference="Als-eY-DQD"/>
+                                <include reference="LzZ-oz-Y1Y"/>
+                                <include reference="eQ2-aH-dzN"/>
                                 <include reference="mv9-tZ-2Qr"/>
+                                <include reference="qRp-vZ-rtc"/>
+                                <include reference="Kli-YB-Okt"/>
+                                <include reference="o74-yt-cNN"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
                                 <include reference="ZWR-kd-W8y"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="UUO-LM-WyX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="BDQ-4f-rki"/>
+                                <include reference="BcY-Qp-BK6"/>
+                                <include reference="uSj-yl-9SG"/>
+                                <include reference="cvM-wD-eio"/>
                             </mask>
                         </variation>
                     </view>
@@ -74,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fp-b9-0iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="145.5" y="320"/>
+            <point key="canvasLocation" x="429" y="996.75"/>
         </scene>
         <!--Saved Stories-->
         <scene sceneID="mhS-jM-0wB">
@@ -139,6 +182,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz0-DH-iPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="832.5" y="318"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="F0I-ge-XY7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IGC-a3-s8B" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hmf-Fr-i1G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8ma-3C-12o" kind="relationship" relationship="rootViewController" id="mpM-Ck-rBg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D0M-WY-X3C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-30" y="996.75"/>
         </scene>
     </scenes>
 </document>

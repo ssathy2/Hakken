@@ -192,7 +192,7 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
         attrs.model = transitionModel;
         
-        [self.navigationController transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+        [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
     }
     // TODO: Handle URL's tapped in teh cell
     else

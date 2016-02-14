@@ -13,50 +13,25 @@
 #import "UIColor+DDDAdditions.h"
 
 @interface DDDViewControllerRouter ()
+@property (weak, nonatomic) UISplitViewController *splitViewController;
 @property (strong, nonatomic) NSMutableDictionary *screenMapping;
 @end
 
 @implementation DDDViewControllerRouter
-
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
++ (instancetype) sharedInstance
 {
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-        [self sharedInit];
-    }
-    return self;
+    static DDDViewControllerRouter* sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+        // do any init for the shared instance here
+    });
+    return sharedInstance;
 }
 
-- (instancetype)init
+- (void)setupWithSplitViewController:(UISplitViewController *)splitViewController
 {
-    self = [super init];
-    if (self)
-    {
-        [self sharedInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithRootViewController:(UIViewController *)rootViewController
-{
-    self = [super initWithRootViewController:rootViewController];
-    if (self)
-    {
-        [self sharedInit];
-    }
-    return self;
-}
-
-- (void)sharedInit
-{
-    [self setupNavigationController];
-}
-
-- (void)setupNavigationController
-{
-    [self.navigationBar setBackgroundColor:[UIColor navigationBarBackgroundColor]];
-    self.navigationBar.barStyle = UIBarStyleBlack;
+    self.splitViewController = splitViewController;
 }
 
 - (void)updateScreenMapping:(NSDictionary *)screenMapping
@@ -88,7 +63,7 @@
     }
 }
 
-- (void)transitionToScreen:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+- (void)showScreenInMaster:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
 {
     // Grab the screen from the screen mapping
     NSParameterAssert(screen);
@@ -96,22 +71,62 @@
     // check if the screen is a root view
     DDDScreen *screenObject = [self.screenMapping objectForKey:screen];
     DDDViewController *vc = [self viewControllerForScreen:screen];
-    [vc prepareWithModel:attributes.model];
+    
+    if ([vc respondsToSelector:@selector(prepareWithModel:)])
+        [vc prepareWithModel:attributes.model];
 
     // instantiate the view and replace root view if it is, if it's not then push it on
     // modal presentation takes precedence over root view
     if (attributes.presentModally)
     {
-        DDDViewControllerRouter *router = [[DDDViewControllerRouter alloc] initWithRootViewController:vc];;
-        [router updateScreenMapping:[self.screenMapping copy]];
-        [self presentViewController:router animated:animated completion:nil];
+        UINavigationController *router = [[UINavigationController alloc] initWithRootViewController:vc];
+//        [router updateScreenMapping:[self.screenMapping copy]];
+        [self.splitViewController showViewController:router sender:self.splitViewController];
     }
     else
     {
         if (screenObject.isRootView)
-            [self setViewControllers:@[vc] animated:animated];
+        {
+            [self.splitViewController setViewControllers:@[vc]];
+        }
         else
-            [self pushViewController:vc animated:animated];
+        {
+            [self.splitViewController showViewController:vc sender:self.splitViewController];
+        }
+    }
+}
+
+- (void)showScreenInDetail:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+{
+    // Grab the screen from the screen mapping
+    NSParameterAssert(screen);
+    
+    // check if the screen is a root view
+    DDDScreen *screenObject = [self.screenMapping objectForKey:screen];
+    DDDViewController *vc = [self viewControllerForScreen:screen];
+    
+    if ([vc respondsToSelector:@selector(prepareWithModel:)])
+        [vc prepareWithModel:attributes.model];
+    
+    // instantiate the view and replace root view if it is, if it's not then push it on
+    // modal presentation takes precedence over root view
+    if (attributes.presentModally)
+    {
+        UINavigationController *router = [[UINavigationController alloc] initWithRootViewController:vc];
+        //        [router updateScreenMapping:[self.screenMapping copy]];
+        [self.splitViewController showViewController:router sender:self.splitViewController];
+    }
+    else
+    {
+        if (screenObject.isRootView)
+        {
+            // TODO: what should this be?
+            [self.splitViewController setViewControllers:@[vc]];
+        }
+        else
+        {
+            [self.splitViewController showDetailViewController:vc sender:self.splitViewController];
+        }
     }
 }
 

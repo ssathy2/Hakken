@@ -8,6 +8,6 @@
 
 #import "DDDViewController.h"
 
-@interface DDDMainViewController : DDDViewController
+@interface DDDMainViewController : UIViewController
 
 @end

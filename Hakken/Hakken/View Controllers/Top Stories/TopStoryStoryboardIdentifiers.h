@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
+
 #define DDDTopStoriesStoryboardName @"TopStoriesStoryboard"
 #define DDDTopStoriesViewControllerIdentifier @"DDDTopStoriesViewController"
-
+#define DDDHomeViewControllerIdentifier @"DDDHomeViewController"
 #define DDDSavedStoriesViewControllerIdentifier @"DDDReadLaterViewController"

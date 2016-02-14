@@ -7,7 +7,6 @@
 //
 
 #import "DDDMainViewController.h"
-#import "DDDContentViewController.h"
 #import "MainStoryboardIdentifiers.h"
 #import "TopStoryStoryboardIdentifiers.h"
 #import "DetailStoryboardIdentifiers.h"
@@ -20,11 +19,21 @@
 #import "UINavigationBar+Styling.h"
 
 @interface DDDMainViewController ()
-@property (weak, nonatomic) DDDContentViewController *contentViewController;
+@property (weak, nonatomic) UISplitViewController *splitViewController;
 @end
 
 @implementation DDDMainViewController
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:DDDEmbedSpltViewController])
+        self.splitViewController = segue.destinationViewController;
+}
 
+// Accessor
+- (DDDViewControllerRouter *)vcRouter
+{
+    return [DDDViewControllerRouter sharedInstance];
+}
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -34,19 +43,19 @@
 - (void)setupNavigationRouter
 {
     [UINavigationBar applyGlobalNavigationBarStyles];
-    [self.navigationController updateScreenMapping:@{
-                                                     DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
-                                                     DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },
-                                                     DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class], @"isRootView" : @(NO) },
-                                                     DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class], @"isRootView" : @(NO) }
-                                                     }];
 }
 
-- (NSDictionary *)segueIdentifierToContainerViewControllerMapping
+- (void)viewDidLoad
 {
-    return @{
-             DDDEmbedContentViewIdentifier : @keypath(self.contentViewController)
-             };
-}
+    [super viewDidLoad];
+    [self.vcRouter setupWithSplitViewController:self.splitViewController];
+    [self.vcRouter updateScreenMapping:@{
+                                         DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
+                                         DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },
+                                         DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class], @"isRootView" : @(NO) },
+                                         DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class], @"isRootView" : @(NO) }
+                                         }];
 
+    [self.vcRouter showScreenInMaster:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];
+}
 @end

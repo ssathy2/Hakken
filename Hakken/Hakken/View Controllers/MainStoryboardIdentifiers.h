@@ -6,4 +6,4 @@
 //  Copyright (c) 2014 dotdotdot. All rights reserved.
 //
 
-#define DDDEmbedContentViewIdentifier @"DDDEmbedContentViewIdentifier"
+#define DDDEmbedSpltViewController @"DDDEmbedSpltViewController"

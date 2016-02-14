@@ -244,25 +244,33 @@ UIGestureRecognizerDelegate>
 {
     [self shrinkCellAtIndexPath:indexPath animated:YES];
     [self expandCellAtIndexPath:indexPath animated:YES];
-    
-    DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
-    transitionModel.story = item;
     
-    DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
-    attrs.model = transitionModel;
-    
-    [[[self storyDisplayViewModel] markStoryAsRead:item] subscribeNext:^(id x) {
-        [[[self storyDisplayViewModel] latestStoriesUpdate] updateItemAtIndex:indexPath.row withItems:x];
-    } completed:^{
-        DDLogInfo(@"Update completed!");
-    }];
-    
-    // push webview/comments controller here...
-    if (item.isUserGenerated)
-        [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    if (self.storyDisplayWebView)
+    {
+        [self displayStoryInWebview:item];
+    }
     else
-        [self.navigationController transitionToScreen:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    {
+        DDDStoryTransitionModel *transitionModel = [DDDStoryTransitionModel new];
+     
+        transitionModel.story = item;
+
+        DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
+        attrs.model = transitionModel;
+
+        [[[self storyDisplayViewModel] markStoryAsRead:item] subscribeNext:^(id x) {
+            [[[self storyDisplayViewModel] latestStoriesUpdate] updateItemAtIndex:indexPath.row withItems:x];
+        } completed:^{
+            DDLogInfo(@"Update completed!");
+        }];
+
+        // push webview/comments controller here...
+        if (item.isUserGenerated)
+            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        else
+            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+    }
 }
 
 
@@ -292,6 +300,12 @@ UIGestureRecognizerDelegate>
                         }];
 }
 
+- (void)displayStoryInWebview:(DDDHackerNewsItem *)item
+{
+    NSURL *itemURL = [NSURL URLWithString:item.url];
+    [self.storyDisplayWebView loadRequest:[NSURLRequest requestWithURL:itemURL]];
+}
+
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectCommentsButton:(DDDHackerNewsItem *)story
 {
@@ -301,7 +315,7 @@ UIGestureRecognizerDelegate>
     attrs.model = transitionModel;
     
     // push webview/comments controller here...
-    [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)errorBlock

@@ -13,7 +13,6 @@
 @end
 
 @implementation DDDViewController
-@dynamic navigationController;
 
 #pragma mark - DDDViewControllerInstantiation
 + (instancetype)storyboardInstance

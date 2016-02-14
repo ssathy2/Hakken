@@ -140,7 +140,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     attrs.model = transitionModel;
     
     // push webview/comments controller here...
-    [self.navigationController transitionToScreen:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 @end

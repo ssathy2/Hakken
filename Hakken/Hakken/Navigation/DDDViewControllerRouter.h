@@ -10,7 +10,12 @@
 
 @class DDDTransitionAttributes;
 
-@interface DDDViewControllerRouter : UINavigationController
+@interface DDDViewControllerRouter : NSObject
+
++ (instancetype)sharedInstance;
+
+// Call this in main view controller
+- (void)setupWithSplitViewController:(UISplitViewController *)splitViewController;
 
 // Designated initializer
 
@@ -28,5 +33,8 @@
 
 // The screen parameter HAS to be a screen that is part of the screen mapping
 // if attributes is nil then the screen will be pushed AND the view model for the view controller will not have a model passed into it
-- (void)transitionToScreen:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+- (void)showScreenInMaster:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+
+- (void)showScreenInDetail:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+
 @end

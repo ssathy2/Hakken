@@ -27,6 +27,9 @@
 		DE3128091A1EE4D70020DB40 /* mock_poll.json in Resources */ = {isa = PBXBuildFile; fileRef = DE3128051A1EE4D70020DB40 /* mock_poll.json */; };
 		DE31280A1A1EE4D70020DB40 /* DDDHackerNewsItemTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */; };
 		DE31280D1A1EE4E20020DB40 /* DDDHackerNewsComment.m in Sources */ = {isa = PBXBuildFile; fileRef = DE31280C1A1EE4E20020DB40 /* DDDHackerNewsComment.m */; };
+		DE3920081C6FE118005AF979 /* DDDView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3920071C6FE118005AF979 /* DDDView.m */; };
+		DE39200B1C6FE162005AF979 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39200A1C6FE162005AF979 /* UIView+Autolayout.m */; };
+		DE39200E1C6FE54A005AF979 /* UIView+Instantiation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39200D1C6FE54A005AF979 /* UIView+Instantiation.m */; };
 		DE3962561A2BB9A2009EEB82 /* DDDStoryTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
@@ -54,7 +57,6 @@
 		DE53D46C1A5FF14B00A8B06A /* DDDCommentCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4501A5FF14A00A8B06A /* DDDCommentCollectionViewCell.m */; };
 		DE53D46D1A5FF14B00A8B06A /* DDDCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4521A5FF14A00A8B06A /* DDDCommentsViewController.m */; };
 		DE53D46E1A5FF14B00A8B06A /* DDDCommentTreeInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4541A5FF14A00A8B06A /* DDDCommentTreeInfo.m */; };
-		DE53D46F1A5FF14B00A8B06A /* DDDContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4561A5FF14A00A8B06A /* DDDContentViewController.m */; };
 		DE53D4701A5FF14B00A8B06A /* DDDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D4581A5FF14A00A8B06A /* DDDMainViewController.m */; };
 		DE53D4711A5FF14B00A8B06A /* DDDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D45A1A5FF14A00A8B06A /* DDDViewController.m */; };
 		DE53D4721A5FF14B00A8B06A /* DDDBouncyCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE53D45D1A5FF14A00A8B06A /* DDDBouncyCollectionViewFlowLayout.m */; };
@@ -143,6 +145,12 @@
 		DE3128061A1EE4D70020DB40 /* DDDHackerNewsItemTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsItemTests.m; sourceTree = "<group>"; };
 		DE31280B1A1EE4E20020DB40 /* DDDHackerNewsComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDHackerNewsComment.h; sourceTree = "<group>"; };
 		DE31280C1A1EE4E20020DB40 /* DDDHackerNewsComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDHackerNewsComment.m; sourceTree = "<group>"; };
+		DE3920061C6FE118005AF979 /* DDDView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDView.h; sourceTree = "<group>"; };
+		DE3920071C6FE118005AF979 /* DDDView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDView.m; sourceTree = "<group>"; };
+		DE3920091C6FE161005AF979 /* UIView+Autolayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Autolayout.h"; sourceTree = "<group>"; };
+		DE39200A1C6FE162005AF979 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
+		DE39200C1C6FE54A005AF979 /* UIView+Instantiation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Instantiation.h"; sourceTree = "<group>"; };
+		DE39200D1C6FE54A005AF979 /* UIView+Instantiation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Instantiation.m"; sourceTree = "<group>"; };
 		DE3962541A2BB9A2009EEB82 /* DDDStoryTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryTransitionModel.h; sourceTree = "<group>"; };
 		DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryTransitionModel.m; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,8 +203,6 @@
 		DE53D4521A5FF14A00A8B06A /* DDDCommentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentsViewController.m; sourceTree = "<group>"; };
 		DE53D4531A5FF14A00A8B06A /* DDDCommentTreeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDCommentTreeInfo.h; sourceTree = "<group>"; };
 		DE53D4541A5FF14A00A8B06A /* DDDCommentTreeInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDCommentTreeInfo.m; sourceTree = "<group>"; };
-		DE53D4551A5FF14A00A8B06A /* DDDContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDContentViewController.h; sourceTree = "<group>"; };
-		DE53D4561A5FF14A00A8B06A /* DDDContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDContentViewController.m; sourceTree = "<group>"; };
 		DE53D4571A5FF14A00A8B06A /* DDDMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDMainViewController.h; sourceTree = "<group>"; };
 		DE53D4581A5FF14A00A8B06A /* DDDMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDMainViewController.m; sourceTree = "<group>"; };
 		DE53D4591A5FF14A00A8B06A /* DDDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDViewController.h; sourceTree = "<group>"; };
@@ -471,6 +477,10 @@
 				DE2430811AE2CEA600F05838 /* UINavigationBar+Styling.m */,
 				DE7CA0F41C698AC200E7480D /* UIFont+Helpers.h */,
 				DE7CA0F51C698AC200E7480D /* UIFont+Helpers.m */,
+				DE3920091C6FE161005AF979 /* UIView+Autolayout.h */,
+				DE39200A1C6FE162005AF979 /* UIView+Autolayout.m */,
+				DE39200C1C6FE54A005AF979 /* UIView+Instantiation.h */,
+				DE39200D1C6FE54A005AF979 /* UIView+Instantiation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -510,6 +520,8 @@
 				DEB590411AAE43B1002D7603 /* DDDNoContentView.xib */,
 				DE8B5CBE1C0CFFC800A53A42 /* RotatableArrow.swift */,
 				DE8B5CBD1C0CFFC700A53A42 /* Hakken-Bridging-Header.h */,
+				DE3920061C6FE118005AF979 /* DDDView.h */,
+				DE3920071C6FE118005AF979 /* DDDView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -536,8 +548,6 @@
 			isa = PBXGroup;
 			children = (
 				DE53D44D1A5FF14A00A8B06A /* Comments */,
-				DE53D4551A5FF14A00A8B06A /* DDDContentViewController.h */,
-				DE53D4561A5FF14A00A8B06A /* DDDContentViewController.m */,
 				DE53D4571A5FF14A00A8B06A /* DDDMainViewController.h */,
 				DE53D4581A5FF14A00A8B06A /* DDDMainViewController.m */,
 				DE53D4591A5FF14A00A8B06A /* DDDViewController.h */,
@@ -833,6 +843,7 @@
 				DE53D4061A5FE4C600A8B06A /* DDDStoryDisplayViewModel.m in Sources */,
 				DE8B5CBF1C0CFFC800A53A42 /* RotatableArrow.swift in Sources */,
 				DE53D4351A5FF12300A8B06A /* UIView+SSAdditions.m in Sources */,
+				DE39200E1C6FE54A005AF979 /* UIView+Instantiation.m in Sources */,
 				DE53D4361A5FF12300A8B06A /* DDDCollectionViewCellSizingHelper.m in Sources */,
 				DE2430821AE2CEA600F05838 /* UINavigationBar+Styling.m in Sources */,
 				DE53D4481A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.m in Sources */,
@@ -850,9 +861,9 @@
 				DE53D46C1A5FF14B00A8B06A /* DDDCommentCollectionViewCell.m in Sources */,
 				DEB590401AAE4389002D7603 /* DDDNoContentView.m in Sources */,
 				DE0755BF1A7D7F1F005170D6 /* DDDHakkenReadLaterInformation.m in Sources */,
-				DE53D46F1A5FF14B00A8B06A /* DDDContentViewController.m in Sources */,
 				F97A5A941ACB008B004B71D6 /* DDDRightNavigationView.m in Sources */,
 				DE53D4371A5FF12300A8B06A /* DDDFileOperationHelpers.m in Sources */,
+				DE39200B1C6FE162005AF979 /* UIView+Autolayout.m in Sources */,
 				DE53D4461A5FF13500A8B06A /* DDDCollectionViewCell.m in Sources */,
 				DE62AC531A213D5F00692CB8 /* DDDHackernewsItemResponseSerializer.m in Sources */,
 				DE0755C21A7ECE1F005170D6 /* RLMResults+DDDHelpers.m in Sources */,
@@ -861,6 +872,7 @@
 				DE61ADA61A9A659D00714D5A /* DDDLoadingCollectionReusableView.m in Sources */,
 				DE55040D1A4CB240003B4CEC /* DDDCommentsViewModel.m in Sources */,
 				DE53D4731A5FF14B00A8B06A /* DDDCommentsCollectionViewFlowLayout.m in Sources */,
+				DE3920081C6FE118005AF979 /* DDDView.m in Sources */,
 				DE53D42F1A5FF12300A8B06A /* DDDViewControllerRouter.m in Sources */,
 				DE53D4301A5FF12300A8B06A /* NSDate+Utility.m in Sources */,
 				DE53D42D1A5FF12300A8B06A /* DDDScreen.m in Sources */,
@@ -1012,6 +1024,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hakken/Views/Hakken-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1035,6 +1048,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "57b79e6b-5a33-4f62-b0fa-39b842e732cb";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hakken/Views/Hakken-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
