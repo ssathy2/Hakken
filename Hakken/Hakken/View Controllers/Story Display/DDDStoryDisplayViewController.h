@@ -13,7 +13,6 @@
 
 @interface DDDStoryDisplayViewController : DDDViewController<DDDHackerNewsItemCollectionViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UIWebView *storyDisplayWebView;
 
 - (void)updateWithInsertionDeletion:(DDDArrayInsertionDeletion *)insertionDeletion;
 @end

@@ -31,27 +31,35 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </collectionReusableView>
                                 <connections>
-                                    <outlet property="dataSource" destination="Avq-g0-6wy" id="3Ww-C4-7o0"/>
-                                    <outlet property="delegate" destination="Avq-g0-6wy" id="mn0-04-NIp"/>
+                                    <outlet property="dataSource" destination="Avq-g0-6wy" id="d9t-o9-O8l"/>
+                                    <outlet property="delegate" destination="Avq-g0-6wy" id="gHi-QP-8pE"/>
                                 </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AeX-C6-s6L" firstAttribute="leading" secondItem="2an-LB-Hbq" secondAttribute="leading" id="79w-3J-9gw"/>
+                            <constraint firstAttribute="trailing" secondItem="AeX-C6-s6L" secondAttribute="trailing" id="IFE-np-Ffk"/>
                             <constraint firstAttribute="trailing" secondItem="AeX-C6-s6L" secondAttribute="trailing" id="LdF-5k-1Yz"/>
+                            <constraint firstItem="hVi-dD-1bV" firstAttribute="top" secondItem="AeX-C6-s6L" secondAttribute="bottom" id="Ojb-R0-EAs"/>
                             <constraint firstItem="hVi-dD-1bV" firstAttribute="top" secondItem="AeX-C6-s6L" secondAttribute="bottom" id="SPE-4w-Qj8"/>
+                            <constraint firstItem="AeX-C6-s6L" firstAttribute="top" secondItem="ahr-B3-K31" secondAttribute="bottom" id="dmu-mD-Tsv"/>
                             <constraint firstItem="AeX-C6-s6L" firstAttribute="top" secondItem="2an-LB-Hbq" secondAttribute="top" id="eIf-Pe-x3O"/>
+                            <constraint firstItem="AeX-C6-s6L" firstAttribute="leading" secondItem="2an-LB-Hbq" secondAttribute="leading" id="yvj-Gc-twa"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="AeX-C6-s6L"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="SPE-4w-Qj8"/>
                                 <exclude reference="79w-3J-9gw"/>
+                                <exclude reference="IFE-np-Ffk"/>
                                 <exclude reference="LdF-5k-1Yz"/>
+                                <exclude reference="dmu-mD-Tsv"/>
                                 <exclude reference="eIf-Pe-x3O"/>
+                                <exclude reference="yvj-Gc-twa"/>
+                                <exclude reference="Ojb-R0-EAs"/>
+                                <exclude reference="SPE-4w-Qj8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -59,10 +67,21 @@
                                 <include reference="AeX-C6-s6L"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="SPE-4w-Qj8"/>
                                 <include reference="79w-3J-9gw"/>
                                 <include reference="LdF-5k-1Yz"/>
                                 <include reference="eIf-Pe-x3O"/>
+                                <include reference="SPE-4w-Qj8"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="AeX-C6-s6L"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="IFE-np-Ffk"/>
+                                <include reference="dmu-mD-Tsv"/>
+                                <include reference="yvj-Gc-twa"/>
+                                <include reference="Ojb-R0-EAs"/>
                             </mask>
                         </variation>
                     </view>
@@ -70,7 +89,7 @@
                     <navigationItem key="navigationItem" title="Comments" id="cJD-qV-CQM"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="collectionView" destination="AeX-C6-s6L" id="4qk-pJ-LfE"/>
+                        <outlet property="collectionView" destination="AeX-C6-s6L" id="rty-Gw-lfN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HS7-Ll-S5c" userLabel="First Responder" sceneMemberID="firstResponder"/>

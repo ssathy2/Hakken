@@ -5,6 +5,39 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
+        <!--Story Preview View Controller-->
+        <scene sceneID="ogx-H9-ntD">
+            <objects>
+                <viewController storyboardIdentifier="DDDStoryPreviewViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Za-Y2-YEl" customClass="DDDStoryPreviewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Z2-dK-zR3"/>
+                        <viewControllerLayoutGuide type="bottom" id="UCM-dc-FKQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="o7x-AP-4Dx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrX-Lt-7ZK">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KrX-Lt-7ZK" firstAttribute="top" secondItem="o7x-AP-4Dx" secondAttribute="top" id="18k-JC-cmC"/>
+                            <constraint firstAttribute="trailing" secondItem="KrX-Lt-7ZK" secondAttribute="trailing" id="MFG-qP-nZs"/>
+                            <constraint firstItem="KrX-Lt-7ZK" firstAttribute="leading" secondItem="o7x-AP-4Dx" secondAttribute="leading" id="iI3-em-bFE"/>
+                            <constraint firstItem="UCM-dc-FKQ" firstAttribute="top" secondItem="KrX-Lt-7ZK" secondAttribute="bottom" id="ubB-ej-qwo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="KrX-Lt-7ZK" id="8Ke-Sb-cgd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="upf-UF-7fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="348" y="112"/>
+        </scene>
         <!--Detail-->
         <scene sceneID="Pjs-Tu-HGP">
             <objects>
@@ -92,7 +125,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQc-K3-sz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="375" y="415"/>
+            <point key="canvasLocation" x="387" y="801"/>
         </scene>
     </scenes>
 </document>

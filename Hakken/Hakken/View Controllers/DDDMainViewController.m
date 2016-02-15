@@ -12,6 +12,7 @@
 #import "DetailStoryboardIdentifiers.h"
 #import "CommentsStoryboardIdentifiers.h"
 
+#import "DDDStoryPreviewViewController.h"
 #import "DDDTopStoriesViewController.h"
 #import "DDDStoryDetailViewController.h"
 #import "DDDCommentsViewController.h"
@@ -48,12 +49,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
     [self.vcRouter setupWithSplitViewController:self.splitViewController];
     [self.vcRouter updateScreenMapping:@{
-                                         DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class], @"isRootView" : @(YES) },
-                                         DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class], @"isRootView" : @(NO) },
-                                         DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class], @"isRootView" : @(NO) },
-                                         DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class], @"isRootView" : @(NO) }
+                                         DDDStoryPreviewViewControllerIdentifier : @{ @"viewClass" : [DDDStoryPreviewViewController class] },
+                                         DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class] },
+                                         DDDStoryDetailViewControllerIdentifier : @{ @"viewClass" : [DDDStoryDetailViewController class] },
+                                         DDDCommentsViewControllerIdentifier : @{ @"viewClass" : [DDDCommentsViewController class] },
+                                         DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class] }
                                          }];
 
     [self.vcRouter showScreenInMaster:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];

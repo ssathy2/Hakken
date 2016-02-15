@@ -10,3 +10,4 @@
 
 #define DDDStoryDetailViewControllerIdentifier @"DDDStoryDetailViewController"
 #define DDDStoryDetailCollectionViewCellIdentifier @"DDDStoryDetailCollectionViewCell"
+#define DDDStoryPreviewViewControllerIdentifier @"DDDStoryPreviewViewController"

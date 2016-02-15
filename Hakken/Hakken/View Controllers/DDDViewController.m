@@ -24,12 +24,12 @@
 
 + (NSString *)storyboardIdentifier
 {
-    return NSStringFromClass([self class]);
+    return NSStringFromClass(self);
 }
 
 + (NSString *)storyboardName
 {
-    return @"Main";
+    return nil;
 }
 
 #pragma mark - DDDViewModelInstantiation

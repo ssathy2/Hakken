@@ -87,6 +87,17 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
     self.viewIsVisible = NO;
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView setCollectionViewLayout:self.collectionView.collectionViewLayout animated:YES];
+        } completion:nil];
+    }];
+}
+
 - (void)setupRefreshControl
 {
     self.refreshControl             = [UIRefreshControl new];

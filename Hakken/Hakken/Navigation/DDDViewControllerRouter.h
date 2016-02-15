@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class DDDTransitionAttributes;
+@class DDDTransitionAttributes, DDDViewController;
 
 @interface DDDViewControllerRouter : NSObject
 
@@ -23,10 +23,10 @@
  An enumeration mapping should be of the format:
  ex:
  {
- DDDExampleScreenHome : { viewClass : [DDDHomeViewController class], isRootView : @(YES) }
- DDDExampleScreenSettings : { viewClass : [DDDSettingsViewController class], isRootView: @(NO) }
+ DDDExampleScreenHome : { viewClass : [DDDHomeViewController class] }
+ DDDExampleScreenSettings : { viewClass : [DDDSettingsViewController class] }
  }
- Where DDDExampleScreenHome and DDDExampleScreenSettings are either enumerations or string identifiers and the value it corresponds to is a dictionary that contains the class and if the view is a root view or not
+ Where DDDExampleScreenHome and DDDExampleScreenSettings are either enumerations or string identifiers and the value it corresponds to is a dictionary that contains the class
  */
 - (void)updateScreenMapping:(NSDictionary *)screenMapping;
 
@@ -36,5 +36,9 @@
 - (void)showScreenInMaster:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
 
 - (void)showScreenInDetail:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+
+- (void)showViewControllerInDetail:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+
+- (void)showViewControllerInMaster:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attribtes animated:(BOOL)animated;
 
 @end

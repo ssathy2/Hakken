@@ -8,6 +8,7 @@
 
 #import "DDDStoryDisplayViewController.h"
 
+#import "DDDStoryPreviewViewController.h"
 #import "DDDTopStoriesViewModel.h"
 #import "DDDArrayInsertionDeletion.h"
 
@@ -34,6 +35,7 @@ UIGestureRecognizerDelegate>
 @property (assign, nonatomic) BOOL viewIsVisible;
 @property (strong, nonatomic) UIPanGestureRecognizer *cellSwipePangestureRecognizer;
 @property (strong, nonatomic) NSIndexPath *previousCellSwipedIndexPath;
+@property (strong, nonatomic) DDDStoryPreviewViewController *iPadStoryPreviewController;
 @end
 
 @implementation DDDStoryDisplayViewController
@@ -61,6 +63,12 @@ UIGestureRecognizerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    self.iPadStoryPreviewController = [DDDStoryPreviewViewController storyboardInstance];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        [[DDDViewControllerRouter sharedInstance] showViewControllerInDetail:self.iPadStoryPreviewController withAttributes:nil animated:YES];
+    }
+    
     [self setupCellSwipePanGestureRecognizer];
     [self setupCollectionView];
     [self setupFlowLayout];
@@ -77,6 +85,17 @@ UIGestureRecognizerDelegate>
 {
     [super viewDidDisappear:animated];
     self.viewIsVisible = NO;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:nil completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [self.collectionView performBatchUpdates:^{
+            [self.collectionView setCollectionViewLayout:self.collectionView.collectionViewLayout animated:YES];
+        } completion:nil];
+    }];
 }
 
 #pragma mark - Setup Methods
@@ -246,7 +265,7 @@ UIGestureRecognizerDelegate>
     [self expandCellAtIndexPath:indexPath animated:YES];
     DDDHackerNewsItem *item = [[[self storyDisplayViewModel] latestStoriesUpdate].array objectAtIndex:indexPath.row];
     
-    if (self.storyDisplayWebView)
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     {
         [self displayStoryInWebview:item];
     }
@@ -302,8 +321,10 @@ UIGestureRecognizerDelegate>
 
 - (void)displayStoryInWebview:(DDDHackerNewsItem *)item
 {
-    NSURL *itemURL = [NSURL URLWithString:item.url];
-    [self.storyDisplayWebView loadRequest:[NSURLRequest requestWithURL:itemURL]];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        [self.iPadStoryPreviewController prepareWithModel:item];
+    }
 }
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
@@ -315,7 +336,7 @@ UIGestureRecognizerDelegate>
     attrs.model = transitionModel;
     
     // push webview/comments controller here...
-    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 - (void)cell:(DDDHackerNewsItemCollectionViewCell *)cell didSelectAddToReadLater:(DDDHackerNewsItem *)story withCompletion:(DDDHackerNewsItemBlock)completion withError:(ErrorBlock)errorBlock

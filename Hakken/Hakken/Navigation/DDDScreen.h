@@ -10,5 +10,4 @@
 
 @interface DDDScreen : DDDModel
 @property (assign, nonatomic) Class viewClass;
-@property (assign, nonatomic) BOOL isRootView;
 @end

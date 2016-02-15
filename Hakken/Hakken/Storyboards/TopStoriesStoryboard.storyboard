@@ -5,18 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
-        <scene sceneID="pxw-jz-8PP">
-            <objects>
-                <splitViewController storyboardIdentifier="DDDHomeViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Vf-g7-6GI" customClass="DDDHomeViewController" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="IGC-a3-s8B" kind="relationship" relationship="masterViewController" id="KjX-EK-k3p"/>
-                    </connections>
-                </splitViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5U3-rd-4UR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-943" y="-152"/>
-        </scene>
         <!--Top Stories-->
         <scene sceneID="S5K-xc-S92">
             <objects>
@@ -112,12 +100,12 @@
                     <navigationItem key="navigationItem" title="Top Stories" id="0ex-n5-9wh"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="collectionView" destination="UUO-LM-WyX" id="7BT-YU-Nc3"/>
+                        <outlet property="collectionView" destination="UUO-LM-WyX" id="19r-bd-BeR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Fp-b9-0iI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="429" y="996.75"/>
+            <point key="canvasLocation" x="703.5" y="977.25"/>
         </scene>
         <!--Saved Stories-->
         <scene sceneID="mhS-jM-0wB">

@@ -10,5 +10,6 @@
 
 @interface DDDTransitionAttributes : DDDModel
 @property (assign, nonatomic) BOOL presentModally;
+@property (assign, nonatomic) BOOL shouldBeRoot;
 @property (strong, nonatomic) id model;
 @end

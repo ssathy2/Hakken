@@ -42,14 +42,29 @@
         <scene sceneID="OYh-XO-NQW">
             <objects>
                 <navigationController id="Ujk-Wc-aib" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0o7-yB-jfI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0o7-yB-jfI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AuC-eq-SMd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-55.5" y="-9.75"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LMj-zW-XMN">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afG-rk-UKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="Uu9-pR-56O" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YXz-Rn-WeR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="25.5" y="717"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="VSk-g8-Pgq">
@@ -57,11 +72,12 @@
                 <splitViewController id="sx8-wK-QlY" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Ujk-Wc-aib" kind="relationship" relationship="masterViewController" id="4aR-yV-hf2"/>
+                        <segue destination="Uu9-pR-56O" kind="relationship" relationship="detailViewController" id="hHa-QX-Xa1"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P9o-7P-Z42" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-727.5" y="427.81690140845069"/>
+            <point key="canvasLocation" x="-700.5" y="390"/>
         </scene>
     </scenes>
 </document>
