@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upf-UF-7fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="348" y="112"/>
+            <point key="canvasLocation" x="16" y="-8"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Pjs-Tu-HGP">
@@ -51,65 +51,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hrD-2a-QeR" userLabel="HackernewsItemContainerView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="120"/>
                                 <color key="backgroundColor" red="0.95686274510000002" green="0.0" blue="0.20292436520000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="1FS-xh-ZL6"/>
+                                    <constraint firstAttribute="height" constant="120" id="m4e-2f-aBl"/>
                                 </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="1FS-xh-ZL6"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="1FS-xh-ZL6"/>
-                                    </mask>
-                                </variation>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fyv-Vr-SGC">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <rect key="frame" x="0.0" y="120" width="600" height="416"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="fyv-Vr-SGC" secondAttribute="bottom" id="32w-SV-RGB"/>
-                            <constraint firstAttribute="trailing" secondItem="hrD-2a-QeR" secondAttribute="trailing" id="7B2-X3-7rP"/>
-                            <constraint firstAttribute="trailing" secondItem="fyv-Vr-SGC" secondAttribute="trailing" id="Gh5-7i-fyt"/>
-                            <constraint firstItem="hrD-2a-QeR" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="QAe-pZ-g4G"/>
-                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="Wde-eh-080"/>
-                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="top" secondItem="hrD-2a-QeR" secondAttribute="bottom" id="aPt-N1-20g"/>
-                            <constraint firstItem="hrD-2a-QeR" firstAttribute="top" secondItem="A3q-Jm-kzr" secondAttribute="bottom" id="jb1-Xd-Lnm"/>
+                            <constraint firstAttribute="trailing" secondItem="hrD-2a-QeR" secondAttribute="trailing" id="0xw-Sf-uLu"/>
+                            <constraint firstAttribute="trailing" secondItem="fyv-Vr-SGC" secondAttribute="trailing" id="1s0-Kw-Zbe"/>
+                            <constraint firstItem="hrD-2a-QeR" firstAttribute="top" secondItem="A3q-Jm-kzr" secondAttribute="bottom" id="IoV-mU-Hh6"/>
+                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="top" secondItem="hrD-2a-QeR" secondAttribute="bottom" id="duJ-xv-PIC"/>
+                            <constraint firstItem="8Ab-nG-bdK" firstAttribute="top" secondItem="fyv-Vr-SGC" secondAttribute="bottom" id="fTB-tH-bSs"/>
+                            <constraint firstItem="hrD-2a-QeR" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="koK-sp-HCy"/>
+                            <constraint firstItem="fyv-Vr-SGC" firstAttribute="leading" secondItem="VgO-pz-6Lf" secondAttribute="leading" id="uqm-Uy-ov3"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="hrD-2a-QeR"/>
-                                <exclude reference="fyv-Vr-SGC"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="32w-SV-RGB"/>
-                                <exclude reference="Gh5-7i-fyt"/>
-                                <exclude reference="Wde-eh-080"/>
-                                <exclude reference="aPt-N1-20g"/>
-                                <exclude reference="7B2-X3-7rP"/>
-                                <exclude reference="QAe-pZ-g4G"/>
-                                <exclude reference="jb1-Xd-Lnm"/>
-                            </mask>
-                        </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="hrD-2a-QeR"/>
                                 <include reference="fyv-Vr-SGC"/>
                             </mask>
-                            <mask key="constraints">
-                                <include reference="32w-SV-RGB"/>
-                                <include reference="Gh5-7i-fyt"/>
-                                <include reference="Wde-eh-080"/>
-                                <include reference="aPt-N1-20g"/>
-                                <include reference="7B2-X3-7rP"/>
-                                <include reference="QAe-pZ-g4G"/>
-                                <include reference="jb1-Xd-Lnm"/>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="hrD-2a-QeR"/>
+                                <include reference="fyv-Vr-SGC"/>
                             </mask>
                         </variation>
                     </view>
@@ -118,8 +90,8 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="hackernewsItemDetailContainer" destination="hrD-2a-QeR" id="OyT-a9-TjQ"/>
-                        <outlet property="itemDetailContainerHeightConstraint" destination="1FS-xh-ZL6" id="GbP-YW-zPl"/>
-                        <outlet property="itemDetailContainerTopSpaceConstraint" destination="jb1-Xd-Lnm" id="jxM-Kz-jcW"/>
+                        <outlet property="itemDetailContainerHeightConstraint" destination="m4e-2f-aBl" id="1Ba-CL-ht8"/>
+                        <outlet property="itemDetailContainerTopSpaceConstraint" destination="IoV-mU-Hh6" id="LgE-K5-K36"/>
                         <outlet property="webview" destination="fyv-Vr-SGC" id="5YO-od-idS"/>
                     </connections>
                 </viewController>

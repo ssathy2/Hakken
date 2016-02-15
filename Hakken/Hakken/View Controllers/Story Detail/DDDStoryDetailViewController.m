@@ -29,6 +29,7 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemDetailContainerHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *itemDetailContainerTopSpaceConstraint;
 @property (weak, nonatomic) IBOutlet UIView *hackernewsItemDetailContainer;
+@property (weak, nonatomic) DDDHackerNewsItemCollectionViewCell *itemDetailView;
 @property (weak, nonatomic) IBOutlet UIWebView *webview;
 @property (assign, nonatomic) CGPoint lastContentOffset;
 @property (assign, nonatomic) CGSize expandedItemDetailSize;
@@ -57,18 +58,27 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     return (DDDStoryDetailViewModel *)self.viewModel;
 }
 
-- (void)viewDidLoad
+- (void)prepareWithModel:(DDDHackerNewsItem *)model
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    [super prepareWithModel:model];
+    [self bindToViewModel];
+}
+
+- (void)bindToViewModel
+{
     __block DDDHackerNewsItem *item;
     [[[self storyDetailViewModel] markStoryAsRead] subscribeNext:^(DDDHackerNewsItem *x) {
         item = x;
     } completed:^{
         [self applyStoryToView:item];
     }];
-    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    [self bindToViewModel];
     self.isStoryInformationCellExpanded = YES;
     [self setupWebview];
 }
@@ -87,13 +97,16 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
 
 - (void)loadDetailViewIntoContainerWithStory:(DDDHackerNewsItem *)story
 {
-    DDDHackerNewsItemCollectionViewCell *cell = [DDDHackerNewsItemCollectionViewCell instance];
-    [cell prepareWithModel:story];
+    if (!self.itemDetailView)
+    {
+        self.itemDetailView = [DDDHackerNewsItemCollectionViewCell instance];
+        [self.hackernewsItemDetailContainer addSubviewWithConstraints:self.itemDetailView];
+        self.itemDetailView.delegate = self;
+    }
     CGSize cellSize = [[DDDCollectionViewCellSizingHelper sharedInstance] preferredLayoutSizeWithCellClass:[DDDHackerNewsItemCollectionViewCell class] withCellModel:story withModelIdentifier:[@(story.id) stringValue]];
     self.itemDetailContainerHeightConstraint.constant = cellSize.height;
     self.expandedItemDetailSize = cellSize;
-    cell.delegate = self;
-    [self.hackernewsItemDetailContainer addSubviewWithConstraints:cell];
+    [self.itemDetailView prepareWithModel:story];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -140,7 +153,10 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     attrs.model = transitionModel;
     
     // push webview/comments controller here...
-    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    if (IS_RUNNING_ON_IPAD)
+        [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+    else
+        [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 @end

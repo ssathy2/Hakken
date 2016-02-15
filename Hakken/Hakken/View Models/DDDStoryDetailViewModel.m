@@ -23,6 +23,9 @@
 
 - (RACSignal *)markStoryAsRead
 {
-    return [DDDHakkenReadLaterManager markStoryAsRead:self.transitionModel.story];
+    if (self.transitionModel.story)
+        return [DDDHakkenReadLaterManager markStoryAsRead:self.transitionModel.story];
+    else
+        return nil;
 }
 @end

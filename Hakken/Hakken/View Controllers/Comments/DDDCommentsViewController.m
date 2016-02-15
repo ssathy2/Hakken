@@ -203,7 +203,10 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
         attrs.model = transitionModel;
         
-        [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+        if (IS_RUNNING_ON_IPAD)
+            [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+        else
+            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
     }
     // TODO: Handle URL's tapped in teh cell
     else

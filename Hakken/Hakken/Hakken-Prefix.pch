@@ -18,6 +18,8 @@
 
 #define safe_block(_block) if(_block)_block
 
+#define IS_RUNNING_ON_IPAD UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad
+
 @class DDDHackerNewsItem;
 
 typedef void(^ArrayBlock)(NSArray *array);

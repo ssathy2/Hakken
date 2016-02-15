@@ -15,6 +15,8 @@
 
 @interface DDDTopStoriesViewController()
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+
+//TODO: Figure out rotation
 @property (strong, nonatomic) DDDRightNavigationView *rightNavView;
 @end
 
@@ -39,7 +41,7 @@
 {
     [super viewDidLoad];
     [self setupRefreshControl];
-    [self setupNavigationButton];
+//    [self setupNavigationButton];
     [self setupReactions];
 }
 
