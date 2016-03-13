@@ -63,13 +63,16 @@
 {
     // Grab the screen from the screen mapping
     NSParameterAssert(screen);
-    
-    // check if the screen is a root view
-    DDDViewController *vc = [self viewControllerForScreen:screen];
+    [self showViewController:[self viewControllerForScreen:screen] usingNavigationController:navigationController withAttributes:attributes animated:animated];
+}
+
+- (void)showViewController:(DDDViewController *)viewController usingNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+{
+    // check if the screen is a root view    
     if (attributes.presentModally)
-        [self presentViewController:vc onNavigationController:navigationController withAttributes:attributes animated:animated];
+        [self presentViewController:viewController onNavigationController:navigationController withAttributes:attributes animated:animated];
     else
-        [self pushViewController:vc onNavigationController:navigationController withAttributes:attributes animated:animated];
+        [self pushViewController:viewController onNavigationController:navigationController withAttributes:attributes animated:animated];
 }
 
 - (void)pushViewController:(DDDViewController *)viewController onNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
