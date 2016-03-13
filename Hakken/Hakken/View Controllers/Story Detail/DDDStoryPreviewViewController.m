@@ -11,7 +11,7 @@
 #import "DDDHackerNewsItem.h"
 
 @interface DDDStoryPreviewViewController()
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation DDDStoryPreviewViewController
@@ -38,10 +38,7 @@
 
 - (void)updateWebviewWithItem:(DDDHackerNewsItem *)item
 {
-    if (item)
-    {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:item.url]]];
-    }
+
 }
 
 

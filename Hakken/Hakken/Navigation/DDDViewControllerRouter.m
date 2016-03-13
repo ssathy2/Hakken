@@ -11,6 +11,7 @@
 #import "DDDScreen.h"
 #import "DDDTransitionAttributes.h"
 #import "UIColor+DDDAdditions.h"
+#import "UINavigationBar+Styling.h"
 
 @interface DDDViewControllerRouter ()<UISplitViewControllerDelegate>
 @property (weak, nonatomic) UISplitViewController *splitViewController;
@@ -27,22 +28,6 @@
         // do any init for the shared instance here
     });
     return sharedInstance;
-}
-
-- (void)setupWithSplitViewController:(UISplitViewController *)splitViewController
-{
-    self.splitViewController = splitViewController;
-    self.splitViewController.delegate = self;
-}
-
-- (UINavigationController *)splitViewControllerMasterNavigationController
-{
-    return [self.splitViewController.viewControllers firstObject];
-}
-
-- (UINavigationController *)splitViewControllerDetailNavigationController
-{
-    return self.splitViewController.viewControllers[1];
 }
 
 - (void)updateScreenMapping:(NSDictionary *)screenMapping
@@ -74,76 +59,34 @@
     }
 }
 
-- (void)showScreenInMaster:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+- (void)showScreen:(id)screen usingNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
 {
     // Grab the screen from the screen mapping
     NSParameterAssert(screen);
     
     // check if the screen is a root view
     DDDViewController *vc = [self viewControllerForScreen:screen];
-    [self showViewControllerInMaster:vc withAttributes:attributes animated:animated];
+    if (attributes.presentModally)
+        [self presentViewController:vc onNavigationController:navigationController withAttributes:attributes animated:animated];
+    else
+        [self pushViewController:vc onNavigationController:navigationController withAttributes:attributes animated:animated];
 }
 
-- (void)showScreenInDetail:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
-{
-    // Grab the screen from the screen mapping
-    NSParameterAssert(screen);
-    
-    // check if the screen is a root view
-    DDDViewController *vc = [self viewControllerForScreen:screen];
-    [self showViewControllerInDetail:vc withAttributes:attributes animated:animated];
-}
-
-- (void)showViewControllerInDetail:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+- (void)pushViewController:(DDDViewController *)viewController onNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
 {
     if ([viewController respondsToSelector:@selector(prepareWithModel:)])
         [viewController prepareWithModel:attributes.model];
     
-    // instantiate the view and replace root view if it is, if it's not then push it on
-    // modal presentation takes precedence over root view
-    if (attributes.presentModally)
-    {
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [self.splitViewControllerMasterNavigationController presentViewController:navController animated:YES completion:nil];
-    }
-    else
-    {
-        if (attributes.shouldBeRoot)
-        {
-            // TODO: what should this be?
-            [self.splitViewControllerDetailNavigationController setViewControllers:@[viewController]];
-        }
-        else
-        {
-            [self.splitViewControllerDetailNavigationController pushViewController:viewController animated:YES];
-        }
-    }
+    [navigationController pushViewController:viewController animated:animated];
 }
 
-- (void)showViewControllerInMaster:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
+- (void)presentViewController:(DDDViewController *)viewController onNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated
 {
     if ([viewController respondsToSelector:@selector(prepareWithModel:)])
         [viewController prepareWithModel:attributes.model];
     
-    // instantiate the view and replace root view if it is, if it's not then push it on
-    // modal presentation takes precedence over root view
-    if (attributes.presentModally)
-    {
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [self.splitViewControllerMasterNavigationController presentViewController:navController animated:YES completion:nil];
-    }
-    else
-    {
-        if (attributes.shouldBeRoot)
-        {
-            // TODO: what should this be?
-            [self.splitViewControllerMasterNavigationController setViewControllers:@[viewController]];
-        }
-        else
-        {
-            [self.splitViewControllerMasterNavigationController pushViewController:viewController animated:YES];
-        }
-    }
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [navigationController presentViewController:navController animated:animated completion:nil];
 }
 
 // Either instantiate a view from storyboard or from a nib

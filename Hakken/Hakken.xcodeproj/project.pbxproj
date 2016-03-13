@@ -30,8 +30,8 @@
 		DE3920081C6FE118005AF979 /* DDDView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3920071C6FE118005AF979 /* DDDView.m */; };
 		DE39200B1C6FE162005AF979 /* UIView+Autolayout.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39200A1C6FE162005AF979 /* UIView+Autolayout.m */; };
 		DE39200E1C6FE54A005AF979 /* UIView+Instantiation.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39200D1C6FE54A005AF979 /* UIView+Instantiation.m */; };
-		DE39201A1C713C22005AF979 /* DDDStoryPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3920191C713C22005AF979 /* DDDStoryPreviewViewController.m */; };
-		DE39201D1C713C6C005AF979 /* DDDStoryPreviewViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE39201C1C713C6C005AF979 /* DDDStoryPreviewViewModel.m */; };
+		DE3920231C7973ED005AF979 /* DDDStoryPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3920211C7973ED005AF979 /* DDDStoryPreviewViewController.m */; };
+		DE3920261C7973FF005AF979 /* DDDStoryPreviewViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3920241C7973FF005AF979 /* DDDStoryPreviewViewModel.m */; };
 		DE3962561A2BB9A2009EEB82 /* DDDStoryTransitionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */; };
 		DE475D931A1ADB1600970E87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D921A1ADB1600970E87 /* main.m */; };
 		DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE475D951A1ADB1600970E87 /* AppDelegate.m */; };
@@ -153,10 +153,10 @@
 		DE39200A1C6FE162005AF979 /* UIView+Autolayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Autolayout.m"; sourceTree = "<group>"; };
 		DE39200C1C6FE54A005AF979 /* UIView+Instantiation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Instantiation.h"; sourceTree = "<group>"; };
 		DE39200D1C6FE54A005AF979 /* UIView+Instantiation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Instantiation.m"; sourceTree = "<group>"; };
-		DE3920181C713C22005AF979 /* DDDStoryPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryPreviewViewController.h; sourceTree = "<group>"; };
-		DE3920191C713C22005AF979 /* DDDStoryPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryPreviewViewController.m; sourceTree = "<group>"; };
-		DE39201B1C713C6C005AF979 /* DDDStoryPreviewViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryPreviewViewModel.h; sourceTree = "<group>"; };
-		DE39201C1C713C6C005AF979 /* DDDStoryPreviewViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryPreviewViewModel.m; sourceTree = "<group>"; };
+		DE3920211C7973ED005AF979 /* DDDStoryPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryPreviewViewController.m; sourceTree = "<group>"; };
+		DE3920221C7973ED005AF979 /* DDDStoryPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryPreviewViewController.h; sourceTree = "<group>"; };
+		DE3920241C7973FF005AF979 /* DDDStoryPreviewViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryPreviewViewModel.m; sourceTree = "<group>"; };
+		DE3920251C7973FF005AF979 /* DDDStoryPreviewViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryPreviewViewModel.h; sourceTree = "<group>"; };
 		DE3962541A2BB9A2009EEB82 /* DDDStoryTransitionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDStoryTransitionModel.h; sourceTree = "<group>"; };
 		DE3962551A2BB9A2009EEB82 /* DDDStoryTransitionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDDStoryTransitionModel.m; sourceTree = "<group>"; };
 		DE475D8D1A1ADB1600970E87 /* Hakken.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hakken.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +340,8 @@
 		DE3127D61A1ADBBD0020DB40 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				DE3920241C7973FF005AF979 /* DDDStoryPreviewViewModel.m */,
+				DE3920251C7973FF005AF979 /* DDDStoryPreviewViewModel.h */,
 				DE0755C61A7EE219005170D6 /* DDDReadLaterViewModel.h */,
 				DE0755C71A7EE219005170D6 /* DDDReadLaterViewModel.m */,
 				DE53D4041A5FE4C600A8B06A /* DDDStoryDisplayViewModel.h */,
@@ -352,8 +354,6 @@
 				DEC57A7D1A2AA33F00D89A96 /* DDDStoryDetailViewModel.m */,
 				DE55040B1A4CB240003B4CEC /* DDDCommentsViewModel.h */,
 				DE55040C1A4CB240003B4CEC /* DDDCommentsViewModel.m */,
-				DE39201B1C713C6C005AF979 /* DDDStoryPreviewViewModel.h */,
-				DE39201C1C713C6C005AF979 /* DDDStoryPreviewViewModel.m */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -595,11 +595,11 @@
 		DE53D4611A5FF14A00A8B06A /* Story Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DE3920211C7973ED005AF979 /* DDDStoryPreviewViewController.m */,
+				DE3920221C7973ED005AF979 /* DDDStoryPreviewViewController.h */,
 				DE53D4621A5FF14A00A8B06A /* DDDStoryDetailViewController.h */,
 				DE53D4631A5FF14A00A8B06A /* DDDStoryDetailViewController.m */,
 				DE53D4641A5FF14A00A8B06A /* DetailStoryboardIdentifiers.h */,
-				DE3920181C713C22005AF979 /* DDDStoryPreviewViewController.h */,
-				DE3920191C713C22005AF979 /* DDDStoryPreviewViewController.m */,
 			);
 			path = "Story Detail";
 			sourceTree = "<group>";
@@ -838,7 +838,7 @@
 				DE124AC01A4B570400337342 /* DDDMockDataServices.m in Sources */,
 				DE475D961A1ADB1600970E87 /* AppDelegate.m in Sources */,
 				DE53D4341A5FF12300A8B06A /* UIColor+DDDAdditions.m in Sources */,
-				DE39201D1C713C6C005AF979 /* DDDStoryPreviewViewModel.m in Sources */,
+				DE3920261C7973FF005AF979 /* DDDStoryPreviewViewModel.m in Sources */,
 				DE0755BC1A7D7C59005170D6 /* DDDHakkenReadLaterManager.m in Sources */,
 				DE3127E71A1AE9B00020DB40 /* DDDModel.m in Sources */,
 				DE53D4751A5FF14B00A8B06A /* DDDStoryDisplayViewController.m in Sources */,
@@ -855,7 +855,7 @@
 				DE8B5CBF1C0CFFC800A53A42 /* RotatableArrow.swift in Sources */,
 				DE53D4351A5FF12300A8B06A /* UIView+SSAdditions.m in Sources */,
 				DE39200E1C6FE54A005AF979 /* UIView+Instantiation.m in Sources */,
-				DE39201A1C713C22005AF979 /* DDDStoryPreviewViewController.m in Sources */,
+				DE3920231C7973ED005AF979 /* DDDStoryPreviewViewController.m in Sources */,
 				DE53D4361A5FF12300A8B06A /* DDDCollectionViewCellSizingHelper.m in Sources */,
 				DE2430821AE2CEA600F05838 /* UINavigationBar+Styling.m in Sources */,
 				DE53D4481A5FF13500A8B06A /* DDDHackerNewsItemCollectionViewCell.m in Sources */,
@@ -1058,7 +1058,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dotdotdot.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "57b79e6b-5a33-4f62-b0fa-39b842e732cb";
+				PROVISIONING_PROFILE = "c1c57c88-b04f-439f-94fd-95a255343737";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hakken/Views/Hakken-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

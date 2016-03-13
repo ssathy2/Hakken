@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -27,15 +27,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h4p-q5-eud" userLabel="SubcommentsArrowContainer">
-                                <rect key="frame" x="10" y="5" width="15" height="15"/>
+                                <rect key="frame" x="10" y="8" width="10" height="10"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="15" id="MKW-6w-xhg"/>
-                                    <constraint firstAttribute="height" constant="15" id="xEy-Go-hyX"/>
+                                    <constraint firstAttribute="width" constant="10" id="MKW-6w-xhg"/>
+                                    <constraint firstAttribute="height" constant="10" id="xEy-Go-hyX"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Moot" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1x-ml-vhn">
-                                <rect key="frame" x="33" y="5" width="30" height="15"/>
+                                <rect key="frame" x="28" y="5" width="30" height="15"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="6YD-vJ-d7v"/>
                                 </constraints>

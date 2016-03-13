@@ -204,9 +204,9 @@ typedef NS_ENUM(NSInteger, DDDCommentsSection)
         attrs.model = transitionModel;
         
         if (IS_RUNNING_ON_IPAD)
-            [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+            [[DDDViewControllerRouter sharedInstance] showScreen:DDDStoryDetailViewControllerIdentifier usingNavigationController:self.splitViewController.viewControllers[1] withAttributes:attrs animated:YES];
         else
-            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+            [[DDDViewControllerRouter sharedInstance] showScreen:DDDStoryDetailViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
     }
     // TODO: Handle URL's tapped in teh cell
     else

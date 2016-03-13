@@ -16,8 +16,6 @@ typedef NS_ENUM(NSInteger, DDDCellSwipeState)
     DDDCellSwipeStateSelected
 };
 
-#define CHECKMARKLAYERNAME @"CHECKMARKLAYERNAME"
-
 @interface DDDHackerNewsItemCollectionViewCell()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *commentsButton;
 @property (weak, nonatomic) IBOutlet UILabel *pointDatePostedLabel;

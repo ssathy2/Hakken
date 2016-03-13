@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZSv-DA-r6X">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZSv-DA-r6X">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -28,7 +28,7 @@
                         <constraints>
                             <constraint firstItem="vqY-rA-zLc" firstAttribute="top" secondItem="CRQ-6U-wIb" secondAttribute="bottom" id="Gru-RG-Mfh"/>
                             <constraint firstItem="CRQ-6U-wIb" firstAttribute="leading" secondItem="sFN-mt-xJr" secondAttribute="leading" id="I6X-AC-cuF"/>
-                            <constraint firstItem="CRQ-6U-wIb" firstAttribute="top" secondItem="1h3-HW-oOF" secondAttribute="bottom" constant="-20" id="Wsz-36-ZmV"/>
+                            <constraint firstItem="CRQ-6U-wIb" firstAttribute="top" secondItem="1h3-HW-oOF" secondAttribute="bottom" constant="-20" id="ko8-tf-Huq"/>
                             <constraint firstAttribute="trailing" secondItem="CRQ-6U-wIb" secondAttribute="trailing" id="lBb-he-TEo"/>
                         </constraints>
                     </view>
@@ -41,7 +41,7 @@
         <!--Navigation Controller-->
         <scene sceneID="OYh-XO-NQW">
             <objects>
-                <navigationController id="Ujk-Wc-aib" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="Ujk-Wc-aib" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0o7-yB-jfI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -55,14 +55,14 @@
         <!--Navigation Controller-->
         <scene sceneID="LMj-zW-XMN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="afG-rk-UKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="Uu9-pR-56O" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="Uu9-pR-56O" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YXz-Rn-WeR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afG-rk-UKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="25.5" y="717"/>
         </scene>

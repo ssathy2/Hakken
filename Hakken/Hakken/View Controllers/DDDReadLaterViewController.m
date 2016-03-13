@@ -31,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(closeButtonTapped:)];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor blackColor]];
 }
 
 - (void)closeButtonTapped:(UIBarButtonItem *)item

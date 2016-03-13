@@ -68,13 +68,11 @@ UIGestureRecognizerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    self.navigationController.navigationBarHidden = NO;
     if (IS_RUNNING_ON_IPAD)
     {
-//        self.iPadStoryPreviewController = [DDDStoryPreviewViewController storyboardInstance];
-//        [[DDDViewControllerRouter sharedInstance] showViewControllerInDetail:self.iPadStoryPreviewController withAttributes:nil animated:YES];
-        
         self.iPadDetailViewController = [DDDStoryDetailViewController storyboardInstance];
-        [[DDDViewControllerRouter sharedInstance] showViewControllerInDetail:self.iPadDetailViewController withAttributes:nil animated:YES];
+//        [[DDDViewControllerRouter sharedInstance] showViewControllerInDetail:self.iPadDetailViewController withAttributes:nil animated:YES];
     }
     
     [self setupCellSwipePanGestureRecognizer];
@@ -289,7 +287,7 @@ UIGestureRecognizerDelegate>
         DDLogInfo(@"Update completed!");
     }];
     
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    if (IS_RUNNING_ON_IPAD)
     {
         [self displayStoryForIPad:item];
     }
@@ -303,9 +301,9 @@ UIGestureRecognizerDelegate>
 
         // push webview/comments controller here...
         if (item.isUserGenerated)
-            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+            [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
         else
-            [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDStoryDetailViewControllerIdentifier withAttributes:attrs animated:YES];
+            [[DDDViewControllerRouter sharedInstance] showScreen:DDDStoryDetailViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
     }
 }
 
@@ -347,10 +345,12 @@ UIGestureRecognizerDelegate>
         DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
         attrs.model = transitionModel;
         attrs.shouldBeRoot = YES;
-        [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
     }
     else
+    {
         [self.iPadDetailViewController prepareWithModel:transitionModel];
+    }
 }
 
 #pragma mark - DDDHackerNewsItemCollectionViewCellDelegate
@@ -364,11 +364,12 @@ UIGestureRecognizerDelegate>
     if (IS_RUNNING_ON_IPAD)
     {
         // push webview/comments controller here...
-        [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        attrs.shouldBeRoot = YES;
+        [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.splitViewController.viewControllers[1] withAttributes:attrs animated:YES];
     }
     else
     {
-        [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
     }
 }
 

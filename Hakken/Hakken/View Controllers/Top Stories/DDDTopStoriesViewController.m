@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     [self setupRefreshControl];
-//    [self setupNavigationButton];
+    [self setupNavigationButton];
     [self setupReactions];
 }
 
@@ -108,7 +108,7 @@
 {
     DDDTransitionAttributes *attrs = [DDDTransitionAttributes new];
     attrs.presentModally = YES;
-    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
+//    [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDSavedStoriesViewControllerIdentifier withAttributes:attrs animated:YES];
 }
 
 - (void)setupRefreshControl

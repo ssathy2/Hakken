@@ -14,11 +14,6 @@
 
 + (instancetype)sharedInstance;
 
-// Call this in main view controller
-- (void)setupWithSplitViewController:(UISplitViewController *)splitViewController;
-
-// Designated initializer
-
 /**
  An enumeration mapping should be of the format:
  ex:
@@ -30,15 +25,9 @@
  */
 - (void)updateScreenMapping:(NSDictionary *)screenMapping;
 
-
 // The screen parameter HAS to be a screen that is part of the screen mapping
 // if attributes is nil then the screen will be pushed AND the view model for the view controller will not have a model passed into it
-- (void)showScreenInMaster:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
+- (void)showScreen:(id)screen usingNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
 
-- (void)showScreenInDetail:(id)screen withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
-
-- (void)showViewControllerInDetail:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
-
-- (void)showViewControllerInMaster:(DDDViewController *)viewController withAttributes:(DDDTransitionAttributes *)attribtes animated:(BOOL)animated;
-
+- (void)showViewController:(DDDViewController *)viewController usingNavigationController:(UINavigationController *)navigationController withAttributes:(DDDTransitionAttributes *)attributes animated:(BOOL)animated;
 @end

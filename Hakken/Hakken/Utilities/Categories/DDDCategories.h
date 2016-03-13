@@ -20,3 +20,4 @@
 #import "AFHTTPRequestOperationManager+ReactiveExtensions.h"
 #import "UIView+AutoLayout.h"
 #import "UIView+Instantiation.h"
+#import "UINavigationBar+Styling.h"

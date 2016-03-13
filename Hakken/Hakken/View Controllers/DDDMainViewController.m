@@ -35,6 +35,7 @@
 {
     return [DDDViewControllerRouter sharedInstance];
 }
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -50,7 +51,6 @@
 {
     [super viewDidLoad];
     self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
-    [self.vcRouter setupWithSplitViewController:self.splitViewController];
     [self.vcRouter updateScreenMapping:@{
                                          DDDStoryPreviewViewControllerIdentifier : @{ @"viewClass" : [DDDStoryPreviewViewController class] },
                                          DDDTopStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDTopStoriesViewController class] },
@@ -59,6 +59,6 @@
                                          DDDSavedStoriesViewControllerIdentifier : @{ @"viewClass" : [DDDReadLaterViewController class] }
                                          }];
 
-    [self.vcRouter showScreenInMaster:DDDTopStoriesViewControllerIdentifier withAttributes:nil animated:YES];
+    [self.vcRouter showScreen:DDDTopStoriesViewControllerIdentifier usingNavigationController:self.splitViewController.viewControllers[0] withAttributes:nil animated:YES];
 }
 @end

@@ -11,3 +11,6 @@
 #define DDDStoryDetailViewControllerIdentifier @"DDDStoryDetailViewController"
 #define DDDStoryDetailCollectionViewCellIdentifier @"DDDStoryDetailCollectionViewCell"
 #define DDDStoryPreviewViewControllerIdentifier @"DDDStoryPreviewViewController"
+
+#define DDDEmbedStoryDetailViewControllerIdentifier @"DDDEmbedStoryDetailViewControllerIdentifier"
+#define DDDEmbedCommentsViewControllerIdentifier @"DDDEmbedCommentsViewControllerIdentifier"

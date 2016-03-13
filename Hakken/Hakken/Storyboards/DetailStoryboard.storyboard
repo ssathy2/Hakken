@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E56a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -17,26 +17,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KrX-Lt-7ZK">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9II-RT-nna">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="ARy-Ac-G8p" kind="embed" identifier="DDDEmbedCommentsViewControllerIdentifier" id="gEe-1C-MJJ"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrH-PQ-wBA">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <connections>
+                                    <segue destination="dwc-z9-46x" kind="embed" identifier="DDDEmbedStoryDetailViewControllerIdentifier" id="NZv-TG-xDB"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvV-Re-Met" userLabel="ButtonsContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.0" green="0.73333334920000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Lo6-Y7-mzG"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Lo6-Y7-mzG"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="Lo6-Y7-mzG"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KrX-Lt-7ZK" firstAttribute="top" secondItem="o7x-AP-4Dx" secondAttribute="top" id="18k-JC-cmC"/>
-                            <constraint firstAttribute="trailing" secondItem="KrX-Lt-7ZK" secondAttribute="trailing" id="MFG-qP-nZs"/>
-                            <constraint firstItem="KrX-Lt-7ZK" firstAttribute="leading" secondItem="o7x-AP-4Dx" secondAttribute="leading" id="iI3-em-bFE"/>
-                            <constraint firstItem="UCM-dc-FKQ" firstAttribute="top" secondItem="KrX-Lt-7ZK" secondAttribute="bottom" id="ubB-ej-qwo"/>
+                            <constraint firstItem="UCM-dc-FKQ" firstAttribute="top" secondItem="9II-RT-nna" secondAttribute="bottom" id="4rn-94-0w9"/>
+                            <constraint firstItem="fvV-Re-Met" firstAttribute="top" secondItem="o7x-AP-4Dx" secondAttribute="top" id="4zx-c2-2P8"/>
+                            <constraint firstItem="9II-RT-nna" firstAttribute="top" secondItem="fvV-Re-Met" secondAttribute="bottom" id="8gB-8S-suS"/>
+                            <constraint firstAttribute="trailing" secondItem="fvV-Re-Met" secondAttribute="trailing" id="Spb-ET-K8x"/>
+                            <constraint firstItem="UCM-dc-FKQ" firstAttribute="top" secondItem="lrH-PQ-wBA" secondAttribute="bottom" id="X9O-0e-c7E"/>
+                            <constraint firstItem="fvV-Re-Met" firstAttribute="leading" secondItem="o7x-AP-4Dx" secondAttribute="leading" id="aF2-AG-SiV"/>
+                            <constraint firstItem="lrH-PQ-wBA" firstAttribute="top" secondItem="fvV-Re-Met" secondAttribute="bottom" id="dLa-vd-Eyq"/>
+                            <constraint firstAttribute="trailing" secondItem="9II-RT-nna" secondAttribute="trailing" id="kXX-az-S7K"/>
+                            <constraint firstItem="lrH-PQ-wBA" firstAttribute="leading" secondItem="o7x-AP-4Dx" secondAttribute="leading" id="qEc-Mu-n2N"/>
+                            <constraint firstItem="9II-RT-nna" firstAttribute="leading" secondItem="o7x-AP-4Dx" secondAttribute="leading" id="txy-uH-1mh"/>
+                            <constraint firstAttribute="trailing" secondItem="lrH-PQ-wBA" secondAttribute="trailing" id="wBm-pd-JZu"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="fvV-Re-Met"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="fvV-Re-Met"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <connections>
-                        <outlet property="webView" destination="KrX-Lt-7ZK" id="8Ke-Sb-cgd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upf-UF-7fQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="16" y="-8"/>
+            <point key="canvasLocation" x="-329.25" y="-179.25"/>
         </scene>
         <!--Detail-->
         <scene sceneID="Pjs-Tu-HGP">
@@ -91,13 +130,49 @@
                     <connections>
                         <outlet property="hackernewsItemDetailContainer" destination="hrD-2a-QeR" id="OyT-a9-TjQ"/>
                         <outlet property="itemDetailContainerHeightConstraint" destination="m4e-2f-aBl" id="1Ba-CL-ht8"/>
-                        <outlet property="itemDetailContainerTopSpaceConstraint" destination="IoV-mU-Hh6" id="LgE-K5-K36"/>
+                        <outlet property="itemDetailContainerTopSpaceConstraint" destination="IoV-mU-Hh6" id="z2L-P0-zaL"/>
                         <outlet property="webview" destination="fyv-Vr-SGC" id="5YO-od-idS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQc-K3-sz7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="387" y="801"/>
+            <point key="canvasLocation" x="-325.5" y="513"/>
+        </scene>
+        <!--Comments View Controller-->
+        <scene sceneID="vv0-QR-bxb">
+            <objects>
+                <viewController id="ARy-Ac-G8p" customClass="DDDCommentsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="g1T-cy-oxo"/>
+                        <viewControllerLayoutGuide type="bottom" id="qHM-a3-rpw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6bf-tL-1gu">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZGL-jS-9x3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358.5" y="144.75"/>
+        </scene>
+        <!--Story Detail View Controller-->
+        <scene sceneID="Y02-jq-8Fh">
+            <objects>
+                <viewController id="dwc-z9-46x" customClass="DDDStoryDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e7g-gU-BfQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="H8E-Uf-kpc"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8OA-L4-mrF">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YhU-SI-vJl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="358.5" y="-474.75"/>
         </scene>
     </scenes>
 </document>

@@ -154,9 +154,9 @@ typedef NS_OPTIONS(NSInteger, UIScrollViewDirection)
     
     // push webview/comments controller here...
     if (IS_RUNNING_ON_IPAD)
-        [[DDDViewControllerRouter sharedInstance] showScreenInDetail:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.splitViewController.viewControllers[1] withAttributes:attrs animated:YES];
     else
-        [[DDDViewControllerRouter sharedInstance] showScreenInMaster:DDDCommentsViewControllerIdentifier withAttributes:attrs animated:YES];
+        [[DDDViewControllerRouter sharedInstance] showScreen:DDDCommentsViewControllerIdentifier usingNavigationController:self.navigationController withAttributes:attrs animated:YES];
 }
 
 @end
